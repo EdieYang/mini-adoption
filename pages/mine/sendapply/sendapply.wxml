@@ -1,0 +1,101 @@
+<nav-bar title-text="我发出的领养申请" backIcon='../../images/back-pre-black.png'></nav-bar>
+
+
+<view class='tab-cover' style='top:{{marginNav}}px'>
+  <view class='tab-item' data-id='1' bindtap='chooseTab'>
+    <view class='tab' style='{{chosenId==1?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>
+      待初审
+    </view>
+  </view>
+  <view class='tab-item' data-id='2' bindtap='chooseTab'>
+    <view class='tab' style='{{chosenId==2?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>
+      待终审
+    </view>
+  </view>
+  <view class='tab-item' data-id='3' bindtap='chooseTab'>
+    <view class='tab' style='{{chosenId==3?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>
+      领养成功
+    </view>
+  </view>
+  <view class='tab-item' data-id='4' bindtap='chooseTab'>
+    <view class='tab' style='{{chosenId==4?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>
+      已取消
+    </view>
+  </view>
+</view>
+
+<view class='collect-cover' style='margin-top:{{marginNav+50}}px;'>
+  <view class='loading_cover' wx:if='{{showLoading}}'>
+    <view class="spinner">
+      <view class="double-bounce1"></view>
+      <view class="double-bounce2"></view>
+    </view>
+    <view class='loading_text'>加载中</view>
+  </view>
+
+  <view class='ext-cover'>
+    <view class='ext-item' wx:for='{{applyList}}'>
+      <view class='ext-line' bindtap='detail' data-applyid='{{item.applyId}}'>
+        <view class='ext-left'>
+          <image class='ext-img-left' src='{{photoPrefix}}{{item.mediaPath}}'></image>
+          <view class='ext-info'>
+            <view class='info-head'>{{item.petName}}</view>
+            <view class='info-body'>
+              <view class='info-age'>{{item.petAge}}</view>
+              <view class='inf-sex'>
+                <block wx:if='{{item.petSex==2}}'>
+                  <image class='info-img' src='../../../images/boy.png'></image>
+                  <text>男孩</text>
+                </block>
+                <block wx:if='{{item.petSex==1}}'>
+                  <image class='info-img' src='../../../images/girl.png'></image>
+                  <text>女孩</text>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='ext-right'>
+          <image class='ext-img' src='{{item.portrait}}'></image>
+          <view class='ext-name'>{{item.nickName}}</view>
+        </view>
+      </view>
+      <view class='ext-msg' wx:if='{{item.applyStatus==5}}'>
+        申请已取消：{{item.applyResp}}
+      </view>
+      <view class='ext-msg' wx:if='{{item.applyStatus==2}}'>
+        领养协议已发送,待领养人签署领养协议
+      </view>
+      <view class='ext-msg' wx:if='{{item.applyStatus==3}}'>
+        待送养人签署领养协议
+      </view>
+      <view class='ext-footer'>
+        <block wx:if='{{item.applyStatus==0 || item.applyStatus==1 }}'>
+          <view class='footer-oper'>
+            <button class='oper-default-btn' bindtap='cancel' data-applyid='{{item.applyId}}'>取消申请</button>
+            <button class='oper-primary-btn' bindtap='detail' data-applyid='{{item.applyId}}'>查看进度</button>
+          </view>
+        </block>
+
+        <block wx:if='{{item.applyStatus==2}}'>
+          <view class='footer-oper'>
+            <button class='oper-default-btn' bindtap='cancel' data-applyid='{{item.applyId}}'>取消申请</button>
+            <button class='oper-primary-btn' bindtap='signContract' data-applyid='{{item.applyId}}'>签署协议</button>
+          </view>
+        </block>
+
+        <block wx:if='{{item.applyStatus==3}}'>
+          <view class='footer-oper'>
+            <button class='oper-default-btn' bindtap='contract' data-applyid='{{item.applyId}}'>查看协议</button>
+            <button class='oper-primary-btn' bindtap='detail' data-applyid='{{item.applyId}}'>查看进度</button>
+          </view>
+        </block>
+
+      </view>
+    </view>
+
+  </view>
+</view>
+
+
+<view class='footer-cover' wx:if='{{bottomLast}}'>数据加载完毕</view>

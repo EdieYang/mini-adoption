@@ -1,0 +1,123 @@
+.identify-cover{
+  width:90%;
+  margin-left:5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title{
+  color:#000;
+  font-size: 38rpx;
+  font-weight: bold;
+}
+
+.example{
+  font-size: 30rpx;
+  color:#ec5358;
+  text-decoration: underline;
+}
+
+.tip{
+  width: 600rpx;
+  font-size: 28rpx;
+  color:#999;
+  margin-top:30rpx;
+}
+
+.identify-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top:100rpx;
+  margin-bottom: 100rpx;
+}
+
+.identify-left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.left-top{
+  width:260rpx;
+  height:161rpx;
+}
+
+.left-info{
+  margin-top:10rpx;
+  color:#333;
+  font-size: 24rpx;
+}
+
+
+.help-cover{
+  margin-top:60rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.help-header{
+  color:#000;
+  font-size: 32rpx;
+  margin-bottom:50rpx;
+}
+
+.help-item{
+  font-size: 28rpx;
+  color:#000;
+  margin-top:20rpx;
+  margin-bottom:10rpx;
+}
+
+.check-btn{
+  height:60rpx;
+  line-height: 60rpx;
+  color:#fff;
+  background-color: #1c43b2;
+  border-radius: 100rpx;
+  width:320rpx;
+  position: absolute;
+  bottom: 20rpx;
+  left: 215rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+
+.progress{
+  height:94rpx;
+  width:598rpx;
+  margin:0 auto;
+}
+
+.check-header{
+  margin-top:300rpx;
+  font-size: 38rpx;
+  color:#000;
+  text-align: center;
+  width:100%;
+
+}
+
+.check-info{
+  margin-top:50rpx;
+  font-size: 28rpx;
+  color:#333;
+  text-align: center;
+  width:100%;
+}
+

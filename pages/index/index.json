@@ -1,0 +1,11 @@
+{
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "onReachBottomDistance": 300,
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "nav-bar": "/component/navbar/navbar"
+  }
+}

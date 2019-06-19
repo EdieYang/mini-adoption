@@ -1,0 +1,272 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<view class='contract-cover' style='margin-top:{{height+30}}px'>
+  <view class='title'>送养人将委托动物交由领养方领养。</view>
+  <view class='header'>甲方（送养人）义务：</view>
+  <view class='contract-item'>1、如实告知乙方被领养动物的健康状况，性格，行为习惯等。</view>
+  <view class='contract-item'>2、为乙方领养及日后喂养动物提供必要的咨询和协助。</view>
+  <view class='contract-item'>3、不以任何领养名义做商业行为甚至商业欺诈。</view>
+
+  <view class='header'>乙方（领养人）义务：</view>
+  <view class='contract-item'>1、为领养动物提供适合的食物，提供洁净的饮用水，做到科学喂养。</view>
+  <view class='contract-item'>2、提供适当的活动空间，进行家庭喂养，并保证领养动物的安全，不得将所领养动物异用和商业用途。</view>
+  <view class='contract-item'>3、必要时为领养动物提供必要的医疗措施。</view>
+  <view class='contract-item'>4、接受领养后，协助甲方对喂养情况进行了解和回访。</view>
+  <view class='contract-item'>5、事先与家人或房东做好沟通，签署领养协议后，不得因为家人反对，婚姻，生育，工作变动，动物不听话，东湖生病等原因随意抛弃或售卖领养动物。</view>
+  <view class='contract-item'>6、由于特殊原因，无法继续喂养领养动物的情况下，必须将动物交回甲方；或与甲方协商，为动物寻找新的领养人，未经甲方同意不得自行转交他人。</view>
+  <view class='contract-item'>7、任何情况下，乙方不得虐待领养动物。</view>
+  <view class='contract-item'>8、带领养动物出门必须做好安全措施，如拴好牵引绳，保障宠物安全。出现意外情况必须及时向甲方反馈，不得隐瞒。</view>
+  <view class='contract-item'>9、定期（成年后每年一次）为领养动物注射疫苗。</view>
+
+  <view class='contract-info'>
+    <view class='info-header'>宠物信息</view>
+    <image class='info-img' mode='aspectFill' src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}'></image>
+    <view class='info-item'>
+      <view class='info-label'>宠物昵称</view>
+      <view class='info-content'>{{petInfo.petName}}</view>
+    </view>
+    <view class='info-item'>
+      <view class='info-label'>宠物性别</view>
+      <view class='info-content'>
+        <block wx:if='{{petInfo.petSex==1}}'>
+          未知
+        </block>
+        <block wx:if='{{petInfo.petSex==2}}'>
+          男孩
+        </block>
+        <block wx:if='{{petInfo.petSex==3}}'>
+          女孩
+        </block>
+      </view>
+    </view>
+    <view class='info-item'>
+      <view class='info-label'>宠物年龄</view>
+      <view class='info-content'>
+        {{petInfo.petAge}}
+      </view>
+    </view>
+    <view class='info-item'>
+      <view class='info-label'>免疫情况</view>
+      <view class='info-content'>
+        <block wx:if='{{petInfo.petVaccine==1}}'>
+          已免疫
+        </block>
+        <block wx:if='{{petInfo.petVaccine==2}}'>
+          未接种疫苗
+        </block>
+        <block wx:if='{{petInfo.petVaccine==3}}'>
+          接种疫苗情况不详
+        </block>
+        <block wx:if='{{petInfo.petVaccine==4}}'>
+          接种疫苗中
+        </block>
+
+      </view>
+    </view>
+    <view class='info-item'>
+      <view class='info-label'>驱虫情况</view>
+      <view class='info-content'>
+        <block wx:if='{{petInfo.petParasite==1}}'>
+          已驱虫
+        </block>
+        <block wx:if='{{petInfo.petParasite==2}}'>
+          未驱虫
+        </block>
+        <block wx:if='{{petInfo.petParasite==3}}'>
+          驱虫情况不详
+        </block>
+      </view>
+    </view>
+    <view class='info-item'>
+      <view class='info-label'>绝育情况</view>
+      <view class='info-content'>
+        <block wx:if='{{petInfo.petSterilization==1}}'>
+          已绝育
+        </block>
+        <block wx:if='{{petInfo.petSterilization==2}}'>
+          未绝育
+        </block>
+        <block wx:if='{{petInfo.petSterilization==3}}'>
+          未知
+        </block>
+      </view>
+    </view>
+    <view class='info-item'>
+      <view class='info-label'>体型</view>
+      <view class='info-content'>
+        <block wx:if='{{petInfo.petSomatotype==1}}'>
+          迷你
+        </block>
+        <block wx:if='{{petInfo.petSomatotype==2}}'>
+          小型
+        </block>
+        <block wx:if='{{petInfo.petSomatotype==3}}'>
+          中型
+        </block>
+        <block wx:if='{{petInfo.petSomatotype==4}}'>
+          大型
+        </block>
+      </view>
+    </view>
+    <view class='info-item'>
+      <view class='info-label'>毛发</view>
+      <view class='info-content'>
+        <block wx:if='{{petInfo.petHair==1}}'>
+          无毛
+        </block>
+        <block wx:if='{{petInfo.petHair==2}}'>
+          短毛
+        </block>
+        <block wx:if='{{petInfo.petHair==3}}'>
+          长毛
+        </block>
+        <block wx:if='{{petInfo.petHair==4}}'>
+          卷毛
+        </block>
+      </view>
+    </view>
+  </view>
+  <block wx:if='{{status==1}}'>
+    <form report-submit='true' bindsubmit='submitForm' report-submit-timeout='1000'>
+      <view class='contract-form'>
+        <view class='form-header'>甲方（送养人）信息</view>
+        <view class='form-item'>
+          <view class='form-label'>姓名</view>
+          <input type='text' class='form-input' placeholder='请输入您的姓名' name='name' maxlength='20'></input>
+        </view>
+        <view class='form-item'>
+          <view class='form-label'>手机号</view>
+          <input type='number' class='form-input' placeholder='请输入您的手机号' name='phone' maxlength='11' bindblur='verifyPhone'></input>
+        </view>
+        <view class='form-header'>补充协议</view>
+        <textarea class='form-textarea' placeholder='建议填写违约条款，如赔偿金等。' placeholder-style='color;#666' adjust-position='true' maxlength='200' name='agreement'></textarea>
+      </view>
+      <button class='submit-btn' form-type="submit">填写完毕，发送给领养人</button>
+    </form>
+  </block>
+
+
+  <block wx:if='{{status==2}}'>
+    <view class='contract-info'>
+      <view class='warn'>请双方务必当面确认个人信息是否正确，必要时可按模板签署书面协议以保障双方利益。</view>
+      <view class='info-header' style='margin-bottom:30rpx;'>甲方（送养人）信息</view>
+      <view class='info-item'>
+        <view class='info-label'>姓名</view>
+        <view class='info-content'>
+          {{contractInfo.adopterName}}
+        </view>
+      </view>
+      <view class='info-item'>
+        <view class='info-label'>手机号</view>
+        <view class='info-content'>
+          {{contractInfo.adopterPhone}}
+        </view>
+      </view>
+    </view>
+    <form report-submit='true' bindsubmit='submitFormApplyer' report-submit-timeout='1000'>
+      <view class='contract-form'>
+        <view class='form-header'>乙方（领养人）信息</view>
+        <view class='form-item'>
+          <view class='form-label'>姓名</view>
+          <input type='text' class='form-input' placeholder='请输入您的姓名' name='name' maxlength='20'></input>
+        </view>
+        <view class='form-item'>
+          <view class='form-label'>手机号</view>
+          <input type='number' class='form-input' placeholder='请输入您的手机号' name='phone' maxlength='11' bindblur='verifyPhone'></input>
+        </view>
+        <view class='form-identify' wx:if='{{applyUser.authenticated==0}}' bindtap='authenticate'>
+          <icon type="warn" size="20" />去实名
+        </view>
+        <view class='form-identify' wx:if='{{applyUser.authenticated==1}}'>
+          <icon type="success" size="20" />已实名
+        </view>
+        <view class='form-header'>签名</view>
+        <view class='form-textarea' bindtap='sign' wx:if='{{contractInfo.applySign==null}}'></view>
+        <view class='form-palce-sign'  wx:if='{{contractInfo.applySign!=null}}'  bindtap='sign'>
+          <image src='{{contractInfo.applySign}}'></image>
+        </view>
+      </view>
+      <button class='submit-btn' form-type="submit" wx:if='{{applyUser.authenticated==0}}' disabled>填写完毕，发送给送养人</button>
+      <button class='submit-btn' form-type="submit" wx:if='{{applyUser.authenticated==1}}'>填写完毕，发送给送养人</button>
+    </form>
+  </block>
+
+
+
+
+  <block wx:if='{{status==3}}'>
+    <view class='contract-info'>
+      <view class='warn'>请双方务必当面确认个人信息是否正确，必要时可按模板签署书面协议以保障双方利益。</view>
+      <view class='info-header' style='margin-bottom:30rpx;'>甲方（送养人）信息</view>
+      <view class='info-item'>
+        <view class='info-label'>姓名</view>
+        <view class='info-content'>
+          {{contractInfo.adopterName}}
+        </view>
+      </view>
+      <view class='info-item'>
+        <view class='info-label'>手机号</view>
+        <view class='info-content'>
+          {{contractInfo.adopterPhone}}
+        </view>
+      </view>
+      <form report-submit='true' bindsubmit='submitFormAdopter' report-submit-timeout='1000'>
+        <view class='contract-form'>
+          <view class='form-header'>签名</view>
+          <view class='form-textarea' bindtap='signAdopter' wx:if='{{contractInfo.adopterSign==null}}'></view>
+          <view class='form-palce-sign' wx:if='{{contractInfo.adopterSign!=null}}'  bindtap='sign' >
+            <image src='{{contractInfo.adopterSign}}'></image>
+          </view>
+        </view>
+
+
+
+        <view class='info-header' style='margin-top:60rpx;margin-bottom:30rpx;'>乙方（领养人）信息</view>
+        <view class='info-item'>
+          <view class='info-label'>姓名</view>
+          <view class='info-content'>
+            {{contractInfo.applyName}}
+          </view>
+        </view>
+        <view class='info-item'>
+          <view class='info-label'>手机号</view>
+          <view class='info-content'>
+            {{contractInfo.applyPhone}}
+          </view>
+        </view>
+        <view class='info-label'>乙方签名</view>
+        <image src='{{photoPrefix}}{{contractInfo.applySign}}' class='sign-img'></image>
+
+        <button class='submit-btn' form-type="submit">上传协议</button>
+      </form>
+
+    </view>
+
+  </block>
+
+</view>
+
+
+
+
+
+<block wx:if="{{showFilter}}">
+
+  <view class="tip_container" catchtouchmove='preventTouchMove'>
+
+  </view>
+  <view class="tipTap" style='top:{{height+170}}px' catchtouchmove='preventTouchMove'>
+    <view class='tip_header'>
+      实名登记
+    </view>
+    <view class='tip_content'>
+      1.根据
+      <text style='color:#ff7e7e;text-decoration:underline'>邻宠公益领养平台的领养规则</text>,领养用户在签署协议之前，需要进行实名登记和身份照上传。
+    </view>
+    <view class='tip_content'>
+      2.平台审核通过后,再进入此页面签署协议，签署协议后，用户信息将会与领养协议进行绑定。
+    </view>
+    <view class='filter-btn-cover'>
+      <button class="filter-btn" bindtap='authorize'>前往实名认证</button>
+    </view>
+  </view>
+</block>

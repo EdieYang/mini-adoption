@@ -1,0 +1,38 @@
+<nav-bar title-text="{{navTitle}}"  backIcon='../../images/back-pre-black.png'></nav-bar>
+
+
+<scroll-view class='room-cover' scroll-y style="height: 81vh;margin-top:{{marginNav}}px" scroll-top="{{scrollTop}}">
+  <block wx:for='{{msgs}}'>
+    <view class='msg-receive' wx:if='{{item.targetUserId==userId}}' id='a_{{index}}'>
+      <image class='pop-portrait' src='{{targetUserInfo.portrait}}'></image>
+      <view class='pop-text-cover-left' wx:if='{{item.type==0}}'>
+        <view class='pop-text-cover-arrow-left'></view>
+        <view class='pop-text'>{{item.data}}</view>
+      </view>
+      <image wx:if='{{item.type==1}}' bindload="imageLoad" data-key="{{index}}" style="margin-top:20rpx;margin-left:20rpx;width:{{item.width}}rpx; height:{{item.height}}rpx;border-radius:10rpx;" src='{{photoPrefix}}{{item.data}}' bindtap='previewImg' data-img='{{photoPrefix}}{{item.data}}'></image>
+    </view>
+
+    <view class='msg-send' wx:if='{{item.targetUserId!=userId}}' id='a_{{index}}'>
+      <image class='pop-portrait' src='{{userInfo.portrait}}'></image>
+      <view class='pop-text-cover-right' wx:if='{{item.type==0}}'>
+        <view class='pop-text-cover-arrow-right'></view>
+        <view class='pop-text'>{{item.data}}</view>
+      </view>
+       <image wx:if='{{item.type==1 && item.fromOri==0}}' bindload='imageLoad' data-key='{{index}}' style='margin-top:20rpx;margin-right:20rpx;width:{{item.width}}rpx; height:{{item.height}}rpx;border-radius:10rpx;' src='{{item.data}}' bindtap='previewImg' data-img='{{item.data}}'></image>
+      <image wx:if='{{item.type==1 && item.fromOri!=0}}' bindload='imageLoad' data-key='{{index}}' style='margin-top:20rpx;margin-right:20rpx;width:{{item.width}}rpx; height:{{item.height}}rpx;border-radius:10rpx;' src='{{photoPrefix}}{{item.data}}' bindtap='previewImg' data-img='{{photoPrefix}}{{item.data}}'></image>
+    </view>
+  </block>
+  <view style='height:100rpx;width:100%;'></view>
+
+</scroll-view>
+
+<view class='tool-bar'>
+  <view class='bar-item'>
+    <image src='../../../images/send-img.png' class='bar-img' bindtap='chooseImage'></image>
+  </view>
+  <view class='bar-item'>
+    <image src='../../../images/keyboard-img.png' class='bar-img'></image>
+  </view>
+  <input class='bar-input' placeholder='请输入...' cursor-spacing='20' bindinput="bindKeyInput" value='{{inputValue}}'></input>
+  <button class='bar-btn' bindtap='sendmsg'>发送</button>
+</view>

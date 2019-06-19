@@ -1,0 +1,166 @@
+page{
+  padding-top:100rpx;
+}
+.top-cover {
+  background-color: #1c43b2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 30rpx;
+}
+
+.user-cover {
+  width: 92vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.user-cover-default {
+  width: 92vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user-info-default {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.co-portrait {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100%;
+  overflow: hidden;
+  margin-right: 20rpx;
+  border: 4rpx solid #fff;
+}
+
+.co-portrait-default {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.info-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.info-cover-default {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cover-btn {
+  width: 170rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+  color: #000;
+  border-radius: 50rpx;
+}
+
+.co-name {
+  font-size: 38rpx;
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 5rpx;
+}
+
+.co-id {
+  font-size: 25rpx;
+  color: #fff;
+}
+
+.co-follows {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 10rpx;
+}
+
+.follow {
+  font-size: 25rpx;
+  color: #fff;
+  margin-right: 20rpx;
+}
+
+.co-home {
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.modi-info {
+  width: 92vw;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.modi-icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 30rpx;
+}
+
+.modi-txt {
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.oper-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 92vw;
+  padding-left: 4vw;
+}
+
+.oper-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.oper-left {
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.oper-icon {
+  margin-right: 45rpx;
+  width: 44rpx;
+  height: 42rpx;
+}
+
+.oper-in {
+  width: 40rpx;
+  height: 40rpx;
+}

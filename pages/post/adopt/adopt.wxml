@@ -1,0 +1,224 @@
+<nav-bar title-text="发布宠物信息"  backIcon='../../images/back-pre-black.png'></nav-bar>
+
+<form bindsubmit="submitNew">
+  <view class='top-warning' style='margin-top:{{marginNav+10}}px'>(只限上海地区发布领养) 虚假违法内容将被介入删除！</view>
+
+
+  <view class='cover-item'>
+    <view class='header'>上传宠物照片</view>
+    <view class='gallery'>
+      <block wx:if='{{ImageUrls.length>0}}' wx:for='{{ImageUrls}}' wx:key='imground'>
+        <view class='layout' wx:if='{{item.notDeleted}}'>
+          <view class='add-layout-info'>
+            <image mode='aspectFill' class='add-img-info' src='{{photoPrefix}}{{item.data}}'></image>
+            <view class='del-cover' data-index='{{index}}' bindtap='delImg'></view>
+            <image data-index='{{index}}' bindtap='delImg' class='del-img' src='../../../images/del.png'></image>
+          </view>
+        </view>
+
+      </block>
+
+      <block wx:if='{{showAddPhotoCover}}'>
+        <image class='add-img' src='../../../images/photo-plus.png' bindtap='addPhoto'></image>
+      </block>
+
+      <view style='clear:both'></view>
+    </view>
+  </view>
+
+  <view class='cover-item'>
+    <view class='header'>宠物信息</view>
+    <view class='input-item'>
+      <view class='input-item-left'>昵称</view>
+      <view class='input-item-right'>
+        <input class='input-i' placeholder='请输入昵称' name='petName' maxlength='6' value='{{petName}}' bindinput='nameInput' placeholder-style='color:#666'></input>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+
+    <view class='input-item'>
+      <view class='input-item-left'>年龄</view>
+      <view class='input-item-right'>
+        <picker mode="selector" range="{{ageRange}}" bindchange="bindAgeRange">
+          <view class="agePickVal" style='{{agePickVal!="请选择"?"color:#2d2d2d":"color:#666"}}'>
+            {{agePickVal}}
+          </view>
+        </picker>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+
+    <view class='input-item'>
+      <view class='input-item-left'>类别</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{speciesType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSpecies' data-type='1'>狗狗</view>
+        <view class='checkbox-item' style='{{speciesType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSpecies' data-type='2'>猫咪</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+
+
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>性别</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{genderType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='1'>未知</view>
+        <view class='checkbox-item' style='{{genderType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='2'>男孩</view>
+        <view class='checkbox-item' style='{{genderType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='3'>女孩</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+  </view>
+
+  <view class='cover-item'>
+    <view class='header'>宠物现状</view>
+    <view class='input-item'>
+      <view class='input-item-left'>绝育</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{sterilizeType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSterilize' data-type='3'>不详</view>
+        <view class='checkbox-item' style='{{sterilizeType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSterilize' data-type='1'>已绝育</view>
+        <view class='checkbox-item' style='{{sterilizeType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSterilize' data-type='2'>未绝育</view>
+
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item'>
+      <view class='input-item-left'>疫苗</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{vaccineType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseVaccine' data-type='3'>不详</view>
+        <view class='checkbox-item' style='{{vaccineType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseVaccine' data-type='1'>已接种</view>
+        <view class='checkbox-item' style='{{vaccineType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseVaccine' data-type='2'>未接种</view>
+        <view class='checkbox-item' style='{{vaccineType==4?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseVaccine' data-type='4'>接种中</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item'>
+      <view class='input-item-left'>驱虫</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{parasiteType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseParasite' data-type='3'>未知</view>
+        <view class='checkbox-item' style='{{parasiteType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseParasite' data-type='1'>已驱</view>
+        <view class='checkbox-item' style='{{parasiteType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseParasite' data-type='2'>未驱</view>
+        <view style='clear:both'></view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>来源</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{fromType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseFrom' data-type='1'>家养</view>
+        <view class='checkbox-item' style='{{fromType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseFrom' data-type='2'>救助站</view>
+        <view class='checkbox-item' style='{{fromType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseFrom' data-type='3'>个人救助</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>体型</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{sizeType==4?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSize' data-type='4'>大型</view>
+        <view class='checkbox-item' style='{{sizeType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSize' data-type='3'>中型</view>
+        <view class='checkbox-item' style='{{sizeType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSize' data-type='2'>小型</view>
+        <view class='checkbox-item' style='{{sizeType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSize' data-type='1'>迷你</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>毛发</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{hairType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseHair' data-type='1'>无毛</view>
+        <view class='checkbox-item' style='{{hairType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseHair' data-type='2'>短毛</view>
+        <view class='checkbox-item' style='{{hairType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseHair' data-type='3'>长毛</view>
+        <view class='checkbox-item' style='{{hairType==4?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseHair' data-type='4'>卷毛</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+  </view>
+
+  <view class='cover-item'>
+    <view class='header'>宠物特点
+      <text style='color:#999;font-size:28rpx;font-weight:300;margin-left:10rpx;'>（最多选择3个，选填）</text>
+    </view>
+    <view class='check-cover'>
+
+      <block wx:for='{{petCharacter}}'>
+        <view class='checkbox-item ' style='{{item.checked?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseCharacter' data-type='{{index}}'>{{item.name}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view class='cover-item'>
+    <view class='header'>领养要求</view>
+    <view class='ruler-cover'>
+      <block wx:for='{{requirements}}'>
+        <view class='ruler-item' bindtap='chooseRequirement' data-type='{{index}}'>
+          <image class='check-icon' src='{{item.checked?"../../../images/checked-icon.png":"../../../images/check-icon.png"}}'></image>
+
+          <text class='check-rule'>{{item.value==10?'其他(先勾选再填信息)':item.name}}</text>
+        </view>
+
+
+        <view class='ruler-other' wx:if='{{index==9}}'>
+          <textarea class='check-textarea' placeholder='请输入信息' placeholder-style='color;#666' auto-height='true' adjust-position='true' disabled='{{!item.checked}}' name='requirementOther' cursor-spacing='30'   bindinput='requirementOtherInput' maxlength='200' value='{{item.name!="其他(先勾选再填信息)"?item.name:""}}'></textarea>
+          <view class='currentLeftWords'>{{currentDetailWordNumber}}/200</view>
+        </view>
+      </block>
+    </view>
+
+  </view>
+
+  <view class='cover-item'>
+    <view class='header'>送养故事</view>
+
+    <view class='form-cover'>
+      <textarea class='form-textarea' placeholder='请描述宠物饮食偏好、行为习惯、运动量等，以及送养原因、宠物过往经历、情感故事等。' placeholder-style='color;#666'  cursor-spacing='30' adjust-position='true' maxlength='200' name='story' bindinput='storyInput' value='{{story}}'></textarea>
+      <view class='currentLeftWords'>{{currentStoryWordNumber}}/200</view>
+    </view>
+  </view>
+
+
+
+  <view class='cover-item'>
+    <view class='header'>联系方式</view>
+    <view class='input-item'>
+      <view class='input-item-left'>所在地</view>
+      <view class='input-item-right'>
+        <picker mode="region" bindchange="bindRegionChange" value="">
+          <view class="picker" wx:if='{{hasArea}}'>
+            {{region[0]}} {{region[1]}} {{region[2]}}
+          </view>
+          <view class='picker' style='color:#a9a9a9' wx:else>
+            请选择上海市区县（仅限上海市）
+          </view>
+        </picker>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item'>
+      <view class='input-item-left'>微信号</view>
+      <view class='input-item-right'>
+        <input class='input-i' placeholder='选填' name='wxAccount' value='{{wxAccount}}' bindinput='wxAccountInput' maxlength='20'></input>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>手机号</view>
+      <view class='input-item-right'>
+        <input class='input-i' type='number' placeholder='必填' name='phone' maxlength='11' value='{{phone}}' bindinput='phoneInput' bindblur='verifyPhone'></input>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <!-- <view class='warn-item'>
+      <image class='check-icon' src='../../../images/check-icon.png'></image>
+      <text class='warn-item-txt'>手机号只作为短信通知用，不展示给领养人</text>
+    </view> -->
+  </view>
+
+  <view class='check-ok' bindtap='obeyRules'>
+    <image class='check-ok-icon' src='{{!obeyRules?"../../../images/check-ok-icon.png":"../../../images/checked-ok-icon.png"}}'></image>
+    <view class='ok-item'>我已阅读，并同意遵守
+      <text class='rule-item'>《邻宠领养平台送养规则》</text>
+    </view>
+  </view>
+
+  <button class='publish' form-type="submit">发布</button>
+
+
+</form>

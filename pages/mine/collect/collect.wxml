@@ -1,0 +1,54 @@
+<nav-bar title-text="我的收藏" backIcon='../../images/back-pre-black.png'   style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+
+<view class='collect-cover' style='margin-top:{{marginNav}}px'>
+
+  <view class='loading_cover' wx:if='{{showLoading}}'>
+    <view class="spinner">
+      <view class="double-bounce1"></view>
+      <view class="double-bounce2"></view>
+    </view>
+    <view class='loading_text'>加载中</view>
+  </view>
+
+
+  <view class='extra-list'>
+
+    <view class='ext-item-cover' wx:for="{{petInfoList}}">
+      <view class='ext-item' bindtap='detail' data-petid='{{item.petId}}'>
+        <image class='ext-pic' mode='aspectFill' src='{{photoPrefix}}{{item.mediaList[0].mediaPath}}'></image>
+        <view class='ext-info'>
+          <view class='ext-name'>{{item.petName}}</view>
+          <view class='ext-spec'>
+            <view class='ext-age'>
+              {{item.petAge}}
+            </view>
+            <view class='ext-gender'>
+              <block wx:if='{{item.petSex==1}}'>
+                <image class='gender-icon' src='../../../images/boy.png'></image>
+                <text>男孩</text>
+              </block>
+              <block wx:if='{{item.petSex==2}}'>
+                <image class='gender-icon' src='../../../images/girl.png'></image>
+                <text>女孩</text>
+              </block>
+            </view>
+          </view>
+          <view class='ext-tags'>
+            <view class='ext-tag' wx:for="{{item.petCharacteristic}}" wx:for-item="character" wx:for-index="idx" wx:key="unique">
+              {{character.name}}
+            </view>
+          </view>
+          <view class='ext-location'>
+            <image class='location' src='../../../images/lost.png'></image>
+            <text>{{item.address}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+
+</view>
+
+<view class='footer-cover' wx:if='{{bottomLast}}'>数据加载完毕</view>

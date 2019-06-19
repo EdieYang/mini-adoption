@@ -1,0 +1,13 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+
+<view class="wrapper" style='margin-top:{{height+40}}px;'>
+  <view class="handCenter">
+    <canvas class="handWriting" disable-scroll="true" bindtouchstart="uploadScaleStart" bindtouchmove="uploadScaleMove"
+      bindtouchend="uploadScaleEnd" bindtap="mouseDown" canvas-id="handWriting">
+    </canvas>
+  </view>
+  <view class="handBtn">
+    <button catchtap="subCanvas" class="subBtn" >完成</button> 
+    <button catchtap="retDraw" class="delBtn">重写</button>
+  </view>
+</view>

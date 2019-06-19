@@ -1,0 +1,343 @@
+<nav-bar title-text="宠物详情" backIcon='../../images/back-pre-black.png' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+
+
+<swiper bindchange="swiper" class='h_c' current="0" circular="true" next-margin="70rpx" easing-function='easeOutCubic' style='margin-top:{{marginNav}}px'>
+  <block wx:for="{{imgUrls}}" wx:for-index="i" wx:key="{{key}}">
+    <swiper-item class="item" bindtap='previewImg' data-imgindex='{{i}}'>
+      <view class='h_sp {{i==index?"active":""}}'>
+        <image mode='aspectFill' class='pos_c' src='{{item}}'></image>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>
+
+<view class='detail-cover'>
+  <view class='det-title'>你好，我叫{{petInfo.petName}}</view>
+  <view class='det-info'>
+    <view class='info-item'>
+      <block wx:if='{{petInfo.petType==1}}'>
+        狗狗
+      </block>
+      <block wx:if='{{petInfo.petType==2}}'>
+        猫咪
+      </block>
+    </view>
+    <view class='info-item'>
+    <block wx:if='{{petInfo.petSex==1}}'>
+        性别不详
+      </block>
+      <block wx:if='{{petInfo.petSex==2}}'>
+        男孩
+      </block>
+      <block wx:if='{{petInfo.petSex==3}}'>
+        女孩
+      </block>
+    </view>
+    <view class='info-item' wx:if='{{petInfo.petAge!="不详"}}'>{{petInfo.petAge}}</view>
+  </view>
+  <view class='det-tags'>
+    <view class='tag' wx:for='{{petInfo.petCharacteristic}}'>{{item.name}}</view>
+  </view>
+  <view class='det-spec'>
+    <image class='det-icon' src='../../../images/det-spec.png'></image>
+    <view class='spec'>
+      <block wx:if='{{petInfo.petSomatotype==1}}'>
+        迷你
+      </block>
+      <block wx:if='{{petInfo.petSomatotype==2}}'>
+        小型
+      </block>
+      <block wx:if='{{petInfo.petSomatotype==3}}'>
+        中型
+      </block>
+      <block wx:if='{{petInfo.petSomatotype==4}}'>
+        大型
+      </block>
+    </view>
+    <view class='spec'>
+      <block wx:if='{{petInfo.petHair==1}}'>
+        无毛
+      </block>
+      <block wx:if='{{petInfo.petHair==2}}'>
+        短毛
+      </block>
+      <block wx:if='{{petInfo.petHair==3}}'>
+        长毛
+      </block>
+      <block wx:if='{{petInfo.petHair==4}}'>
+        卷毛
+      </block>
+    </view>
+  </view>
+
+  <view class='det-medic'>
+    <image class='det-icon' src='../../../images/det-medic.png'></image>
+    <view class='spec'>
+      <block wx:if='{{petInfo.petVaccine==1}}'>
+        已免疫
+      </block>
+      <block wx:if='{{petInfo.petVaccine==2}}'>
+        未接种疫苗
+      </block>
+      <block wx:if='{{petInfo.petVaccine==3}}'>
+        接种疫苗情况不详
+      </block>
+      <block wx:if='{{petInfo.petVaccine==4}}'>
+        接种疫苗中
+      </block>
+    </view>
+    <view class='spec'>
+      <block wx:if='{{petInfo.petParasite==1}}'>
+        已驱虫
+      </block>
+      <block wx:if='{{petInfo.petParasite==2}}'>
+        未驱虫
+      </block>
+      <block wx:if='{{petInfo.petParasite==3}}'>
+        驱虫情况不详
+      </block>
+    </view>
+    <view class='spec'>
+      <block wx:if='{{petInfo.petSterilization==1}}'>
+        已绝育
+      </block>
+      <block wx:if='{{petInfo.petSterilization==2}}'>
+        未绝育
+      </block>
+    </view>
+  </view>
+
+  <view class='det-pipo'>
+    <image class='det-icon' src='../../../images/det-pipo.png'></image>
+    <view>
+      <block wx:if='{{petInfo.petFrom==1}}'>
+        我在家，期待新主人领养
+      </block>
+      <block wx:if='{{petInfo.petFrom==2 || petInfo.petFrom==3}}'>
+        我被好心人暂时收养，好期待一个家~
+      </block>
+    </view>
+  </view>
+  <view class='det-update'>
+    更新：{{petInfo.createDate}}
+  </view>
+
+</view>
+
+<view class='det-rules'>
+  <view class='rule-demand'>
+    <text class='rule-title'>领养要求</text>
+    <block wx:for='{{petInfo.adoptRequirements}}'>
+      <text class='rule-content'>· {{item.name}}</text>
+    </block>
+  </view>
+  <view class='rule-demand'>
+    <text class='rule-title'>送养故事</text>
+    <text class='rule-content'>{{petInfo.story}}</text>
+  </view>
+</view>
+
+<view class='det-contact'>
+  <view class='det-contact-item'>
+    <view class='con-title'>
+      送养人信息
+    </view>
+    <view class='con-tip' bindtap='report'>
+      <image src='../../../images/tip.png' class='tip-icon'></image>
+      <text>举报</text>
+    </view>
+  </view>
+  <view class='det-contact-item' bindtap='home' data-userid='{{adoptUserInfo.userId}}'>
+    <view class='det-contact-left'>
+      <image class='contact-img' src='{{adoptUserInfo.portrait}}'></image>
+      <view class='contact-info'>
+        <view class='con-name'>{{adoptUserInfo.nickName}}</view>
+        <!-- <view class='con-tag'>爱心救助人</view> -->
+        <view class='con-info'>
+          <view>{{adoptUserInfo.ageFrom}}</view>
+          <view>{{adoptUserInfo.starSign}}</view>
+          <view>
+            <block wx:if='{{adoptUserInfo.gender==1}}'>
+              男生
+            </block>
+            <block wx:else>
+              女生
+            </block>
+          </view>
+          <view class='con-ago'>{{adoptUserInfo.lastLoginTime}}</view>
+        </view>
+      </view>
+    </view>
+    <image class='con-entrance' src='../../../images/entrance.png'></image>
+  </view>
+
+  <view class='contact-btns' wx:if='{{adoptUserInfo.userId!=userId}}'>
+    <view class='header-line'>
+      <view class='line-btn'  data-userid='{{adoptUserInfo.userId}}' bindtap='chat'>
+        <image class='btn-icon' src='../../../images/pmsg.png' style='width:30rpx;height:30rpx;'></image>
+        <text>发私信</text>
+      </view>
+      <view class='line-btn' data-wx='{{petInfo.wxId}}' bindtap='copyWx'>
+        <image class='btn-icon' src='../../../images/wechat.png' style='width:45rpx;height:45rpx;'></image>
+        <text class='{{petInfo.wxId?"":"disabled"}}'>复制微信号</text>
+      </view>
+      <view class='line-btn' data-phone='{{petInfo.mobilePhone}}' bindtap='call'>
+        <image class='btn-icon' src='../../../images/tel.png'></image>
+        <text class='{{petInfo.mobilePhone?"":"disabled"}}'>拨打电话</text>
+      </view>
+    </view>
+
+    <view class='body-line'>
+      <view class='line-text'>
+        <text class='line-num'>100%</text>
+        <text>私信回复率</text>
+      </view>
+      <view class='line-text'>
+        <text class='line-num'>5</text>
+        <text>待送养数</text>
+      </view>
+      <view class='line-text'>
+        <text class='line-num'>5</text>
+        <text>已送养数</text>
+      </view>
+    </view>
+
+    <view class='det-warn'>
+      <image class='warn-icon' src='../../../images/warn.png'></image>
+      <view class='warn'>如送养人向您索要银行卡账号、运送费等涉及钱财时，请您务必提高警惕！</view>
+    </view>
+
+
+  </view>
+
+</view>
+
+<view class='det-progress'>
+  <view class='prog-title'>领养流程</view>
+  <view class='prog-body'>
+    <view class='prog-step'>
+      <image class='prog1-icon' src='../../../images/prog1.png'></image>
+      <view>提交领养流程</view>
+    </view>
+    <image class='prog-icon' src='../../../images/prog-next.png'></image>
+    <view class='prog-step'>
+      <image class='prog2-icon' src='../../../images/prog2.png'></image>
+      <view>通过初审</view>
+    </view>
+    <image class='prog-icon' src='../../../images/prog-next.png'></image>
+
+    <view class='prog-step'>
+      <image class='prog3-icon' src='../../../images/prog3.png'></image>
+      <view>签领养协议</view>
+    </view>
+  </view>
+
+</view>
+
+
+
+
+<view class='extra-list' wx:if='{{petInfo.adoptStatus==3 && adoptUserInfo.userId!=userId}}'>
+  <view class='ext-title'>更多上海待领养的宠物</view>
+
+  <block wx:for='{{cityAdoptionPetList}}'>
+    <view class='ext-item' bindtap='detail' data-petid='{{item.petId}}'>
+      <image class='ext-pic' mode='aspectFill' src='{{photoPrefix}}{{item.mediaList[0].mediaPath}}'></image>
+      <view class='ext-info'>
+        <view class='ext-name'>{{item.petName}}</view>
+        <view class='ext-spec'>
+          <view class='ext-age'>
+            {{item.petAge}}
+          </view>
+          <view class='ext-gender'>
+            <block wx:if='{{item.petSex==1}}'>
+              <image class='gender-icon' src='../../../images/boy.png'></image>
+              <text>男孩</text>
+            </block>
+            <block wx:if='{{item.petSex==2}}'>
+              <image class='gender-icon' src='../../../images/girl.png'></image>
+              <text>女孩</text>
+            </block>
+          </view>
+        </view>
+        <view class='ext-tags'>
+           <view class='ext-tag' wx:for="{{item.petCharacteristic}}" wx:for-item="character" wx:for-index="idx" wx:key="unique">
+              {{character.name}}
+            </view>
+        </view>
+        <view class='ext-location'>
+          <image class='location' src='../../../images/location.png'></image>
+          <text>{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+
+
+    </block>
+
+</view>
+
+
+
+
+<view class='footer' wx:if='{{petInfo.adoptStatus==3 && adoptUserInfo.userId!=userId}}'>
+  <view class='footer-item' bindtap='collect' wx:if='{{!petInfo.collected}}' data-collect='1'>
+    <image class='footer-icon' src='../../../images/collect_.png'></image>
+    <text>收藏</text>
+  </view>
+  <view class='footer-item' bindtap='collect' wx:if='{{petInfo.collected}}' data-collect='2'>
+    <image class='footer-icon' src='../../../images/collected.png'></image>
+    <text>已收藏</text>
+  </view>
+  <view class='footer-item' bindtap='chat' data-userid='{{adoptUserInfo.userId}}'>
+    <image class='footer-icon' src='../../../images/pmsg_.png'></image>
+    <text>私信</text>
+  </view>
+  <view class='adopt-btn' bindtap='apply'>申请领养</view>
+</view>
+
+<block wx:if='{{(petInfo.adoptStatus==0|| petInfo.adoptStatus==1) && adoptUserInfo.userId==userId}}'>
+  <block wx:if='{{petInfo.adoptStatus==0}}'>
+    <view class='upper-cover'>
+      <view class='upper-item'>
+        我们将在1-3个工作日内审核，请耐心等待，审核通过才可以上线。
+      </view>
+    </view>
+  </block>
+  <block wx:if='{{petInfo.adoptStatus==1}}'>
+    <view class='upper-cover'>
+      <view class='upper-item'>
+        未通过审核原因：{{petInfo.memo}}
+      </view>
+    </view>
+  </block>
+  <view class='footer'>
+    <view class='adopt-btn' bindtap='modify'>编辑</view>
+  </view>
+</block>
+
+
+<block wx:if='{{(petInfo.adoptStatus==2 || petInfo.adoptStatus==3) && adoptUserInfo.userId==userId}}'>
+  <view class='footer' style='border-top:1rpx solid #eaeaea'>
+    <view wx:if='{{petInfo.adoptStatus==2}}' class='adopt-btn' bindtap='online' data-petid='{{petInfo.petId}}'>上线</view>
+    <view wx:if='{{petInfo.adoptStatus==3}}' class='adopt-btn' bindtap='offline' data-petid='{{petInfo.petId}}'>下线</view>
+    <view class='adopt-btn' bindtap='modify'>编辑</view>
+  </view>
+</block>
+
+
+
+<block wx:if="{{showFilter}}">
+
+  <view class="tip_container" catchtouchmove='preventTouchMove'>
+
+  </view>
+  <view class="tipTap" catchtouchmove='preventTouchMove'>
+    <view class='header'>为了更好地展示领养信息，领养平台需要您的授权登录</view>
+    <view class='content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>
+    <view class='filter-btn-cover'>
+      <view class='filter-btn' bindtap='cancelLogin'>暂不登录</view>
+      <button class="filter-btn-sumbit" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+    </view>
+  </view>
+</block>

@@ -1,0 +1,254 @@
+page {
+  padding-bottom: 150rpx;
+}
+
+.contract-cover {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.title {
+  font-size: 30rpx;
+  color: #000;
+}
+
+.header {
+  font-size: 34rpx;
+  color: #000;
+  font-weight: bold;
+  margin-top: 60rpx;
+}
+
+.contract-item {
+  color: #2d2d2d;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  letter-spacing: 2rpx;
+  line-height: 50rpx;
+}
+
+.contract-info {
+  margin-top: 60rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.info-header {
+  font-size: 36rpx;
+  color: #000;
+  font-weight: bold;
+}
+
+.info-img {
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  border-radius: 10rpx;
+  width:300rpx;
+  height:225rpx;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.info-label {
+  font-size: 32rpx;
+  color: #000;
+  font-weight: bold;
+  width: 200rpx;
+}
+
+.info-content {
+  color: #666;
+  font-size: 30rpx;
+}
+
+.contract-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.form-header {
+  margin-top: 30rpx;
+  color: #000;
+  font-size: 38rpx;
+  font-weight: bold;
+}
+
+.form-item {
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.form-label {
+  width: 200rpx;
+  color: #000;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 350rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border: none;
+  font-size: 30rpx;
+}
+
+.form-textarea {
+  height: 300rpx;
+  width: 650rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  color: #2d2d2d;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  border: 1rpx solid #809cec;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left: 20rpx;
+  background-color: #f7f8fe;
+}
+
+.form-palce-sign{
+  margin: 0 auto;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  border: 1rpx solid #809cec;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left: 20rpx;
+  background-color: #f7f8fe;
+}
+
+
+.submit-btn{
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  width: 100%;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  color:#fff;
+  background-color: #1c43b2;
+  font-size: 26rpx;
+  z-index: 100;
+  border-radius: 0rpx
+}
+
+
+.warn{
+  font-size: 28rpx;
+  color:#ff2727;
+  margin-bottom:30rpx;
+}
+
+.form-identify{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top:30rpx;
+  background-color:#f7f8fe;
+  height: 80rpx;
+  width:250rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+  border:1rpx solid #eaeaea;
+  color:#000;
+}
+
+
+.sign-img{
+  width:640rpx;
+  height:480rpx;
+  border:1rpx solid #eaeaea;
+  margin-top:30rpx;
+}
+
+
+
+
+.tip_container {
+  z-index: 80000;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.75;
+}
+
+.tipTap {
+  z-index: 90000;
+  position: fixed;
+  left: 110rpx;
+  height: 560rpx;
+  width: 531rpx;
+  background-color: #fff;
+  border-radius: 33rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-bottom: 40rpx;
+}
+
+
+
+.tip_header {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: 500;
+  background-color: #1c43b2;
+  border-top-left-radius: 33rpx;
+  border-top-right-radius: 33rpx;
+  height:100rpx;
+  line-height: 100rpx;
+}
+
+.tip_content{
+  width:90%;
+  margin-left:5%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  color:#000;
+  font-size: 29rpx;
+  line-height: 50rpx;
+  margin-top:30rpx;
+}
+
+.filter-btn-cover {
+  position: absolute;
+  bottom:40rpx;
+  left: 0rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+}
+
+.filter-btn {
+  width: 350rpx;
+  height: 65rpx;
+  line-height: 65rpx;
+  background-color: #b3c3f3;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 100rpx;
+}
+

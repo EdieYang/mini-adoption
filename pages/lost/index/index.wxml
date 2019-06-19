@@ -1,0 +1,240 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+
+<view class='updateSuccess' style='top:{{-40+height}}px' animation='{{showUpdateAnimation}}'>
+  已更新失宠信息
+</view>
+
+
+<block wx:if="{{showShoppingTip}}">
+
+  <view class="tip_container" catchtouchmove='preventTouchMove'>
+
+  </view>
+  <view class="tipTap" catchtouchmove='preventTouchMove'>
+    <view class='walkHeader'>
+      提示
+    </view>
+    <view class='walkText'>发布寻宠信息前邻宠需要您的授权
+    </view>
+    <button class="walkBtn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权微信登录</button>
+  </view>
+</block>
+
+
+<view class='cover-array' style='top:{{height+40}}px'>
+  <block wx:if='{{recordCharitylist.length>0}}' wx:for='{{recordCharitylist}}' wx:key='{{item}}'>
+    <view class='cover-item'>
+      <view class='cover-header'>
+        <image src='{{item.portrait}}' class='cover-header-image' data-userid='{{item.userId}}' bindtap='toUserhome'></image>
+        <view class='cover-header-p'>
+          <view class='header-p'>{{item.nickName}}</view>
+          <!-- <view class='header-des'>铲屎官</view> -->
+        </view>
+      </view>
+
+
+
+      <block wx:if='{{item.images.length==1}}'>
+        <image mode='aspectFill' src="{{photoPrefix}}{{item.images[0]}}" class="cover-image" bindtap='previewImg' data-imgindex='0' data-imgurls='{{item.images}}' />
+      </block>
+
+      <block wx:if='{{item.images.length==2 || item.images.length==4}}'>
+        <view class='cover-50-view'>
+          <block wx:for="{{item.images}}" wx:for-item="imgItem" wx:key='{{item}}' wx:for-index='imgIndex'>
+            <image mode='aspectFill' bindtap='previewImg' data-imgindex='{{imgIndex}}' data-imgurls='{{item.images}}' src="{{photoPrefix}}{{imgItem}}" class="cover-50p-image" />
+          </block>
+          <view style='clear:both'></view>
+        </view>
+      </block>
+
+      <block wx:if='{{item.images.length==3 || item.images.length>4}}'>
+        <view class='cover-33-view'>
+          <block wx:for="{{item.images}}" wx:for-item="imgItem" wx:key='{{item}}' wx:for-index='imgIndex'>
+            <image mode='aspectFill' bindtap='previewImg' data-imgindex='{{imgIndex}}' data-imgurls='{{item.images}}' src="{{photoPrefix}}{{imgItem}}" class="cover-33p-image" />
+          </block>
+          <view style='clear:both'></view>
+        </view>
+      </block>
+
+      <block wx:if='{{item.content.emergencyType=="1"}}'>
+        <view class='cover-info' bindtap='extendContentPage' data-recordid='{{item.postId}}'>
+          <image class='emergencyTag' src='../images/icon_bar/lost-owner.png'></image>
+          <view class='info-view-header-cover'>
+            <view class='info-view-header-left'>
+              我叫{{item.content.petName}}
+              <image class='genderIcon' wx:if='{{item.content.genderType=="男孩"}}' src='../../../images/boy.png'></image>
+              <image class='genderIcon' wx:if='{{item.content.genderType=="女孩"}}' src='../../../images/girl.png'></image>
+            </view>
+            <view class='info-view-header-right'>
+              <button class='header-btn'>查看详情</button>
+            </view>
+            <view style='clear:both'></view>
+          </view>
+          <view class='info-view-content'>
+            <view class='header-tag'>
+              {{item.content.speciesType}}
+            </view>
+            <view class='header-tag'>
+              {{item.content.breed}}
+            </view>
+            <block wx:if='{{item.content.agePickVal!="不详"}}'>
+              <view class='header-tag'>
+                {{item.content.agePickVal}}
+              </view>
+            </block>
+            <block wx:if='{{item.content.genderType!="未知"}}'>
+              <view class='header-tag'>
+                {{item.content.genderType}}
+              </view>
+            </block>
+            <block wx:if='{{item.content.sterilizeType!="未知"}}'>
+              <view class='header-tag'>
+                {{item.content.sterilizeType}}
+              </view>
+            </block>
+            <block wx:if='{{item.content.immuneType!="未知"}}'>
+              <view class='header-tag'>
+                {{item.content.immuneType}}
+              </view>
+            </block>
+            <block wx:if='{{item.content.chipType=="有芯片"}}'>
+              <view class='header-tag'>
+                能去医院扫描芯片查看主人资料
+              </view>
+            </block>
+            <view style='clear:both'></view>
+          </view>
+          <view class='info-view-title'>基本情况</view>
+          <view class='info-view-content' style='width:75%;'>
+            {{item.content.detailInfo}}
+          </view>
+          <view class='info-view-title'>我的特征</view>
+          <view class='info-view-content' style='width:75%;'>
+            {{item.content.specialPoint}}
+          </view>
+          <block wx:if='{{item.content.reward!=0 &&  item.content.reward!=undefined}}'>
+            <view class='rewrd'>酬金：{{item.content.reward}}元</view>
+          </block>
+        </view>
+
+        <view class='cover-info-bottom' bindtap='extendContentPage' data-recordid='{{item.postId}}'>
+          <view class='cover-info-left'>
+            <view class='info-view-title'>丢失地点
+            </view>
+            <view class='info-view-content'>
+              {{item.location}}
+            </view>
+            <view class='info-view-content'>
+              {{item.detailLocation == null ?'':item.detailLocation}}
+            </view>
+          </view>
+
+          <view class='cover-info-right'>
+            <view class='info-view-title'>丢失时间</view>
+            <block wx:if='{{item.content.lostDay==0}}'>
+              <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+                我今天迷路找不回家了
+              </view>
+            </block>
+            <block wx:if='{{item.content.lostDay!=0}}'>
+              <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+                我已经迷路
+              </view>
+              <view class='info-view-clock'>{{item.content.lostDay}}天了</view>
+            </block>
+          </view>
+
+          <view style='clear:both'></view>
+        </view>
+      </block>
+
+
+      <block wx:if='{{item.content.emergencyType=="2"}}'>
+        <view class='cover-info'>
+          <image class='emergencyTag' src='../images/icon_bar/find-owner.png'></image>
+          <view class='info-view-header-cover'>
+            <view class='info-view-header-left'>
+              我被好心人发现了
+            </view>
+            <view class='info-view-header-right'>
+              <button class='header-btn' bindtap='extendContentPage' data-recordid='{{item.postId}}'>查看详情</button>
+            </view>
+            <view style='clear:both'></view>
+          </view>
+          <view class='info-view-content'>
+            <block wx:if='{{item.content.speciesType!=undefined}}'>
+              <view class='header-tag'>
+                {{item.content.speciesType}}
+              </view>
+            </block>
+            <view class='header-tag'>
+              {{item.content.breed}}
+            </view>
+            <block wx:if='{{item.content.agePickVal!="不详"}}'>
+              <view class='header-tag'>
+                {{item.content.agePickVal}}
+              </view>
+            </block>
+            <block wx:if='{{item.content.genderType!="未知"}}'>
+              <view class='header-tag'>
+                {{item.content.genderType}}
+              </view>
+            </block>
+            <view style='clear:both'></view>
+          </view>
+          <view class='info-view-title'>基本情况</view>
+          <view class='info-view-content' style='width:75%;'>
+            {{item.content.detailInfo}}
+          </view>
+        </view>
+
+        <view class='cover-info-bottom' bindtap='extendContentPage' data-recordid='{{item.postId}}' >
+          <view class='cover-info-left'>
+            <view class='info-view-title'>发现地点
+            </view>
+            <view class='info-view-content'>
+              {{item.location}}
+            </view>
+            <view class='info-view-content'>
+              {{item.detailLocation}}
+            </view>
+          </view>
+
+          <view class='cover-info-right'>
+            <view class='info-view-title'>发现时间</view>
+            <block wx:if='{{item.content.findDay==0}}'>
+              <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+                {{item.content.findDate}}
+              </view>
+            </block>
+            <block wx:if='{{item.content.findDay!=0}}'>
+              <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+                我已经迷路
+              </view>
+              <view class='info-view-clock'>{{item.content.findDay}}天了</view>
+            </block>
+          </view>
+
+          <view style='clear:both'></view>
+        </view>
+      </block>
+
+      <view class='timeDis'>信息更新于{{item.createDate}}</view>
+
+    </view>
+
+  </block>
+  <view style='clear:both'></view>
+
+  <view class='loading_cover' wx:if='{{!bottomLast}}'>
+    <view class="spinner">
+      <view class="double-bounce1"></view>
+      <view class="double-bounce2"></view>
+    </view>
+    <view class='loading_text'>加载中</view>
+  </view>
+  <view class='loading_cover' wx:if='{{bottomLast}}'>
+    <view class='loading_end'>数据加载完啦</view>
+  </view>
+
+</view>

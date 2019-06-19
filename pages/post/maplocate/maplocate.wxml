@@ -1,0 +1,43 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+
+
+<view class='search-cover' bindtap='searchLocation' style='margin-top:{{height+12.5}}px'>
+<icon class='search-icon' type="search" size='20'/>
+<text class='search-input'>搜索地点</text>
+</view>
+
+<map id="mapSys" wx:if='{{!showSuggestInfos}}'  show-location  scale="18"  markers='{{markers}}'  bindtap='closePop'>
+
+<cover-view  class='relocateView'>
+  <cover-image src='../../images/icon_bar/locate.png'  class="relocateBtn" bindtap='relocate'></cover-image>
+</cover-view>
+
+</map>
+
+
+<form bindsubmit="submitLocationInfo">
+<view class='locationlist' >
+
+  <view class='location-item'  bindtap='searchLocation'>
+    <view class='location-item-left'>
+      <image class='locate-icon-loading' src='../../images/icon_bar/location2.png'></image>
+    </view>
+    <view class='location-item-right'>
+    <block wx:if='{{title!=""}}'>
+      「{{title}}」
+    </block>
+    {{address}}
+    </view>
+    
+    <view style='clear:both'></view>
+  </view>
+
+  <view style='height:3rpx;background-color:#c1c1c1;width:606rpx;margin-left:37rpx;margin-bottom:10rpx;margin-top:10rpx;'></view>
+
+  <view class='detail-add'>
+    <textarea name='detailForm' maxlength='50' class='detail-textarea' cursor-spacing='100' placeholder='点击输入事件发生详细地点(选填)'  placeholder-style='font-size:28rpx;' bindblur='locationblur'></textarea>
+    <view style='clear:both'></view>
+  </view>  
+  <button class='choosebtn'  form-type="submit">选定位置信息</button> 
+</view>
+</form>

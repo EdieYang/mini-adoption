@@ -1,0 +1,512 @@
+<nav-bar title-text="申请详情" backIcon='../../images/back-pre-black.png'></nav-bar>
+
+<view class='header-cover' style='margin-top:{{marginNav}}px'>
+  <view class='header'>
+    <block wx:if='{{applyInfo.applyStatus==0}}'>
+      待送养人初审
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==1}}'>
+      终审中，待送养人发起领养协议
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==2}}'>
+      待领养人签署领养协议
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==3}}'>
+      待送养人签署领养协议
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==4}}'>
+      领养成功
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==5}}'>
+      申请已取消
+    </block>
+  </view>
+  <view class='body'>
+    <block wx:if='{{applyInfo.applyStatus==0}}'>
+      还剩{{leftTime}}系统自动取消领养申请，积极主动地多展示自己的优势，赢得送养人的信任
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==1}}'>
+      还剩{{leftTime}}系统自动取消领养申请，积极主动地多展示自己的优势，赢得送养人的信任
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==2}}'>
+      还剩{{leftTime}}可以签协议
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==5}}'>
+      取消原因：{{applyInfo.applyResp}}
+    </block>
+  </view>
+</view>
+<block wx:if='{{userId==applyInfo.applyBy}}'>
+  <view class='status-header-default'>
+    <view class='status-header'>进度详情</view>
+    <view class='cell'>
+      <block wx:if='{{applyInfo.applyStatus==0}}'>
+        <view class='cell-list'>
+          <view class='cell-circle' style='background-color:#1c43b2;width:24rpx;height:24rpx;'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>送养人收到申请，正在初审</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>申请已提交</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:if='{{applyInfo.applyStatus==1}}'>
+        <view class='cell-list'>
+          <view class='cell-circle' style='background-color:#1c43b2;width:24rpx;height:24rpx;'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>初审已通过，待送养人发起领养协议</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>送养人收到申请，正在初审</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>申请已提交</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+      </block>
+
+
+      <block wx:if='{{applyInfo.applyStatus==2}}'>
+        <view class='cell-list'>
+          <view class='cell-circle' style='background-color:#1c43b2;width:24rpx;height:24rpx;'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>送养人已发起领养协议，待领养人签署领养协议</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>初审已通过，待送养人发起领养协议</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>送养人收到申请，正在初审</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>申请已提交</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:if='{{applyInfo.applyStatus==3}}'>
+        <view class='cell-list'>
+          <view class='cell-circle' style='background-color:#1c43b2;width:24rpx;height:24rpx;'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>领养人已签署领养协议，待送养人签署领养协议</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>送养人已发起领养协议，待领养人签署领养协议</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>初审已通过，待送养人发起领养协议</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>送养人收到申请，正在初审</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>申请已提交</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:if='{{applyInfo.applyStatus==4}}'>
+        <view class='cell-list'>
+          <view class='cell-circle' style='background-color:#1c43b2;width:24rpx;height:24rpx;'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>领养成功</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>领养人已签署领养协议，待送养人签署领养协议</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>送养人已发起领养协议，待领养人签署领养协议</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>初审已通过，待送养人发起领养协议</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>送养人收到申请，正在初审</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>申请已提交</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:if='{{applyInfo.applyStatus==5}}'>
+        <view class='cell-list'>
+          <view class='cell-circle' style='background-color:#1c43b2;width:24rpx;height:24rpx;'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>{{applyInfo.applyResp}}</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>送养人收到申请，正在初审</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+
+        <view class='cell-list'>
+          <view class='cell-circle'></view>
+          <view class='cell-line'>
+            <view class='cell-time-before'></view>
+            <view class='cell-event-before'>申请已提交</view>
+            <view style='clear:both'></view>
+          </view>
+        </view>
+      </block>
+      <view style='clear:both'></view>
+    </view>
+  </view>
+</block>
+
+<view class='body-cover'>
+  <view class='det-contact-item'>
+    <view class='con-title'>
+      送养人信息
+    </view>
+  </view>
+  <view class='det-contact-item' bindtap='userhome' data-targetuserid='{{adoptUserInfo.userId}}'>
+    <view class='det-contact-left'>
+      <image class='contact-img' src='{{adoptUserInfo.portrait}}'></image>
+      <view class='contact-info'>
+        <view class='con-name'>{{adoptUserInfo.nickName}}</view>
+        <view class='con-tag'>爱心救助人</view>
+        <view class='con-info'>
+          <view>{{adoptUserInfo.ageFrom}}</view>
+          <view>{{adoptUserInfo.starSign}}</view>
+          <view>
+            <block wx:if='{{adoptUserInfo.gender==1}}'>
+              男生
+            </block>
+            <block wx:else>
+              女生
+            </block>
+          </view>
+          <view class='con-ago'>{{adoptUserInfo.lastLoginTime}}</view>
+        </view>
+      </view>
+    </view>
+    <image class='con-entrance' src='../../../images/entrance.png'></image>
+  </view>
+
+  <view class='contact-btns' wx:if='{{adoptUserInfo.userId!=userId}}'>
+    <view class='header-line'>
+      <view class='line-btn' data-target='{{adoptUserInfo.userId}}' bindtap='chat'>
+        <image class='btn-icon' src='../../../images/pmsg.png' style='width:30rpx;height:30rpx;'></image>
+        <text>发私信</text>
+      </view>
+      <view class='line-btn' data-wx='{{petInfo.wxId}}' bindtap='copyWx'>
+        <image class='btn-icon' src='../../../images/wechat.png' style='width:45rpx;height:45rpx;'></image>
+        <text class='{{petInfo.wxId?"":"disabled"}}'>复制微信号</text>
+      </view>
+      <view class='line-btn' data-phone='{{petInfo.mobilePhone}}' bindtap='call'>
+        <image class='btn-icon' src='../../../images/tel.png'></image>
+        <text class='{{petInfo.mobilePhone?"":"disabled"}}'>拨打电话</text>
+      </view>
+    </view>
+
+
+    <view class='det-warn'>
+      <image class='warn-icon' src='../../../images/warn.png'></image>
+      <view class='warn'>如送养人向您索要银行卡账号、运送费等涉及钱财时，请您务必提高警惕！</view>
+    </view>
+
+  </view>
+
+
+</view>
+
+
+
+
+
+<view class='body-cover'>
+  <view class='body-header'>申请人信息</view>
+  <view class='body-user' bindtap='userhome' data-targetuserid='{{userInfo.userId}}'>
+    <view class='user-info'>
+      <image class='user-img' src='{{userInfo.portrait}}'></image>
+      <view class='user-name'>{{userInfo.nickName}}</view>
+    </view>
+    <image class='con-entrance' src='../../../images/entrance.png'></image>
+  </view>
+  <view class='body-item'>
+    <view class='item-label'>年龄</view>
+    <view class='item-info'>
+      <block wx:if='{{applyInfo.age==1}}'>
+        60后
+      </block>
+      <block wx:if='{{applyInfo.age==2}}'>
+        70后
+      </block>
+      <block wx:if='{{applyInfo.age==3}}'>
+        80后
+      </block>
+      <block wx:if='{{applyInfo.age==4}}'>
+        90后
+      </block>
+      <block wx:if='{{applyInfo.age==5}}'>
+        00后
+      </block>
+    </view>
+  </view>
+  <view class='body-item'>
+    <view class='item-label'>性别</view>
+    <view class='item-info'>
+      <block wx:if='{{applyInfo.sex==1}}'>
+        男
+      </block>
+      <block wx:if='{{applyInfo.sex==2}}'>
+        女
+      </block>
+    </view>
+  </view>
+  <view class='body-item'>
+    <view class='item-label'>养宠经验</view>
+    <view class='item-info'>
+      <block wx:if='{{applyInfo.keptPet==1}}'>
+        有
+      </block>
+      <block wx:if='{{applyInfo.keptPet==2}}'>
+        无
+      </block>
+    </view>
+  </view>
+  <view class='body-item'>
+    <view class='item-label'>所在地区</view>
+    <view class='item-info'>{{applyInfo.address}}</view>
+  </view>
+  <view class='body-item'>
+    <view class='item-label'>住房情况</view>
+    <view class='item-info'>
+      <block wx:if='{{applyInfo.housingCondition==1}}'>
+        自有住房
+      </block>
+      <block wx:if='{{applyInfo.housingCondition==2}}'>
+        整租
+      </block>
+      <block wx:if='{{applyInfo.housingCondition==3}}'>
+        合租
+      </block>
+    </view>
+  </view>
+  <view class='body-item'>
+    <view class='item-label'>婚姻状况</view>
+    <view class='item-info'>
+      <block wx:if='{{applyInfo.maritalStatus==1}}'>
+        单身
+      </block>
+      <block wx:if='{{applyInfo.maritalStatus==2}}'>
+        恋爱中
+      </block>
+      <block wx:if='{{applyInfo.maritalStatus==3}}'>
+        已婚
+      </block>
+    </view>
+  </view>
+  <view class='body-item'>
+    <view class='item-label'>职业情况</view>
+    <view class='item-info'>{{applyInfo.job}}</view>
+  </view>
+
+  <view class='body-header' style='margin-top:60rpx;'>申请人留言</view>
+  <view class='to-adopt'>{{applyInfo.toAdopter}}</view>
+
+
+  <view class='body-header' style='margin-top:60rpx;'>申请领养的宠物</view>
+  <view class='body-adopt'>
+    <view class='ext-item-cover' bindtap='petdetail' data-petid='{{petInfo.petId}}'>
+      <view class='ext-item' bindtap='detail' data-petid='{{applyInfo.petId}}'>
+        <image class='ext-pic' mode='aspectFill' wx:if='{{petInfo!=null}}' src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}'></image>
+        <view class='ext-info'>
+          <view class='ext-name'>{{petInfo.petName}}</view>
+          <view class='ext-spec'>
+            <view class='ext-age'>
+              {{petInfo.petAge}}
+            </view>
+            <view class='ext-gender'>
+              <block wx:if='{{petInfo.petSex==2}}'>
+                <image class='gender-icon' src='../../../images/boy.png'></image>
+                <text>男孩</text>
+              </block>
+              <block wx:if='{{petInfo.petSex==3}}'>
+                <image class='gender-icon' src='../../../images/girl.png'></image>
+                <text>女孩</text>
+              </block>
+            </view>
+          </view>
+          <view class='ext-tags'>
+            <view class='ext-tag' wx:for="{{petInfo.petCharacteristic}}" wx:for-item="character" wx:for-index="idx" wx:key="unique" wx:if='{{idx<2}}'>
+
+              {{character.name}}
+
+            </view>
+          </view>
+          <view class='ext-location'>
+            <image class='location' src='../../../images/lost.png'></image>
+            <text>{{petInfo.address}}</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <view class='body-header' style='margin-top:60rpx;'>申请信息</view>
+  <view class='apply-info'>
+    <view class='info-item'>
+      <view class='info-label'>申请时间：</view>
+      <view class='info-content'>{{applyInfo.applyTime}}</view>
+    </view>
+    <view class='info-item' wx:if='{{applyInfo.applyStatus==1}}'>
+      <view class='info-label'>申请通过时间：</view>
+      <view class='info-content'>{{applyInfo.checkTime}}</view>
+    </view>
+    <view class='info-item'>
+      <view class='info-label'>申请状态：</view>
+      <view class='info-content'>
+        <block wx:if='{{applyInfo.applyStatus==0}}'>
+          待初审
+        </block>
+        <block wx:if='{{applyInfo.applyStatus==1}}'>
+          待送养人发起领养协议
+        </block>
+        <block wx:if='{{applyInfo.applyStatus==2}}'>
+          待领养人签署领养协议
+        </block>
+        <block wx:if='{{applyInfo.applyStatus==3}}'>
+          待送养人签署领养协议
+        </block>
+        <block wx:if='{{applyInfo.applyStatus==4}}'>
+          领养成功
+        </block>
+        <block wx:if='{{applyInfo.applyStatus==5}}'>
+          申请已取消
+        </block>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+
+<block wx:if='{{userId==applyInfo.applyBy}}'>
+  <view class='footer' wx:if='{{applyInfo.applyStatus!=5 && applyInfo.applyStatus !=4}}'>
+    <block wx:if='{{applyInfo.applyStatus==0 || applyInfo.applyStatus==1 || applyInfo.applyStatus==2}}'>
+      <view class='adopt-btn' bindtap='cancelPop' data-applyid='{{applyInfo.applyId}}'>取消申请</view>
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==2 }}'>
+      <view class='adopt-btn' bindtap='signContract' data-applyid='{{applyInfo.applyId}}'>签署协议</view>
+    </block>
+  </view>
+
+</block>
+<block wx:if='{{userId==petInfo.createBy}}'>
+  <view class='footer'>
+    <block wx:if='{{applyInfo.applyStatus==0}}'>
+      <view class='adopt-btn' bindtap='refusePop' data-applyid='{{applyInfo.applyId}}'>不合适</view>
+      <view class='adopt-btn' bindtap='pass' data-applyid='{{applyInfo.applyId}}'>通过初审</view>
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==1}}'>
+      <view class='adopt-btn' bindtap='refusePop' data-applyid='{{applyInfo.applyId}}'>不合适</view>
+      <view class='adopt-btn' bindtap='contract' data-applyid='{{applyInfo.applyId}}'>起草协议</view>
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==2}}'>
+      <view class='adopt-btn' bindtap='refusePop' data-applyid='{{applyInfo.applyId}}'>不合适</view>
+      <view class='adopt-btn' bindtap='pass' data-applyid='{{applyInfo.applyId}}'>查看协议</view>
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==3}}'>
+      <view class='adopt-btn' bindtap='refusePop' data-applyid='{{applyInfo.applyId}}'>不合适</view>
+      <view class='adopt-btn' bindtap='pass' data-applyid='{{applyInfo.applyId}}'>签署协议</view>
+    </block>
+  </view>
+</block>

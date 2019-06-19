@@ -1,0 +1,83 @@
+<nav-bar title-text="发布中心"    background="#1c43b2" color="#ffffff"></nav-bar>
+
+<view class='top-block-cover'></view>
+
+<view class='post-cover' style='top:{{marginNav+20}}px'>
+
+<view class='post-item' bindtap='adopt'>
+  
+  <image></image>
+  <view class='item-header'>
+    <text class='title-1'>我要送养</text>
+    <text>领养从真诚开始</text>
+    <view class='item-btn-1'>发布</view>
+  </view>
+</view>
+
+
+
+<view class='post-item'>
+  
+  <image></image>
+  <view class='item-header'>
+    <text class='title-2'>送养攻略</text>
+    <text>发布-审核-签协议</text>
+    <view class='item-btn-2'>查看</view>
+  </view>
+
+</view>
+
+<view class='divider'>为了Ta的安全，请实际考察后再送养哦~</view>
+
+<!-- 
+
+
+
+
+<view class='post-item'>
+  
+  <image></image>
+  <view class='item-header'  bindtap='lost'>
+    <text class='title-1'>宠物丢失</text>
+    <text>希望每个宝贝都能找回自己的家</text>
+    <view class='item-btn-1'>发布</view>
+  </view>
+
+</view>
+
+
+
+<view class='post-item'>
+  
+  <image></image>
+  <view class='item-header' bindtap='find'>
+    <text class='title-2'>宠物寻主</text>
+    <text>帮助身边的流浪动物寻找主人</text>
+    <view class='item-btn-2'>填写信息</view>
+  </view>
+
+</view>
+
+
+
+
+ -->
+
+
+</view>
+
+
+<block wx:if="{{showFilter}}">
+
+  <view class="tip_container" catchtouchmove='preventTouchMove'>
+
+  </view>
+  <view class="tipTap"   catchtouchmove='preventTouchMove'>
+    <view class='header'>为了更好地展示领养信息，领养平台需要您的授权登录</view>
+    <view class='content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>  
+    <view class='filter-btn-cover'>
+      <view class='filter-btn' bindtap='cancelLogin'>暂不登录</view>
+      <button class="filter-btn-sumbit" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+    </view>
+  </view>
+</block>

@@ -1,0 +1,11 @@
+{
+  "enablePullDownRefresh": false,
+  "backgroundColor": "#fafafa",
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-bar": "/component/navbar/navbar"
+  }
+}

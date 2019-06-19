@@ -1,0 +1,410 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+
+
+<block wx:if='{{chooseTab==0}}'>
+  <form bindsubmit="submitNew">
+    <view class='top-warning' style='margin-top:{{height+15}}px'>虚假违法内容一经发现被举报，平台将封号！</view>
+
+
+    <view class='cover-item'>
+      <view class='header'>上传宠物照片</view>
+      <view class='gallery'>
+        <block wx:if='{{ImageUrls.length>0}}' wx:for='{{ImageUrls}}' wx:key='imground'>
+          <view class='layout' wx:if='{{item.notDeleted}}'>
+            <view class='add-layout-info'>
+              <image mode='aspectFill' class='add-img-info' src='{{photoPrefix}}{{item.data}}'></image>
+              <view class='del-cover' data-index='{{index}}' bindtap='delImg'></view>
+              <image data-index='{{index}}' bindtap='delImg' class='del-img' src='../../../images/del.png'></image>
+            </view>
+          </view>
+
+        </block>
+
+        <block wx:if='{{showAddPhotoCover}}'>
+          <image class='add-img' src='../../../images/photo-plus.png' bindtap='addPhoto'></image>
+        </block>
+
+        <view style='clear:both'></view>
+      </view>
+    </view>
+
+    <view class='cover-item'>
+      <view class='header'>宠物信息</view>
+      <view class='input-item'>
+        <view class='input-item-left'>昵称</view>
+        <view class='input-item-right'>
+          <input class='input-i' placeholder='请输入昵称' name='petName' maxlength='6' value='{{petName}}' bindinput='nameInput' placeholder-style='color:#666'></input>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+
+
+      <view class='input-item'>
+        <view class='input-item-left'>品种</view>
+        <view class='input-item-right'>
+          <input class='input-i' placeholder='请输入品种' name='breed' value='{{breed}}' bindinput='breedInput' maxlength='15'></input>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+
+      <view class='input-item'>
+        <view class='input-item-left'>年龄</view>
+        <view class='input-item-right'>
+          <picker mode="selector" range="{{ageRange}}" bindchange="bindAgeRange">
+            <view class="agePickVal" style='{{agePickVal!="请选择"?"color:#2d2d2d":"color:#666"}}'>
+              {{agePickVal}}
+            </view>
+          </picker>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+
+      <view class='input-item'>
+        <view class='input-item-left'>类别</view>
+        <view class='input-item-right'>
+          <view class='checkbox-item' style='{{speciesType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSpecies' data-type='1'>狗狗</view>
+          <view class='checkbox-item' style='{{speciesType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSpecies' data-type='2'>猫咪</view>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+
+
+      <view class='input-item' style='border-bottom:none'>
+        <view class='input-item-left'>性别</view>
+        <view class='input-item-right'>
+          <view class='checkbox-item' style='{{genderType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='1'>未知</view>
+          <view class='checkbox-item' style='{{genderType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='2'>男孩</view>
+          <view class='checkbox-item' style='{{genderType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='3'>女孩</view>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+    </view>
+
+    <view class='cover-item'>
+      <view class='header'>宠物现状</view>
+      <view class='input-item'>
+        <view class='input-item-left'>丢失地点</view>
+        <view class='input-item-right'>
+          <view class='picker' style='height:auto;line-height:normal' bindtap='toMapLocate' wx:if='{{droplocation!="" && droplocation.select}}'>
+            <view class='locationAddress'>{{droplocation.address}}</view>
+            <view class='locationAddressInfo'>{{droplocation.detailAddress}}</view>
+          </view>
+          <view class="picker" bindtap='toMapLocate' wx:else>
+            选择地点
+          </view>
+        </view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item'>
+      <view class='input-item-left'>丢失日期</view>
+      <view class='input-item-right'>
+        <picker mode="date" value="{{date}}" end="{{dateEnd}}" bindchange="bindDateChange">
+          <view class="picker">
+            {{date}}
+          </view>
+        </picker>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item'>
+      <view class='input-item-left'>绝育</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{sterilizeType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSterilize' data-type='3'>未知</view>
+        <view class='checkbox-item' style='{{sterilizeType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSterilize' data-type='1'>已驱</view>
+        <view class='checkbox-item' style='{{sterilizeType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSterilize' data-type='2'>未驱</view>
+        <view style='clear:both'></view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item'>
+      <view class='input-item-left'>免疫</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{immuneType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseImmune' data-type='3'>未知</view>
+        <view class='checkbox-item' style='{{immuneType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseImmune' data-type='1'>已驱</view>
+        <view class='checkbox-item' style='{{immuneType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseImmune' data-type='2'>未驱</view>
+        <view style='clear:both'></view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>芯片</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{chipType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='3'>未知</view>
+        <view class='checkbox-item' style='{{chipType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='1'>有芯片</view>
+        <view class='checkbox-item' style='{{chipType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='2'>无芯片</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>体型</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{chipType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='1'>大型</view>
+        <view class='checkbox-item' style='{{chipType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='2'>中型</view>
+        <view class='checkbox-item' style='{{chipType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='3'>小型</view>
+        <view class='checkbox-item' style='{{chipType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='3'>迷你</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>毛发</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{chipType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='1'>无毛</view>
+        <view class='checkbox-item' style='{{chipType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='2'>短毛</view>
+        <view class='checkbox-item' style='{{chipType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='3'>长毛</view>
+        <view class='checkbox-item' style='{{chipType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='4'>卷毛</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+
+
+    <view class='cover-item'>
+      <view class='header'>宠物特点描述</view>
+      <view class='form-cover'>
+        <textarea class='form-textarea' placeholder='请描述宠物特征有助于更快地找到宠物。' placeholder-style='color;#666' adjust-position='true' maxlength='200' name='specialPoint' value='{{specialPoint}}' bindinput='specialPointInput' cursor-spacing='20'></textarea>
+        <view class='currentLeftWords'>0/200</view>
+      </view>
+    </view>
+
+
+
+    <view class='cover-item'>
+      <view class='header'>宠物丢失详情描述</view>
+      <view class='form-cover'>
+        <textarea class='form-textarea' placeholder='请描述宠物情况及丢失的事情经过有助于更快地找到宠物。' placeholder-style='color;#666' adjust-position='true' maxlength='200' name='detailInfo' value='{{detailInfo}}' bindinput='detailInfoInput' cursor-spacing='20'></textarea>
+        <view class='currentLeftWords'>0/200</view>
+      </view>
+    </view>
+
+
+
+    <view class='cover-item'>
+      <view class='header'>联系方式</view>
+      <view class='input-item'>
+        <view class='input-item-left'>所在地</view>
+        <view class='input-item-right'>
+          <picker mode="region" bindchange="bindRegionChange" value="">
+            <view class="picker" wx:if='{{hasArea}}'>
+              {{region[0]}} {{region[1]}} {{region[2]}}
+            </view>
+            <view class='picker' style='color:#a9a9a9' wx:else>
+              请选择区县
+            </view>
+          </picker>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+      <view class='input-item'>
+        <view class='input-item-left'>微信号</view>
+        <view class='input-item-right'>
+          <input class='input-i' placeholder='选填' name='wxAccount' value='{{wxAccount}}' bindinput='wxAccountInput' maxlength='20'></input>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+      <view class='input-item' style='border-bottom:none'>
+        <view class='input-item-left'>手机号</view>
+        <view class='input-item-right'>
+          <input class='input-i' placeholder='必填' name='phone' maxlength='11' value='{{phone}}' bindinput='phoneInput' bindblur='verifyPhone'></input>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+      <view class='warn-item'>
+        <image class='check-icon' src='../../../images/check-icon.png'></image>
+        <text class='warn-item-txt'>手机号只作为短信通知用，不展示给领养人</text>
+      </view>
+    </view>
+
+    <view class='cover-item'>
+      <view class='header'>寻宠酬金</view>
+      <view class='input-item'>
+        <view class='input-item-left'>金额(元)</view>
+        <view class='input-item-right'>
+          <input class='input-i' placeholder='选填（酬金有助于增加找回几率）' name='reward' value='{{reward}}' bindinput='rewardInput' maxlength='20'  cursor-spacing='20' placeholder-style='color:#666'></input>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+    </view>
+
+    <view class='check-ok'>
+      <image class='check-ok-icon' src='../../../images/check-ok-icon.png'></image>
+      <text class='ok-item'>我已阅读，并同意遵守《邻宠公益平台寻宠规则》</text>
+    </view>
+
+    <button class='publish'  form-type="submit">发布</button>
+
+
+  </form>
+
+</block>
+
+
+
+<block wx:if='{{chooseTab==1}}'>
+  <form bindsubmit="submitNewFind">
+    <view class='top-warning' style='margin-top:{{height+15}}px'>虚假违法内容一经发现被举报，平台将封号！</view>
+
+
+    <view class='cover-item'>
+      <view class='header'>上传宠物照片</view>
+      <view class='gallery'>
+        <block wx:if='{{ImageUrls.length>0}}' wx:for='{{ImageUrls}}' wx:key='imground'>
+          <view class='layout' wx:if='{{item.notDeleted}}'>
+            <view class='add-layout-info'>
+              <image mode='aspectFill' class='add-img-info' src='{{photoPrefix}}{{item.data}}'></image>
+              <view class='del-cover' data-index='{{index}}' bindtap='delImg'></view>
+              <image data-index='{{index}}' bindtap='delImg' class='del-img' src='../../../images/del.png'></image>
+            </view>
+          </view>
+
+        </block>
+
+        <block wx:if='{{showAddPhotoCover}}'>
+          <image class='add-img' src='../../../images/photo-plus.png' bindtap='addPhoto'></image>
+        </block>
+
+        <view style='clear:both'></view>
+      </view>
+    </view>
+
+    <view class='cover-item'>
+      <view class='header'>宠物信息</view>
+
+      <view class='input-item'>
+        <view class='input-item-left'>类别</view>
+        <view class='input-item-right'>
+          <view class='checkbox-item' style='{{speciesType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSpecies' data-type='1'>狗狗</view>
+          <view class='checkbox-item' style='{{speciesType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseSpecies' data-type='2'>猫咪</view>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+
+
+      <view class='input-item' style='border-bottom:none'>
+        <view class='input-item-left'>性别</view>
+        <view class='input-item-right'>
+          <view class='checkbox-item' style='{{genderType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='1'>未知</view>
+          <view class='checkbox-item' style='{{genderType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='2'>男孩</view>
+          <view class='checkbox-item' style='{{genderType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='3'>女孩</view>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+    </view>
+
+    <view class='cover-item'>
+      <view class='header'>宠物现状</view>
+      <view class='input-item'>
+        <view class='input-item-left'>发现地点</view>
+        <view class='input-item-right'>
+          <view class='picker' style='height:auto;line-height:normal' bindtap='toMapLocate' wx:if='{{droplocation!="" && droplocation.select}}'>
+            <view class='locationAddress'>{{droplocation.address}}</view>
+            <view class='locationAddressInfo'>{{droplocation.detailAddress}}</view>
+          </view>
+          <view class="picker" bindtap='toMapLocate' wx:else>
+            选择地点
+          </view>
+        </view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item'>
+      <view class='input-item-left'>发现日期</view>
+      <view class='input-item-right'>
+        <picker mode="date" value="{{date}}" end="{{dateEnd}}" bindchange="bindDateChange">
+          <view class="picker">
+            {{date}}
+          </view>
+        </picker>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    
+    
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>体型</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{chipType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='1'>大型</view>
+        <view class='checkbox-item' style='{{chipType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='2'>中型</view>
+        <view class='checkbox-item' style='{{chipType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='3'>小型</view>
+        <view class='checkbox-item' style='{{chipType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='3'>迷你</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view class='input-item' style='border-bottom:none'>
+      <view class='input-item-left'>毛发</view>
+      <view class='input-item-right'>
+        <view class='checkbox-item' style='{{chipType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='1'>无毛</view>
+        <view class='checkbox-item' style='{{chipType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='2'>短毛</view>
+        <view class='checkbox-item' style='{{chipType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='3'>长毛</view>
+        <view class='checkbox-item' style='{{chipType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseChip' data-type='4'>卷毛</view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+
+    <view class='cover-item'>
+      <view class='header'>宠物详情描述</view>
+      <view class='form-cover'>
+        <textarea class='form-textarea' placeholder='请描述宠物情况及丢失的事情经过有助于更快地找到宠物。' placeholder-style='color;#666' adjust-position='true' maxlength='200' name='detailInfo' value='{{detailInfo}}' bindinput='detailInfoInput' cursor-spacing='20'></textarea>
+        <view class='currentLeftWords'>0/200</view>
+      </view>
+    </view>
+
+
+
+    <view class='cover-item'>
+      <view class='header'>联系方式</view>
+      <view class='input-item'>
+        <view class='input-item-left'>所在地</view>
+        <view class='input-item-right'>
+          <picker mode="region" bindchange="bindRegionChange" value="">
+            <view class="picker" wx:if='{{hasArea}}'>
+              {{region[0]}} {{region[1]}} {{region[2]}}
+            </view>
+            <view class='picker' style='color:#a9a9a9' wx:else>
+              请选择区县
+            </view>
+          </picker>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+      <view class='input-item'>
+        <view class='input-item-left'>微信号</view>
+        <view class='input-item-right'>
+          <input class='input-i' placeholder='选填' name='wxAccount' value='{{wxAccount}}' bindinput='wxAccountInput' maxlength='20'></input>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+      <view class='input-item' style='border-bottom:none'>
+        <view class='input-item-left'>手机号</view>
+        <view class='input-item-right'>
+          <input class='input-i' placeholder='必填' name='phone' maxlength='11' value='{{phone}}' bindinput='phoneInput' bindblur='verifyPhone'></input>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+      <view class='warn-item'>
+        <image class='check-icon' src='../../../images/check-icon.png'></image>
+        <text class='warn-item-txt'>手机号只作为短信通知用，不展示给领养人</text>
+      </view>
+    </view>
+
+    <view class='cover-item'>
+      <view class='header'>寻宠酬金</view>
+      <view class='input-item'>
+        <view class='input-item-left'>金额(元)</view>
+        <view class='input-item-right'>
+          <input class='input-i' placeholder='选填（酬金有助于增加找回几率）' name='reward' value='{{reward}}' bindinput='rewardInput' maxlength='20'  cursor-spacing='20' placeholder-style='color:#666'></input>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+    </view>
+
+    <view class='check-ok'>
+      <image class='check-ok-icon' src='../../../images/check-ok-icon.png'></image>
+      <text class='ok-item'>我已阅读，并同意遵守《邻宠公益平台寻宠规则》</text>
+    </view>
+
+    <button class='publish'  form-type="submit">发布</button>
+
+
+  </form>
+
+</block>

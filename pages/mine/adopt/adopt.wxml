@@ -1,0 +1,73 @@
+<nav-bar title-text="我的送养" backIcon='../../images/back-pre-black.png'   style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+
+<view class='tab-cover' style='top:{{marginNav}}px'>
+  <view class='tab-item' data-id='1' bindtap='chooseTab'>
+    <view class='tab' style='{{chosenId==1?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>
+      待送养
+    </view>
+  </view>
+  <view class='tab-item' data-id='2' bindtap='chooseTab'>
+    <view class='tab' style='{{chosenId==2?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>
+      已送养
+    </view>
+  </view>
+  <view class='tab-item' data-id='3' bindtap='chooseTab'>
+    <view class='tab' style='{{chosenId==3?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>
+      已失效
+    </view>
+  </view>
+</view>
+
+
+<view class='loading_cover' wx:if='{{showLoading}}' style='margin-top:{{marginNav+50}}px;'>
+  <view class="spinner">
+    <view class="double-bounce1"></view>
+    <view class="double-bounce2"></view>
+  </view>
+  <view class='loading_text'>加载中</view>
+</view>
+
+
+
+<view class='extra-list' style='margin-top:{{marginNav+50}}px;'>
+  <view class='ext-item-cover' wx:for="{{petInfoList}}">
+    <view class='ext-item' bindtap='detail'  data-petid='{{item.petId}}' >
+    <view class='ext-check-text-in' wx:if='{{item.adoptStatus==0}}'>待审核</view>
+        <view class='ext-check-text' wx:if='{{item.adoptStatus==2}}'>审核通过</view>
+        <view class='ext-check-text' wx:if='{{item.adoptStatus==3}}'>已上线</view>
+      <image class='ext-pic' mode='aspectFill' src='{{photoPrefix}}{{item.mediaList[0].mediaPath}}'></image>
+      <view class='ext-info'>
+        <view class='ext-name'>{{item.petName}}</view>
+        <view class='ext-spec'>
+          <view class='ext-age' wx:if='{{item.petAge!="不详"}}'>
+            {{item.petAge}}
+          </view>
+          <view class='ext-gender'>
+            <block wx:if='{{item.petSex==1}}'>
+              <image class='gender-icon' src='../../../images/boy.png'></image>
+              <text>男孩</text>
+            </block>
+            <block wx:if='{{item.petSex==2}}'>
+              <image class='gender-icon' src='../../../images/girl.png'></image>
+              <text>女孩</text>
+            </block>
+          </view>
+        </view>
+        <view class='ext-tags'>
+          <view class='ext-tag' wx:for="{{item.petCharacteristic}}" wx:for-item="character" wx:for-index="idx" wx:key="unique">
+            {{character.name}}
+          </view>
+        </view>
+        <view class='ext-location'>
+          <image class='location' src='../../../images/lost.png'></image>
+          <text>{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='ext-footer' wx:if='{{item.adoptStatus==2  || item.adoptStatus==3}}'>
+      <view class='ext-btn' wx:if='{{item.adoptStatus==2}}' data-petid='{{item.petId}}' bindtap='online'>上线</view>
+      <view class='ext-btn' wx:if='{{item.adoptStatus==3}}' data-petid='{{item.petId}}' bindtap='offline'>下线</view>
+    </view>
+  </view>
+</view>
+<view class='footer-cover' wx:if='{{bottomLast}}'>数据加载完毕</view>

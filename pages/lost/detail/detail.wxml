@@ -1,0 +1,306 @@
+<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<block wx:if='{{!showcanvasCover}}'>
+  <view class='section1'>
+    <view class='header' style='padding-top:{{height+10}}px'>
+      <view class='header-author'>
+        <image src='{{record.portrait}}' class='cover-header-image'></image>
+        <text class='cover-header-p'>{{record.nickName}}</text>
+      </view>
+    </view>
+
+    <view class='contentCover'>
+
+
+      <view>
+        <block wx:if='{{record.images.length==1}}'>
+          <image mode='aspectFill' src="{{photoPrefix}}{{record.images[0]}}" class="cover-image" bindtap='previewImg' data-imgindex='0' data-imgurls='{{record.images}}' />
+        </block>
+
+        <block wx:if='{{record.images.length==2 || record.images.length==4}}'>
+          <view class='cover-50-view'>
+            <block wx:for="{{record.images}}" wx:for-item="imgItem" wx:key='unique_img1' wx:for-index='imgIndex'>
+              <image mode='aspectFill' bindtap='previewImg' data-imgindex='{{imgIndex}}' data-imgurls='{{record.images}}' src="{{photoPrefix}}{{imgItem}}" class="cover-50p-image" />
+            </block>
+            <view style='clear:both'></view>
+          </view>
+        </block>
+
+        <block wx:if='{{record.images.length==3 || record.images.length>4}}'>
+          <view class='cover-33-view'>
+            <block wx:for="{{record.images}}" wx:for-item="imgItem" wx:key='unique_img2' wx:for-index='imgIndex'>
+              <image mode='aspectFill' bindtap='previewImg' data-imgindex='{{imgIndex}}' data-imgurls='{{record.images}}' src="{{photoPrefix}}{{imgItem}}" class="cover-33p-image" />
+            </block>
+            <view style='clear:both'></view>
+          </view>
+        </block>
+      </view>
+      <view wx:if='{{record.type=="2"}}' class='textareaCover'>
+        <text>{{record.content}}</text>
+      </view>
+
+
+
+
+
+
+
+      <button class='btn-default' bindtap='genHelpCard'>生成寻宠海报</button>
+
+      <block wx:if='{{record.content.emergencyType=="1"}}'>
+        <view class='cover-info'>
+          <view class='info-view-header-cover' style='position: relative;'>
+            <image class='emergencyTag' src='../images/icon_bar/lost-owner.png'></image>
+            <view class='info-view-header-left'>
+              我叫{{record.content.petName}}
+              <image class='genderIcon' wx:if='{{record.content.genderType=="男孩"}}' src='../../../images/boy.png'></image>
+              <image class='genderIcon' wx:if='{{record.content.genderType=="女孩"}}' src='../../../images/girl.png'></image>
+            </view>
+            <view style='clear:both'></view>
+          </view>
+          <view class='info-view-content'>
+            <view class='header-tag'>
+              {{record.content.speciesType}}
+            </view>
+            <view class='header-tag'>
+              {{record.content.breed}}
+            </view>
+            <block wx:if='{{record.content.agePickVal!="不详"}}'>
+              <view class='header-tag'>
+                {{record.content.agePickVal}}
+              </view>
+            </block>
+            <block wx:if='{{record.content.genderType!="未知"}}'>
+              <view class='header-tag'>
+                {{record.content.genderType}}
+              </view>
+            </block>
+            <block wx:if='{{record.content.sterilizeType!="未知"}}'>
+              <view class='header-tag'>
+                {{record.content.sterilizeType}}
+              </view>
+            </block>
+            <block wx:if='{{record.content.immuneType!="未知"}}'>
+              <view class='header-tag'>
+                {{record.content.immuneType}}
+              </view>
+            </block>
+            <block wx:if='{{record.content.chipType=="有芯片"}}'>
+              <view class='header-tag'>
+                能去医院扫描芯片查看主人资料
+              </view>
+            </block>
+            <view style='clear:both'></view>
+          </view>
+          <view class='info-view-title' style="margin-top: 20rpx; ">基本情况</view>
+          <view class='info-view-content'>
+            {{record.content.detailInfo}}
+          </view>
+          <view class='info-view-title'>我的特征</view>
+          <view class='info-view-content'>
+            {{record.content.specialPoint}}
+          </view>
+          <block wx:if='{{record.content.reward!=0 && record.content.reward!=undefined}}'>
+            <view class='rewrd'>酬金：{{record.content.reward}}元</view>
+          </block>
+        </view>
+
+
+
+        <view class='cover-info-bottom'>
+          <view class='cover-info-left'>
+            <view class='info-view-title'>丢失地点(打开探索地图寻找丢失地点)
+            </view>
+            <view class='info-view-content'>
+              {{record.location}}
+            </view>
+            <view class='info-view-content'>
+              {{record.detailLocation == null ?'':record.detailLocation}}
+            </view>
+          </view>
+
+          <view class='cover-info-right'>
+            <view class='info-view-title'>丢失时间</view>
+            <block wx:if='{{record.content.lostDay==0}}'>
+              <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+                我今天迷路找不回家了
+              </view>
+            </block>
+            <block wx:if='{{record.content.lostDay!=0}}'>
+              <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+                我已经迷路
+              </view>
+              <view class='info-view-clock'>{{record.content.lostDay}}天了</view>
+            </block>
+          </view>
+
+          <view style='clear:both'></view>
+        </view>
+
+        <view class='cover-info-bottom'>
+          <view class='cover-info-left'>
+            <view class='info-view-title'>联系方式
+            </view>
+            <block wx:if='{{record.content.wxAccount!=""}}'>
+              <view class='info-view-content' bindtap='copyWxAccount' data-wxaccount='{{record.content.wxAccount}}'>
+                <image src='../images/icon_bar/wx.png' class='wxImg'></image>
+                <view class='wxNum'>点击复制微信号</view>
+                <view style='clear:both'></view>
+              </view>
+            </block>
+            <view class='info-view-content' style='margin-top:20rpx;' bindtap='copyPhone' data-phone='{{record.content.phone}}'>
+              <image src='../../../images/tel.png' class='wxImg'></image>
+              <view class='wxNum'>点击拨打电话：{{record.content.phone}}</view>
+              <view style='clear:both'></view>
+            </view>
+          </view>
+
+          <view class='cover-info-right'>
+            <view class='info-view-title'>我家在这里</view>
+            <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+              {{record.content.regionDetail}}
+            </view>
+          </view>
+
+          <view style='clear:both'></view>
+        </view>
+      </block>
+
+      <block wx:if='{{record.content.emergencyType=="2"}}'>
+        <view class='cover-info'>
+          <view class='info-view-header-cover' style='position: relative;'>
+            <image class='emergencyTag' src='../images/icon_bar/find-owner.png'></image>
+            <view class='info-view-header-left'>
+              我被好心人发现了
+            </view>
+            <view style='clear:both'></view>
+          </view>
+          <view class='info-view-content'>
+            <block wx:if='{{record.content.speciesType!=undefined}}'>
+              <view class='header-tag'>
+                {{record.content.speciesType}}
+              </view>
+            </block>
+            <view class='header-tag'>
+              {{record.content.breed}}
+            </view>
+            <block wx:if='{{record.content.agePickVal!="不详"}}'>
+              <view class='header-tag'>
+                {{record.content.agePickVal}}
+              </view>
+            </block>
+            <block wx:if='{{record.content.genderType!="未知"}}'>
+              <view class='header-tag'>
+                {{record.content.genderType}}
+              </view>
+            </block>
+            <view style='clear:both'></view>
+          </view>
+          <view class='info-view-title' style="margin-top: 20rpx; ">基本情况</view>
+          <view class='info-view-content'>
+            {{record.content.detailInfo}}
+          </view>
+        </view>
+
+
+
+        <view class='cover-info-bottom'>
+          <view class='cover-info-left'>
+            <view class='info-view-title'>发现地点
+            </view>
+            <view class='info-view-content'>
+              {{record.location}}
+            </view>
+            <view class='info-view-content'>
+              {{record.detailLocation}}
+            </view>
+          </view>
+
+          <view class='cover-info-right'>
+            <view class='info-view-title'>发现时间</view>
+            <block wx:if='{{record.content.findDay==0}}'>
+              <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+                {{record.content.findDate}}
+              </view>
+            </block>
+            <block wx:if='{{record.content.findDay!=0}}'>
+              <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+                我已经迷路
+              </view>
+              <view class='info-view-clock'>{{record.content.findDay}}天了</view>
+            </block>
+          </view>
+
+          <view style='clear:both'></view>
+        </view>
+
+        <view class='cover-info-bottom'>
+          <view class='cover-info-left'>
+            <view class='info-view-title'>联系方式
+            </view>
+            <block wx:if='{{record.content.wxAccount!=""}}'>
+              <view class='info-view-content' bindtap='copyWxAccount' data-wxaccount='{{record.content.wxAccount}}'>
+                <image src='../images/icon_bar/wx.png' class='wxImg'></image>
+                <view class='wxNum'>点击复制微信号</view>
+                <view style='clear:both'></view>
+              </view>
+            </block>
+            <view class='info-view-content' style='margin-top:20rpx;' bindtap='copyPhone' data-phone='{{record.content.phone}}'>
+              <image src='../images/icon_bar/phone.png' class='wxImg'></image>
+              <view class='wxNum'>点击拨打电话：{{record.content.phone}}</view>
+              <view style='clear:both'></view>
+            </view>
+          </view>
+
+          <view class='cover-info-right'>
+            <view class='info-view-title'>好心人在这个地区</view>
+            <view class='info-view-header' style='text-align:center;margin-top:10rpx;'>
+              {{record.content.regionDetail}}
+            </view>
+          </view>
+
+          <view style='clear:both'></view>
+        </view>
+
+      </block>
+
+
+    </view>
+
+    <view class='header-bottom'>
+      <view class='header-time'>
+        <view class='header-content'>更新于 {{record.createDate}} </view>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view style='clear:both'></view>
+
+  </view>
+</block>
+
+<block wx:if='{{showcanvasCover}}'>
+
+  <view class='canvasTitle {{firstStep}}' style='margin-top:{{height+100}}px'>第一步：点击按钮上传流浪动物的照片</view>
+  <view class='uploadPicTip {{firstStep}}'>提示：寻宠详情信息页挑选一张满意的图片上传。</view>
+  <view class='uploadPicTip {{firstStep}}' style="font-size:25rpx;color:#fe395c">下载照片操作方法：返回上一页，点击照片后，再长按保存图片</view>
+  <button class='btn-yes  {{firstStep}}' style='margin-top:100rpx;' bindtap='chooseImage'>上传流浪动物照片</button>
+
+  <template name="we-cropper">
+    <canvas class="cropper  {{cutImage}}" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" style="width:{{width}}rpx;height:75vh;background-color: #000000" canvas-id="{{id}}">
+    </canvas>
+  </template>
+
+  <view class="cropper-wrapper {{cutImage}}" style='margin-top:{{height}}px;'>
+    <template is="we-cropper" data="{{...cropperOpt}}" />
+    <view class="cropper-buttons">
+      <view class="upload boxshaw cropperUpload" bindtap="chooseImage">重新选择</view>
+      <view class="boxshaw getCropperImage" bindtap="getCropperImage">确定</view>
+      <view style='clear:both'></view>
+    </view>
+  </view>
+
+
+  <cover-view class='canvasTitle {{addtribeConShow}}' style='margin-top:{{height+5}}px'>分享海报使救助成功率笔直上升！</cover-view>
+  <canvas class="myCanvas {{addtribeConShow}}" disable-scroll="true" canvas-id="myCanvas" bindtap='turnToImage'>
+  </canvas>
+  <cover-view class='canvasFooter {{addtribeConShow}}' bindtap='saveToAlbum'>保存救助海报</cover-view>
+</block>

@@ -1,0 +1,50 @@
+<nav-bar title-text="我的" backIcon='../../images/back-pre-black.png'   style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+
+<form bindsubmit="submit">
+  <view class='form-cover' style='margin-top:{{marginNav+10}}px'>
+    <view class='form-item-1' bindtap='addPhoto'>
+      <image class='form-portrait' src='{{tempPortrait}}'></image>
+    </view>
+    <view class='form-item-2'>
+      <view class='form-label'>昵称</view>
+      <input class='form-input'  name='nickName' maxlength='8'  placeholder='请输入您的昵称' placeholder-style='color:#a9a9a9' value='{{userInfo.nickName}}'></input>
+    </view>
+    <view class='form-item-2'>
+      <view class='form-label'>性别</view>
+      <view class='form-value'>
+        <view class='checkbox-item' style='{{gender==0?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-gender='0'>帅哥</view>
+        <view class='checkbox-item' style='{{gender==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-gender='1'>美女</view>
+      </view>
+    </view>
+    <view class='form-item-2'>
+      <view class='form-label'>生日</view>
+
+      <picker mode="date" value="{{birthday}}" start="1949" end="2019" bindchange="bindBirthdayChange">
+        <view class="form-picker {{hasBirthday?'choosed':''}}">
+          {{birthday}}
+        </view>
+      </picker>
+    </view>
+
+    <view class='form-item-2'>
+      <view class='form-label'>所在地</view>
+      <picker mode="region" bindchange="bindRegionChange" value="">
+        <view class="form-picker choosed" wx:if='{{hasArea}}'>
+          {{location}}
+        </view>
+        <view class='form-picker' style='color:#a9a9a9' wx:else>
+          请选择所在地
+        </view>
+      </picker>
+    </view>
+
+    <view class='form-item-2'>
+      <view class='form-label'>简介</view>
+      <input class='form-input' name='intro' placeholder='请最多用20字简要介绍一下自己' placeholder-style='color:#a9a9a9' value='{{userInfo.intro}}'></input>
+    </view>
+  
+    <button class='form-btn' form-type="submit">提交</button>
+
+
+  </view>
+</form>

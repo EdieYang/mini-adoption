@@ -1,0 +1,64 @@
+<nav-bar title-text="消息中心"></nav-bar>
+
+<view class='msg-cover' style='margin-top:{{marginNav}}px'>
+  <view class='msg-item' wx:if='{{messageList.sysMsg!=null}}' bindtap='detaillist' data-type='0'>
+    <view class='icon-cover'>
+      <image class='msg-icon' src='../../../images/msg-icon3.png'></image>
+      <view class='msg-banner' wx:if='{{messageList.sysMsg.unreadNumber>0}}'>{{messageList.sysMsg.unreadNumber}}</view>
+    </view>
+    <view class='msg-content'>
+      <view class='msg-header'>
+        <view class='title'>系统消息</view>
+        <view class='tag'>{{messageList.sysMsg.dateBefore}}</view>
+      </view>
+      <view class='msg-body'>{{messageList.sysMsg.msgTitle}}</view>
+    </view>
+  </view>
+
+  <view class='msg-item' wx:if='{{messageList.applyMsg!=null}}' bindtap='detaillist' data-type='1'>
+    <view class='icon-cover'>
+      <image class='msg-icon' src='../../../images/msg-icon1.png'></image>
+      <view class='msg-banner' wx:if='{{messageList.applyMsg.unreadNumber>0}}'>{{messageList.applyMsg.unreadNumber}}</view>
+    </view>
+    <view class='msg-content'>
+      <view class='msg-header'>
+        <view class='title'>领养申请通知</view>
+        <view class='tag'>{{messageList.applyMsg.dateBefore}}</view>
+      </view>
+      <view class='msg-body'>{{messageList.applyMsg.msgTitle}}</view>
+    </view>
+  </view>
+
+  <view class='msg-item' wx:if='{{messageList.agreementMsg!=null}}' bindtap='detaillist' data-type='2'>
+    <view class='icon-cover'>
+      <image class='msg-icon' src='../../../images/msg-icon2.png'></image>
+      <view class='msg-banner' wx:if='{{messageList.agreementMsg.unreadNumber>0}}'>{{messageList.agreementMsg.unreadNumber}}</view>
+    </view>
+    <view class='msg-content'>
+      <view class='msg-header'>
+        <view class='title'>领养协议通知</view>
+        <view class='tag'>{{messageList.agreementMsg.dateBefore}}</view>
+      </view>
+      <view class='msg-body'>{{messageList.agreementMsg.msgTitle}}</view>
+    </view>
+  </view>
+
+  <block wx:if='{{chatlist!=null}}' wx:for='{{chatlist}}'>
+    <view class='msg-item' bindtap='chat' data-userid='{{item.userId}}'>
+      <view class='icon-cover'>
+        <image class='msg-icon-protrait' src='{{item.portrait}}'></image>
+      </view>
+      <view class='msg-content'>
+        <view class='msg-header'>
+          <view class='title'>{{item.nickName}}</view>
+          <view class='tag'>{{item.messageList[0].key}}</view>
+        </view>
+        <view class='msg-body' wx:if='{{item.messageList[0].type==0}}'>{{item.messageList[0].data}}</view>
+        <view class='msg-body' wx:if='{{item.messageList[0].type==1}}'>发来一张图片</view>
+      </view>
+    </view>
+  </block>
+
+</view>
+
+<view class='footer-cover' wx:if='messageList.sysMsg == null && messageList.applyMsg == null && messageList.agreementMsg == null &&chatlist == null '>暂无任何消息</view>

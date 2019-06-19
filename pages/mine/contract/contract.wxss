@@ -1,0 +1,142 @@
+page {
+  padding-bottom: 150rpx;
+}
+
+.contract-cover {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.title {
+  font-size: 30rpx;
+  color: #000;
+}
+
+.header {
+  font-size: 34rpx;
+  color: #000;
+  font-weight: bold;
+  margin-top: 60rpx;
+}
+
+.contract-item {
+  color: #2d2d2d;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  letter-spacing: 2rpx;
+  line-height: 50rpx;
+}
+
+.contract-info {
+  margin-top: 60rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.info-header {
+  font-size: 36rpx;
+  color: #000;
+  font-weight: bold;
+}
+
+.info-img {
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  border-radius: 10rpx;
+  width:300rpx;
+  height:225rpx;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.info-label {
+  font-size: 32rpx;
+  color: #000;
+  font-weight: bold;
+  width: 200rpx;
+}
+
+.info-content {
+  color: #666;
+  font-size: 30rpx;
+}
+
+.contract-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.form-header {
+  margin-top: 30rpx;
+  color: #000;
+  font-size: 38rpx;
+  font-weight: bold;
+}
+
+.form-item {
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.form-label {
+  width: 200rpx;
+  color: #000;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 350rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border: none;
+  font-size: 30rpx;
+}
+
+.form-textarea {
+  height: 300rpx;
+  width: 650rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  color: #2d2d2d;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  border: 1rpx solid #809cec;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left: 20rpx;
+  background-color: #f7f8fe;
+}
+
+
+.submit-btn{
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  width: 100%;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  color:#fff;
+  background-color: #1c43b2;
+  font-size: 26rpx;
+  z-index: 100;
+  border-radius: 0rpx
+}
+
+.warn{
+  font-size: 28rpx;
+  color:#ff2727;
+  margin-bottom:30rpx;
+}

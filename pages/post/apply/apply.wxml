@@ -1,0 +1,93 @@
+<nav-bar title-text="申请领养"  backIcon='../../images/back-pre-black.png'></nav-bar>
+
+<view class='header' style='margin-top:{{marginNav}}px'>请填写正确信息，领养从真诚开始</view>
+<form bindsubmit="submitApply">
+  <view class='form'>
+    <view class='form-item'>
+      <view class='form-label'>我的性别</view>
+      <view class='form-checkbox'>
+        <view class='checkbox-item' style='{{gender==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='1'>女神</view>
+        <view class='checkbox-item' style='{{gender==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseGender' data-type='2'>男神</view>
+      </view>
+    </view>
+
+    <view class='form-item'>
+      <view class='form-label'>我的年龄</view>
+      <view class='form-checkbox'>
+        <view class='checkbox-item' style='{{age==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseAge' data-type='1'>60后</view>
+        <view class='checkbox-item' style='{{age==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseAge' data-type='2'>70后</view>
+        <view class='checkbox-item' style='{{age==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseAge' data-type='3'>80后</view>
+        <view class='checkbox-item' style='{{age==4?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseAge' data-type='4'>90后</view>
+        <view class='checkbox-item' style='{{age==5?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseAge' data-type='5'>00后</view>
+      </view>
+    </view>
+
+
+    <view class='form-item'>
+      <view class='form-label'>养宠经验</view>
+      <view class='form-checkbox'>
+        <view class='checkbox-item' style='{{experience==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseExper' data-type='1'>有</view>
+        <view class='checkbox-item' style='{{experience==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseExper' data-type='2'>无</view>
+      </view>
+    </view>
+
+    <view class='form-item'>
+      <view class='form-label'>婚姻状况</view>
+      <view class='form-checkbox'>
+        <view class='checkbox-item' style='{{marriage==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseMarriage' data-type='1'>单身</view>
+        <view class='checkbox-item' style='{{marriage==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseMarriage' data-type='2'>恋爱中</view>
+        <view class='checkbox-item' style='{{marriage==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseMarriage' data-type='3'>已婚</view>
+      </view>
+    </view>
+
+    <view class='form-item'>
+      <view class='form-label'>住房情况</view>
+      <view class='form-checkbox'>
+        <view class='checkbox-item' style='{{houseState==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseHouseState' data-type='1'>自有住房</view>
+        <view class='checkbox-item' style='{{houseState==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseHouseState' data-type='2'>整租</view>
+        <view class='checkbox-item' style='{{houseState==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseHouseState' data-type='3'>合租</view>
+      </view>
+    </view>
+
+    <view class='form-item'>
+      <view class='form-label'>我的职业</view>
+      <input class='input-i' placeholder='请输入' name='job' maxlength='6' value='{{petName}}' bindinput='jobInput' placeholder-style='color:#a9a9a9'></input>
+    </view>
+
+    <view class='form-item'>
+      <view class='form-label'>我的地址</view>
+      <view class='input-picker'>
+        <picker mode="region" bindchange="bindRegionChange" value="">
+          <view class="picker" wx:if='{{hasArea}}'>
+            {{region[0]}} {{region[1]}} {{region[2]}}
+          </view>
+          <view class='picker' style='color:#a9a9a9' wx:else>
+            请选择上海市区县
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class='form-item'>
+      <view class='form-label'>手机号</view>
+      <input class='input-i' placeholder='请输入手机号' name='phone' maxlength='11' value='{{phone}}' bindinput='phoneInput' bindblur='verifyPhone' placeholder-style='color:#a9a9a9'></input>
+      <view class='warn'>只有签署送养协议阶段才向送养人公开，方便双方沟通</view>
+    </view>
+
+    <view class='form-item'>
+      <view class='form-label'>给送养人的话</view>
+
+      <view class='form-cover'>
+        <textarea class='form-textarea' placeholder='选填，最多200个字' placeholder-style='color:#a9a9a9' adjust-position='true' maxlength='200' name='story' bindinput='storyInput' value='{{story}}'></textarea>
+      </view>
+    </view>
+
+    <view class='check-ok' bindtap='obeyRules'>
+      <image class='check-ok-icon' src='{{!obeyRules?"../../../images/check-ok-icon.png":"../../../images/checked-ok-icon.png"}}'></image>
+      <view class='ok-item'>我已阅读，并同意遵守
+        <text class='rule-item'>《邻宠领养平台送养规则》</text>
+      </view>
+    </view>
+  <button class='publish' form-type="submit">提交申请</button>
+  </view>
+</form>

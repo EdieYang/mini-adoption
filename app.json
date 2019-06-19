@@ -1,0 +1,81 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/post/index/index",
+    "pages/post/adopt/adopt",
+    "pages/post/lost/lost",
+    "pages/post/maplocate/maplocate",
+    "pages/post/apply/apply",
+    "pages/post/contract/contract",
+    "pages/post/sign/sign",
+    "pages/adoption/detail/detail",
+    "pages/adoption/chat/chat",
+    "pages/lost/index/index",
+    "pages/lost/detail/detail",
+    "pages/msg/index/index",
+    "pages/msg/detaillist/detaillist",
+    "pages/mine/index/index",
+    "pages/mine/home/home",
+    "pages/mine/modify/modify",
+    "pages/mine/identify/identify",
+    "pages/mine/collect/collect",
+    "pages/mine/adopt/adopt",
+    "pages/mine/sendapply/sendapply",
+    "pages/mine/receiveapply/receiveapply",
+    "pages/mine/receiveapplydetail/receiveapplydetail",
+    "pages/mine/contract/contract",
+    "pages/mine/followlist/followlist",
+    "pages/mine/followedlist/followedlist",
+    "pages/redirect/redirect"
+  ],
+  "window": {
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 100
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取用户位置信息在探索中展示"
+    }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx8abaf00ee8c3202e"
+  ],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#000",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/home_.png",
+        "selectedIconPath": "/images/home.png"
+      },
+      {
+        "pagePath": "pages/post/index/index",
+        "text": "发布",
+        "iconPath": "/images/post_.png",
+        "selectedIconPath": "/images/post.png"
+      },
+      {
+        "pagePath": "pages/msg/index/index",
+        "text": "消息",
+        "iconPath": "/images/msg_.png",
+        "selectedIconPath": "/images/msg.png"
+      },
+      {
+        "pagePath": "pages/mine/index/index",
+        "text": "我的",
+        "iconPath": "/images/mine_.png",
+        "selectedIconPath": "/images/mine.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 120000,
+    "downloadFile": 10000
+  },
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
+}

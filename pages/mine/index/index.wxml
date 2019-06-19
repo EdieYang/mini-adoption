@@ -1,0 +1,98 @@
+<nav-bar title-text="我的" background='#1c43b2' color='#fff' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+
+<view class='top-cover' style='padding-top:{{marginNav/2}}px'>
+  <view class='user-cover-default' wx:if='{{!isAuthorized}}'>
+    <view class='user-info-default'>
+      <image class='co-portrait-default' mode='aspectFill' src='../../../images/portrait.png'></image>
+      <view class='info-cover-default'>
+        <button class='cover-btn'  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+      </view>
+    </view>
+  </view>
+  <view class='user-cover' wx:if='{{isAuthorized}}'>
+    <view class='user-info'>
+      <image class='co-portrait' mode='aspectFill' src='{{userInfo.portrait}}'></image>
+      <view class='info-cover'>
+        <view class='co-name'>
+          {{userInfo.nickName}}
+        </view>
+        <!-- <view class='co-id'>
+          ID：{{userInfo.userId}}
+        </view> -->
+        <view class='co-follows'>
+          <view class='follow' bindtap='followlist'>关注 {{userInfo.followNum}} </view>
+          <view class='follow' bindtap='followedlist'>被关注 {{userInfo.followByNum}}  </view>
+        </view>
+      </view>
+    </view>
+    <view class='co-home' bindtap='home'>个人主页 > </view>
+  </view>
+  <view class='modi-info'  wx:if='{{isAuthorized}}'   bindtap='modify'>
+    <image class='modi-icon' src='../../../images/modi-icon.png'></image>
+    <text class='modi-txt'>编辑个人信息</text>
+  </view>
+</view>
+
+
+<view class='oper-cover'>
+  <view class='oper-item' bindtap='adoptlist'>
+    <view class='oper-left'>
+      <image class='oper-icon' src='../../../images/oper-1.png'></image>
+      <text>我的送养</text>
+    </view>
+    <image class='oper-in' src='../../../images/arrow-r.png'></image>
+  </view>
+  <view class='oper-item'  bindtap='receiveApply'>
+    <view class='oper-left'>
+      <image class='oper-icon' src='../../../images/oper-2.png'></image>
+      <text>我收到的领养申请</text>
+    </view>
+    <image class='oper-in' src='../../../images/arrow-r.png'></image>
+  </view>
+  <view class='oper-item'   bindtap='sendApply'>
+    <view class='oper-left'>
+      <image class='oper-icon' src='../../../images/oper-3.png'></image>
+      <text>我发出的领养申请</text>
+    </view>
+    <image class='oper-in' src='../../../images/arrow-r.png'></image>
+  </view>
+
+  <view style='height:1rpx; background-color:#eaeaea'></view>
+
+  <view class='oper-item' bindtap='certify'>
+    <view class='oper-left'>
+      <image class='oper-icon' src='../../../images/oper-4.png'></image>
+      <text>实名认证</text>
+    </view>
+    <image class='oper-in' src='../../../images/arrow-r.png'></image>
+  </view>
+  <view class='oper-item' bindtap='modify'>
+    <view class='oper-left'>
+      <image class='oper-icon' src='../../../images/oper-5.png'></image>
+      <text>我的资料</text>
+    </view>
+    <image class='oper-in' src='../../../images/arrow-r.png'></image>
+  </view>
+  
+  <view style='height:1rpx; background-color:#eaeaea'></view>
+
+
+  <view class='oper-item' bindtap='collect'>
+    <view class='oper-left'>
+      <image class='oper-icon' src='../../../images/oper-6.png'></image>
+      <text>我的收藏</text>
+    </view>
+    <image class='oper-in' src='../../../images/arrow-r.png'></image>
+  </view>
+  <view class='oper-item' bindtap='feedback'>
+    <view class='oper-left'>
+      <image class='oper-icon' src='../../../images/oper-7.png'></image>
+      <text>帮助与反馈</text>
+    </view>
+    <image class='oper-in' src='../../../images/arrow-r.png'></image>
+  </view>
+
+
+  <view style='height:1rpx; background-color:#eaeaea'></view>
+
+</view>

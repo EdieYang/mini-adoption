@@ -1,0 +1,79 @@
+page{
+  padding-bottom: 60rpx;
+}
+
+.msg-cover {
+  width: 700rpx;
+  margin-left: 25rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.msg-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-bottom: 1rpx solid #eaeaea;
+  margin-bottom:30rpx;
+}
+
+.msg-tip {
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 20rpx;
+}
+
+.msg-tip-portrait{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 20rpx;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.msg-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 620rpx;
+}
+
+.info-header {
+  color: #000;
+  font-size: 34rpx;
+}
+
+.info-content {
+  color: #999;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.info-pet {
+  background-color: #f7f8fe;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.pet-pic {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.pet-name {
+  font-size: 30rpx;
+  color: #000;
+  margin-left: 30rpx;
+  font-weight: bold;
+}
+
+.info-date {
+  font-size: 24rpx;
+  color: #999;
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+}

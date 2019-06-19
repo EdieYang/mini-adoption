@@ -1,0 +1,21 @@
+<nav-bar title-text="我关注的人" backIcon='../../images/back-pre-black.png' ></nav-bar>
+
+<view class='follow-cover' wx:for='{{followlist}}' style='margin-top:{{marginNav}}px'>
+  <view class='follow-item'>
+    <view class='item-info'  bindtap='home' data-followid='{{item.userId}}' >
+      <image class='info-img' src='{{item.portrait}}'></image>
+      <view class='info-name'>{{item.nickName}}</view>
+    </view>
+    <view class='item-btn' data-followid='{{item.userId}}'  bindtap='cancelFollow' wx:if='{{item.followed>0 || targetUserId==userId}}'>已关注</view>
+     <view class='item-btn-follow'  data-followid='{{item.userId}}'   bindtap='follow' wx:if='{{item.followed==0 && targetUserId!=userId}}'>关注</view>
+  </view>
+</view>
+
+
+<view class='loading_cover' wx:if='{{showLoading}}'>
+  <view class="spinner">
+    <view class="double-bounce1"></view>
+    <view class="double-bounce2"></view>
+  </view>
+  <view class='loading_text'>加载中</view>
+</view>
