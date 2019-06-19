@@ -480,12 +480,15 @@
 
 
 <block wx:if='{{userId==applyInfo.applyBy}}'>
-  <view class='footer' wx:if='{{applyInfo.applyStatus!=5 && applyInfo.applyStatus !=4}}'>
+  <view class='footer' wx:if='{{applyInfo.applyStatus!=5}}'>
     <block wx:if='{{applyInfo.applyStatus==0 || applyInfo.applyStatus==1 || applyInfo.applyStatus==2}}'>
       <view class='adopt-btn' bindtap='cancelPop' data-applyid='{{applyInfo.applyId}}'>取消申请</view>
     </block>
     <block wx:if='{{applyInfo.applyStatus==2 }}'>
       <view class='adopt-btn' bindtap='signContract' data-applyid='{{applyInfo.applyId}}'>签署协议</view>
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==4}}'>
+      <view class='adopt-btn' bindtap='contract' data-applyid='{{applyInfo.applyId}}'>领养协议</view>
     </block>
   </view>
 
@@ -507,6 +510,9 @@
     <block wx:if='{{applyInfo.applyStatus==3}}'>
       <view class='adopt-btn' bindtap='refusePop' data-applyid='{{applyInfo.applyId}}'>不合适</view>
       <view class='adopt-btn' bindtap='pass' data-applyid='{{applyInfo.applyId}}'>签署协议</view>
+    </block>
+    <block wx:if='{{applyInfo.applyStatus==4}}'>
+      <view class='adopt-btn' bindtap='contract' data-applyid='{{applyInfo.applyId}}'>领养协议</view>
     </block>
   </view>
 </block>

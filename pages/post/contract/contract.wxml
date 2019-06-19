@@ -1,5 +1,5 @@
-<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
-<view class='contract-cover' style='margin-top:{{height+30}}px'>
+<nav-bar title-text="领养协议"  backIcon='../../images/back-pre-black.png'></nav-bar>
+<view class='contract-cover' style='margin-top:{{marginNav+30}}px'>
   <view class='title'>送养人将委托动物交由领养方领养。</view>
   <view class='header'>甲方（送养人）义务：</view>
   <view class='contract-item'>1、如实告知乙方被领养动物的健康状况，性格，行为习惯等。</view>
@@ -242,6 +242,58 @@
     </view>
 
   </block>
+
+
+  <block wx:if='{{status==4}}'>
+    <view class='contract-info'>
+      <view class='warn'>请双方务必当面确认个人信息是否正确，必要时可按模板签署书面协议以保障双方利益。</view>
+      <view class='info-header' style='margin-bottom:30rpx;'>甲方（送养人）信息</view>
+      <view class='info-item'>
+        <view class='info-label'>姓名</view>
+        <view class='info-content'>
+          {{contractInfo.adopterName}}
+        </view>
+      </view>
+      <view class='info-item'>
+        <view class='info-label'>手机号</view>
+        <view class='info-content'>
+          {{contractInfo.adopterPhone}}
+        </view>
+      </view>
+      <form report-submit='true' bindsubmit='submitFormAdopter' report-submit-timeout='1000'>
+        <view class='contract-form'>
+          <view class='form-header'>签名</view>
+          <image src='{{photoPrefix}}{{contractInfo.adopterSign}}' class='sign-img'></image>
+        </view>
+
+
+
+        <view class='info-header' style='margin-top:60rpx;margin-bottom:30rpx;'>乙方（领养人）信息</view>
+        <view class='info-item'>
+          <view class='info-label'>姓名</view>
+          <view class='info-content'>
+            {{contractInfo.applyName}}
+          </view>
+        </view>
+        <view class='info-item'>
+          <view class='info-label'>手机号</view>
+          <view class='info-content'>
+            {{contractInfo.applyPhone}}
+          </view>
+        </view>
+        <view class='info-label'>乙方签名</view>
+        <image src='{{photoPrefix}}{{contractInfo.applySign}}' class='sign-img'></image>
+
+        <button class='submit-btn' bindtap='download'>下载协议</button>
+      </form>
+
+    </view>
+
+  </block>
+
+
+
+
 
 </view>
 

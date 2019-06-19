@@ -19,18 +19,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nvabarData: {
-      showCapsule: 0, //是否显示左上角图标
-      showCapsuleSingle: 1, //是否显示左上角图标
-      showIndex: false,
-      title: '领养协议', //导航栏 中间的标题
-      background: '#fff',
-      color: '#2d2d2d',
-      share: true,
-      showFilter: false
-    },
-    // 此页面 页面内容距最顶部的距离
-    height: app.globalData.height * 2 + 20,
+    marginNav: app.globalData.marginNav,
     photoPrefix: photoPrefix
   },
 
@@ -41,6 +30,24 @@ Page({
     userId = app.globalData.userId
     applyId = options.applyId
     this.getPetAdoptApplyDetial()
+    this.getUserInfo()
+  },
+  getUserInfo: function() {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/users/user',
+      data: {
+        userId: userId
+      },
+      method: "GET",
+      success: function(res) {
+        var userInfo = res.data.data
+        that.setData({
+          userInfo: userInfo,
+          isAuthorized: true,
+        })
+      }
+    })
   },
   getPetAdoptApplyDetial: function() {
     var that = this
@@ -63,6 +70,8 @@ Page({
           status = 2
         } else if (contractInfo.signStatus == 1) {
           status = 3
+        } else {
+          status = 4
         }
 
         petInfo.petCharacteristic = JSON.parse(petInfo.petCharacteristic)
@@ -75,7 +84,7 @@ Page({
           status: status
         })
 
-        if (applyUser.authenticated === 0) {
+        if (that.data.userInfo.authenticated === 0) {
           //弹出实名认证窗口
           that.setData({
             showFilter: true
@@ -294,14 +303,14 @@ Page({
 
     var dataReq = {
       applyId: applyId,
-      adopterId: this.data.applyInfo.createBy,
+      adopterId: this.data.adopterUser.userId,
       petId: this.data.petInfo.petId,
       applyBy: this.data.applyInfo.applyBy,
       agreement: agreement,
       adopterName: name,
       adopterPhone: phone,
       signStatus: 0,
-      createBy: this.data.applyInfo.createBy
+      createBy: this.data.adopterUser.userId
     }
 
     wx.request({

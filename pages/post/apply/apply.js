@@ -14,8 +14,6 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    // 此页面 页面内容距最顶部的距离
-    height: app.globalData.height * 2 + 20,
     hasArea: false,
     obeyRules: false,
   },
