@@ -52,8 +52,8 @@ App({
   IfAccess: function() {
     var that = this
     return new Promise(function(resolve, reject) {
-      var userId = wx.getStorageSync("userId")
-      // var userId = 'ae2bb55b0aed47868aaf67f98839685c'
+      // var userId = wx.getStorageSync("userId")
+      const userId = '062b42c7997348b398719f8ff8ebc8e4'
       //put userId into global variable dataset
       that.globalData.userId = userId;
       //define api request url
@@ -91,7 +91,6 @@ App({
             dataType: "json",
             success: function(res) {
               const userId = res.data.userId;
-              // const userId = 'ae2bb55b0aed47868aaf67f98839685c'
               if (userId && typeof(userId) != 'undefined' && userId != '') {
                 that.checkIfUserAuthorized(userId, resolve);
               } else {

@@ -24,6 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    pageNum=1
     type = options.type
     if (type == 0) {
       var navTitle = '系统通知'
@@ -47,6 +48,7 @@ Page({
       })
     }
     userId = app.globalData.userId
+    messageArr=[]
   },
 
   /**

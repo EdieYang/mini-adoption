@@ -261,7 +261,8 @@ Page({
         'ossZone': 'adopt/' + applyId + '/agreement'
       },
       success: (resp) => {
-        var returnUrl = resp.data.data;
+        var result = resp.data;
+        var returnUrl = JSON.parse(result).data
         var dataReq = {
           agreementId: this.data.contractInfo.agreementId,
           applyId: applyId,

@@ -164,10 +164,10 @@ Page({
       }
     })
   },
-  contract: function(e) {
+  contractDetail: function(e) {
     var applyId = e.currentTarget.dataset.applyid
     wx.navigateTo({
-      url: '../../post/contract/contract?applyId=' + applyId,
+      url: '../contract/contract?applyId=' + applyId,
     })
   },
   signContract: function(e) {

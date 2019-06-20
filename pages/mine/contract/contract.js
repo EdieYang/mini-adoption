@@ -12,17 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nvabarData: {
-      showCapsule: 0, //是否显示左上角图标
-      showCapsuleSingle: 1, //是否显示左上角图标
-      showIndex: false,
-      title: '领养协议', //导航栏 中间的标题
-      background: '#fff',
-      color: '#2d2d2d',
-      share: true
-    },
-    // 此页面 页面内容距最顶部的距离
-    height: app.globalData.height * 2 + 20,
+    marginNav: app.globalData.marginNav,
     photoPrefix: photoPrefix
   },
 

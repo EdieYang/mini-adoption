@@ -1,6 +1,5 @@
 <nav-bar title-text="宠物详情" backIcon='../../images/back-pre-black.png' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 
-
 <swiper bindchange="swiper" class='h_c' current="0" circular="true" next-margin="70rpx" easing-function='easeOutCubic' style='margin-top:{{marginNav}}px'>
   <block wx:for="{{imgUrls}}" wx:for-index="i" wx:key="{{key}}">
     <swiper-item class="item" bindtap='previewImg' data-imgindex='{{i}}'>

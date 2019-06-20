@@ -1,6 +1,6 @@
-<nav-bar title-text="领养协议" backIcon='../../images/back-pre-black.png'   style='top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+<nav-bar title-text="领养协议"  backIcon='../../images/back-pre-black.png'></nav-bar>
 
-<view class='contract-cover' style='margin-top:{{marginNav}}px'>
+<view class='contract-cover' style='margin-top:{{marginNav+30}}px'>
   <view class='title'>送养人将委托动物交由领养方领养。</view>
   <view class='header'>甲方（送养人）义务：</view>
   <view class='contract-item'>1、如实告知乙方被领养动物的健康状况，性格，行为习惯等。</view>
@@ -143,14 +143,14 @@
         {{contractInfo.adopterPhone}}
       </view>
     </view>
-    <block wx:if='{{contractInfo.status!=0}}'>
+    <block wx:if='{{contractInfo.signStatus==2}}'>
       <view class='info-item'>
-        <image src='{{photoPrefix}}{{contractInfo.adoptSign}}'></image>
+        <image src='{{photoPrefix}}{{contractInfo.adopterSign}}'></image>
       </view>
     </block>
   </view>
 
-  <block wx:if='{{contractInfo.status!=0}}'>
+  <block wx:if='{{contractInfo.signStatus==1 || contractInfo.signStatus==2}}'>
     <view class='contract-info'>
       <view class='info-header' style='margin-bottom:30rpx;'>乙方（领养人）信息</view>
       <view class='info-item'>
@@ -170,5 +170,14 @@
       </view>
     </view>
   </block>
+
+  <block wx:if='{{contractInfo.signStatus==0}}'>
+    <button class='waiting-btn'>等待领养人签署协议</button>
+  </block>
+
+  <block wx:if='{{contractInfo.signStatus==2}}'>
+    <button class='submit-btn' bindtap='download'>下载协议</button>
+  </block>
+
 
 </view>
