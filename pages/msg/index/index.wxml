@@ -51,10 +51,10 @@
       <view class='msg-content'>
         <view class='msg-header'>
           <view class='title'>{{item.nickName}}</view>
-          <view class='tag'>{{item.messageList[0].key}}</view>
+          <view class='tag'>{{item.messageList[item.messageList.length-1].key}}</view>
         </view>
-        <view class='msg-body' wx:if='{{item.messageList[0].type==0}}'>{{item.messageList[0].data}}</view>
-        <view class='msg-body' wx:if='{{item.messageList[0].type==1}}'>发来一张图片</view>
+        <view class='msg-body' wx:if='{{item.messageList[item.messageList.length-1].type==0}}'>{{item.messageList[item.messageList.length-1].data}}</view>
+        <view class='msg-body' wx:if='{{item.messageList[item.messageList.length-1].type==1}}'>发来一张图片</view>
       </view>
     </view>
   </block>

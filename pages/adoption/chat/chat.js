@@ -65,6 +65,9 @@ Page({
       that.setData({
         msgs: mgds
       })
+      that.setData({
+        scrollTop: 1000 * mgds.length // 这里我们的单对话区域最高1000，取了最大值，应该有方法取到精确的
+      });
     })
 
   },
@@ -234,6 +237,7 @@ Page({
     });
 
   },
+
   checkEmptyVar: function(param) {
     if (!param || typeof(param) == 'undefined' || param == "") {
       return true;
@@ -308,9 +312,14 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-    //清除定时器
-    clearInterval(this.recoveraAnimation);
-    clearInterval(this.restartAnimation);
+    //断开websocket
+    wx.onSocketOpen(function () {
+      wx.closeSocket()
+    })
+
+    wx.onSocketClose(function (res) {
+      console.log('WebSocket 已关闭！')
+    })
   },
 
   /**

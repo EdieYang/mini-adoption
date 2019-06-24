@@ -488,7 +488,7 @@
       <view class='adopt-btn' bindtap='signContract' data-applyid='{{applyInfo.applyId}}'>签署协议</view>
     </block>
     <block wx:if='{{applyInfo.applyStatus==4}}'>
-      <view class='adopt-btn' bindtap='contract' data-applyid='{{applyInfo.applyId}}'>领养协议</view>
+      <view class='adopt-btn' bindtap='contractDetail' data-applyid='{{applyInfo.applyId}}'>领养协议</view>
     </block>
   </view>
 

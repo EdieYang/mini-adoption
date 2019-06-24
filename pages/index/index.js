@@ -226,6 +226,7 @@ Page({
         petInfoListArr = petInfoListArr.concat(petInfoList)
         that.setData({
           petInfoList: petInfoListArr,
+          petCols: petInfoList,
           showLoading: false,
           bottomLast: bottomLast
         })
@@ -386,7 +387,11 @@ Page({
     //刷新页面
     if (!bottomLast) {
       pageNum++;
-      that.getPetAdoptList()
+      if (chosenId == 1) {
+        that.getFollowAdoption()
+      } else {
+        that.getPetAdoptList()
+      }
     }
   },
 

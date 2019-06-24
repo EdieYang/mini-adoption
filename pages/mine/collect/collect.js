@@ -6,6 +6,7 @@ var userId;
 var pageNum = 1
 var pageSize = 10
 var collectArr=[]
+var bottomLast=false 
 
 Page({
 
