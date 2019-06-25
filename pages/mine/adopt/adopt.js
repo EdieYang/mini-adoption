@@ -41,6 +41,7 @@ Page({
     } else {
       adoptStatus = '5'
     }
+    pageNum=1
     adoptlistArr = []
     this.setData({
       showLoading: true,
@@ -78,6 +79,12 @@ Page({
           bottomLast: bottomLast
         })
       }
+    })
+  },
+  modify:function(e){
+    var petId = e.currentTarget.dataset.petid
+    wx.navigateTo({
+      url: '../../post/adopt/adopt?loadState=1&petId=' + petId,
     })
   },
   online: function(e) {

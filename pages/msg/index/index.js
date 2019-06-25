@@ -18,6 +18,9 @@ Page({
    */
   onLoad: function(options) {
     userId = app.globalData.userId
+    wx.hideTabBarRedDot({
+      index:2
+    })
   },
 
 

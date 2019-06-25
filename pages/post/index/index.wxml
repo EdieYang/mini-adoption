@@ -6,7 +6,7 @@
 
 <view class='post-item' bindtap='adopt'>
   
-  <image></image>
+  <image class='itme-bc' src="https://linkpet-image-bucket-1.oss-cn-hangzhou.aliyuncs.com/cms/logo/pc-bc2.jpg"  mode="aspectFill"></image>
   <view class='item-header'>
     <text class='title-1'>我要送养</text>
     <text>领养从真诚开始</text>
@@ -18,7 +18,7 @@
 
 <view class='post-item'>
   
-  <image></image>
+  <image class='itme-bc'  src="https://linkpet-image-bucket-1.oss-cn-hangzhou.aliyuncs.com/cms/logo/post-bc1.jpg" mode="aspectFill"></image>
   <view class='item-header'>
     <text class='title-2'>送养攻略</text>
     <text>发布-审核-签协议</text>

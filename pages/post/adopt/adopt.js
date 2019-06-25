@@ -787,6 +787,7 @@ Page({
         mobilePhone: phone,
         story: story,
         createBy: userId,
+        adoptStatus:'0',
         mediaList: imageArr
       }
       wx.request({

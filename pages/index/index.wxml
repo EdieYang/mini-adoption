@@ -1,6 +1,6 @@
 <nav-bar title-text="上海宠物领养"></nav-bar>
 
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color='{{indicatorColor}}' style='margin-top:{{marginNav}}px;height:125px;'>
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color='{{indicatorColor}}' style='margin-top:{{marginNav}}px;height:375rpx;'>
   <block wx:for="{{imgUrls}}">
     <swiper-item bindtap='redirectUrl' data-index='{{index}}'>
       <image src="{{photoPrefix}}{{item.bannerImgUrl}}" class="slide-image" />

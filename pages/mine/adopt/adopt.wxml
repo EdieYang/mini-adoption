@@ -1,4 +1,4 @@
-<nav-bar title-text="我的送养" backIcon='../../images/back-pre-black.png'   style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+<nav-bar title-text="我的送养" backIcon='../../images/back-pre-black.png' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 
 <view class='tab-cover' style='top:{{marginNav}}px'>
   <view class='tab-item' data-id='1' bindtap='chooseTab'>
@@ -31,10 +31,7 @@
 
 <view class='extra-list' style='margin-top:{{marginNav+50}}px;'>
   <view class='ext-item-cover' wx:for="{{petInfoList}}">
-    <view class='ext-item' bindtap='detail'  data-petid='{{item.petId}}' >
-    <view class='ext-check-text-in' wx:if='{{item.adoptStatus==0}}'>待审核</view>
-        <view class='ext-check-text' wx:if='{{item.adoptStatus==2}}'>审核通过</view>
-        <view class='ext-check-text' wx:if='{{item.adoptStatus==3}}'>已上线</view>
+    <view class='ext-item' bindtap='detail' data-petid='{{item.petId}}'>
       <image class='ext-pic' mode='aspectFill' src='{{photoPrefix}}{{item.mediaList[0].mediaPath}}'></image>
       <view class='ext-info'>
         <view class='ext-name'>{{item.petName}}</view>
@@ -64,7 +61,12 @@
         </view>
       </view>
     </view>
-    <view class='ext-footer' wx:if='{{item.adoptStatus==2  || item.adoptStatus==3}}'>
+    <view class='ext-footer'>
+      <view class='ext-check-text-in' wx:if='{{item.adoptStatus==0}}'>状态：待审核</view>
+      <view class='ext-check-text-in' wx:if='{{item.adoptStatus==1}}'>状态：审核未通过</view>
+      <view class='ext-check-text' wx:if='{{item.adoptStatus==2}}'>状态：审核通过</view>
+      <view class='ext-check-text' wx:if='{{item.adoptStatus==3}}'>状态：已上线</view>
+      <view class='ext-btn' wx:if='{{item.adoptStatus==0 || item.adoptStatus==1}}' data-petid='{{item.petId}}' bindtap='modify'>编辑</view>
       <view class='ext-btn' wx:if='{{item.adoptStatus==2}}' data-petid='{{item.petId}}' bindtap='online'>上线</view>
       <view class='ext-btn' wx:if='{{item.adoptStatus==3}}' data-petid='{{item.petId}}' bindtap='offline'>下线</view>
     </view>

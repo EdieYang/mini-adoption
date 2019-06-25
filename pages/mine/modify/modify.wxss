@@ -27,7 +27,7 @@
 
 .form-label{
   width:140rpx;
-  margin-left:20rpx;
+  margin-left:40rpx;
   font-size: 32rpx;
   color: #2d2d2d;
 }

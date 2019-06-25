@@ -13,8 +13,8 @@ var healthStatus = 1
 var petInfoListArr = []
 let col1H = 0
 let col2H = 0
-let chosenId=2
-let bottomLast=false
+let chosenId = 2
+let bottomLast = false
 
 Page({
 
@@ -61,6 +61,7 @@ Page({
   onLoad: function(options) {
     var that = this
     this.getBannerList()
+
     app.IfAccess().then(function(res) {
       if (res) {
         userId = app.globalData.userId;
@@ -69,6 +70,7 @@ Page({
             userId: userId
           })
           that.getPetAdoptList()
+          that.getUnreadMessage()
         }
       }
     })
@@ -186,6 +188,24 @@ Page({
           petCols: petInfoList
         })
         wx.stopPullDownRefresh()
+      }
+    })
+  },
+  getUnreadMessage: function() {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/messages/unreadlist',
+      data: {
+        userId: userId
+      },
+      method: "GET",
+      success: function(res) {
+        var msgList = res.data.data
+        if (msgList.length > 0) {
+          wx.showTabBarRedDot({
+            index: 2
+          })
+        }
       }
     })
   },
@@ -324,11 +344,11 @@ Page({
       })
     } else if (sex == 2) {
       this.setData({
-        sexArr: '1'
+        sexArr: '2'
       })
     } else {
       this.setData({
-        sexArr: '2'
+        sexArr: '3'
       })
     }
 
@@ -360,10 +380,16 @@ Page({
     petInfoListArr = []
     this.setData({
       showFilter: false,
-      petInfoList: []
+      showLoading: true,
+      petInfoList: [],
+      petCols: [],
+      col1: [],
+      col2: [],
     })
+    col1H = 0
+    col2H = 0
+    pageNum = 1
     this.getPetAdoptList()
-
   },
 
   toAdoptionDetail: function(e) {
@@ -382,7 +408,7 @@ Page({
   },
 
 
-  onReachBottom:  function() {
+  onReachBottom: function() {
     var that = this
     //刷新页面
     if (!bottomLast) {
@@ -425,11 +451,11 @@ Page({
   onPageScroll: function(res) {
     var that = this
     console.log(res);
-    if (res.scrollTop >= 125) {
+    if (res.scrollTop >= 185) {
       this.setData({
         tabFix: true
       })
-    } else if (res.scrollTop < 125) {
+    } else if (res.scrollTop < 185) {
       this.setData({
         tabFix: false
       })
@@ -440,7 +466,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    var that=this
+    var that = this
     this.setData({
       showLoading: true,
       petInfoList: [],
