@@ -1,6 +1,6 @@
 <nav-bar title-text="发布宠物信息"  backIcon='../../images/back-pre-black.png'></nav-bar>
 
-<form bindsubmit="submitNew">
+<form bindsubmit="submitNew" report-submit='true'  report-submit-timeout='1000'>
   <view class='top-warning' style='margin-top:{{marginNav+10}}px'>(只限上海地区发布领养) 虚假违法内容将被介入删除！</view>
 
 

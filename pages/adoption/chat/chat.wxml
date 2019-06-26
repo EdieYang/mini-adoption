@@ -33,6 +33,7 @@
   <view class='bar-item'>
     <image src='../../../images/keyboard-img.png' class='bar-img'></image>
   </view>
+  <form report-submit='true'></form>
   <input class='bar-input' placeholder='请输入...' type='text' cursor-spacing='20' bindinput="bindKeyInput" value='{{inputValue}}' confirm-type='send' confirm-hold='true'  bindconfirm='sendmsg'></input>
   <button class='bar-btn' bindtap='sendmsg'>发送</button>
 </view>

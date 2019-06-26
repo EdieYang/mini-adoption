@@ -202,10 +202,11 @@ Page({
           applyPhone: phone,
           applySign: returnUrl,
           signStatus: 1,
+          formId:formId
         }
 
         wx.request({
-          url: app.globalData.requestUrlCms + '/adopt/agreement/info/' + formId,
+          url: app.globalData.requestUrlCms + '/adopt/agreement/info',
           data: dataReq,
           method: "PUT",
           header: {
