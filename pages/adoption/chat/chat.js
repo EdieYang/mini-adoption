@@ -219,6 +219,7 @@ Page({
     req.targetUserId = targetUserId
     req.data = this.data.inputValue
     req.type = 0
+    req.formId=e.detail.formId
     var mgds = this.data.msgs
     mgds.push(req)
     this.setData({

@@ -1,7 +1,7 @@
 <nav-bar title-text="实名认证" backIcon='../../images/back-pre-black.png' ></nav-bar>
 
 <block wx:if='{{status==1}}'>
-  <form report-submit='true'>
+  <form report-submit='true' bindsubmit="uploadCheck">
     <view class='identify-cover' style='margin-top:{{marginNav+30}}px'>
       <view class='header'>
         <view class='title'>实名认证材料</view>
@@ -37,7 +37,7 @@
 
     </view>
 
-    <view class='check-btn' bindtap='uploadCheck'>提交审核</view>
+    <button class='check-btn' form-type="submit">提交审核</button>
   </form>
 </block>
 

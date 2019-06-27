@@ -76,7 +76,7 @@ Page({
     });
   },
 
-  uploadCheck: function() {
+  uploadCheck: function(e) {
     var that = this
     if (this.data.imageFront != imageFronDefault && this.data.imageBack != imagebackDefault) {
       wx.showLoading({
@@ -87,7 +87,8 @@ Page({
         data: {
           imageFront: that.data.imageFront,
           imageBack: that.data.imageBack,
-          userId: userId
+          userId: userId,
+          formId:e.detail.formId
         },
         method: "POST",
         header: {
