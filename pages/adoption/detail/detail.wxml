@@ -11,6 +11,10 @@
 </swiper>
 
 <view class='detail-cover'>
+  <view class="share-cover" bindtap="sharePost"  data-petid='{{petInfo.petId}}'>
+    <image src="../../../images/share.png" style="width:80rpx;height:80rpx;"></image>
+    <view style="font-size:18rpx;">生成分享海报</view>
+  </view>
   <view class='det-title'>你好，我叫{{petInfo.petName}}</view>
   <view class='det-info'>
     <view class='info-item'>

@@ -442,6 +442,15 @@ Page({
       }
     })
   },
+  sharePost:function(e){
+    var petId = e.currentTarget.dataset.petid
+    wx.showLoading({
+      title: '生成海报中',
+    })
+    wx.navigateTo({
+      url: '../share/share?petId='+petId,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

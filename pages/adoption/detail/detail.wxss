@@ -42,6 +42,13 @@ page {
   display: flex;
   flex-direction: column;
   box-shadow: -2rpx 10rpx 30rpx #fafafa;
+  position: relative;
+}
+
+.share-cover{
+  position: absolute;
+  top:10rpx;
+  right:30rpx;
 }
 
 .det-title {

@@ -1,0 +1,6 @@
+<nav-bar title-text="分享海报" backIcon='../../images/back-pre-black.png'></nav-bar>
+<view style='display:none'>
+    <image src="{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}" bindload="onImageLoad" mode="widthFix"  lazy-load="true"></image>
+</view>
+
+<canvas style="width: 750rpx; height: 1334rpx;margin-top:{{marginNav}}px" canvas-id="post-adoption"></canvas>
