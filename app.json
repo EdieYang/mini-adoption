@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/mine/contractdwn/contractdwn",
     "pages/index/index",
     "pages/post/index/index",
     "pages/post/adopt/adopt",
@@ -11,6 +10,7 @@
     "pages/post/sign/sign",
     "pages/adoption/detail/detail",
     "pages/adoption/chat/chat",
+    "pages/adoption/share/share",
     "pages/lost/index/index",
     "pages/lost/detail/detail",
     "pages/msg/index/index",
@@ -25,6 +25,7 @@
     "pages/mine/receiveapply/receiveapply",
     "pages/mine/receiveapplydetail/receiveapplydetail",
     "pages/mine/contract/contract",
+    "pages/mine/contractdwn/contractdwn",
     "pages/mine/followlist/followlist",
     "pages/mine/followedlist/followedlist",
     "pages/redirect/redirect"

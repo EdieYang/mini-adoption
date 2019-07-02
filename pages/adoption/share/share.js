@@ -21,8 +21,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // petId = options.petId
-    petId = '349ac45d6d624ad79baabc3c2c45adb7'
+    petId = options.petId
+    // petId = '349ac45d6d624ad79baabc3c2c45adb7'
     userId = app.globalData.userId
     wx.showLoading({
       title: '生成海报中',
@@ -57,18 +57,50 @@ Page({
     })
   },
   generatePost: function() {
-    wx.hideLoading()
+    var that=this
     var petInfo = this.data.petInfo
     context = wx.createCanvasContext("post-adoption", this)
     context.drawImage('../../../images/post-adoption.png', 16, 0, 345, 613)
-    context.drawImage(photoPrefix + petInfo.mediaList[0].mediaPath, 45, 60, 112, destHeight)
-    context.setFontSize(16)
-    context.fillText('你好，我叫  ' + petInfo.petName, 70, 260)
-    context.fillText(this.genInfo1(), 70, 288)
-    context.fillText(this.genInfo2(), 70, 320)
-    this.drawText(context, petInfo.story, 45, 350, 280)
-    context.fillText('长按识别右侧二维码', 45, 520)
-    context.draw()
+    wx.getImageInfo({
+      src: photoPrefix + petInfo.mediaList[0].mediaPath,
+      success(res) {
+        var petPhoto = res.path;
+        context.drawImage(petPhoto, 45, 60, 112, destHeight)
+        context.setFontSize(16)
+        context.fillText('Hi，我叫 ' + petInfo.petName, 70, 260)
+        context.fillText(that.genInfo2(), 70, 288)
+        context.fillText(that.genInfo1(), 70, 320)
+        that.drawText(context, petInfo.story, 45, 350, 280)
+        context.fillText('长按识别右侧二维码', 45, 520)
+        context.setFillStyle('#fc6653')
+        context.fillRect(45, 538, 150, 32)
+        context.setFillStyle("#ffffff")
+        context.fillText('查看待领养宠物详情', 48, 560)
+        wx.request({
+          url: app.globalData.requestUrlWechat + '/miniSystemApi/generateWxACode',
+          dataType: "json",
+          method: "GET",
+          data: {
+            path: 'pages/adoption/detail/detail',
+            scene: petId
+          },
+          success: function (res) {
+            var wxAcodeUrl = photoPrefix + res.data.data;
+            wx.getImageInfo({
+              src: wxAcodeUrl,
+              success(res) {
+                wxAcodeUrl = res.path;
+                context.drawImage(wxAcodeUrl, 220, 490, 90, 90)
+                context.draw()
+                wx.hideLoading()
+              }
+            })
+          }
+        })
+      }
+    })
+    
+
   },
   onImageLoad: function(e) {
     let oImgW = e.detail.width; //图片原始宽度
@@ -117,6 +149,34 @@ Page({
     }
 
     return initHeight
+  },
+
+  download: function() {
+    var width = wx.getSystemInfoSync().windowWidth
+    var contextHidden = wx.createCanvasContext('post-adoption-hidden', this)
+    contextHidden.draw(false, wx.canvasToTempFilePath({
+      x: 15,
+      y: 0,
+      width: 345,
+      height: 613,
+      destWidth: 345 * 750 / width,
+      destHeight: 613 * 750 / width,
+      canvasId: 'post-adoption',
+      success(res) {
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success(res) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '保存成功',
+            });
+          },
+          fail() {
+            wx.hideLoading()
+          }
+        })
+      }
+    }))
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -197,13 +197,15 @@ Page({
   },
   download:function(){
     var height = wx.getSystemInfoSync().windowHeight
-    context.draw(false,wx.canvasToTempFilePath({
+    var width = wx.getSystemInfoSync().windowWidth
+    var contextHidden = wx.createCanvasContext('contract-page-hidden', this)
+    contextHidden.draw(false,wx.canvasToTempFilePath({
       x: 0,
       y: 0,
       width: 375,
       height: 2.5 * height,
-      destWidth: 375,
-      destHeight: 2.5 * height,
+      destWidth: 375 * 750 / width,
+      destHeight: 2.5 * height * 750 / width,
       canvasId: 'contract-page',
       success(res) {
         wx.saveImageToPhotosAlbum({

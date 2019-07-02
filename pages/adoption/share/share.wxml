@@ -3,4 +3,7 @@
     <image src="{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}" bindload="onImageLoad" mode="widthFix"  lazy-load="true"></image>
 </view>
 
-<canvas style="width: 750rpx; height: 1334rpx;margin-top:{{marginNav}}px" canvas-id="post-adoption"></canvas>
+<canvas style="width: 750rpx; height: 1334rpx;margin-top:{{marginNav}}px;z-index: 100" canvas-id="post-adoption"></canvas>
+<canvas style="width: 750rpx; height: 1334rpx;margin-top:{{marginNav}}px;z-index: 100;display:none" canvas-id="post-adoption-hidden"></canvas>
+
+<cover-view class="footer" bindtap="download">保存海报至相册</cover-view>
