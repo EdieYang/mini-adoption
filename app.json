@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/mine/contractdwn/contractdwn",
     "pages/index/index",
     "pages/post/index/index",
     "pages/post/adopt/adopt",

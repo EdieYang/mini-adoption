@@ -1,0 +1,17 @@
+
+.submit-btn{
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  width: 100%;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  color:#fff;
+  background-color: #1c43b2;
+  font-size: 26rpx;
+  z-index: 100;
+  border-radius: 0rpx
+}
+
+
