@@ -15,15 +15,15 @@ App({
     model: '',
     entranceScene: '',
     // requestUrl: 'https://www.linchongpets.com/lpCms',
-    // requestUrlCms: 'https://www.linchongpets.com/lpCms',
-    // requestUrlWechat: 'https://www.linchongpets.com/lpWechat',
-    // uploadUrl: 'https://www.linchongpets.com/lpCms/pet/portrait/upload',
-    // uploadImageUrl: 'https://www.linchongpets.com/lpCms/oss/image',
+    requestUrlCms: 'https://www.linchongpets.com/lpCms',
+    requestUrlWechat: 'https://www.linchongpets.com/lpWechat',
+    uploadUrl: 'https://www.linchongpets.com/lpCms/pet/portrait/upload',
+    uploadImageUrl: 'https://www.linchongpets.com/lpCms/oss/image',
     staticResourceUrlPrefix: 'https://linkpet-image-bucket-1.oss-cn-hangzhou.aliyuncs.com',
-    requestUrlCms: 'http://localhost:8093/lpCms',
-    requestUrlWechat: 'http://localhost:8094/lpWechat',
+    // requestUrlCms: 'http://localhost:8093/lpCms',
+    // requestUrlWechat: 'http://localhost:8094/lpWechat',
     // uploadUrl: 'http://localhost:8093/pokemon/pet/portrait/upload',
-    uploadImageUrl: 'http://localhost:8093/lpCms/oss/image',
+    // uploadImageUrl: 'http://localhost:8093/lpCms/oss/image',
   },
   onLaunch: function(options) {
     console.log("linkpets.miniapp.launching.....")
@@ -52,8 +52,8 @@ App({
   IfAccess: function() {
     var that = this
     return new Promise(function(resolve, reject) {
-      // var userId = wx.getStorageSync("userId")
-      const userId = '062b42c7997348b398719f8ff8ebc8e4'
+      var userId = wx.getStorageSync("userId")
+      // const userId = '062b42c7997348b398719f8ff8ebc8e4'
       //put userId into global variable dataset
       that.globalData.userId = userId;
       //define api request url

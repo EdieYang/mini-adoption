@@ -15,6 +15,7 @@ let col1H = 0
 let col2H = 0
 let chosenId = 2
 let bottomLast = false
+var changingStatus=false
 
 Page({
 
@@ -93,6 +94,9 @@ Page({
       }
     }
     let loadingCount = this.data.loadingCount - 1;
+    this.setData({
+      loadingCount: loadingCount
+    })
     let col1 = this.data.col1;
     let col2 = this.data.col2;
     if (col1H <= col2H) {
@@ -103,12 +107,18 @@ Page({
       col2.push(petObj);
     }
     let data = {
-      loadingCount: loadingCount,
       col1: col1,
       col2: col2
     };
-    if (!loadingCount) {
+    if (loadingCount == 0) {
       data.petCols = [];
+    }
+    if (changingStatus) {
+      this.setData({
+        col1:[],
+        col2:[]
+      })
+      return
     }
     this.setData(data);
   },
@@ -181,6 +191,7 @@ Page({
           petInfoList[i].petCharacteristic = JSON.parse(petInfoList[i].petCharacteristic)
         }
         petInfoListArr = petInfoListArr.concat(petInfoList)
+        changingStatus=false
         that.setData({
           petInfoList: petInfoListArr,
           showLoading: false,
@@ -270,7 +281,9 @@ Page({
       col1: [],
       col2: [],
       petCols: [],
+      loadingCount: 10
     })
+    changingStatus=true
     petInfoListArr = []
     pageNum = 1
     col1H = 0
@@ -330,7 +343,7 @@ Page({
       })
     } else if (age == 3) {
       this.setData({
-        ageArr: '1岁，2岁，3岁，4岁，5岁，6岁，7岁，8岁'
+        ageArr: '1岁,2岁,3岁,4岁,5岁,6岁,7岁,8岁'
       })
     } else {
       this.setData({

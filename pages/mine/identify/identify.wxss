@@ -64,16 +64,17 @@
 
 
 .help-cover{
-  margin-top:60rpx;
+  margin-top:40rpx;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin-bottom: 140rpx;
 }
 
 .help-header{
   color:#000;
   font-size: 32rpx;
-  margin-bottom:50rpx;
+  margin-bottom:30rpx;
 }
 
 .help-item{
@@ -84,13 +85,13 @@
 }
 
 .check-btn{
-  height:60rpx;
-  line-height: 60rpx;
+  height:70rpx;
+  line-height: 70rpx;
   color:#fff;
   background-color: #1c43b2;
   border-radius: 100rpx;
   width:320rpx;
-  position: absolute;
+  position: fixed;
   bottom: 20rpx;
   left: 215rpx;
   text-align: center;
@@ -121,3 +122,23 @@
   width:100%;
 }
 
+
+
+
+.login-item {
+  margin-bottom: 40rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.login-input {
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  border-bottom: 1rpx solid #eaeaea;
+}

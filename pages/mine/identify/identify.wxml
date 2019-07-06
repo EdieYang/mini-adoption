@@ -1,4 +1,4 @@
-<nav-bar title-text="实名认证" backIcon='../../images/back-pre-black.png' ></nav-bar>
+<nav-bar title-text="实名认证" backIcon='../../images/back-pre-black.png'></nav-bar>
 
 <block wx:if='{{status==1}}'>
   <form report-submit='true' bindsubmit="uploadCheck">
@@ -8,7 +8,7 @@
         <view class='example'>查看示例</view>
       </view>
 
-      <view class='tip'>认证材料仅用于平台审核及送养协议备案，不会对外显示</view>
+      <view class='tip'>认证材料仅用于平台审核及送养协议备案</view>
       <view class='identify-item'>
         <view class='identify-left'>
           <image class='left-top' src='{{imageFront}}' bindtap='chooseImage' data-img='1'></image>
@@ -19,6 +19,15 @@
           <view class='left-info'>身份证正面</view>
         </view>
       </view>
+      <view class="login-item">
+        <view class="label">真实姓名：</view>
+        <input class='login-input' type="text" placeholder="请输入姓名" name='realName'></input>
+      </view>
+      <view class="login-item">
+        <view class="label">身份证号：</view>
+        <input class='login-input' type="text" placeholder="请输入身份证号" name='idCard'></input>
+      </view>
+
 
       <view class='help-cover'>
         <view class='help-header'>
@@ -65,7 +74,7 @@
         您的实名认证审核未通过！
       </view>
       <view class='check-info'>未通过原因：{{checkInfo.memo}}</view>
-       <view class='check-btn' bindtap='reUpload'>重新上传</view>
+      <view class='check-btn' bindtap='reUpload'>重新上传</view>
     </block>
   </view>
 

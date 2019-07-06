@@ -78,6 +78,24 @@ Page({
 
   uploadCheck: function(e) {
     var that = this
+    var realName = e.detail.value.realName
+    var idCard = e.detail.value.idCard
+    if (realName == '') {
+      wx.showToast({
+        title: '请输入真实姓名',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    if (idCard == '') {
+      wx.showToast({
+        title: '请输入真实身份证',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
     if (this.data.imageFront != imageFronDefault && this.data.imageBack != imagebackDefault) {
       wx.showLoading({
         title: '上传中',
@@ -88,7 +106,9 @@ Page({
           imageFront: that.data.imageFront,
           imageBack: that.data.imageBack,
           userId: userId,
-          formId:e.detail.formId
+          idCard: idCard,
+          realName: realName,
+          formId: e.detail.formId
         },
         method: "POST",
         header: {
@@ -103,7 +123,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '请上传身份信息',
+        title: '请点击身份证图片上传身份信息',
         icon: 'none',
         duration: 2000
       })
