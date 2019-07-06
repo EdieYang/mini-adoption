@@ -192,16 +192,17 @@
 
     <view class='body-line'>
       <view class='line-text'>
-        <text class='line-num'>100%</text>
-        <text>私信回复率</text>
+        <text>居住地</text>
+        <text class='line-num' wx:if='{{adoptUserInfo.location==""}}'>未知</text>
+        <text class='line-num' wx:if='{{adoptUserInfo.location!=""}}'>{{adoptUserInfo.location}}</text>
       </view>
       <view class='line-text'>
-        <text class='line-num'>5</text>
         <text>待送养数</text>
+        <text class='line-num'>{{adoptUserInfo.adoptingNum}}</text>
       </view>
       <view class='line-text'>
-        <text class='line-num'>5</text>
         <text>已送养数</text>
+        <text class='line-num'>{{adoptUserInfo.adoptedNum}}</text>
       </view>
     </view>
 

@@ -733,7 +733,7 @@ Page({
 
     var regionArr = region
 
-    var regionDetail = region[0] + ' ' + region[1] + ' ' + region[2]
+    var regionDetail =region[1] + ' ' + region[2]
 
     var wxAccount = e.detail.value.wxAccount;
 

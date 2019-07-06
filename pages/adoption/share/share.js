@@ -69,7 +69,7 @@ Page({
         context.setFontSize(16)
         context.fillText('Hi，我叫 ' + petInfo.petName, 70, 260)
         context.fillText(that.genInfo2(), 70, 288)
-        context.fillText(that.genInfo1(), 70, 320)
+        context.fillText(petInfo.address, 70, 320)
         that.drawText(context, petInfo.story, 45, 350, 280)
         context.fillText('长按识别右侧二维码', 45, 520)
         context.setFillStyle('#fc6653')
