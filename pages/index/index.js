@@ -254,6 +254,7 @@ Page({
         for (var i = 0; i < petInfoList.length; i++) {
           petInfoList[i].petCharacteristic = JSON.parse(petInfoList[i].petCharacteristic)
         }
+        changingStatus = false
         petInfoListArr = petInfoListArr.concat(petInfoList)
         that.setData({
           petInfoList: petInfoListArr,
