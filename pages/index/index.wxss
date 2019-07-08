@@ -528,8 +528,7 @@ page {
 }
 
 .collect-out {
-  /* width: 100%;  */
-  width: 49%;
+  width: 50%;
   margin-top: 20rpx;
   column-width: 330rpx;
   column-gap: 20rpx;
