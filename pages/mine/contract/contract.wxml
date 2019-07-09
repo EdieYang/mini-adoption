@@ -175,6 +175,10 @@
     <button class='waiting-btn'>等待领养人签署协议</button>
   </block>
 
+   <block wx:if='{{contractInfo.signStatus==1}}'>
+    <button class='waiting-btn'>等待送养人签署协议</button>
+  </block>
+
   <block wx:if='{{contractInfo.signStatus==2}}'>
     <button class='submit-btn' bindtap='download'>下载协议</button>
   </block>

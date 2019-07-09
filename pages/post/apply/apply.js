@@ -95,6 +95,7 @@ Page({
     })
   },
   submitApply: function(e) {
+    var formId=e.detail.formId
     var that = this
     wx.showLoading({
       title: '正在提交',
@@ -217,7 +218,8 @@ Page({
       job: job,
       address: regionDetail,
       mobilePhone: phone,
-      toAdopter: this.data.story
+      toAdopter: this.data.story,
+      formId: formId
     }
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/apply/info',

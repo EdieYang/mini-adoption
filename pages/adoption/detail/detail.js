@@ -15,7 +15,8 @@ Page({
     imgUrls: [],
     index: 0,
     showFilter: false,
-    photoPrefix: photoPrefix
+    photoPrefix: photoPrefix,
+    homeIcon:false
   },
 
   /**
@@ -24,6 +25,12 @@ Page({
   onLoad: function(options) {
     var that = this
     petId = options.petId
+    if(options.petId=='' || typeof options.petId == 'undefined' ||options.petId==null){
+      petId=options.scene
+      that.setData({
+        homeIcon:true
+      })
+    }
     userId = app.globalData.userId
     wx.showLoading({
       title: '正在加载',
@@ -443,7 +450,8 @@ Page({
     })
   },
   sharePost:function(e){
-    var petId = e.currentTarget.dataset.petid
+    var formId=e.detail.formId
+    this.genFormId(formId)
     wx.showLoading({
       title: '生成海报中',
     })
@@ -451,7 +459,21 @@ Page({
       url: '../share/share?petId='+petId,
     })
   },
-
+  genFormId: function (formId) {
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/formId',
+      data: {
+        formId: formId,
+        userId: userId
+      },
+      method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -573,6 +595,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: '我叫'+this.data.petInfo.petName+"，快把我带回家吧！",
+      imageUrl: this.data.imgUrls[0],
+      path: '/adoptoin/detail/detail?petId='+petId
+    }
   }
 })

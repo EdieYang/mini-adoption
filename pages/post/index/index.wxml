@@ -1,35 +1,38 @@
-<nav-bar title-text="发布中心"    background="#1c43b2" color="#ffffff"></nav-bar>
+<nav-bar title-text="发布中心" background="#1c43b2" color="#ffffff"></nav-bar>
 
 <view class='top-block-cover'></view>
 
 <view class='post-cover' style='top:{{marginNav+20}}px'>
 
-<view class='post-item' bindtap='adopt'>
-  
-  <image class='itme-bc' src="https://linkpet-image-bucket-1.oss-cn-hangzhou.aliyuncs.com/cms/logo/pc-bc2.jpg"  mode="aspectFill"></image>
-  <view class='item-header'>
-    <text class='title-1'>我要送养</text>
-    <text>领养从真诚开始</text>
-    <view class='item-btn-1'>发布</view>
-  </view>
-</view>
-
-
-
-<view class='post-item'>
-  
-  <image class='itme-bc'  src="https://linkpet-image-bucket-1.oss-cn-hangzhou.aliyuncs.com/cms/logo/post-bc1.jpg" mode="aspectFill"></image>
-  <view class='item-header'>
-    <text class='title-2'>送养攻略</text>
-    <text>发布-审核-签协议</text>
-    <view class='item-btn-2'>查看</view>
+  <view class='post-item'>
+    <image class='itme-bc' src="https://linkpet-image-bucket-1.oss-cn-hangzhou.aliyuncs.com/cms/logo/pc-bc2.jpg" mode="aspectFill"></image>
+    <view class='item-header'>
+      <text class='title-1'>我要送养</text>
+      <text>领养从真诚开始</text>
+      <form bindsubmit="adopt" report-submit="true">
+        <button class='item-btn-1' form-type="submit">发布</button>
+      </form>
+    </view>
   </view>
 
-</view>
 
-<view class='divider'>为了Ta的安全，请实际考察后再送养哦~</view>
 
-<!-- 
+  <view class='post-item'>
+
+    <image class='itme-bc' src="https://linkpet-image-bucket-1.oss-cn-hangzhou.aliyuncs.com/cms/logo/post-bc1.jpg" mode="aspectFill"></image>
+    <view class='item-header'>
+      <text class='title-2'>送养攻略</text>
+      <text>发布-审核-签协议</text>
+      <form bindsubmit="adoptTour" report-submit="true">
+      <button class='item-btn-2' form-type="submit">查看</button>
+      </form>
+    </view>
+
+  </view>
+
+  <view class='divider'>为了Ta的安全，请实际考察后再送养哦~</view>
+
+  <!-- 
 
 
 
@@ -72,9 +75,9 @@
   <view class="tip_container" catchtouchmove='preventTouchMove'>
 
   </view>
-  <view class="tipTap"   catchtouchmove='preventTouchMove'>
+  <view class="tipTap" catchtouchmove='preventTouchMove'>
     <view class='header'>为了更好地展示领养信息，领养平台需要您的授权登录</view>
-    <view class='content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>  
+    <view class='content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>
     <view class='filter-btn-cover'>
       <view class='filter-btn' bindtap='cancelLogin'>暂不登录</view>
       <button class="filter-btn-sumbit" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>

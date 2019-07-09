@@ -8,6 +8,7 @@ var pageSize = 10
 var applyStatus = 0
 var actionSheetList = ['双方达成一致取消申请', '领养人资质不符合要求', '送养人不想送养了', '宠物已被领养']
 var applyArr=[]
+var bottomLast =false
 
 Page({
 
@@ -42,6 +43,8 @@ Page({
       applyStatus = '5'
     }
     applyArr=[]
+    pageNum=1
+    bottomLast=false
     this.setData({
       applyList:[],
       showLoading: true,
@@ -135,6 +138,9 @@ Page({
             icon: 'none'
           })
           setTimeout(function() {
+            pageNum=1
+            applyArr=[]
+            bottomLast=false
             that.getPetAdoptApplyList()
           }, 2000)
         }

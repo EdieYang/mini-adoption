@@ -1,4 +1,4 @@
-<nav-bar title-text="领养协议"  backIcon='../../images/back-pre-black.png'></nav-bar>
+<nav-bar title-text="领养协议" backIcon='../../images/back-pre-black.png'></nav-bar>
 <view class='contract-cover' style='margin-top:{{marginNav+30}}px'>
   <view class='title'>送养人将委托动物交由领养方领养。</view>
   <view class='header'>甲方（送养人）义务：</view>
@@ -16,6 +16,10 @@
   <view class='contract-item'>7、任何情况下，乙方不得虐待领养动物。</view>
   <view class='contract-item'>8、带领养动物出门必须做好安全措施，如拴好牵引绳，保障宠物安全。出现意外情况必须及时向甲方反馈，不得隐瞒。</view>
   <view class='contract-item'>9、定期（成年后每年一次）为领养动物注射疫苗。</view>
+  <block wx:if='{{status>1}}'>
+    <view class='header'>补充协议</view>
+    <view class='contract-item'>{{contractInfo.agreement}}</view>
+  </block>
 
   <view class='contract-info'>
     <view class='info-header'>宠物信息</view>
@@ -181,7 +185,7 @@
         </view>
         <view class='form-header'>签名</view>
         <view class='form-textarea' bindtap='sign' wx:if='{{contractInfo.applySign==null}}'></view>
-        <view class='form-palce-sign'  wx:if='{{contractInfo.applySign!=null}}'  bindtap='sign'>
+        <view class='form-palce-sign' wx:if='{{contractInfo.applySign!=null}}' bindtap='sign'>
           <image src='{{contractInfo.applySign}}'></image>
         </view>
       </view>
@@ -213,7 +217,7 @@
         <view class='contract-form'>
           <view class='form-header'>签名</view>
           <view class='form-textarea' bindtap='signAdopter' wx:if='{{contractInfo.adopterSign==null}}'></view>
-          <view class='form-palce-sign' wx:if='{{contractInfo.adopterSign!=null}}'  bindtap='sign' >
+          <view class='form-palce-sign' wx:if='{{contractInfo.adopterSign!=null}}' bindtap='sign'>
             <image src='{{contractInfo.adopterSign}}'></image>
           </view>
         </view>

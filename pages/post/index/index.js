@@ -12,42 +12,57 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    showFilter:false
+    showFilter: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
+    userId=app.globalData.userId
   },
 
 
-  adopt: function() {
-    var that=this
-    app.IfAccess().then(function (res) {
+  adopt: function(e) {
+    var that = this
+    app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
           wx.navigateTo({
             url: '../adopt/adopt',
           })
-        }else{
+        } else {
           that.setData({
-            showFilter:true
+            showFilter: true
           })
         }
       }
     })
-   
+
+    this.genFormId(e.detail.formId)
   },
-  cancelLogin:function(){
+  genFormId: function(formId) {
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/formId',
+      data: {
+        formId: formId,
+        userId: userId
+      },
+      method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      success: function(res) {}
+    })
+  },
+  cancelLogin: function() {
     this.setData({
-      showFilter:false
+      showFilter: false
     })
   },
   bindGetUserInfo: function(e) {
-    if (e.detail.errMsg =='getUserInfo:fail auth deny'){
+    if (e.detail.errMsg == 'getUserInfo:fail auth deny') {
       return
     }
     wx.showLoading({
@@ -62,7 +77,7 @@ Page({
         mask: true
       })
       that.setData({
-        showFilter:false,
+        showFilter: false,
         isAuthorized: true,
         userInfo: app.globalData.userInfo
       })
@@ -73,7 +88,7 @@ Page({
     //login
     wx.login({
       success: res => {
-        if (res.errMsg !='getUserInfo:fail:auth deny' && res.code) {
+        if (res.errMsg != 'getUserInfo:fail:auth deny' && res.code) {
           //register new temp user
           wx.request({
             url: app.globalData.requestUrlWechat + '/miniSystem/login',
@@ -157,7 +172,13 @@ Page({
       url: '../lost/lost?chooseTab=1',
     })
   },
-
+  adoptTour:function(e){
+    this.genFormId(e.detail.formId)
+    var url = ''
+    wx.navigateTo({
+      url: '../../redirect/redirect?url=' + url,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

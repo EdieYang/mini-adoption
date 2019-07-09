@@ -260,12 +260,12 @@
       <image class='contact-img' src='{{adoptUserInfo.portrait}}'></image>
       <view class='contact-info'>
         <view class='con-name'>{{adoptUserInfo.nickName}}</view>
-        <view class='con-tag'>爱心救助人</view>
+        <!-- <view class='con-tag'>爱心救助人</view> -->
         <view class='con-info'>
           <view>{{adoptUserInfo.ageFrom}}</view>
           <view>{{adoptUserInfo.starSign}}</view>
           <view>
-            <block wx:if='{{adoptUserInfo.gender==1}}'>
+            <block wx:if='{{adoptUserInfo.gender==0}}'>
               男生
             </block>
             <block wx:else>

@@ -67,7 +67,7 @@
     <block wx:for="{{col1}}" wx:key="" wx:for-index="idx" wx:for-item="item">
       <view class="img_box" bindtap='toAdoptionDetail' data-petid='{{item.petId}}'>
         <view class='item-content'>
-          <image src="{{photoPrefix}}{{item.mediaList[0].mediaPath}}" mode="widthFix"  data-index="{{index}}" class='img_box_img'></image>
+          <image src="{{photoPrefix}}{{item.mediaList[0].mediaPath}}" mode="widthFix" data-index="{{index}}" class='img_box_img'></image>
           <view class="item_desc">
             <view class='item-info'>
               <view class='item-header'>
@@ -114,9 +114,9 @@
   </view>
   <view class="collect-out" style='float:left' wx:if="{{col2.length}}">
     <block wx:for="{{col2}}" wx:key="" wx:for-index="idx" wx:for-item="item">
-      <view class="img_box"  bindtap='toAdoptionDetail' data-petid='{{item.petId}}'>
+      <view class="img_box" bindtap='toAdoptionDetail' data-petid='{{item.petId}}'>
         <view class='item-content'>
-          <image src="{{photoPrefix}}{{item.mediaList[0].mediaPath}}" mode="widthFix"  data-index="{{index}}" class='img_box_img'></image>
+          <image src="{{photoPrefix}}{{item.mediaList[0].mediaPath}}" mode="widthFix" data-index="{{index}}" class='img_box_img'></image>
           <view class="item_desc">
             <view class='item-info'>
               <view class='item-header'>
@@ -218,8 +218,12 @@
       </view>
     </view>
     <view class='filter-btn-cover'>
-      <button class="filter-btn" bindtap='reset'>重置</button>
-      <button class="filter-btn-sumbit" bindtap='submit'>确定</button>
+      <form bindsubmit="reset" report-submit="true">
+        <button class="filter-btn" form-type="submit">重置</button>
+      </form>
+      <form bindsubmit="submit" report-submit="true">
+        <button class="filter-btn-sumbit" form-type="submit">确定</button>
+      </form>
     </view>
   </view>
 </block>

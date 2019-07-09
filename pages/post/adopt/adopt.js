@@ -525,6 +525,8 @@ Page({
     wx.showLoading({
       title: '正在发布',
     })
+    var formId=e.detail.formId
+
     var imageArr = [];
     var imageLength = 0
     if (loadState == 1) {
@@ -788,7 +790,8 @@ Page({
         story: story,
         createBy: userId,
         adoptStatus:'0',
-        mediaList: imageArr
+        mediaList: imageArr,
+        formId: formId
       }
       wx.request({
         url: app.globalData.requestUrlCms + '/adopt/pets/info',
@@ -837,7 +840,8 @@ Page({
         mobilePhone: phone,
         story: story,
         createBy: userId,
-        mediaList: imageArr
+        mediaList: imageArr,
+        formId: formId
       }
       wx.request({
         url: app.globalData.requestUrlCms + '/adopt/pets/info',

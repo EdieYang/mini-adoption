@@ -15,14 +15,14 @@ Component({
     },
     titleText: {
       type: String,
-      value: '上海宠安窝领养'
+      value: '上海宠物领养'
     },
     backIcon: {
       type: String,
       value: ''
     },
     homeIcon: {
-      type: String,
+      type: Boolean,
       value: ''
     },
     fontSize: {

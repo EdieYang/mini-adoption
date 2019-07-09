@@ -5,7 +5,7 @@
             <cover-image src='{{backIcon}}'></cover-image>
         </cover-view>
         <cover-view class='home-icon' wx:if="{{homeIcon}}" bindtap='home'>
-            <cover-image src='{{homeIcon}}'></cover-image>
+            <cover-image src='../../images/rehome.png'></cover-image>
         </cover-view>
         <cover-view class='nav-title' wx:if="{{titleText}}">
             <cover-view style='{{textStyle}}'>{{titleText}}</cover-view>

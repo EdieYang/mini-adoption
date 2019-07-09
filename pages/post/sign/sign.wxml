@@ -1,6 +1,7 @@
-<nav-bar navbar-data='{{nvabarData}}'></nav-bar>
+<nav-bar title-text="领养协议签名" backIcon='../../images/back-pre-black.png'></nav-bar>
 
-<view class="wrapper" style='margin-top:{{height+40}}px;'>
+
+<view class="wrapper" style='margin-top:{{marginNav+20}}px;'>
   <view class="handCenter">
     <canvas class="handWriting" disable-scroll="true" bindtouchstart="uploadScaleStart" bindtouchmove="uploadScaleMove"
       bindtouchend="uploadScaleEnd" bindtap="mouseDown" canvas-id="handWriting">

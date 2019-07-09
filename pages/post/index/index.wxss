@@ -61,6 +61,7 @@
   border-radius: 100rpx;
   margin-top: 20rpx;
   font-size: 29rpx;
+  margin-left: 0;
 }
 
 .title-2 {
@@ -80,6 +81,7 @@
   border-radius: 100rpx;
   margin-top: 20rpx;
   font-size: 29rpx;
+  margin-left: 0;
 }
 
 .tip_container {

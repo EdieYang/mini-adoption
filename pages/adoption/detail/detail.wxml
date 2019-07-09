@@ -1,4 +1,4 @@
-<nav-bar title-text="宠物详情" backIcon='../../images/back-pre-black.png' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+<nav-bar title-text="宠物详情" backIcon='../../images/back-pre-black.png' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 
 <swiper bindchange="swiper" class='h_c' current="0" circular="true" next-margin="70rpx" easing-function='easeOutCubic' style='margin-top:{{marginNav}}px'>
   <block wx:for="{{imgUrls}}" wx:for-index="i" wx:key="{{key}}">
@@ -11,10 +11,18 @@
 </swiper>
 
 <view class='detail-cover'>
-  <view class="share-cover" bindtap="sharePost"  data-petid='{{petInfo.petId}}'>
-    <image src="../../../images/share.png" style="width:80rpx;height:80rpx;"></image>
-    <view style="font-size:18rpx;">生成分享海报</view>
-  </view>
+  <form report-submit="true" bindsubmit="sharePost">
+    <button class="share-cover" form-type="submit">
+      <image src="../../../images/share.png" style="width:80rpx;height:80rpx;"></image>
+      <view style="font-size:20rpx;">领养海报</view>
+    </button>
+  </form>
+
+  <button class="share-cover-2" open-type='share'>
+    <image src="../../../images/share-mini.png" style="width:80rpx;height:80rpx;"></image>
+    <view style="font-size:20rpx;">分享到群</view>
+  </button>
+
   <view class='det-title'>你好，我叫{{petInfo.petName}}</view>
   <view class='det-info'>
     <view class='info-item'>
@@ -26,7 +34,7 @@
       </block>
     </view>
     <view class='info-item'>
-    <block wx:if='{{petInfo.petSex==1}}'>
+      <block wx:if='{{petInfo.petSex==1}}'>
         性别不详
       </block>
       <block wx:if='{{petInfo.petSex==2}}'>
@@ -157,15 +165,16 @@
         <view class='con-name'>{{adoptUserInfo.nickName}}</view>
         <!-- <view class='con-tag'>爱心救助人</view> -->
         <view class='con-info'>
-          <view>{{adoptUserInfo.ageFrom}}</view>
-          <view>{{adoptUserInfo.starSign}}</view>
-          <view>
-            <block wx:if='{{adoptUserInfo.gender==1}}'>
-              男生
-            </block>
-            <block wx:else>
-              女生
-            </block>
+          <view wx:if='{{adoptUserInfo.ageFrom!=""}}'>{{adoptUserInfo.ageFrom}}</view>
+          <view wx:if='{{adoptUserInfo.starSign!=""}}'>{{adoptUserInfo.starSign}}</view>
+          <view wx:if='{{adoptUserInfo.gender==0}}'>
+            男生
+          </view>
+          <view wx:if='{{adoptUserInfo.gender==1}}'>
+            女生
+          </view>
+          <view wx:if='{{adoptUserInfo.ageFrom=="" && adoptUserInfo.starSign==""}}'>
+            信息完善度：50%
           </view>
           <view class='con-ago'>{{adoptUserInfo.lastLoginTime}}</view>
         </view>
@@ -176,7 +185,7 @@
 
   <view class='contact-btns' wx:if='{{adoptUserInfo.userId!=userId}}'>
     <view class='header-line'>
-      <view class='line-btn'  data-userid='{{adoptUserInfo.userId}}' bindtap='chat'>
+      <view class='line-btn' data-userid='{{adoptUserInfo.userId}}' bindtap='chat'>
         <image class='btn-icon' src='../../../images/pmsg.png' style='width:30rpx;height:30rpx;'></image>
         <text>发私信</text>
       </view>
@@ -192,9 +201,8 @@
 
     <view class='body-line'>
       <view class='line-text'>
-        <text>居住地</text>
-        <text class='line-num' wx:if='{{adoptUserInfo.location==""}}'>未知</text>
-        <text class='line-num' wx:if='{{adoptUserInfo.location!=""}}'>{{adoptUserInfo.location}}</text>
+        <text>申请处理率</text>
+        <text class='line-num'>{{adoptUserInfo.applyHandle}}</text>
       </view>
       <view class='line-text'>
         <text>待送养数</text>
@@ -265,9 +273,9 @@
           </view>
         </view>
         <view class='ext-tags'>
-           <view class='ext-tag' wx:for="{{item.petCharacteristic}}" wx:for-item="character" wx:for-index="idx" wx:key="unique">
-              {{character.name}}
-            </view>
+          <view class='ext-tag' wx:for="{{item.petCharacteristic}}" wx:for-item="character" wx:for-index="idx" wx:key="unique">
+            {{character.name}}
+          </view>
         </view>
         <view class='ext-location'>
           <image class='location' src='../../../images/location.png'></image>
@@ -277,7 +285,7 @@
     </view>
 
 
-    </block>
+  </block>
 
 </view>
 

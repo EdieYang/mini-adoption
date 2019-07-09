@@ -1,7 +1,7 @@
 <nav-bar title-text="申请领养"  backIcon='../../images/back-pre-black.png'></nav-bar>
 
 <view class='header' style='margin-top:{{marginNav}}px'>请填写正确信息，领养从真诚开始</view>
-<form bindsubmit="submitApply">
+<form bindsubmit="submitApply" report-submit='true'>
   <view class='form'>
     <view class='form-item'>
       <view class='form-label'>我的性别</view>

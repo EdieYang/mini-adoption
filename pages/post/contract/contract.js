@@ -269,10 +269,11 @@ Page({
           applyId: applyId,
           adopterSign: returnUrl,
           signStatus: 2,
+          formId: formId
         }
 
         wx.request({
-          url: app.globalData.requestUrlCms + '/adopt/agreement/info/' + formId,
+          url: app.globalData.requestUrlCms + '/adopt/agreement/info' ,
           data: dataReq,
           method: "PUT",
           header: {
@@ -312,11 +313,12 @@ Page({
       adopterName: name,
       adopterPhone: phone,
       signStatus: 0,
-      createBy: this.data.adopterUser.userId
+      createBy: this.data.adopterUser.userId,
+      formId: formId
     }
 
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/agreement/info/' + formId,
+      url: app.globalData.requestUrlCms + '/adopt/agreement/info/',
       data: dataReq,
       method: "POST",
       header: {

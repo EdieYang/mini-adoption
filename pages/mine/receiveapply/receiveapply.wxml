@@ -48,12 +48,12 @@
             <view class='info-head'>{{item.petName}}</view>
             <view class='info-body'>
               <view class='info-age'>{{item.petAge}}</view>
-              <view class='inf-sex'>
+              <view class='info-sex'>
                 <block wx:if='{{item.petSex==2}}'>
                   <image class='info-img' src='../../../images/boy.png'></image>
                   <text>男孩</text>
                 </block>
-                <block wx:if='{{item.sex==1}}'>
+                <block wx:if='{{item.petSex==1}}'>
                   <image class='info-img' src='../../../images/girl.png'></image>
                   <text>女孩</text>
                 </block>

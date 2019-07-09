@@ -45,10 +45,34 @@ page {
   position: relative;
 }
 
-.share-cover{
+.share-cover {
   position: absolute;
-  top:10rpx;
-  right:30rpx;
+  top: 10rpx;
+  right: 30rpx;
+  text-align: center;
+  margin-left: 0;
+  background-color: #fff;
+  line-height: 30rpx;
+}
+
+.share-cover::after {
+  border: none;
+  outline: none;
+}
+
+.share-cover-2 {
+  position: absolute;
+  top: 160rpx;
+  right: 30rpx;
+  text-align: center;
+  margin-left: 0;
+  background-color: #fff;
+  line-height: 30rpx;
+}
+
+.share-cover-2::after {
+  border: none;
+  outline: none;
 }
 
 .det-title {
@@ -322,7 +346,7 @@ page {
 }
 
 .line-num {
-  margin-top:20rpx;
+  margin-top: 20rpx;
   color: #333;
   font-size: 26rpx;
   font-weight: bold;

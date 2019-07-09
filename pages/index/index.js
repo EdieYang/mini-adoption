@@ -323,7 +323,7 @@ Page({
       showFilter: false
     })
   },
-  reset: function() {
+  reset: function(e) {
     age = 1
     sex = 1
     healthStatus = 1
@@ -332,8 +332,10 @@ Page({
       sexType: sex,
       healthStatus: healthStatus
     })
+    this.genFormId(e.detail.formId)
   },
-  submit: function() {
+  submit: function(e) {
+    var formId=e.detail.formId
     if (age == 1) {
       this.setData({
         ageArr: ''
@@ -404,6 +406,7 @@ Page({
     col2H = 0
     pageNum = 1
     this.getPetAdoptList()
+    this.genFormId(formId)
   },
 
   toAdoptionDetail: function(e) {
@@ -418,6 +421,21 @@ Page({
     var url = this.data.imgUrls[index].bannerRedirectUrl
     wx.navigateTo({
       url: '../redirect/redirect?url=' + url,
+    })
+  },
+  genFormId: function (formId){
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/formId',
+      data: {
+        formId:formId,
+        userId:userId
+      },
+      method: "POST",
+      header:{
+        "content-type":"application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+      }
     })
   },
 

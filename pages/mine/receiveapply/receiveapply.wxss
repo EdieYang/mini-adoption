@@ -181,7 +181,7 @@
   margin-right: 20rpx;
 }
 
-.inf-sex {
+.info-sex {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
