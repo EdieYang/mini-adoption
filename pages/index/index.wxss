@@ -345,6 +345,7 @@ page {
   font-size: 24rpx;
   color: #999;
   width: 260rpx;
+  text-align: left;
 }
 
 .location {

@@ -84,28 +84,52 @@
       <view class='ext-footer'>
         <block wx:if='{{item.applyStatus==0}}'>
           <view class='footer-oper'>
-            <button class='oper-default-btn' bindtap='refusePop' data-applyid='{{item.applyId}}'>不合适</button>
-            <button class='oper-primary-btn' bindtap='pass' data-applyid='{{item.applyId}}'>通过初审</button>
+            <form report-submit="true" bindsubmit="refusePop">
+              <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
+              <button class='oper-default-btn' form-type="submit">不合适</button>
+            </form>
+            <form report-submit="true" bindsubmit="pass">
+              <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
+              <button class='oper-primary-btn' form-type="submit">通过初审</button>
+            </form>
           </view>
         </block>
         <block wx:if='{{item.applyStatus==1}}'>
           <view class='footer-oper'>
-            <button class='oper-default-btn' bindtap='refusePop' data-applyid='{{item.applyId}}'>不合适</button>
-            <button class='oper-primary-btn' bindtap='contract' data-applyid='{{item.applyId}}'>起草协议</button>
+            <form report-submit="true" bindsubmit="refusePop">
+              <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
+              <button class='oper-default-btn' form-type="submit">不合适</button>
+            </form>
+            <form report-submit="true" bindsubmit="contract">
+              <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
+              <button class='oper-primary-btn' form-type="submit">起草协议</button>
+            </form>
           </view>
         </block>
 
         <block wx:if='{{item.applyStatus==2}}'>
           <view class='footer-oper'>
-            <button class='oper-default-btn' bindtap='refusePop' data-applyid='{{item.applyId}}'>不合适</button>
-            <button class='oper-primary-btn' bindtap='contractDetail' data-applyid='{{item.applyId}}'>查看协议</button>
+            <form report-submit="true" bindsubmit="refusePop">
+              <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
+              <button class='oper-default-btn' form-type="submit">不合适</button>
+            </form>
+            <form report-submit="true" bindsubmit="contractDetail">
+              <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
+              <button class='oper-primary-btn' form-type="submit">查看协议</button>
+            </form>
           </view>
         </block>
 
         <block wx:if='{{item.applyStatus==3}}'>
           <view class='footer-oper'>
-            <button class='oper-default-btn' bindtap='refusePop' data-applyid='{{item.applyId}}'>不合适</button>
-            <button class='oper-primary-btn' bindtap='signContract' data-applyid='{{item.applyId}}'>签署协议</button>
+            <form report-submit="true" bindsubmit="refusePop">
+              <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
+              <button class='oper-default-btn' form-type="submit">不合适</button>
+            </form>
+            <form report-submit="true" bindsubmit="signContract">
+              <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
+              <button class='oper-primary-btn' form-type="submit">签署协议</button>
+            </form>
           </view>
         </block>
 

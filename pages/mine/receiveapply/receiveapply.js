@@ -86,14 +86,17 @@ Page({
     wx.showActionSheet({
       itemList: actionSheetList,
       success(res) {
-        that.refuse(e.currentTarget.dataset.applyid, actionSheetList[res.tapIndex])
+        that.refuse(e.detail.value.applyId, actionSheetList[res.tapIndex], e.detail.formId)
       },
       fail(res) {
         console.log(res.errMsg)
       }
     })
   },
-  refuse: function(applyId, applyResp) {
+  refuse: function (applyId, applyResp, formId) {
+    wx.showLoading({
+      title: '操作中',
+    })
     var that = this
     var applyId = applyId
     wx.request({
@@ -101,10 +104,13 @@ Page({
       data: {
         applyId: applyId,
         applyStatus: '5',
-        applyResp: applyResp
+        applyResp: applyResp,
+        formId: formId,
+        operateUserId: userId
       },
       method: "PUT",
       success: function(res) {
+        wx.hideLoading()
         if (res.data.success) {
           wx.showToast({
             title: '取消成功',
@@ -113,6 +119,9 @@ Page({
             icon: 'none'
           })
           setTimeout(function() {
+            applyArr = []
+            pageNum = 1
+            bottomLast = false
             that.getPetAdoptApplyList()
           }, 2000)
         }
@@ -120,16 +129,22 @@ Page({
     })
   },
   pass: function(e) {
+    wx.showLoading({
+      title: '操作中',
+    })
     var that = this
-    var applyId = e.currentTarget.dataset.applyid
+    var applyId = e.detail.value.applyId
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/apply/info',
       data: {
         applyId: applyId,
-        applyStatus: '1'
+        applyStatus: '1',
+        formId: e.detail.formId,
+        operateUserId:userId
       },
       method: "PUT",
       success: function(res) {
+        wx.hideLoading()
         if (res.data.success) {
           wx.showToast({
             title: '初审成功',
@@ -148,30 +163,46 @@ Page({
     })
   },
   detail: function(e) {
-    var applyId = e.currentTarget.dataset.applyid
+    var applyId =e.currentTarget.dataset.applyid
     wx.navigateTo({
       url: '../receiveapplydetail/receiveapplydetail?applyId=' + applyId,
     })
   },
   contract:function(e){
-    var applyId=e.currentTarget.dataset.applyid
+    this.genFormId(e.detail.formId)
+    var applyId = e.detail.value.applyId
     wx.navigateTo({
       url: '../../post/contract/contract?applyId=' + applyId,
     })
   },
   contractDetail:function(e){
-    var applyId = e.currentTarget.dataset.applyid
+    this.genFormId(e.detail.formId)
+    var applyId = e.detail.value.applyId
     wx.navigateTo({
       url: '../../mine/contract/contract?applyId=' + applyId,
     })
   },
   signContract: function (e) {
-    var applyId = e.currentTarget.dataset.applyid
+    this.genFormId(e.detail.formId)
+    var applyId = e.detail.value.applyId
     wx.navigateTo({
       url: '../../post/contract/contract?applyId=' + applyId,
     })
   },
-
+  genFormId: function (formId) {
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/formId',
+      data: {
+        formId: formId,
+        userId: userId
+      },
+      method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) { }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

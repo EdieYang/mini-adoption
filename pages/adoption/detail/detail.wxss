@@ -585,6 +585,8 @@ page {
   justify-content: flex-start;
   align-items: center;
   color: #fff;
+  padding-top: 10rpx;
+  padding-bottom: 5px;
 }
 
 .upper-item {

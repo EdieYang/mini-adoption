@@ -443,6 +443,10 @@
 
   <view class='body-header' style='margin-top:60rpx;'>申请信息</view>
   <view class='apply-info'>
+  <view class='info-item'>
+      <view class='info-label'>申请Id：</view>
+      <view class='info-content'>AT{{applyInfo.applyId}}</view>
+    </view>
     <view class='info-item'>
       <view class='info-label'>申请时间：</view>
       <view class='info-content'>{{applyInfo.applyTime}}</view>
