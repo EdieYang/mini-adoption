@@ -7,6 +7,7 @@ var contractId
 var applyId
 var name
 var phone
+var address
 var agreement
 var formId
 var status = 0
@@ -108,6 +109,7 @@ Page({
     var that = this
     name = e.detail.value.name
     phone = e.detail.value.phone
+    address = e.detail.value.address
     agreement = e.detail.value.agreement
     formId = e.detail.formId
     if (this.checkEmptyVar(name)) {
@@ -128,6 +130,15 @@ Page({
       return;
     }
 
+    if (this.checkEmptyVar(address)) {
+      wx.showToast({
+        title: '请填写联系地址',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+
     wx.showModal({
       title: '',
       content: '协议发送后，将无法再修改补充条款和宠物信息',
@@ -139,12 +150,12 @@ Page({
         }
       }
     })
-
   },
   submitFormApplyer: function(e) {
     var that = this
     name = e.detail.value.name
     phone = e.detail.value.phone
+    address = e.detail.value.address
     formId = e.detail.formId
     if (this.checkEmptyVar(name)) {
       wx.showToast({
@@ -164,6 +175,14 @@ Page({
       return;
     }
 
+    if (this.checkEmptyVar(address)) {
+      wx.showToast({
+        title: '请填写联系地址',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
 
 
     if (this.checkEmptyVar(this.data.contractInfo.applySign)) {
@@ -200,9 +219,11 @@ Page({
           applyId: applyId,
           applyName: name,
           applyPhone: phone,
+          applyAddress: address,
           applySign: returnUrl,
           signStatus: 1,
-          formId:formId
+          formId:formId,
+          operateUserId:userId
         }
 
         wx.request({
@@ -234,7 +255,6 @@ Page({
     var that = this
     formId = e.detail.formId
 
-
     if (this.checkEmptyVar(this.data.contractInfo.adopterSign)) {
       wx.showToast({
         title: '请签下您的大名',
@@ -245,8 +265,6 @@ Page({
     }
 
     adopterSign = this.data.contractInfo.adopterSign
-
-
 
     wx.showLoading({
       title: '协议正在上传',
@@ -269,7 +287,8 @@ Page({
           applyId: applyId,
           adopterSign: returnUrl,
           signStatus: 2,
-          formId: formId
+          formId: formId,
+          operateUserId: userId
         }
 
         wx.request({
@@ -312,9 +331,11 @@ Page({
       agreement: agreement,
       adopterName: name,
       adopterPhone: phone,
+      adopterAddress:address,
       signStatus: 0,
       createBy: this.data.adopterUser.userId,
-      formId: formId
+      formId: formId,
+      operateUserId: userId
     }
 
     wx.request({

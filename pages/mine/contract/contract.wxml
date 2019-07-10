@@ -22,7 +22,7 @@
 
   <view class='contract-info'>
     <view class='info-header'>宠物信息</view>
-    <image class='info-img' mode='aspectFill' src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}'></image>
+    <image class='info-img' mode='aspectFill' lazy-load='true' src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}'></image>
     <view class='info-item'>
       <view class='info-label'>宠物昵称</view>
       <view class='info-content'>{{petInfo.petName}}</view>
@@ -143,9 +143,15 @@
         {{contractInfo.adopterPhone}}
       </view>
     </view>
+    <view class='info-item'>
+      <view class='info-label'>联系地址</view>
+      <view class='info-content'>
+        {{contractInfo.adopterAddress}}
+      </view>
+    </view>
     <block wx:if='{{contractInfo.signStatus==2}}'>
       <view class='info-item'>
-        <image src='{{photoPrefix}}{{contractInfo.adopterSign}}'></image>
+        <image lazy-load='true' src='{{photoPrefix}}{{contractInfo.adopterSign}}'></image>
       </view>
     </block>
   </view>
@@ -165,8 +171,14 @@
           {{contractInfo.applyPhone}}
         </view>
       </view>
-      <view class='info-item'>
-        <image src='{{photoPrefix}}{{contractInfo.applySign}}'></image>
+       <view class='info-item'>
+        <view class='info-label'>联系地址</view>
+        <view class='info-content'>
+          {{contractInfo.applyAddress}}
+        </view>
+      </view>
+      <view class='info-item' wx:if='{{contractInfo.applySign}}'>
+        <image lazy-load='true' src='{{photoPrefix}}{{contractInfo.applySign}}'></image>
       </view>
     </view>
   </block>
@@ -175,7 +187,7 @@
     <button class='waiting-btn'>等待领养人签署协议</button>
   </block>
 
-   <block wx:if='{{contractInfo.signStatus==1}}'>
+  <block wx:if='{{contractInfo.signStatus==1}}'>
     <button class='waiting-btn'>等待送养人签署协议</button>
   </block>
 

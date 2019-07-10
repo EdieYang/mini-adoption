@@ -23,7 +23,7 @@
 
   <view class='contract-info'>
     <view class='info-header'>宠物信息</view>
-    <image class='info-img' mode='aspectFill' src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}'></image>
+    <image class='info-img' mode='aspectFill' src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}' lazy-load="true"></image>
     <view class='info-item'>
       <view class='info-label'>宠物昵称</view>
       <view class='info-content'>{{petInfo.petName}}</view>
@@ -141,6 +141,10 @@
           <view class='form-label'>手机号</view>
           <input type='number' class='form-input' placeholder='请输入您的手机号' name='phone' maxlength='11' bindblur='verifyPhone'></input>
         </view>
+        <view class='form-item'>
+          <view class='form-label'>联系地址</view>
+          <input type='text' class='form-input' placeholder='请输入详细地址' name='address' maxlength='50'></input>
+        </view>
         <view class='form-header'>补充协议</view>
         <textarea class='form-textarea' placeholder='建议填写违约条款，如赔偿金等。' placeholder-style='color;#666' adjust-position='true' maxlength='200' name='agreement'></textarea>
       </view>
@@ -165,6 +169,12 @@
           {{contractInfo.adopterPhone}}
         </view>
       </view>
+       <view class='info-item'>
+        <view class='info-label'>联系地址</view>
+        <view class='info-content'>
+          {{contractInfo.adopterAddress}}
+        </view>
+      </view>
     </view>
     <form report-submit='true' bindsubmit='submitFormApplyer' report-submit-timeout='1000'>
       <view class='contract-form'>
@@ -176,6 +186,10 @@
         <view class='form-item'>
           <view class='form-label'>手机号</view>
           <input type='number' class='form-input' placeholder='请输入您的手机号' name='phone' maxlength='11' bindblur='verifyPhone'></input>
+        </view>
+        <view class='form-item'>
+          <view class='form-label'>联系地址</view>
+          <input type='text' class='form-input' placeholder='请输入详细地址' name='address' maxlength='50'></input>
         </view>
         <view class='form-identify' wx:if='{{applyUser.authenticated==0}}' bindtap='authenticate'>
           <icon type="warn" size="20" />去实名
@@ -213,6 +227,12 @@
           {{contractInfo.adopterPhone}}
         </view>
       </view>
+      <view class='info-item'>
+        <view class='info-label'>联系地址</view>
+        <view class='info-content'>
+          {{contractInfo.adopterAddress}}
+        </view>
+      </view>
       <form report-submit='true' bindsubmit='submitFormAdopter' report-submit-timeout='1000'>
         <view class='contract-form'>
           <view class='form-header'>签名</view>
@@ -237,8 +257,14 @@
             {{contractInfo.applyPhone}}
           </view>
         </view>
+        <view class='info-item'>
+          <view class='info-label'>联系地址</view>
+          <view class='info-content'>
+            {{contractInfo.applyAddress}}
+          </view>
+        </view>
         <view class='info-label'>乙方签名</view>
-        <image src='{{photoPrefix}}{{contractInfo.applySign}}' class='sign-img'></image>
+        <image src='{{photoPrefix}}{{contractInfo.applySign}}' class='sign-img' lazy-load="true"></image>
 
         <button class='submit-btn' form-type="submit">上传协议</button>
       </form>

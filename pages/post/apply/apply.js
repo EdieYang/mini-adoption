@@ -95,7 +95,7 @@ Page({
     })
   },
   submitApply: function(e) {
-    var formId=e.detail.formId
+    var formId = e.detail.formId
     var that = this
     wx.showLoading({
       title: '正在提交',
@@ -231,25 +231,41 @@ Page({
       success: function(res) {
         var applyId = res.data.data
         wx.hideLoading();
-        wx.showToast({
-          title: '提交成功',
-          icon:'none',
-          duration:2000
-        })
 
-        setTimeout(function(){
-          that.toSendApply()
-        },2000)
+        if (applyId!='') {
+          wx.showToast({
+            title: '提交成功',
+            icon: 'none',
+            duration: 2000
+          })
+
+          setTimeout(function() {
+            that.toSendApply()
+          }, 2000)
+
+        } else {
+          wx.showToast({
+            title: '抱歉，您已申请过此领养',
+            icon: 'none',
+            duration: 2000
+          })
+
+          setTimeout(function() {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 2000)
+        }
       }
     })
   },
-  toSendApply:function(){
+  toSendApply: function() {
     wx.redirectTo({
       url: '../../mine/sendapply/sendapply',
     })
   },
-  checkEmptyVar: function (param) {
-    if (!param || typeof (param) == 'undefined' || param == "") {
+  checkEmptyVar: function(param) {
+    if (!param || typeof(param) == 'undefined' || param == "") {
       return true;
     } else {
       return false;

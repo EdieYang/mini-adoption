@@ -260,10 +260,9 @@
       <image class='contact-img' src='{{adoptUserInfo.portrait}}'></image>
       <view class='contact-info'>
         <view class='con-name'>{{adoptUserInfo.nickName}}</view>
-        <!-- <view class='con-tag'>爱心救助人</view> -->
         <view class='con-info'>
-          <view>{{adoptUserInfo.ageFrom}}</view>
-          <view>{{adoptUserInfo.starSign}}</view>
+          <view wx:if='{{adoptUserInfo.ageFrom}}'>{{adoptUserInfo.ageFrom}}</view>
+          <view wx:if='{{adoptUserInfo.starSign}}'>{{adoptUserInfo.starSign}}</view>
           <view>
             <block wx:if='{{adoptUserInfo.gender==0}}'>
               男生
@@ -272,7 +271,7 @@
               女生
             </block>
           </view>
-          <view class='con-ago'>{{adoptUserInfo.lastLoginTime}}</view>
+          <view class='con-ago' wx:if='{{adoptUserInfo.lastLoginTime}}'>最近登录时间{{adoptUserInfo.lastLoginTime}}</view>
         </view>
       </view>
     </view>
@@ -406,7 +405,7 @@
   <view class='body-adopt'>
     <view class='ext-item-cover' bindtap='petdetail' data-petid='{{petInfo.petId}}'>
       <view class='ext-item' bindtap='detail' data-petid='{{applyInfo.petId}}'>
-        <image class='ext-pic' mode='aspectFill' wx:if='{{petInfo!=null}}' src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}'></image>
+        <image class='ext-pic' mode='aspectFill' wx:if='{{petInfo!=null}}' lazy-load="true" src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}'></image>
         <view class='ext-info'>
           <view class='ext-name'>{{petInfo.petName}}</view>
           <view class='ext-spec'>
