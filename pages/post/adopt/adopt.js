@@ -716,7 +716,7 @@ Page({
     var story = this.data.story;
     if (this.checkEmptyVar(story) || util.trimString(story) == '') {
       wx.showToast({
-        title: '须填写宠物详情描述',
+        title: '须填写宠物送养故事',
         icon: 'none',
         duration: 2000
       })

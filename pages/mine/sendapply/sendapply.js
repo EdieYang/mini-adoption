@@ -47,6 +47,8 @@ Page({
       showLoading: true,
       chosenId: chosenId,
     })
+    pageNum=1
+    bottomLast=false
     this.getPetAdoptApplyList()
 
   },
@@ -114,6 +116,9 @@ Page({
             icon: 'none'
           })
           setTimeout(function () {
+            pageNum=1;
+            bottomLast=false
+            applyArr = []
             that.getPetAdoptApplyList()
           }, 2000)
         }
@@ -144,6 +149,7 @@ Page({
    */
   onShow: function () {
     pageNum=1
+    bottomLast=false
     applyArr=[]
     this.getPetAdoptApplyList()
   },
