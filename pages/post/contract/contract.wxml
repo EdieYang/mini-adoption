@@ -23,7 +23,7 @@
 
   <view class='contract-info'>
     <view class='info-header'>宠物信息</view>
-    <image class='info-img' mode='aspectFill' src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}' lazy-load="true"></image>
+    <image class='info-img' lazy-load='true' mode='aspectFill'  src='{{petImg}}'></image>
     <view class='info-item'>
       <view class='info-label'>宠物昵称</view>
       <view class='info-content'>{{petInfo.petName}}</view>
@@ -238,7 +238,7 @@
           <view class='form-header'>签名</view>
           <view class='form-textarea' bindtap='signAdopter' wx:if='{{contractInfo.adopterSign==null}}'></view>
           <view class='form-palce-sign' wx:if='{{contractInfo.adopterSign!=null}}' bindtap='sign'>
-            <image src='{{contractInfo.adopterSign}}'></image>
+            <image src='{{contractInfo.adopterSign}}' lazy-load="true"></image>
           </view>
         </view>
 
@@ -264,7 +264,7 @@
           </view>
         </view>
         <view class='info-label'>乙方签名</view>
-        <image src='{{photoPrefix}}{{contractInfo.applySign}}' class='sign-img' lazy-load="true"></image>
+        <image lazy-load='true' src='{{photoPrefix}}{{contractInfo.applySign}}' class='sign-img' ></image>
 
         <button class='submit-btn' form-type="submit">上传协议</button>
       </form>

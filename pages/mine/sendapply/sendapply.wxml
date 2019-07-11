@@ -102,7 +102,7 @@
               <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
               <button class='oper-default-btn' form-type="submit">查看协议</button>
             </form>
-             <form report-submit="true" bindsubmit="detail">
+             <form report-submit="true" bindsubmit="toDetail">
               <input name='applyId' value="{{item.applyId}}" hidden="true"></input>
               <button class='oper-primary-btn' form-type="submit">查看进度</button>
             </form>

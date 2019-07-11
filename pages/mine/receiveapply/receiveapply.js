@@ -27,6 +27,7 @@ Page({
   onLoad: function(options) {
     wx.hideShareMenu()
     applyArr=[]
+    applyStatus = '0'
     userId = app.globalData.userId
   },
 

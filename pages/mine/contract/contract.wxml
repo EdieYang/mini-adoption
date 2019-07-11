@@ -1,4 +1,4 @@
-<nav-bar title-text="领养协议"  backIcon='../../images/back-pre-black.png'></nav-bar>
+<nav-bar title-text="领养协议" backIcon='../../images/back-pre-black.png'></nav-bar>
 
 <view class='contract-cover' style='margin-top:{{marginNav+30}}px'>
   <view class='title'>送养人将委托动物交由领养方领养。</view>
@@ -22,7 +22,7 @@
 
   <view class='contract-info'>
     <view class='info-header'>宠物信息</view>
-    <image class='info-img' mode='aspectFill' lazy-load='true' src='{{photoPrefix}}{{petInfo.mediaList[0].mediaPath}}'></image>
+    <image class='info-img' mode='aspectFill' lazy-load='true' src='{{petImg}}'></image>
     <view class='info-item'>
       <view class='info-label'>宠物昵称</view>
       <view class='info-content'>{{petInfo.petName}}</view>
@@ -151,7 +151,7 @@
     </view>
     <block wx:if='{{contractInfo.signStatus==2}}'>
       <view class='info-item'>
-        <image lazy-load='true' src='{{photoPrefix}}{{contractInfo.adopterSign}}'></image>
+        <image wx:if='{{contractInfo.adopterSign!=null}}' src='{{photoPrefix}}{{contractInfo.adopterSign}}' lazy-load='true'></image>
       </view>
     </block>
   </view>
@@ -171,28 +171,35 @@
           {{contractInfo.applyPhone}}
         </view>
       </view>
-       <view class='info-item'>
+      <view class='info-item'>
         <view class='info-label'>联系地址</view>
         <view class='info-content'>
           {{contractInfo.applyAddress}}
         </view>
       </view>
       <view class='info-item' wx:if='{{contractInfo.applySign}}'>
-        <image lazy-load='true' src='{{photoPrefix}}{{contractInfo.applySign}}'></image>
+        <image src='{{photoPrefix}}{{contractInfo.applySign}}' lazy-load='true'></image>
       </view>
     </view>
   </block>
 
   <block wx:if='{{contractInfo.signStatus==0}}'>
-    <button class='waiting-btn'>等待领养人签署协议</button>
+    <form report-submit="true" bindsubmit="addFormId">
+      <button class='waiting-btn' form-type="submit">等待领养人签署协议</button>
+    </form>
   </block>
 
   <block wx:if='{{contractInfo.signStatus==1}}'>
-    <button class='waiting-btn'>等待送养人签署协议</button>
+    <form report-submit="true" bindsubmit="addFormId">
+      <button class='waiting-btn' form-type="submit">等待送养人签署协议</button>
+    </form>
   </block>
 
   <block wx:if='{{contractInfo.signStatus==2}}'>
-    <button class='submit-btn' bindtap='download'>下载协议</button>
+    <form report-submit="true" bindsubmit="download">
+      <input name='applyId' value="{{contractInfo.applyId}}" style="display:none"></input>
+      <button class='submit-btn' form-type="submit">下载协议</button>
+    </form>
   </block>
 
 

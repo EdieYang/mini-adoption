@@ -444,7 +444,7 @@
   <view class='apply-info'>
   <view class='info-item'>
       <view class='info-label'>申请Id：</view>
-      <view class='info-content'>AT{{applyInfo.applyId}}</view>
+      <view class='info-content'>AT{{applyDetailId}}</view>
     </view>
     <view class='info-item'>
       <view class='info-label'>申请时间：</view>

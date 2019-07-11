@@ -22,8 +22,7 @@ Page({
    */
   onLoad: function (options) {
     userId = app.globalData.userId
-    // agreementId = options.agreementId
-    applyId = '22deb5c8bd3848d4aea11e0e67c86511'
+    applyId = options.applyId
     context = wx.createCanvasContext('contract-page')
     this.getPetAdoptAgreementDetial()
   },
@@ -40,7 +39,6 @@ Page({
         var petInfo = res.data.data.petInfo
         petInfo.petCharacteristic = JSON.parse(petInfo.petCharacteristic)
         that.drawContract(contractInfo,petInfo)
-        
       }
     })
   },
@@ -95,8 +93,9 @@ Page({
     innerHeight = this.drawText('甲方（送养人）信息', 15, innerHeight, 50, 375)
     context.setFontSize(16)
     innerHeight = this.drawText('姓名：' + contractInfo.adopterName + '      手机号：' + contractInfo.adopterPhone, 15, innerHeight, 50, 375)
+    innerHeight = this.drawText('联系地址：' + contractInfo.adopterAddress, 15, innerHeight, 50, 375)
     innerHeight = this.drawText('签名：', 15, innerHeight, 50, 375)
-    context.drawImage(photoPrefix + contractInfo.adopterSign, 50, innerHeight, 100, 100)
+    context.drawImage(photoPrefix + contractInfo.adopterSign, 50, innerHeight-20, 100, 100)
     innerHeight += 100
     innerHeight = this.drawText('日期：' + contractInfo.signTime, 15, innerHeight, 50, 375)
     
@@ -105,8 +104,9 @@ Page({
     innerHeight = this.drawText('乙方（领养人）信息', 15, innerHeight, 50, 375)
     context.setFontSize(16)
     innerHeight = this.drawText('姓名：' + contractInfo.applyName + '      手机号：' + contractInfo.applyPhone, 15, innerHeight, 50, 375)
+    innerHeight = this.drawText('联系地址：' + contractInfo.applyAddress, 15, innerHeight, 50, 375)
     innerHeight = this.drawText('签名：', 15, innerHeight, 50, 375)
-    context.drawImage(photoPrefix + contractInfo.applySign, 50, innerHeight, 100, 100)
+    context.drawImage(photoPrefix + contractInfo.applySign, 50, innerHeight - 20, 100, 100)
     innerHeight += 100
     innerHeight = this.drawText('日期：' + contractInfo.signTime, 15, innerHeight, 50, 375)
 

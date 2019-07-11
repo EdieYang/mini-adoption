@@ -64,7 +64,7 @@ Page({
         var petInfo = res.data.data.petInfo
         var applyUser = res.data.data.applyUser
         var adopterUser = res.data.data.adopterUser
-
+        var petImg = photoPrefix+petInfo.mediaList[0].mediaPath
         if (contractInfo == null) {
           status = 1
         } else if (contractInfo.signStatus == 0) {
@@ -77,6 +77,7 @@ Page({
 
         petInfo.petCharacteristic = JSON.parse(petInfo.petCharacteristic)
         that.setData({
+          petImg: petImg,
           applyInfo: applyInfo,
           petInfo: petInfo,
           contractInfo: contractInfo,
@@ -339,7 +340,7 @@ Page({
     }
 
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/agreement/info/',
+      url: app.globalData.requestUrlCms + '/adopt/agreement/info',
       data: dataReq,
       method: "POST",
       header: {

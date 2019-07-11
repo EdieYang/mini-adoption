@@ -28,6 +28,7 @@ Page({
     wx.hideShareMenu()
     userId = app.globalData.userId
     applyArr=[]
+    applyStatus = '0'
   },
   chooseTab: function (e) {
     var that = this
@@ -136,12 +137,14 @@ Page({
   },
   signContract:function(e){
     var applyId = e.detail.value.applyId
+    this.genFormId(e.detail.formId)
     wx.navigateTo({
       url: '../../post/contract/contract?applyId=' + applyId,
     })
   },
   contract: function (e){
     var applyId = e.detail.value.applyId
+    this.genFormId(e.detail.formId)
     wx.navigateTo({
       url: '../../mine/contract/contract?applyId=' + applyId,
     })

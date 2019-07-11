@@ -19,85 +19,105 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     userId = app.globalData.userId
-    // agreementId = options.agreementId
     applyId = options.applyId
     this.getPetAdoptAgreementDetial()
   },
-  getPetAdoptAgreementDetial: function () {
+  getPetAdoptAgreementDetial: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/agreement/info',
       method: "GET",
-      data:{
+      data: {
         applyId: applyId
       },
-      success: function (res) {
+      success: function(res) {
         var contractInfo = res.data.data.contractInfo
         var petInfo = res.data.data.petInfo
+        var petImg = photoPrefix + petInfo.mediaList[0].mediaPath
         petInfo.petCharacteristic = JSON.parse(petInfo.petCharacteristic)
         that.setData({
+          petImg: petImg,
           contractInfo: contractInfo,
           petInfo: petInfo
         })
       }
     })
   },
-  download:function(){
+  download: function(e) {
+    this.genFormId(e.detail.formId)
     wx.showLoading({
       title: '协议制作中',
     })
     wx.navigateTo({
-      url: '../contractdwn/contractdwn',
+      url: '../contractdwn/contractdwn?applyId=' + e.detail.value.applyId,
+    })
+    wx.hideLoading()
+  },
+  addFormId: function(e) {
+    this.genFormId(e.detail.formId)
+  },
+  genFormId: function(formId) {
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/formId',
+      data: {
+        formId: formId,
+        userId: userId
+      },
+      method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      success: function(res) {}
     })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -51,7 +51,7 @@ Page({
       success: function(res) {
         var applyInfo = res.data.data.applyInfo
         var applyId=applyInfo.applyId
-        applyInfo.applyId=applyId.substring(0,15)
+        var applyDetailId=applyId.substring(0,15)
         var userInfo = res.data.data.userInfo
         var petInfo = res.data.data.petInfo
         var adopterInfo = res.data.data.adopterInfo
@@ -67,6 +67,7 @@ Page({
 
         petInfo.petCharacteristic = JSON.parse(petInfo.petCharacteristic)
         that.setData({
+          applyDetailId: applyDetailId,
           applyInfo: applyInfo,
           userInfo: userInfo,
           petInfo: petInfo,

@@ -66,6 +66,7 @@ page {
 .info-content {
   color: #666;
   font-size: 30rpx;
+  width:480rpx;
 }
 
 .contract-form {
