@@ -1,11 +1,11 @@
-<nav-bar title-text="我的" background='#1c43b2' color='#fff' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+<nav-bar title-text="我的" background='#1c43b2' color='#fff'></nav-bar>
 
 <view class='top-cover' style='padding-top:{{marginNav/2}}px'>
   <view class='user-cover-default' wx:if='{{!isAuthorized}}'>
     <view class='user-info-default'>
       <image class='co-portrait-default' mode='aspectFill' src='../../../images/portrait.png'></image>
       <view class='info-cover-default'>
-        <button class='cover-btn'  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+        <button class='cover-btn' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
       </view>
     </view>
   </view>
@@ -16,18 +16,22 @@
         <view class='co-name'>
           {{userInfo.nickName}}
         </view>
-        <!-- <view class='co-id'>
-          ID：{{userInfo.userId}}
-        </view> -->
+        <view class='co-follows'>
+          <view class='follow' wx:if='{{userInfo.gender==0}}'>男神 </view>
+          <view class='follow' wx:if='{{userInfo.gender==1}}'> 女神 </view>
+          <view class='follow' wx:if='{{userInfo.location}}'>{{userInfo.location}}</view>
+        </view>
         <view class='co-follows'>
           <view class='follow' bindtap='followlist'>关注 {{userInfo.followNum}} </view>
-          <view class='follow' bindtap='followedlist'>被关注 {{userInfo.followByNum}}  </view>
+          <view class='follow' bindtap='followedlist'>被关注 {{userInfo.followByNum}} </view>
         </view>
       </view>
     </view>
     <view class='co-home' bindtap='home'>个人主页 > </view>
   </view>
-  <view class='modi-info'  wx:if='{{isAuthorized}}'   bindtap='modify'>
+  <view class='co-intro' wx:if='{{userInfo.intro}}'>简介：{{userInfo.intro}}</view>
+  <view class='co-intro' wx:if='{{!userInfo.intro}}'>简介：这个人很懒，什么也没写~</view>
+  <view class='modi-info' wx:if='{{isAuthorized}}' bindtap='modify'>
     <image class='modi-icon' src='../../../images/modi-icon.png'></image>
     <text class='modi-txt'>编辑个人信息</text>
   </view>
@@ -42,14 +46,14 @@
     </view>
     <image class='oper-in' src='../../../images/arrow-r.png'></image>
   </view>
-  <view class='oper-item'  bindtap='receiveApply'>
+  <view class='oper-item' bindtap='receiveApply'>
     <view class='oper-left'>
       <image class='oper-icon' src='../../../images/oper-2.png'></image>
       <text>我收到的领养申请</text>
     </view>
     <image class='oper-in' src='../../../images/arrow-r.png'></image>
   </view>
-  <view class='oper-item'   bindtap='sendApply'>
+  <view class='oper-item' bindtap='sendApply'>
     <view class='oper-left'>
       <image class='oper-icon' src='../../../images/oper-3.png'></image>
       <text>我发出的领养申请</text>
@@ -73,7 +77,7 @@
     </view>
     <image class='oper-in' src='../../../images/arrow-r.png'></image>
   </view>
-  
+
   <view style='height:1rpx; background-color:#eaeaea'></view>
 
 

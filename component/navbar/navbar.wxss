@@ -13,16 +13,16 @@
     left: 16px;
 }
 .home-icon{
-    left: 44px
+    left: 16px;
 }
-.back-icon cover-image{
+.back-icon{
     width: 20px!important;
     height: 20px!important;
     margin: auto;
 }
-.home-icon cover-image{
-    width: 20px;
-    height: 20px;
+.home-icon{
+    width: 20px!important;
+    height: 20px!important;
     margin: auto;
 }
 .nav-title, .nav-icon{

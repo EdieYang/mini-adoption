@@ -16,7 +16,8 @@ Page({
     index: 0,
     showFilter: false,
     photoPrefix: photoPrefix,
-    homeIcon:false
+    homeIcon:false,
+    backIcon:'../../images/back-pre-black.png'
   },
 
   /**
@@ -28,13 +29,15 @@ Page({
     if(options.petId=='' || typeof options.petId == 'undefined' ||options.petId==null){
       petId=options.scene
       that.setData({
-        homeIcon:true
+        homeIcon:true,
+        backIcon:''
       })
     }
     userId = app.globalData.userId
     wx.showLoading({
       title: '正在加载',
     })
+    wx.hideShareMenu()
   },
 
   getAdoptionDetail: function() {
@@ -598,7 +601,7 @@ Page({
     return {
       title: '我叫'+this.data.petInfo.petName+"，快把我带回家吧！",
       imageUrl: this.data.imgUrls[0],
-      path: '/adoptoin/detail/detail?petId='+petId
+      path: '/pages/adoption/detail/detail?scene='+petId
     }
   }
 })

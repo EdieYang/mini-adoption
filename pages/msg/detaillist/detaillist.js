@@ -4,10 +4,10 @@ const util = require('../../../utils/util.js')
 const app = getApp()
 var userId
 var type
-var pageNum=1
-var pageSize=10
-var bottomLast=false
-var messageArr=[]
+var pageNum = 1
+var pageSize = 10
+var bottomLast = false
+var messageArr = []
 
 Page({
 
@@ -15,16 +15,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    marginNav:app.globalData.marginNav,
+    marginNav: app.globalData.marginNav,
     photoPrefix: photoPrefix,
-    navTitle:''
+    navTitle: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    pageNum=1
+    pageNum = 1
     type = options.type
     if (type == 0) {
       var navTitle = '系统通知'
@@ -32,14 +32,14 @@ Page({
         navTitle: navTitle,
         type: type
       })
-    } else if (type == 1){
+    } else if (type == 1) {
 
       var navTitle = '领养申请通知'
       this.setData({
         navTitle: navTitle,
         type: type
       })
-    } else{
+    } else {
 
       var navTitle = '领养协议通知'
       this.setData({
@@ -48,13 +48,16 @@ Page({
       })
     }
     userId = app.globalData.userId
-    messageArr=[]
+    messageArr = []
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    pageNum = 1
+    messageArr = []
+    bottomLast=false
     this.getDetailMessageList()
     this.uptDetailMessageList()
   },
@@ -64,18 +67,18 @@ Page({
       url: app.globalData.requestUrlCms + '/adopt/messages/detailList',
       data: {
         userId: userId,
-        type:type,
-        pageNum:pageNum,
-        pageSize:pageSize
+        type: type,
+        pageNum: pageNum,
+        pageSize: pageSize
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var messageList = res.data.data.list
-        for(var i =0;i<messageList.length;i++){
+        for (var i = 0; i < messageList.length; i++) {
           messageList[i].msgContent = JSON.parse(messageList[i].msgContent)
         }
-        if(messageList.length<10){
-          bottomLast=true
+        if (messageList.length < 10) {
+          bottomLast = true
         }
         messageArr = messageArr.concat(messageList)
         that.setData({
@@ -84,7 +87,7 @@ Page({
       }
     })
   },
-  uptDetailMessageList:function(){
+  uptDetailMessageList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/messages/detailList',
@@ -96,18 +99,18 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
       method: "PUT",
-      success: function (res) {
-        
+      success: function(res) {
+
       }
     })
   },
-  applyDetail:function(e){
+  applyDetail: function(e) {
     var applyId = e.currentTarget.dataset.applyid
     wx.navigateTo({
       url: '../../mine/receiveapplydetail/receiveapplydetail?applyId=' + applyId,
     })
   },
-  detail:function(e){
+  detail: function(e) {
     var petId = e.currentTarget.dataset.petid
     wx.navigateTo({
       url: '../../adoption/detail/detail?petId=' + petId,

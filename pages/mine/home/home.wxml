@@ -1,12 +1,17 @@
 <nav-bar title-text="个人主页" backIcon='../../images/back-pre.png' background="#1c43b2" color="#ffffff"></nav-bar>
 
-<view class='top-cover'>
-  <view class='user-cover' style='margin-top:{{marginNav+10}}px'>
+<view class='top-cover'  style='padding-top:{{marginNav/2}}px'>
+  <view class='user-cover'>
     <view class='user-info'>
       <image class='co-portrait' mode='aspectFill' src='{{userInfo.portrait}}'></image>
       <view class='info-cover'>
         <view class='co-name'>
           {{userInfo.nickName}}
+        </view>
+         <view class='co-follows'>
+          <view class='follow' wx:if='{{userInfo.gender==0}}'>男神 </view>
+          <view class='follow' wx:if='{{userInfo.gender==1}}'> 女神 </view>
+          <view class='follow' wx:if='{{userInfo.location}}'>{{userInfo.location}}</view>
         </view>
         <view class='co-follows'>
           <view class='follow' bindtap='followlist'>关注 {{userInfo.followNum}} </view>
@@ -14,8 +19,9 @@
         </view>
       </view>
     </view>
-    <view class='co-home' bindtap='home'></view>
   </view>
+  <view class='co-intro' wx:if='{{userInfo.intro}}'>简介：{{userInfo.intro}}</view>
+  <view class='co-intro' wx:if='{{!userInfo.intro}}'>简介：这个人很懒，什么也没写~</view>
   <view class='modi-info' bindtap='modify' wx:if='{{targetUserId==userId}}'>
     <image class='modi-icon' src='../../../images/modi-icon.png'></image>
     <text class='modi-txt'>编辑个人信息</text>

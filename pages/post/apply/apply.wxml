@@ -1,4 +1,4 @@
-<nav-bar title-text="申请领养"  backIcon='../../images/back-pre-black.png'></nav-bar>
+<nav-bar title-text="申请领养" backIcon='../../images/back-pre-black.png'></nav-bar>
 
 <view class='header' style='margin-top:{{marginNav}}px'>请填写正确信息，领养从真诚开始</view>
 <form bindsubmit="submitApply" report-submit='true'>
@@ -51,7 +51,7 @@
 
     <view class='form-item'>
       <view class='form-label'>我的职业</view>
-      <input class='input-i' placeholder='请输入' name='job' maxlength='6' value='{{petName}}' bindinput='jobInput' placeholder-style='color:#a9a9a9'></input>
+      <input class='input-i' placeholder='请输入' name='job' maxlength='12' value='{{petName}}' bindinput='jobInput' placeholder-style='color:#a9a9a9'></input>
     </view>
 
     <view class='form-item'>
@@ -70,7 +70,7 @@
 
     <view class='form-item'>
       <view class='form-label'>手机号</view>
-      <input class='input-i' placeholder='请输入手机号' name='phone' maxlength='11' value='{{phone}}' bindinput='phoneInput' bindblur='verifyPhone' placeholder-style='color:#a9a9a9'></input>
+      <input class='input-i' placeholder='请输入手机号' name='phone' maxlength='11' value='{{phone}}' bindinput='phoneInput' bindblur='verifyPhone' placeholder-style='color:#a9a9a9' type="number"></input>
       <view class='warn'>只有签署送养协议阶段才向送养人公开，方便双方沟通</view>
     </view>
 
@@ -88,6 +88,6 @@
         <text class='rule-item'>《邻宠领养平台送养规则》</text>
       </view>
     </view>
-  <button class='publish' form-type="submit">提交申请</button>
+    <button class='publish' form-type="submit">提交申请</button>
   </view>
 </form>

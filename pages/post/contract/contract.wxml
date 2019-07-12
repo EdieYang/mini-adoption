@@ -284,7 +284,7 @@
   <view class="tip_container" catchtouchmove='preventTouchMove'>
 
   </view>
-  <view class="tipTap" style='top:{{height+170}}px' catchtouchmove='preventTouchMove'>
+  <view class="tipTap" style='top:{{marginNav+170}}px' catchtouchmove='preventTouchMove'>
     <view class='tip_header'>
       实名登记
     </view>

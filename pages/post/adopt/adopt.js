@@ -259,6 +259,13 @@ Page({
       region: e.detail.value,
       hasArea: true
     })
+    if (this.data.region[0] != '上海市') {
+      wx.showToast({
+        title: '仅限上海本地送养！',
+        icon: 'none',
+        duration: 2000
+      })
+    }
   },
   chooseSterilize: function(e) {
     var sterilize = e.currentTarget.dataset.type;
@@ -525,7 +532,7 @@ Page({
     wx.showLoading({
       title: '正在发布',
     })
-    var formId=e.detail.formId
+    var formId = e.detail.formId
 
     var imageArr = [];
     var imageLength = 0
@@ -731,11 +738,18 @@ Page({
         duration: 2000
       })
       return;
+    } else if (region[0] != '上海市') {
+      wx.showToast({
+        title: '仅限上海本地送养！',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
     }
 
     var regionArr = region
 
-    var regionDetail =region[1] + ' ' + region[2]
+    var regionDetail = region[1] + ' ' + region[2]
 
     var wxAccount = e.detail.value.wxAccount;
 
@@ -789,7 +803,7 @@ Page({
         mobilePhone: phone,
         story: story,
         createBy: userId,
-        adoptStatus:'0',
+        adoptStatus: '0',
         mediaList: imageArr,
         formId: formId
       }

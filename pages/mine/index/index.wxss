@@ -1,6 +1,7 @@
-page{
-  padding-top:100rpx;
+page {
+  padding-top: 100rpx;
 }
+
 .top-cover {
   background-color: #1c43b2;
   width: 100%;
@@ -86,7 +87,8 @@ page{
   margin-bottom: 5rpx;
 }
 
-.co-id {
+.co-intro {
+  width: 400rpx;
   font-size: 25rpx;
   color: #fff;
 }
@@ -116,6 +118,12 @@ page{
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+
+.co-intro {
+  width: 92vw;
+  color: #fff;
+  font-size: 26rpx;
 }
 
 .modi-icon {

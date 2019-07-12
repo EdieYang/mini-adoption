@@ -342,10 +342,10 @@
     <view class='item-label'>性别</view>
     <view class='item-info'>
       <block wx:if='{{applyInfo.sex==1}}'>
-        男
+        女
       </block>
       <block wx:if='{{applyInfo.sex==2}}'>
-        女
+        男
       </block>
     </view>
   </view>
@@ -361,7 +361,7 @@
     </view>
   </view>
   <view class='body-item'>
-    <view class='item-label'>所在地区</view>
+    <view class='item-label'>现居住地区</view>
     <view class='item-info'>{{applyInfo.address}}</view>
   </view>
   <view class='body-item'>

@@ -21,11 +21,11 @@
       </view>
       <view class="login-item">
         <view class="label">真实姓名：</view>
-        <input class='login-input' type="text" placeholder="请输入姓名" name='realName'></input>
+        <input class='login-input' type="text" placeholder="请输入姓名" name='realName' maxlength="10"></input>
       </view>
       <view class="login-item">
         <view class="label">身份证号：</view>
-        <input class='login-input' type="text" placeholder="请输入身份证号" name='idCard'></input>
+        <input class='login-input' type="text" placeholder="请输入身份证号" name='idCard' maxlength="20"></input>
       </view>
 
 

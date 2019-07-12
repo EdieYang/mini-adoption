@@ -96,6 +96,9 @@ Component({
       })
     },
     home: function() {
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
       this.triggerEvent('home', {});
     }
   }

@@ -1,4 +1,4 @@
-<nav-bar title-text="宠物详情" backIcon='../../images/back-pre-black.png' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+<nav-bar title-text="宠物详情" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 
 <swiper bindchange="swiper" class='h_c' current="0" circular="true" next-margin="70rpx" easing-function='easeOutCubic' style='margin-top:{{marginNav}}px'>
   <block wx:for="{{imgUrls}}" wx:for-index="i" wx:key="{{key}}">
@@ -11,17 +11,19 @@
 </swiper>
 
 <view class='detail-cover'>
-  <form report-submit="true" bindsubmit="sharePost">
-    <button class="share-cover" form-type="submit">
-      <image src="../../../images/share.png" style="width:80rpx;height:80rpx;"></image>
-      <view style="font-size:20rpx;">领养海报</view>
-    </button>
-  </form>
+  <block wx:if='{{petInfo.adoptStatus==3}}'>
+    <form report-submit="true" bindsubmit="sharePost">
+      <button class="share-cover" form-type="submit">
+        <image src="../../../images/share.png" style="width:80rpx;height:80rpx;"></image>
+        <view style="font-size:20rpx;">领养海报</view>
+      </button>
+    </form>
 
-  <button class="share-cover-2" open-type='share'>
-    <image src="../../../images/share-mini.png" style="width:80rpx;height:80rpx;"></image>
-    <view style="font-size:20rpx;">分享到群</view>
-  </button>
+    <button class="share-cover-2" open-type='share'>
+      <image src="../../../images/share-mini.png" style="width:80rpx;height:80rpx;"></image>
+      <view style="font-size:20rpx;">分享到群</view>
+    </button>
+  </block>
 
   <view class='det-title'>你好，我叫{{petInfo.petName}}</view>
   <view class='det-info'>

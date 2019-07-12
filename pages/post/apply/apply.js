@@ -66,6 +66,13 @@ Page({
       region: e.detail.value,
       hasArea: true
     })
+    if (this.data.region[0] != '上海市') {
+      wx.showToast({
+        title: '平台仅限居住在上海市区县的用户领养！',
+        duration: 1000,
+        icon: 'none'
+      })
+    }
   },
   phoneInput: function(event) {
     phone = event.detail.value;
@@ -174,6 +181,13 @@ Page({
         duration: 2000
       })
       return;
+    } else if (region[0] != '上海市') {
+      wx.showToast({
+        title: '平台仅限居住在上海市区县的用户领养！',
+        duration: 1000,
+        icon: 'none'
+      })
+      return
     }
 
     var regionArr = region
@@ -232,7 +246,7 @@ Page({
         var applyId = res.data.data
         wx.hideLoading();
 
-        if (applyId!='') {
+        if (applyId != '') {
           wx.showToast({
             title: '提交成功',
             icon: 'none',

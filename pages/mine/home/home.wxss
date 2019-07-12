@@ -1,5 +1,6 @@
-page{
-  padding-bottom:100rpx;
+page {
+  padding-bottom: 100rpx;
+  padding-top: 100rpx;
 }
 
 .top-cover {
@@ -90,6 +91,12 @@ page{
 .co-id {
   font-size: 25rpx;
   color: #fff;
+}
+
+.co-intro {
+  width: 92vw;
+  color: #fff;
+  font-size: 26rpx;
 }
 
 .co-follows {
