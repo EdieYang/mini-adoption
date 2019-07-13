@@ -29,8 +29,8 @@
     </view>
     <view class='co-home' bindtap='home'>个人主页 > </view>
   </view>
-  <view class='co-intro' wx:if='{{userInfo.intro}}'>简介：{{userInfo.intro}}</view>
-  <view class='co-intro' wx:if='{{!userInfo.intro}}'>简介：这个人很懒，什么也没写~</view>
+  <view class='co-intro' wx:if='{{userInfo.intro && isAuthorized}}'>简介：{{userInfo.intro}}</view>
+  <view class='co-intro' wx:if='{{!userInfo.intro && isAuthorized}}'>简介：这个人很懒，什么也没写~</view>
   <view class='modi-info' wx:if='{{isAuthorized}}' bindtap='modify'>
     <image class='modi-icon' src='../../../images/modi-icon.png'></image>
     <text class='modi-txt'>编辑个人信息</text>

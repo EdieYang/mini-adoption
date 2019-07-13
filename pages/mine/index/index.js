@@ -49,7 +49,7 @@ Page({
     })
   },
   bindGetUserInfo: function(e) {
-    if (e.detail.errMsg =='getUserInfo:fail auth deny'){
+    if (e.detail.errMsg == 'getUserInfo:fail auth deny') {
       return
     }
     wx.showLoading({
@@ -74,7 +74,7 @@ Page({
     //login
     wx.login({
       success: res => {
-        if (res.errMsg !='getUserInfo:fail:auth deny' && res.code) {
+        if (res.errMsg != 'getUserInfo:fail:auth deny' && res.code) {
           //register new temp user
           wx.request({
             url: app.globalData.requestUrlWechat + '/miniSystem/login',
@@ -159,7 +159,7 @@ Page({
     })
   },
   adoptlist: function() {
-    if(!this.authorizedFilter()){
+    if (!this.authorizedFilter()) {
       return
     }
     wx.navigateTo({
@@ -230,7 +230,7 @@ Page({
       url: '../followedlist/followedlist?targetUserId=' + userId,
     })
   },
-  authorizedFilter:function(){
+  authorizedFilter: function() {
     if (!this.data.isAuthorized) {
       wx.showToast({
         title: '请先登录',
@@ -238,7 +238,7 @@ Page({
         duration: 1000
       })
       return false
-    }else{
+    } else {
       return true
     }
   },
@@ -254,10 +254,11 @@ Page({
    */
   onShow: function() {
     var that = this
-    app.IfAccess().then(function (res) {
+    app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
+          userId = app.globalData.userId
           that.getUserInfo()
         }
       }
