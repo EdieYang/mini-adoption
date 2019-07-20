@@ -39,8 +39,6 @@ Page({
         }
       }
     })
-
-    this.genFormId(e.detail.formId)
   },
   genFormId: function(formId) {
     wx.request({
@@ -173,11 +171,13 @@ Page({
     })
   },
   adoptTour:function(e){
-    this.genFormId(e.detail.formId)
     var url = ''
     wx.navigateTo({
       url: '../../redirect/redirect?url=' + url,
     })
+  },
+  addFormId:function(e){
+    this.genFormId(e.detail.formId)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

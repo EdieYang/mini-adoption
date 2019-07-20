@@ -5,15 +5,15 @@ const app = getApp()
 var userId;
 var targetUserId;
 var socketTask;
-var socketStatus = 'CLOSE'
+var socketStatus = 'AUTO'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    marginNav:app.globalData.marginNav,
-    navTitle:'',
+    marginNav: app.globalData.marginNav,
+    navTitle: '',
     msgs: [],
     userId: '',
     userInfo: '',
@@ -36,7 +36,13 @@ Page({
     })
 
     this.getChannelMessage()
-    socketTask = wx.connectSocket({
+
+
+  },
+  initSocket: function() {
+    var that = this
+    socketStatus='AUTO'
+    app.globalData.chatSocket = wx.connectSocket({
       url: 'wss://www.linchongpets.com/websocket?uid=' + userId,
       header: {
         'content-type': 'application/json'
@@ -44,17 +50,18 @@ Page({
       method: 'GET'
     })
 
-    socketTask.onOpen(function(res) {
-      console.log(res)
-      socketStatus = 'OPEN'
+    app.globalData.chatSocket.onOpen(function(res) {
+      console.log('opening:' + res)
     })
 
-    socketTask.onClose(function(res) {
-      console.log(res)
-      socketStatus = 'CLOSE'
+    app.globalData.chatSocket.onClose(function(res) {
+      console.log('closed:' + res)
+      if (socketStatus == 'AUTO') {
+        that.initSocket()
+      }
     })
 
-    socketTask.onMessage(function(res) {
+    app.globalData.chatSocket.onMessage(function(res) {
       var msg = JSON.parse(res.data)
       var senderUserId = msg.userId
       if (senderUserId != targetUserId) {
@@ -69,7 +76,6 @@ Page({
         scrollTop: 1000 * mgds.length // 这里我们的单对话区域最高1000，取了最大值，应该有方法取到精确的
       });
     })
-
   },
 
   getTargetUserInfo: function() {
@@ -168,12 +174,15 @@ Page({
         req.targetUserId = targetUserId
         req.data = picUrl
         req.type = 1
-        socketTask.send({
-          data: JSON.stringify(req),
-          success: function(res) {
-            console.log(res)
-          }
-        })
+
+        if (app.globalData.chatSocket.readyState === 1) {
+          app.globalData.chatSocket.send({
+            data: JSON.stringify(req),
+            success: function(res) {
+              console.log(res)
+            }
+          })
+        }
 
       },
       fail: (res) => {
@@ -219,19 +228,22 @@ Page({
     req.targetUserId = targetUserId
     req.data = this.data.inputValue
     req.type = 0
-    req.formId=e.detail.formId
+    req.formId = e.detail.formId
     var mgds = this.data.msgs
     mgds.push(req)
     this.setData({
       msgs: mgds,
       inputValue: ''
     })
-    socketTask.send({
-      data: JSON.stringify(req),
-      success: function(res) {
-        console.log(res)
-      }
-    })
+
+    if (app.globalData.chatSocket.readyState === 1) {
+      app.globalData.chatSocket.send({
+        data: JSON.stringify(req),
+        success: function(res) {
+          console.log(res)
+        }
+      })
+    }
 
     this.setData({
       scrollTop: 1000 * mgds.length // 这里我们的单对话区域最高1000，取了最大值，应该有方法取到精确的
@@ -299,7 +311,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    if (app.globalData.chatSocket.readyState !== 0 && app.globalData.chatSocket.readyState !== 1) {
+      console.log('开始尝试连接WebSocket！readyState=' + app.globalData.chatSocket.readyState)
+      this.initSocket()
+    }
   },
 
   /**
@@ -314,13 +329,8 @@ Page({
    */
   onUnload: function() {
     //断开websocket
-    wx.onSocketOpen(function () {
-      wx.closeSocket()
-    })
-
-    wx.onSocketClose(function (res) {
-      console.log('WebSocket 已关闭！')
-    })
+    socketStatus='HANDDOWN'
+    app.globalData.chatSocket.close()
   },
 
   /**

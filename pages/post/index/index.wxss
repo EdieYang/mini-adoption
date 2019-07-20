@@ -165,3 +165,19 @@
   padding-left:40rpx;
   padding-right:20rpx;
 }
+
+
+form button{
+  padding: 0;
+  background-color: #fff;
+}
+
+form button::after{
+  content: '';
+  display: none;
+  background-color: #fff;
+}
+
+.button-hover{
+  background-color: #fff;
+}
