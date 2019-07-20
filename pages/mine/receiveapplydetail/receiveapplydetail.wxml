@@ -1,4 +1,4 @@
-<nav-bar title-text="申请详情" backIcon='../../images/back-pre-black.png'></nav-bar>
+<nav-bar title-text="申请详情" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' ></nav-bar>
 
 <view class='header-cover' style='margin-top:{{marginNav}}px'>
   <view class='header'>
@@ -271,7 +271,7 @@
               女生
             </block>
           </view>
-          <view class='con-ago' wx:if='{{adoptUserInfo.lastLoginTime}}'>最近登录时间{{adoptUserInfo.lastLoginTime}}</view>
+          <view class='con-ago' wx:if='{{adoptUserInfo.lastLoginTime}}'>{{adoptUserInfo.lastLoginTime}}</view>
         </view>
       </view>
     </view>

@@ -15,16 +15,26 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    photoPrefix: photoPrefix
+    photoPrefix: photoPrefix,
+    homeIcon: false,
+    backIcon: '../../images/back-pre-black.png'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var that = this
     wx.hideShareMenu()
     userId = app.globalData.userId
     applyId = options.applyId
+    if (applyId == '' || typeof applyId == 'undefined' || applyId == null) {
+      applyId = options.scene
+      that.setData({
+        homeIcon: true,
+        backIcon: ''
+      })
+    }
     this.setData({
       userId: userId
     })
@@ -50,8 +60,8 @@ Page({
       method: "GET",
       success: function(res) {
         var applyInfo = res.data.data.applyInfo
-        var applyId=applyInfo.applyId
-        var applyDetailId=applyId.substring(0,15)
+        var applyId = applyInfo.applyId
+        var applyDetailId = applyId.substring(0, 15)
         var userInfo = res.data.data.userInfo
         var petInfo = res.data.data.petInfo
         var adopterInfo = res.data.data.adopterInfo
@@ -213,7 +223,7 @@ Page({
   },
   forea(timetot) {
     var timenow = Date.parse(new Date()) / 1000;
-    var totalstart = timetot/1000 + 60 * 60 * 24 * 7 - timenow;
+    var totalstart = timetot / 1000 + 60 * 60 * 24 * 7 - timenow;
     return this.dateformat(totalstart)
   },
 

@@ -173,7 +173,7 @@ Page({
     })
   },
   onLoad(options) {
-    type=options.type
+    type = options.type
     let canvasName = this.data.canvasName
     let ctx = wx.createCanvasContext(canvasName)
     this.setData({
@@ -192,37 +192,37 @@ Page({
     this.data.ctx.draw()
   },
   subCanvas() {
-    this.data.ctx.draw(true,function(){
-      wx.canvasToTempFilePath({
-        x: 0,
-        y: 0,
-        width: 375,
-        height: 375,
-        destWidth: 375,
-        destHeight: 375,
-        canvasId: 'handWriting',
-        success: function (res) {
-          console.log(res.tempFilePath)
-          var sendImage = res.tempFilePath;
+    console.log('提交签名中')
+    var contextHidden = wx.createCanvasContext('handWriting-hidden', this)
+    contextHidden.draw(false, wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: 375,
+      height: 375,
+      destWidth: 375,
+      destHeight: 375,
+      canvasId: 'handWriting',
+      success: function(res) {
+        console.log(res.tempFilePath)
+        var sendImage = res.tempFilePath;
 
-          let pages = getCurrentPages(); 
-          let prevPage = pages[pages.length - 2];
-          var contractInfo=prevPage.data.contractInfo
-          if (type==0){
-            contractInfo.applySign = sendImage
-          }else{
-            contractInfo.adopterSign = sendImage
-          }
-          prevPage.setData({  
-            contractInfo: contractInfo
-          })
-          wx.navigateBack({
-            delta: 1
-          })
+        let pages = getCurrentPages();
+        let prevPage = pages[pages.length - 2];
+        var contractInfo = prevPage.data.contractInfo
+        if (type == 0) {
+          contractInfo.applySign = sendImage
+        } else {
+          contractInfo.adopterSign = sendImage
         }
-      })
-    })
-    
+        console.log(contractInfo)
+        prevPage.setData({
+          contractInfo: contractInfo
+        })
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    }))
   },
 
   //画两点之间的线条；参数为:line，会绘制最近的开始的两个点；

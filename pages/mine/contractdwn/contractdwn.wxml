@@ -1,6 +1,6 @@
 <nav-bar title-text="领养协议"  backIcon='../../images/back-pre-black.png'></nav-bar>
 
-<canvas  canvas-id="contract-page" style='width: 100vw;height:280vh;margin-top:{{marginNav}}px'></canvas>
-<canvas style='width: 100vw;height:250vh;margin-top:{{marginNav}}px;display:none'  canvas-id="contract-page-hidden"></canvas>
+<canvas  canvas-id="contract-page" style='width: 100vw;height:{{screenHeight}}px;margin-top:{{marginNav}}px'></canvas>
+<canvas style='width: 100vw;height:{{screenHeight}}px;margin-top:{{marginNav}}px;display:none'  canvas-id="contract-page-hidden"></canvas>
 
  <button class='submit-btn' bindtap='download'>保存协议至相册</button>
