@@ -4,13 +4,15 @@ const util = require('../../../utils/util.js')
 const app = getApp()
 var userId;
 
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    marginNav:app.globalData.marginNav
+    marginNav: app.globalData.marginNav,
+    chatlist: []
   },
 
   /**
@@ -18,24 +20,45 @@ Page({
    */
   onLoad: function(options) {
     userId = app.globalData.userId
-    wx.hideTabBarRedDot({
-      index:2
-    })
   },
-
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that = this
+    app.globalData.socketStatus = 'HANDDOWN'
+    wx.hideTabBarRedDot({
+      index: 2
+    })
+    wx.onSocketOpen(function(res) {
+      console.log('opening:' + res)
+    })
+
+    wx.onSocketClose(function(res) {
+      console.log('closed:' + res)
+    })
+    wx.onSocketMessage(function(res) {
+      //消息弹出提示
+      if (app.globalData.socketStatus != 'AUTO') {
+        //消息弹出提示
+        wx.showTabBarRedDot({
+          index: 2
+        })
+        //消息存入缓存
+        var resJson = JSON.parse(res.data)
+        wx.setStorageSync(resJson.userId, "SHOW_CHAT_MSG")
+        that.getChatMessageList()
+      }
+    })
     this.getMessageList()
     this.getChatMessageList()
   },
 
-  detaillist:function(e){
-    var type=e.currentTarget.dataset.type
+  detaillist: function(e) {
+    var type = e.currentTarget.dataset.type
     wx.navigateTo({
-      url: '../detaillist/detaillist?type='+type,
+      url: '../detaillist/detaillist?type=' + type,
     })
   },
   getMessageList: function() {
@@ -55,7 +78,7 @@ Page({
     })
   },
 
-  getChatMessageList(){
+  getChatMessageList() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/messages/chatList',
@@ -63,25 +86,49 @@ Page({
         userId: userId
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var messageList = res.data.data
+        var old = that.data.chatlist
+        if (old.length == 0) {
+          for (var i = 0; i < messageList.length; i++) {
+            //缓存消息识别是否为最新消息
+            var msgLatest = wx.getStorageSync(messageList[i].userId)
+            if (msgLatest =='SHOW_CHAT_MSG'){
+              messageList[i].fresh = true
+            }else{
+              messageList[i].fresh=false
+            }
+          }
+          that.setData({
+            chatlist: messageList,
+          })
+          return
+        }
+        for (var j = 0; j < messageList.length; j++) {
+          var msgLatest = wx.getStorageSync(messageList[j].userId)
+          if (msgLatest == 'SHOW_CHAT_MSG') {
+            messageList[j].fresh = true
+          } else {
+            messageList[j].fresh = false
+          }
+        }
         that.setData({
           chatlist: messageList,
         })
       }
     })
   },
-  chat:function(e){
-    var userId=e.currentTarget.dataset.userid
+  chat: function(e) {
+    var userId = e.currentTarget.dataset.userid
     wx.navigateTo({
-      url: '../../adoption/chat/chat?userId='+userId,
+      url: '../../adoption/chat/chat?userId=' + userId,
     })
   },
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    app.globalData.socketStatus = 'AUTO'
   },
 
   /**

@@ -43,10 +43,11 @@
     </view>
   </view>
 
-  <block wx:if='{{chatlist!=null}}' wx:for='{{chatlist}}'>
-    <view class='msg-item' bindtap='chat' data-userid='{{item.userId}}'>
+  <block wx:if='{{chatlist!=null}}' wx:for='{{chatlist}}' wx-index='index'>
+    <view class='msg-item' bindtap='chat' data-userid='{{item.userId}}' data-index='{{index}}'>
       <view class='icon-cover'>
         <image class='msg-icon-protrait' src='{{item.portrait}}'></image>
+        <view class='msg-round-banner'  wx:if='{{item.fresh}}'></view>
       </view>
       <view class='msg-content'>
         <view class='msg-header'>

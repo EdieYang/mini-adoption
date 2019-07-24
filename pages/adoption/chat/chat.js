@@ -41,7 +41,6 @@ Page({
   },
   initSocket: function() {
     var that = this
-    socketStatus='AUTO'
     app.globalData.chatSocket = wx.connectSocket({
       url: 'wss://www.linchongpets.com/websocket?uid=' + userId,
       header: {
@@ -56,9 +55,6 @@ Page({
 
     app.globalData.chatSocket.onClose(function(res) {
       console.log('closed:' + res)
-      if (socketStatus == 'AUTO') {
-        that.initSocket()
-      }
     })
 
     app.globalData.chatSocket.onMessage(function(res) {
@@ -311,10 +307,36 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    if (app.globalData.chatSocket.readyState !== 0 && app.globalData.chatSocket.readyState !== 1) {
-      console.log('开始尝试连接WebSocket！readyState=' + app.globalData.chatSocket.readyState)
-      this.initSocket()
-    }
+    var that = this
+    app.globalData.socketStatus = 'HANDDOWN'
+
+    //取消消息提醒
+    wx.setStorageSync(targetUserId, 'HIDE_CHAT_MSG')
+    wx.onSocketOpen(function(res) {
+      console.log('opening:' + res)
+    })
+
+    wx.onSocketClose(function(res) {
+      console.log('closed:' + res)
+    })
+
+    wx.onSocketMessage(function(res) {
+      var msg = JSON.parse(res.data)
+      //消息存入缓存
+      wx.setStorageSync(msg.userId, 'HIDE_CHAT_MSG')
+      var senderUserId = msg.userId
+      if (senderUserId != targetUserId) {
+        return
+      }
+      var mgds = that.data.msgs;
+      mgds.push(msg);
+      that.setData({
+        msgs: mgds
+      })
+      that.setData({
+        scrollTop: 1000 * mgds.length // 这里我们的单对话区域最高1000，取了最大值，应该有方法取到精确的
+      })
+    })
   },
 
   /**
@@ -329,8 +351,7 @@ Page({
    */
   onUnload: function() {
     //断开websocket
-    socketStatus='HANDDOWN'
-    app.globalData.chatSocket.close()
+    app.globalData.socketStatus = 'AUTO'
   },
 
   /**

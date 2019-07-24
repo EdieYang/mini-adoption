@@ -150,6 +150,7 @@
       </view>
     </view>
     <block wx:if='{{contractInfo.signStatus==2}}'>
+      <view class='info-label'>送养人签名</view>
       <view class='info-item'>
         <image wx:if='{{contractInfo.adopterSign!=null}}' src='{{photoPrefix}}{{contractInfo.adopterSign}}' lazy-load='true'></image>
       </view>
@@ -177,6 +178,12 @@
           {{contractInfo.applyAddress}}
         </view>
       </view>
+      <view class='info-label-pic'>身份证照片</view>
+      <view class='info-item-pic'>
+        <image src="{{contractInfo.idCardBackUrl}}" class="info-pic" mode="aspectFill"></image>
+        <image src="{{contractInfo.idCardBackUrl}}"  class="info-pic" mode="aspectFill"></image>
+      </view>
+      <view class='info-label'>领养人签名</view>
       <view class='info-item' wx:if='{{contractInfo.applySign}}'>
         <image src='{{photoPrefix}}{{contractInfo.applySign}}' lazy-load='true'></image>
       </view>

@@ -34,7 +34,7 @@
   <view class='bar-item'>
     <image src='../../../images/keyboard-img.png' class='bar-img'></image>
   </view>
-  <input class='bar-input' placeholder='请输入...' type='text' cursor-spacing='20' bindinput="bindKeyInput" value='{{inputValue}}' confirm-type='send' confirm-hold='true' bindconfirm='sendmsg'></input>
+  <input class='bar-input' adjust-position='false' placeholder='请输入...' type='text' cursor-spacing='20' bindinput="bindKeyInput" value='{{inputValue}}' confirm-type='send' confirm-hold='true' bindconfirm='sendmsg'></input>
   <form report-submit='true' bindsubmit="sendmsg">
     <button class='bar-btn' form-type="submit">发送</button>
   </form>

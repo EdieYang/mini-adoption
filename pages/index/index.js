@@ -15,7 +15,7 @@ let col1H = 0
 let col2H = 0
 let chosenId = 2
 let bottomLast = false
-var changingStatus=false
+var changingStatus = false
 
 Page({
 
@@ -61,6 +61,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this
+    petType = 1
     this.getBannerList()
 
     app.IfAccess().then(function(res) {
@@ -115,8 +116,8 @@ Page({
     }
     if (changingStatus) {
       this.setData({
-        col1:[],
-        col2:[]
+        col1: [],
+        col2: []
       })
       return
     }
@@ -191,7 +192,7 @@ Page({
           petInfoList[i].petCharacteristic = JSON.parse(petInfoList[i].petCharacteristic)
         }
         petInfoListArr = petInfoListArr.concat(petInfoList)
-        changingStatus=false
+        changingStatus = false
         that.setData({
           petInfoList: petInfoListArr,
           showLoading: false,
@@ -284,7 +285,7 @@ Page({
       petCols: [],
       loadingCount: 10
     })
-    changingStatus=true
+    changingStatus = true
     petInfoListArr = []
     pageNum = 1
     col1H = 0
@@ -335,7 +336,7 @@ Page({
     this.genFormId(e.detail.formId)
   },
   submit: function(e) {
-    var formId=e.detail.formId
+    var formId = e.detail.formId
     if (age == 1) {
       this.setData({
         ageArr: ''
@@ -423,19 +424,18 @@ Page({
       url: '../redirect/redirect?url=' + url,
     })
   },
-  genFormId: function (formId){
+  genFormId: function(formId) {
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/formId',
       data: {
-        formId:formId,
-        userId:userId
+        formId: formId,
+        userId: userId
       },
       method: "POST",
-      header:{
-        "content-type":"application/x-www-form-urlencoded"
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
-      }
+      success: function(res) {}
     })
   },
 

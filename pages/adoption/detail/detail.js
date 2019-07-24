@@ -76,7 +76,8 @@ Page({
       data: {
         pageNum:1,
         pageSize:5,
-        withOutPet: petId
+        withOutPet: petId,
+        adoptStatus:'3'
       },
       method: "GET",
       success: function (res) {

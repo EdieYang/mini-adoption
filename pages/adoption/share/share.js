@@ -57,10 +57,10 @@ Page({
     })
   },
   generatePost: function() {
-    var that=this
+    var that = this
     var petInfo = this.data.petInfo
     context = wx.createCanvasContext("post-adoption", this)
-    context.drawImage('../../../images/post-adoption.png', 16, 0, 345, 613)
+    context.drawImage('../../../images/post-adoption.png', 15, 0, that.data.screenWidth-30, 613)
     wx.getImageInfo({
       src: photoPrefix + petInfo.mediaList[0].mediaPath,
       success(res) {
@@ -84,7 +84,7 @@ Page({
             path: 'pages/adoption/detail/detail',
             scene: petId
           },
-          success: function (res) {
+          success: function(res) {
             var wxAcodeUrl = photoPrefix + res.data.data;
             wx.getImageInfo({
               src: wxAcodeUrl,
@@ -99,10 +99,11 @@ Page({
         })
       }
     })
-    
+
 
   },
   onImageLoad: function(e) {
+    var that = this
     let oImgW = e.detail.width; //图片原始宽度
     let oImgH = e.detail.height; //图片原始高
     destHeight = oImgH / oImgW * 112
@@ -110,7 +111,14 @@ Page({
     if (destHeight > 150) {
       destHeight = 150
     }
-    this.generatePost()
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          screenWidth: res.screenWidth
+        })
+        that.generatePost()
+      }
+    })
   },
   genInfo1: function() {
     var petInfo = this.data.petInfo
@@ -157,9 +165,9 @@ Page({
     contextHidden.draw(false, wx.canvasToTempFilePath({
       x: 15,
       y: 0,
-      width: 345,
+      width: that.data.screenWidth-30,
       height: 613,
-      destWidth: 345 * 750 / width,
+      destWidth: that.data.screenWidth * 750 / width,
       destHeight: 613 * 750 / width,
       canvasId: 'post-adoption',
       success(res) {

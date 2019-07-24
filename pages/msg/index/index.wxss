@@ -47,6 +47,16 @@
   border-radius: 100rpx;
 }
 
+.msg-round-banner{
+  background-color: #ec5358;
+  position: absolute;
+  top:-20rpx;
+  right:30rpx;
+  border-radius: 100rpx;
+  width:20rpx;
+  height:20rpx;
+}
+
 .msg-content{
   display: flex;
   flex-direction: column;

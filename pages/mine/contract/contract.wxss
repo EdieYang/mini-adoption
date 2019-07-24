@@ -56,6 +56,30 @@ page {
   margin-bottom: 30rpx;
 }
 
+
+.info-item-pic{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.info-label-pic{
+  font-size: 32rpx;
+  color: #000;
+  font-weight: bold;
+  width: 200rpx;
+  margin-bottom:20rpx;
+}
+
+.info-pic{
+  width:700rpx;
+  height: 350rpx;
+  margin-bottom:20rpx;
+  border-radius: 10rpx;
+}
+
 .info-label {
   font-size: 32rpx;
   color: #000;
