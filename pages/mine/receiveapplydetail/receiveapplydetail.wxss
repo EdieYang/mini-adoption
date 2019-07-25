@@ -261,12 +261,7 @@ page {
   font-size: 25rpx;
   color: #000;
 }
-
-.footer-icon {
-  width: 30rpx;
-  height: 30rpx;
-  margin-right: 10rpx;
-}
+ 
 
 .adopt-btn {
   background-color: #1c43b2;

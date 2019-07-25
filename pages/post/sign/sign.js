@@ -415,5 +415,11 @@ Page({
       ctx.fill(); //填充图形 ( 后绘制的图形会覆盖前面的图形, 绘制时注意先后顺序 )
     }
     ctx.draw(true)
+  },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    wx.hideShareMenu()
   }
 })

@@ -1,8 +1,7 @@
-<nav-bar title-text="发布宠物信息"  backIcon='../../images/back-pre-black.png'></nav-bar>
+<nav-bar title-text="发布宠物信息" backIcon='../../images/back-pre-black.png'></nav-bar>
 
-<form bindsubmit="submitNew" report-submit='true'  report-submit-timeout='1000'>
+<form bindsubmit="submitNew" report-submit='true' report-submit-timeout='1000'>
   <view class='top-warning' style='margin-top:{{marginNav+10}}px'>(只限上海地区发布领养) 虚假违法内容将被介入删除！</view>
-
 
   <view class='cover-item'>
     <view class='header'>上传宠物照片</view>
@@ -156,7 +155,7 @@
 
 
         <view class='ruler-other' wx:if='{{index==9}}'>
-          <textarea class='check-textarea' placeholder='请输入信息' placeholder-style='color;#666' auto-height='true' adjust-position='true' disabled='{{!item.checked}}' name='requirementOther' cursor-spacing='30'   bindinput='requirementOtherInput' maxlength='200' value='{{item.name!="其他(先勾选再填信息)"?item.name:""}}'></textarea>
+          <textarea class='check-textarea' placeholder='请输入信息' placeholder-style='color;#666' auto-height='true' adjust-position='true' disabled='{{!item.checked}}' name='requirementOther' cursor-spacing='30' bindinput='requirementOtherInput' maxlength='200' value='{{item.name!="其他(先勾选再填信息)"?item.name:""}}'></textarea>
           <view class='currentLeftWords'>{{currentDetailWordNumber}}/200</view>
         </view>
       </block>
@@ -168,7 +167,7 @@
     <view class='header'>送养故事</view>
 
     <view class='form-cover'>
-      <textarea class='form-textarea' placeholder='请描述宠物饮食偏好、行为习惯、运动量等，以及送养原因、宠物过往经历、情感故事等。' placeholder-style='color;#666'  cursor-spacing='30' adjust-position='true' maxlength='200' name='story' bindinput='storyInput' value='{{story}}'></textarea>
+      <textarea class='form-textarea' placeholder='请描述宠物饮食偏好、行为习惯、运动量等，以及送养原因、宠物过往经历、情感故事等。' placeholder-style='color;#666' cursor-spacing='30' adjust-position='true' maxlength='200' name='story' bindinput='storyInput' value='{{story}}'></textarea>
       <view class='currentLeftWords'>{{currentStoryWordNumber}}/200</view>
     </view>
   </view>
