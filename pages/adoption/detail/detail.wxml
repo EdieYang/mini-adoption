@@ -1,7 +1,7 @@
 <nav-bar title-text="宠物详情" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 
 <swiper bindchange="swiper" class='h_c' current="0" circular="true" next-margin="70rpx" easing-function='easeOutCubic' style='margin-top:{{marginNav}}px'>
-  <block wx:for="{{imgUrls}}" wx:for-index="i" wx:key="{{key}}">
+  <block wx:for="{{imgUrls}}" wx:for-index="i" wx:key="{{index}}">
     <swiper-item class="item" bindtap='previewImg' data-imgindex='{{i}}'>
       <view class='h_sp {{i==index?"active":""}}'>
         <image mode='aspectFill' class='pos_c' src='{{item}}'></image>
@@ -49,7 +49,7 @@
     <view class='info-item' wx:if='{{petInfo.petAge!="不详"}}'>{{petInfo.petAge}}</view>
   </view>
   <view class='det-tags'>
-    <view class='tag' wx:for='{{petInfo.petCharacteristic}}'>{{item.name}}</view>
+    <view class='tag' wx:for='{{petInfo.petCharacteristic}}'  wx:key='{{index}}'>{{item.name}}</view>
   </view>
   <view class='det-spec'>
     <image class='det-icon' src='../../../images/det-spec.png'></image>
@@ -140,7 +140,7 @@
 <view class='det-rules'>
   <view class='rule-demand'>
     <text class='rule-title'>领养要求</text>
-    <block wx:for='{{petInfo.adoptRequirements}}'>
+    <block wx:for='{{petInfo.adoptRequirements}}' wx:key='{{index}}'>
       <text class='rule-content'>· {{item.name}}</text>
     </block>
   </view>
@@ -254,7 +254,7 @@
 <view class='extra-list' wx:if='{{petInfo.adoptStatus==3 && adoptUserInfo.userId!=userId}}'>
   <view class='ext-title'>更多上海待领养的宠物</view>
 
-  <block wx:for='{{cityAdoptionPetList}}'>
+  <block wx:for='{{cityAdoptionPetList}}' wx:key='{{index}}'>
     <view class='ext-item' bindtap='detail' data-petid='{{item.petId}}'>
       <image class='ext-pic' mode='aspectFill' src='{{photoPrefix}}{{item.mediaList[0].mediaPath}}'></image>
       <view class='ext-info'>

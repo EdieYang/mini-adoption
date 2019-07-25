@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -9,6 +8,8 @@ var applyStatus = 0
 var actionSheetList = ['双方达成一致取消申请', '领养人资质不符合要求', '送养人不想送养了', '宠物已被领养']
 var applyArr=[]
 var bottomLast =false
+var reqPassTimeout;
+var reqRefuseTimeout;
 
 Page({
 
@@ -18,7 +19,7 @@ Page({
   data: {
     marginNav:app.globalData.marginNav,
     chosenId: 1,
-    photoPrefix: photoPrefix
+    photoPrefix: app.globalData.staticResourceUrlPrefix
   },
 
   /**
@@ -119,7 +120,7 @@ Page({
             mask: true,
             icon: 'none'
           })
-          setTimeout(function() {
+          reqRefuseTimeout=setTimeout(function() {
             applyArr = []
             pageNum = 1
             bottomLast = false
@@ -153,7 +154,7 @@ Page({
             mask: true,
             icon: 'none'
           })
-          setTimeout(function() {
+          reqPassTimeout=setTimeout(function() {
             pageNum=1
             applyArr=[]
             bottomLast=false
@@ -224,14 +225,15 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+  
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    clearTimeout(reqPassTimeout)
+    clearTimeout(reqRefuseTimeout)
   },
 
   /**

@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()

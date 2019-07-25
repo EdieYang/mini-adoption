@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../utils/util.js')
 
 const app = getApp()
@@ -16,7 +15,7 @@ let col2H = 0
 let chosenId = 2
 let bottomLast = false
 var changingStatus = false
-
+var loadingCount = 10
 Page({
 
   /**
@@ -27,7 +26,7 @@ Page({
     tabFix: false,
     chosenId: 2,
     userId: '',
-    photoPrefix: photoPrefix,
+    photoPrefix: app.globalData.staticResourceUrlPrefix,
     showFilter: false,
     ageType: 1,
     sexType: 1,
@@ -52,8 +51,7 @@ Page({
     pageStatus: true,
     col1: [],
     col2: [],
-    images: [],
-    loadingCount: 10
+    images: []
   },
 
   /**
@@ -94,10 +92,8 @@ Page({
         break;
       }
     }
-    let loadingCount = this.data.loadingCount - 1;
-    this.setData({
-      loadingCount: loadingCount
-    })
+    loadingCount = loadingCount - 1;
+
     let col1 = this.data.col1;
     let col2 = this.data.col2;
     if (col1H <= col2H) {

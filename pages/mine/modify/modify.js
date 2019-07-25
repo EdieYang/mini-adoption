@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -10,13 +9,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    marginNav:app.globalData.marginNav,
+    marginNav: app.globalData.marginNav,
     isAuthorized: false,
     userInfo: {},
     tempPortrait: '../../../images/portrait-default.png',
     birthday: '选择你的生日',
     hasBirthday: false,
     hasArea: false,
+    photoPrefix: app.globalData.staticResourceUrlPrefix
   },
 
   /**
@@ -24,7 +24,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this
-    userId=app.globalData.userId
+    userId = app.globalData.userId
     // userId = '9e02dbdc2e0347ed899e056b6780f1a3'
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/users/user',
@@ -36,27 +36,27 @@ Page({
       success: function(res) {
         console.log(res)
         var result = res.data.data
-        if(result==null){
+        if (result == null) {
           return
         }
-        var hasArea=false
-        var location=''
+        var hasArea = false
+        var location = ''
         if (result.location) {
-          hasArea=true
+          hasArea = true
         }
-        var birthday=''
-        var hasBirthday=false
-        if(result.birthday){
+        var birthday = ''
+        var hasBirthday = false
+        if (result.birthday) {
           birthday = result.birthday
-          hasBirthday=true
-        }else{
-          birthday ='选择你的生日'
+          hasBirthday = true
+        } else {
+          birthday = '选择你的生日'
         }
         that.setData({
           userInfo: result,
           tempPortrait: result.portrait,
           birthday: birthday,
-          gender:result.gender,
+          gender: result.gender,
           hasArea: hasArea,
           hasBirthday: hasBirthday,
           location: result.location,
@@ -82,7 +82,7 @@ Page({
   bindRegionChange: function(e) {
     var region = e.detail.value
     this.setData({
-      location: region[0]+' '+region[1]+' '+region[2],
+      location: region[0] + ' ' + region[1] + ' ' + region[2],
       hasArea: true
     })
   },
@@ -95,13 +95,13 @@ Page({
       sourceType: ['album', 'camera'],
       success: function(res) {
         var fileSize = res.tempFiles[0].size
-        if (fileSize > 1024*1024*5){
+        if (fileSize > 1024 * 1024 * 5) {
           wx.showToast({
             title: '上传图片限制大小5M',
-            icon:'none',
-            duration:2000
+            icon: 'none',
+            duration: 2000
           })
-          return 
+          return
         }
         wx.showToast({
           title: '上传中',
@@ -130,7 +130,7 @@ Page({
         var picUrl = returnUrl.data
 
         that.setData({
-          tempPortrait: photoPrefix+picUrl
+          tempPortrait: that.data.photoPrefix + picUrl
         })
 
       },

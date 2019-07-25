@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -6,8 +5,8 @@ var userId
 var applyId
 var actionSheetList = ['双方达成一致取消申请', '领养人资质不符合要求', '送养人不想送养了', '宠物已被领养']
 var actionSheetList2 = ['双方达成一致取消申请', '领养人不想领养了', '宠物已被领养']
-
-
+var reqPassTimeout,reqRefuseTimeout;
+var interval;
 Page({
 
   /**
@@ -15,7 +14,7 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    photoPrefix: photoPrefix,
+    photoPrefix: app.globalData.staticResourceUrlPrefix,
     homeIcon: false,
     backIcon: '../../images/back-pre-black.png'
   },
@@ -66,7 +65,7 @@ Page({
         var petInfo = res.data.data.petInfo
         var adopterInfo = res.data.data.adopterInfo
 
-        var interval = setInterval(function() {
+        interval = setInterval(function() {
           //将时间传如 调用
           var clock = that.forea(util.formatDateDiffMills(applyInfo.applyTime))
 
@@ -145,7 +144,7 @@ Page({
             mask: true,
             icon: 'none'
           })
-          setTimeout(function() {
+          reqRefuseTimeout=setTimeout(function() {
             that.getPetAdoptApplyDetial()
           }, 2000)
         }
@@ -170,7 +169,7 @@ Page({
             mask: true,
             icon: 'none'
           })
-          setTimeout(function() {
+          reqPassTimeout=setTimeout(function() {
             that.getPetAdoptApplyDetial()
           }, 2000)
         }
@@ -268,7 +267,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    clearTimeout(reqPassTimeout)
+    clearTimeout(reqRefuseTimeout)
+    clearInterval(interval)
   },
 
   /**

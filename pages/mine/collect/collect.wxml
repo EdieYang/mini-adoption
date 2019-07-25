@@ -13,7 +13,7 @@
 
   <view class='extra-list'>
 
-    <view class='ext-item-cover' wx:for="{{petInfoList}}">
+    <view class='ext-item-cover' wx:for="{{petInfoList}}" wx:key='petInfoList'>
       <view class='ext-item' bindtap='detail' data-petid='{{item.petId}}'>
         <image class='ext-pic' mode='aspectFill' src='{{photoPrefix}}{{item.mediaList[0].mediaPath}}'></image>
         <view class='ext-info'>

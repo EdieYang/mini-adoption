@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -93,10 +92,10 @@ Page({
           for (var i = 0; i < messageList.length; i++) {
             //缓存消息识别是否为最新消息
             var msgLatest = wx.getStorageSync(messageList[i].userId)
-            if (msgLatest =='SHOW_CHAT_MSG'){
+            if (msgLatest == 'SHOW_CHAT_MSG') {
               messageList[i].fresh = true
-            }else{
-              messageList[i].fresh=false
+            } else {
+              messageList[i].fresh = false
             }
           }
           that.setData({

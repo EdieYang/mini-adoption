@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -7,8 +6,10 @@ var pageNum = 1
 var pageSize = 10
 var applyStatus = 0
 var actionSheetList = ['双方达成一致取消申请', '领养人不想领养了', '宠物已被领养']
-var applyArr=[]
-var bottomLast =false
+var applyArr = []
+var bottomLast = false
+var reqRefuseTimeout;
+
 
 Page({
 
@@ -16,21 +17,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    marginNav:app.globalData.marginNav,
-    chosenId:1,
-    photoPrefix: photoPrefix
+    marginNav: app.globalData.marginNav,
+    chosenId: 1,
+    photoPrefix: app.globalData.staticResourceUrlPrefix
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     wx.hideShareMenu()
     userId = app.globalData.userId
-    applyArr=[]
+    applyArr = []
     applyStatus = '0'
   },
-  chooseTab: function (e) {
+  chooseTab: function(e) {
     var that = this
     var chosenId = e.currentTarget.dataset.id;
     if (chosenId == 1) {
@@ -42,18 +43,18 @@ Page({
     } else if (chosenId == 4) {
       applyStatus = 5
     }
-    applyArr=[]
+    applyArr = []
     this.setData({
-      applyList:[],
+      applyList: [],
       showLoading: true,
       chosenId: chosenId,
     })
-    pageNum=1
-    bottomLast=false
+    pageNum = 1
+    bottomLast = false
     this.getPetAdoptApplyList()
 
   },
-  getPetAdoptApplyList: function () {
+  getPetAdoptApplyList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/apply/list',
@@ -64,13 +65,13 @@ Page({
         pageSize: pageSize
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var applyList = res.data.data.rows
         var bottomLast = false
         if (res.data.data.total < pageSize) {
           bottomLast = true
         }
-        applyArr=applyArr.concat(applyList)
+        applyArr = applyArr.concat(applyList)
         that.setData({
           applyList: applyArr,
           showLoading: false,
@@ -79,20 +80,20 @@ Page({
       }
     })
   },
-  detail: function (e) {
+  detail: function(e) {
     var applyId = e.currentTarget.dataset.applyid
     wx.navigateTo({
       url: '../receiveapplydetail/receiveapplydetail?applyId=' + applyId,
     })
   },
-  toDetail: function (e) {
+  toDetail: function(e) {
     this.genFormId(e.detail.formId)
     var applyId = e.detail.value.applyId
     wx.navigateTo({
       url: '../receiveapplydetail/receiveapplydetail?applyId=' + applyId,
     })
   },
-  cancel: function (e){
+  cancel: function(e) {
     var that = this
     wx.showActionSheet({
       itemList: actionSheetList,
@@ -104,7 +105,7 @@ Page({
       }
     })
   },
-  refuse: function (applyId, applyResp,formId) {
+  refuse: function(applyId, applyResp, formId) {
     var that = this
     var applyId = applyId
     wx.request({
@@ -117,7 +118,7 @@ Page({
         operateUserId: userId
       },
       method: "PUT",
-      success: function (res) {
+      success: function(res) {
         if (res.data.success) {
           wx.showToast({
             title: '取消成功',
@@ -125,9 +126,9 @@ Page({
             mask: true,
             icon: 'none'
           })
-          setTimeout(function () {
-            pageNum=1;
-            bottomLast=false
+          reqRefuseTimeout = setTimeout(function() {
+            pageNum = 1;
+            bottomLast = false
             applyArr = []
             that.getPetAdoptApplyList()
           }, 2000)
@@ -135,21 +136,21 @@ Page({
       }
     })
   },
-  signContract:function(e){
+  signContract: function(e) {
     var applyId = e.detail.value.applyId
     this.genFormId(e.detail.formId)
     wx.navigateTo({
       url: '../../post/contract/contract?applyId=' + applyId,
     })
   },
-  contract: function (e){
+  contract: function(e) {
     var applyId = e.detail.value.applyId
     this.genFormId(e.detail.formId)
     wx.navigateTo({
       url: '../../mine/contract/contract?applyId=' + applyId,
     })
   },
-  genFormId: function (formId) {
+  genFormId: function(formId) {
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/formId',
       data: {
@@ -160,51 +161,51 @@ Page({
       header: {
         "content-type": "application/x-www-form-urlencoded"
       },
-      success: function (res) { }
+      success: function(res) {}
     })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    pageNum=1
-    bottomLast=false
-    applyArr=[]
+  onShow: function() {
+    pageNum = 1
+    bottomLast = false
+    applyArr = []
     this.getPetAdoptApplyList()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
+  onUnload: function() {
+    clearTimeout(reqRefuseTimeout)
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     wx.stopPullDownRefresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     var that = this
     //刷新页面
     if (!bottomLast) {
@@ -216,7 +217,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

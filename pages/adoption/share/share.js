@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -14,7 +13,7 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    photoPrefix: photoPrefix
+    photoPrefix: app.globalData.staticResourceUrlPrefix
   },
 
   /**
@@ -46,7 +45,7 @@ Page({
         petInfo.adoptRequirements = JSON.parse(petInfo.adoptRequirements)
         var images = []
         for (var i = 0; i < mediaList.length; i++) {
-          images.push(photoPrefix + mediaList[i].mediaPath)
+          images.push(that.data.photoPrefix + mediaList[i].mediaPath)
         }
         that.setData({
           petInfo: petInfo,
@@ -60,9 +59,9 @@ Page({
     var that = this
     var petInfo = this.data.petInfo
     context = wx.createCanvasContext("post-adoption", this)
-    context.drawImage('../../../images/post-adoption.png', 15, 0, that.data.screenWidth-30, 613)
+    context.drawImage('../../../images/post-adoption.png', 15, 0, that.data.screenWidth - 30, 613)
     wx.getImageInfo({
-      src: photoPrefix + petInfo.mediaList[0].mediaPath,
+      src: that.data.photoPrefix + petInfo.mediaList[0].mediaPath,
       success(res) {
         var petPhoto = res.path;
         context.drawImage(petPhoto, 45, 60, 112, destHeight)
@@ -85,7 +84,7 @@ Page({
             scene: petId
           },
           success: function(res) {
-            var wxAcodeUrl = photoPrefix + res.data.data;
+            var wxAcodeUrl = that.data.photoPrefix + res.data.data;
             wx.getImageInfo({
               src: wxAcodeUrl,
               success(res) {
@@ -165,7 +164,7 @@ Page({
     contextHidden.draw(false, wx.canvasToTempFilePath({
       x: 15,
       y: 0,
-      width: that.data.screenWidth-30,
+      width: that.data.screenWidth - 30,
       height: 613,
       destWidth: that.data.screenWidth * 750 / width,
       destHeight: 613 * 750 / width,

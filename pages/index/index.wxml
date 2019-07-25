@@ -1,7 +1,7 @@
 <nav-bar title-text="上海宠物领养"></nav-bar>
 
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color='{{indicatorColor}}' style='margin-top:{{marginNav}}px;height:375rpx;'>
-  <block wx:for="{{imgUrls}}">
+  <block wx:for="{{imgUrls}}" wx:key='{{index}}'>
     <swiper-item bindtap='redirectUrl' data-index='{{index}}'>
       <image src="{{photoPrefix}}{{item.bannerImgUrl}}" class="slide-image" />
     </swiper-item>
@@ -57,14 +57,14 @@
 
 <view class='collect-out'>
   <view style='display:none'>
-    <block wx:for="{{petCols}}">
+    <block wx:for="{{petCols}}" wx:key='{{index}}'>
       <image wx:key="" id="{{item.petId}}" src="{{photoPrefix}}{{item.mediaList[0].mediaPath}}" bindload="onImageLoad" mode="widthFix" class="collecting-img shadow-bottom" lazy-load="true"></image>
     </block>
   </view>
 </view>
 <view class='space-between'>
   <view class="collect-out" style='float:left' wx:if="{{col1.length}}">
-    <block wx:for="{{col1}}" wx:key="" wx:for-index="idx" wx:for-item="item">
+    <block wx:for="{{col1}}" wx:key="{{index}}" wx:for-index="idx" wx:for-item="item">
       <view class="img_box" bindtap='toAdoptionDetail' data-petid='{{item.petId}}'>
         <view class='item-content'>
           <image src="{{photoPrefix}}{{item.mediaList[0].mediaPath}}" mode="widthFix" data-index="{{index}}" class='img_box_img'></image>

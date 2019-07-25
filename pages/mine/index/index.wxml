@@ -16,14 +16,14 @@
         <view class='co-name'>
           {{userInfo.nickName}}
         </view>
-        <view class='co-follows'>
+        <view class='co-follows' style='margin-bottom:10rpx'>
           <view class='follow' wx:if='{{userInfo.gender==0}}'>男神 </view>
           <view class='follow' wx:if='{{userInfo.gender==1}}'> 女神 </view>
           <view class='follow' wx:if='{{userInfo.location}}'>{{userInfo.location}}</view>
         </view>
         <view class='co-follows'>
-          <view class='follow' bindtap='followlist'>关注 {{userInfo.followNum}} </view>
-          <view class='follow' bindtap='followedlist'>被关注 {{userInfo.followByNum}} </view>
+          <view class='follow-btn' bindtap='followlist'>关注 {{userInfo.followNum}} </view>
+          <view class='follow-btn' bindtap='followedlist'>被关注 {{userInfo.followByNum}} </view>
         </view>
       </view>
     </view>

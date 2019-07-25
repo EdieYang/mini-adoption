@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -15,9 +14,9 @@ Page({
     imgUrls: [],
     index: 0,
     showFilter: false,
-    photoPrefix: photoPrefix,
-    homeIcon:false,
-    backIcon:'../../images/back-pre-black.png'
+    photoPrefix: app.globalData.staticResourceUrlPrefix,
+    homeIcon: false,
+    backIcon: '../../images/back-pre-black.png'
   },
 
   /**
@@ -26,11 +25,11 @@ Page({
   onLoad: function(options) {
     var that = this
     petId = options.petId
-    if(options.petId=='' || typeof options.petId == 'undefined' ||options.petId==null){
-      petId=options.scene
+    if (options.petId == '' || typeof options.petId == 'undefined' || options.petId == null) {
+      petId = options.scene
       that.setData({
-        homeIcon:true,
-        backIcon:''
+        homeIcon: true,
+        backIcon: ''
       })
     }
     userId = app.globalData.userId
@@ -57,7 +56,7 @@ Page({
         petInfo.adoptRequirements = JSON.parse(petInfo.adoptRequirements)
         var images = []
         for (var i = 0; i < mediaList.length; i++) {
-          images.push(photoPrefix + mediaList[i].mediaPath)
+          images.push(that.data.photoPrefix + mediaList[i].mediaPath)
         }
         that.setData({
           petInfo: petInfo,
@@ -69,23 +68,23 @@ Page({
     })
   },
 
-  getCityAdoptionList: function () {
+  getCityAdoptionList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/pets/shanghai/list',
       data: {
-        pageNum:1,
-        pageSize:5,
+        pageNum: 1,
+        pageSize: 5,
         withOutPet: petId,
-        adoptStatus:'3'
+        adoptStatus: '3'
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var petInfoList = res.data.data.list
         for (var i = 0; i < petInfoList.length; i++) {
           petInfoList[i].petCharacteristic = JSON.parse(petInfoList[i].petCharacteristic)
         }
-        
+
         that.setData({
           cityAdoptionPetList: petInfoList
         })
@@ -93,7 +92,7 @@ Page({
     })
   },
 
-  detail:function(e){
+  detail: function(e) {
     var petId = e.currentTarget.dataset.petid
     wx.navigateTo({
       url: '../detail/detail?petId=' + petId,
@@ -453,17 +452,17 @@ Page({
       }
     })
   },
-  sharePost:function(e){
-    var formId=e.detail.formId
+  sharePost: function(e) {
+    var formId = e.detail.formId
     this.genFormId(formId)
     wx.showLoading({
       title: '生成海报中',
     })
     wx.navigateTo({
-      url: '../share/share?petId='+petId,
+      url: '../share/share?petId=' + petId,
     })
   },
-  genFormId: function (formId) {
+  genFormId: function(formId) {
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/formId',
       data: {
@@ -474,8 +473,7 @@ Page({
       header: {
         "content-type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
-      }
+      success: function(res) {}
     })
   },
   /**
@@ -600,9 +598,9 @@ Page({
    */
   onShareAppMessage: function() {
     return {
-      title: '我叫'+this.data.petInfo.petName+"，快把我带回家吧！",
+      title: '我叫' + this.data.petInfo.petName + "，快把我带回家吧！",
       imageUrl: this.data.imgUrls[0],
-      path: '/pages/adoption/detail/detail?scene='+petId
+      path: '/pages/adoption/detail/detail?scene=' + petId
     }
   }
 })

@@ -43,7 +43,7 @@
     </view>
   </view>
 
-  <block wx:if='{{chatlist!=null}}' wx:for='{{chatlist}}' wx-index='index'>
+  <block wx:if='{{chatlist!=null}}' wx:for='{{chatlist}}' wx-index='index' wx:key='chatlist'>
     <view class='msg-item' bindtap='chat' data-userid='{{item.userId}}' data-index='{{index}}'>
       <view class='icon-cover'>
         <image class='msg-icon-protrait' src='{{item.portrait}}'></image>

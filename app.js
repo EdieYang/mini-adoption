@@ -20,7 +20,7 @@ App({
     requestUrlWechat: 'https://www.linchongpets.com/lpWechat',
     uploadUrl: 'https://www.linchongpets.com/lpCms/pet/portrait/upload',
     uploadImageUrl: 'https://www.linchongpets.com/lpCms/oss/image',
-    staticResourceUrlPrefix: 'https://linkpet-image-bucket-1.oss-cn-hangzhou.aliyuncs.com',
+    staticResourceUrlPrefix: 'https://pic.linchongpets.com/',
     // requestUrlCms: 'http://localhost:8093/lpCms',
     // requestUrlWechat: 'http://localhost:8094/lpWechat',
     // uploadUrl: 'http://localhost:8093/pokemon/pet/portrait/upload',
@@ -83,8 +83,8 @@ App({
   IfAccess: function() {
     var that = this
     return new Promise(function(resolve, reject) {
-      // var userId = wx.getStorageSync("userId")
-      const userId = '6ad6ff9941254386a98c4729615f8ccd'
+      var userId = wx.getStorageSync("userId")
+      // const userId = '6ad6ff9941254386a98c4729615f8ccd'
       //put userId into global variable dataset
       that.globalData.userId = userId;
       //define api request url

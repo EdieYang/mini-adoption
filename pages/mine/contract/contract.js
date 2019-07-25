@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -13,7 +12,7 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    photoPrefix: photoPrefix
+    photoPrefix: app.globalData.staticResourceUrlPrefix
   },
 
   /**
@@ -35,7 +34,7 @@ Page({
       success: function(res) {
         var contractInfo = res.data.data.contractInfo
         var petInfo = res.data.data.petInfo
-        var petImg = photoPrefix + petInfo.mediaList[0].mediaPath
+        var petImg = that.data.photoPrefix + petInfo.mediaList[0].mediaPath
         petInfo.petCharacteristic = JSON.parse(petInfo.petCharacteristic)
         that.setData({
           petImg: petImg,

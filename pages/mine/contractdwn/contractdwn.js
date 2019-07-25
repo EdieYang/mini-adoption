@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -14,7 +13,7 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    photoPrefix: photoPrefix
+    photoPrefix: app.globalData.staticResourceUrlPrefix
   },
 
   /**
@@ -54,7 +53,6 @@ Page({
     })
   },
   drawContract: function(contractInfo, petInfo) {
-
     var that = this
     var innerHeight = 0
     context.setFontSize(20)
@@ -108,9 +106,8 @@ Page({
     innerHeight = this.drawText('姓名：' + contractInfo.adopterName + '      手机号：' + contractInfo.adopterPhone, 15, innerHeight, 50, screenWidth)
     innerHeight = this.drawText('联系地址：' + contractInfo.adopterAddress, 15, innerHeight, 50, screenWidth)
     innerHeight = this.drawText('签名：', 15, innerHeight, 50, screenWidth)
-    console.log(photoPrefix + contractInfo.adopterSign)
     wx.getImageInfo({
-      src: photoPrefix + contractInfo.adopterSign,
+      src: that.data.photoPrefix + contractInfo.adopterSign,
       success(res) {
         context.drawImage(res.path, 50, innerHeight - 20, 100, 100)
         innerHeight += 100
@@ -123,9 +120,8 @@ Page({
         innerHeight = that.drawText('姓名：' + contractInfo.applyName + '      手机号：' + contractInfo.applyPhone, 15, innerHeight, 50, screenWidth)
         innerHeight = that.drawText('联系地址：' + contractInfo.applyAddress, 15, innerHeight, 50, screenWidth)
         innerHeight = that.drawText('签名：', 15, innerHeight, 50, screenWidth)
-        console.log(photoPrefix + contractInfo.applySign)
         wx.getImageInfo({
-          src: photoPrefix + contractInfo.adopterSign,
+          src: that.data.photoPrefix + contractInfo.adopterSign,
           success(res) {
             context.drawImage(res.path, 50, innerHeight - 20, 100, 100)
             innerHeight += 100
@@ -220,7 +216,7 @@ Page({
     }
   },
   download: function() {
-    var that=this
+    var that = this
     var contextHidden = wx.createCanvasContext('contract-page-hidden', this)
     contextHidden.draw(false, wx.canvasToTempFilePath({
       x: 0,

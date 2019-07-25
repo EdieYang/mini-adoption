@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -21,7 +20,7 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    photoPrefix: photoPrefix
+    photoPrefix: app.globalData.staticResourceUrlPrefix
   },
 
   /**
@@ -64,7 +63,7 @@ Page({
         var petInfo = res.data.data.petInfo
         var applyUser = res.data.data.applyUser
         var adopterUser = res.data.data.adopterUser
-        var petImg = photoPrefix+petInfo.mediaList[0].mediaPath
+        var petImg = that.data.photoPrefix+petInfo.mediaList[0].mediaPath
         if (contractInfo == null) {
           status = 1
         } else if (contractInfo.signStatus == 0) {

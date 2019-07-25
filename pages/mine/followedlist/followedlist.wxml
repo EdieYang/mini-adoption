@@ -1,7 +1,7 @@
 <nav-bar title-text="关注我的人" backIcon='../../images/back-pre-black.png' ></nav-bar>
 
 <view class='follow-cover' style='margin-top:{{marginNav}}px'>
-  <view class='follow-item'  wx:for='{{followlist}}'>
+  <view class='follow-item'  wx:for='{{followlist}}' wx:key='followlist'>
     <view class='item-info' bindtap='home' data-followid='{{item.userId}}' >
       <image class='info-img' src='{{item.portrait}}'></image>
       <view class='info-name'>{{item.nickName}}</view>

@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -18,7 +17,7 @@ Page({
     marginNav: app.globalData.marginNav,
     chosenId: 1,
     showLoading: true,
-    photoPrefix: photoPrefix,
+    photoPrefix: app.globalData.staticResourceUrlPrefix,
     bottomLast: false
   },
 

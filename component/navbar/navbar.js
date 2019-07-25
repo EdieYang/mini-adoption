@@ -62,13 +62,12 @@ Component({
       }
       that.setData({
         status: statusHeight,
-        navHeight: navHeight,
-        navTop: navinfo.top
+        navHeight: navHeight
       })
     },
     setStyle: function() {
       var that = this,
-        containerStyle, textStyle, iconStyle;
+        containerStyle, textStyle;
       containerStyle = [
         'background:' + that.data.background
       ].join(';');
@@ -76,14 +75,9 @@ Component({
         'color:' + that.data.color,
         'font-size:' + that.data.fontSize + 'px'
       ].join(';');
-      iconStyle = [
-        'width: ' + that.data.iconWidth + 'px',
-        'height: ' + that.data.iconHeight + 'px'
-      ].join(';');
       that.setData({
         containerStyle: containerStyle,
-        textStyle: textStyle,
-        iconStyle: iconStyle
+        textStyle: textStyle
       })
     },
     // 返回事件

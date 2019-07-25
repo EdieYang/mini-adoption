@@ -2,9 +2,6 @@ var util = require('../../../utils/util.js');
 var userId;
 var petId;
 const app = getApp()
-
-const photoPrefix = 'https://melody.memorychilli.com/'
-
 var content = '';
 var ImageUrls = [];
 var showLocationHistory = true
@@ -38,7 +35,7 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    photoPrefix: photoPrefix,
+    photoPrefix: app.globalData.staticResourceUrlPrefix,
     ImageUrls: [],
     content: '',
     showAddPhotoCover: showAddPhotoCover,

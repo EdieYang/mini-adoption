@@ -40,7 +40,7 @@
   </view>
 
   <view class='ext-cover'>
-    <view class='ext-item' wx:for='{{applyList}}'>
+    <view class='ext-item' wx:for='{{applyList}}' wx:key='applyList'>
       <view class='ext-line' bindtap='detail' data-applyid='{{item.applyId}}'>
         <view class='ext-left'>
           <image class='ext-img-left' src='{{photoPrefix}}{{item.mediaPath}}'></image>

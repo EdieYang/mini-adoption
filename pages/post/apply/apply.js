@@ -1,6 +1,5 @@
 var util = require('../../../utils/util.js');
 const app = getApp()
-const photoPrefix = 'https://melody.memorychilli.com/'
 
 var userId;
 var petId;

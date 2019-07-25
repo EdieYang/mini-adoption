@@ -138,7 +138,7 @@
     </view>
     <view class='check-cover'>
 
-      <block wx:for='{{petCharacter}}'>
+      <block wx:for='{{petCharacter}}' wx:key='petCharacter'>
         <view class='checkbox-item ' style='{{item.checked?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseCharacter' data-type='{{index}}'>{{item.name}}</view>
       </block>
     </view>
@@ -147,7 +147,7 @@
   <view class='cover-item'>
     <view class='header'>领养要求</view>
     <view class='ruler-cover'>
-      <block wx:for='{{requirements}}'>
+      <block wx:for='{{requirements}}' wx:key='requirements'>
         <view class='ruler-item' bindtap='chooseRequirement' data-type='{{index}}'>
           <image class='check-icon' src='{{item.checked?"../../../images/checked-icon.png":"../../../images/check-icon.png"}}'></image>
 

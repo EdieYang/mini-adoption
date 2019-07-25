@@ -553,6 +553,7 @@ page {
   flex-direction: row;
   font-size: 30rpx;
   color: #000;
+  padding:20rpx 0rpx;
 }
 
 .footer-icon {

@@ -1,4 +1,3 @@
-const photoPrefix = 'https://melody.memorychilli.com/';
 const util = require('../../../utils/util.js')
 
 const app = getApp()
@@ -16,7 +15,8 @@ Page({
     marginNav: app.globalData.marginNav,
     imageFront: imageFronDefault,
     imageBack: imagebackDefault,
-    status: 0
+    status: 0,
+    photoPrefix: app.globalData.staticResourceUrlPrefix
   },
 
   /**
@@ -59,11 +59,11 @@ Page({
         var returnUrl = fielObj.data
         if (index == 1) {
           that.setData({
-            imageFront: photoPrefix + returnUrl
+            imageFront: that.data.photoPrefix + returnUrl
           })
         } else {
           that.setData({
-            imageBack: photoPrefix + returnUrl
+            imageBack: that.data.photoPrefix + returnUrl
           })
         }
       },
