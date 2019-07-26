@@ -58,6 +58,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu()
     var that = this
     petType = 1
     this.getBannerList()
@@ -192,7 +193,6 @@ Page({
         that.setData({
           petInfoList: petInfoListArr,
           showLoading: false,
-          bottomLast: bottomLast,
           petCols: petInfoList
         })
         wx.stopPullDownRefresh()

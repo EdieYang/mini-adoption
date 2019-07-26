@@ -106,20 +106,20 @@ page {
   margin-right: 20rpx;
 }
 
-.follow-btn{
+.follow-btn {
   font-size: 25rpx;
   color: #1c43b2;
   margin-right: 20rpx;
-  background-color:#fff;
-  box-shadow: 0 10rpx 20rpx #000;
-  border-radius:50rpx;
-  padding:9rpx 20rpx;
+  background-color: #fff;
+  box-shadow: 0 5rpx 10rpx #000;
+  border-radius: 50rpx;
+  padding: 9rpx 20rpx;
 }
 
 .co-home {
   font-size: 24rpx;
   color: #fff;
-  padding:20rpx 0rpx;
+  padding: 20rpx 0rpx;
 }
 
 .modi-info {

@@ -24,7 +24,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu()
     var that = this
+    wx.showLoading({
+      title: '加载历史消息',
+    })
     userId = app.globalData.userId
     targetUserId = options.userId
     this.getTargetUserInfo()
@@ -290,7 +294,7 @@ Page({
           msgs: mgds,
           scrollTop: 1000 * mgds.length
         })
-
+        wx.hideLoading()
       }
     })
   },
@@ -370,7 +374,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-    wx.hideShareMenu()
-  }
+  onShareAppMessage: function() {}
 })

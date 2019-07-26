@@ -1,8 +1,8 @@
 <nav-bar title-text="{{navTitle}}" backIcon='../../images/back-pre-black.png'></nav-bar>
 
 
-<scroll-view class='room-cover' scroll-y style="height: 90vh;margin-top:{{marginNav}}px" scroll-top="{{scrollTop}}">
-  <block wx:for='{{msgs}}'>
+<scroll-view class='room-cover' scroll-y style="height: 90vh;margin-top:{{marginNav}}px" scroll-top="{{scrollTop}}" scroll-with-animation='true'>
+  <block wx:for='{{msgs}}' wx:key='msgs'>
     <view class='msg-receive' wx:if='{{item.targetUserId==userId}}' id='a_{{index}}'>
       <image class='pop-portrait' src='{{targetUserInfo.portrait}}'></image>
       <view class='pop-text-cover-left' wx:if='{{item.type==0}}'>
@@ -16,7 +16,7 @@
       <image class='pop-portrait' src='{{userInfo.portrait}}'></image>
       <view class='pop-text-cover-right' wx:if='{{item.type==0}}'>
         <view class='pop-text-cover-arrow-right'></view>
-        <view class='pop-text'>{{item.data}}</view>
+        <view class='pop-text-right'>{{item.data}}</view>
       </view>
       <image wx:if='{{item.type==1 && item.fromOri==0}}' bindload='imageLoad' data-key='{{index}}' style='margin-top:20rpx;margin-right:20rpx;width:{{item.width}}rpx; height:{{item.height}}rpx;border-radius:10rpx;' src='{{item.data}}' bindtap='previewImg' data-img='{{item.data}}'></image>
       <image wx:if='{{item.type==1 && item.fromOri!=0}}' bindload='imageLoad' data-key='{{index}}' style='margin-top:20rpx;margin-right:20rpx;width:{{item.width}}rpx; height:{{item.height}}rpx;border-radius:10rpx;' src='{{photoPrefix}}{{item.data}}' bindtap='previewImg'
@@ -34,7 +34,7 @@
   <view class='bar-item'>
     <image src='../../../images/keyboard-img.png' class='bar-img'></image>
   </view>
-  <input class='bar-input' adjust-position='false' placeholder='请输入...' type='text' cursor-spacing='20' bindinput="bindKeyInput" value='{{inputValue}}' confirm-type='send' confirm-hold='true' bindconfirm='sendmsg'></input>
+  <input class='bar-input' adjust-position='true' placeholder='请输入...' type='text' cursor-spacing='20' bindinput="bindKeyInput" value='{{inputValue}}' confirm-type='send' confirm-hold='true' bindconfirm='sendmsg'></input>
   <form report-submit='true' bindsubmit="sendmsg">
     <button class='bar-btn' form-type="submit">发送</button>
   </form>

@@ -16,15 +16,26 @@ Page({
     imageFront: imageFronDefault,
     imageBack: imagebackDefault,
     status: 0,
-    photoPrefix: app.globalData.staticResourceUrlPrefix
+    photoPrefix: app.globalData.staticResourceUrlPrefix,
+    homeIcon: false,
+    backIcon: '../../images/back-pre-black.png'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var that = this
+    wx.hideShareMenu()
     userId = app.globalData.userId
-    // userId = '9e02dbdc2e0347ed899e056b6780f1a3'
+    var scene = options.scene
+    if (scene == 1) {
+      that.setData({
+        homeIcon: true,
+        backIcon: ''
+      })
+    }
+
   },
 
   chooseImage: function(e) {
@@ -222,7 +233,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-    wx.hideShareMenu()
-  }
+  onShareAppMessage: function() {}
 })

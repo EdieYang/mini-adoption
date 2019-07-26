@@ -359,31 +359,6 @@ page {
   position: relative;
 }
 
-.collecting-tag {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  color: #9b9b9b;
-  font-size: 18rpx;
-  display: flex;
-  flex-direction: row;
-  margin-top: 9rpx;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.tag text {
-  border: 1rpx solid #f1f1f1;
-  margin-right: 4rpx;
-  padding: 0 9rpx;
-  height: 24rpx;
-  line-height: 24rpx;
-  display: inline-block;
-}
 
 .collect-out {
   width: 50%;

@@ -23,6 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu()
     pageNum = 1
     type = options.type
     if (type == 0) {
@@ -56,7 +57,7 @@ Page({
   onShow: function() {
     pageNum = 1
     messageArr = []
-    bottomLast=false
+    bottomLast = false
     this.getDetailMessageList()
     this.uptDetailMessageList()
   },
@@ -152,7 +153,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-    wx.hideShareMenu()
-  }
+  onShareAppMessage: function() {}
 })

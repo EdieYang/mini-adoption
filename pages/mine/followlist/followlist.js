@@ -61,6 +61,9 @@ Page({
       })
       return
     }
+    if (targetUserId != userId) {
+      return
+    }
     wx.showModal({
       title: '',
       content: '确定不再关注此用户？',
@@ -176,6 +179,5 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    wx.hideShareMenu()
   }
 })

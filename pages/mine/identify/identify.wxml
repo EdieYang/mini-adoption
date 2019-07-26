@@ -1,4 +1,4 @@
-<nav-bar title-text="实名认证" backIcon='../../images/back-pre-black.png'></nav-bar>
+<nav-bar title-text="实名认证" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}'></nav-bar>
 
 <block wx:if='{{status==1}}'>
   <form report-submit='true' bindsubmit="uploadCheck">

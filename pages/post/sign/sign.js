@@ -172,6 +172,7 @@ Page({
     })
   },
   onLoad(options) {
+    wx.hideShareMenu()
     type = options.type
     let canvasName = this.data.canvasName
     let ctx = wx.createCanvasContext(canvasName)
@@ -420,6 +421,5 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    wx.hideShareMenu()
   }
 })

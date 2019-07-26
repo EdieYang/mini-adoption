@@ -18,6 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu()
     userId=app.globalData.userId
   },
 
@@ -170,7 +171,7 @@ Page({
     })
   },
   adoptTour:function(e){
-    var url = ''
+    var url = 'https://mp.weixin.qq.com/s/jNI3MjT4Q-QJLKs3L6RdaQ'
     wx.navigateTo({
       url: '../../redirect/redirect?url=' + url,
     })
@@ -224,6 +225,5 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    wx.hideShareMenu()
   }
 })

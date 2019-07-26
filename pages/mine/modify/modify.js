@@ -23,6 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu()
     var that = this
     userId = app.globalData.userId
     // userId = '9e02dbdc2e0347ed899e056b6780f1a3'
@@ -274,6 +275,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    wx.hideShareMenu()
+   
   }
 })

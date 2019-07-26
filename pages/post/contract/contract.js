@@ -27,6 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu()
     userId = app.globalData.userId
     applyId = options.applyId
     this.getPetAdoptApplyDetial()
@@ -63,7 +64,7 @@ Page({
         var petInfo = res.data.data.petInfo
         var applyUser = res.data.data.applyUser
         var adopterUser = res.data.data.adopterUser
-        var petImg = that.data.photoPrefix+petInfo.mediaList[0].mediaPath
+        var petImg = that.data.photoPrefix + petInfo.mediaList[0].mediaPath
         if (contractInfo == null) {
           status = 1
         } else if (contractInfo.signStatus == 0) {
@@ -222,8 +223,8 @@ Page({
           applyAddress: address,
           applySign: returnUrl,
           signStatus: 1,
-          formId:formId,
-          operateUserId:userId
+          formId: formId,
+          operateUserId: userId
         }
 
         wx.request({
@@ -292,7 +293,7 @@ Page({
         }
 
         wx.request({
-          url: app.globalData.requestUrlCms + '/adopt/agreement/info' ,
+          url: app.globalData.requestUrlCms + '/adopt/agreement/info',
           data: dataReq,
           method: "PUT",
           header: {
@@ -331,7 +332,7 @@ Page({
       agreement: agreement,
       adopterName: name,
       adopterPhone: phone,
-      adopterAddress:address,
+      adopterAddress: address,
       signStatus: 0,
       createBy: this.data.adopterUser.userId,
       formId: formId,
@@ -387,7 +388,7 @@ Page({
       url: '../../mine/identify/identify',
     })
   },
-  authenticate:function(){
+  authenticate: function() {
     wx.redirectTo({
       url: '../../mine/identify/identify',
     })
@@ -435,7 +436,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-    wx.hideShareMenu()
-  }
+  onShareAppMessage: function() {}
 })

@@ -74,7 +74,7 @@
   margin-left: 30rpx;
   border-radius: 15rpx;
   padding: 20rpx 20rpx;
-  background-color: #356bff;
+  background-color: #4979ff;
 }
 
 .pop-text-cover-right {
@@ -83,7 +83,7 @@
   margin-right: 30rpx;
   border-radius: 15rpx;
   padding: 20rpx 20rpx;
-  background-color: #356bff;
+  background-color: #fafafa;
 }
 
 .pop-text-cover-arrow-left {
@@ -99,7 +99,7 @@
   border-bottom-width: 20rpx;
   border-bottom-color: currentColor;
   border-radius: 0 0 0 64rpx;
-  color: #356bff;
+  color: #4979ff;
 }
 
 .pop-text-cover-arrow-right {
@@ -115,11 +115,16 @@
   border-bottom-width: 20rpx;
   border-bottom-color: currentColor;
   border-radius: 0 0 64rpx 0;
-  color: #356bff;
+  color: #fafafa;
 }
 
 .pop-text {
   color: #fff;
+  font-size: 28rpx;
+}
+
+.pop-text-right{
+  color: #000;
   font-size: 28rpx;
 }
 

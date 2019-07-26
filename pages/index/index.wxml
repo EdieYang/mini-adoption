@@ -9,7 +9,6 @@
 </swiper>
 
 
-
 <view class='tabCover' wx:if='{{tabFix}}' style='position:fixed;top:{{marginNav-10}}px;left:0;'>
   <view class='tabview' data-id='1' bindtap='chooseTab'>
     <view class='tabTxt' style='{{chosenId==1?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>关注</view>

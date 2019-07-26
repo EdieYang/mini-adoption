@@ -1,7 +1,7 @@
 <nav-bar title-text="{{navTitle}}" backIcon='../../images/back-pre-black.png'></nav-bar>
 
 <view class='msg-cover' style='margin-top:{{marginNav+5}}px' wx:if='{{type==0}}' >
-  <view class='msg-item' wx:for='{{messageList}}' wx:key='messageList3'>
+  <view class='msg-item' wx:for='{{messageList}}' wx:key='messageList3' >
     <image class='msg-tip' src='../../../images/msg-icon3.png'></image>
     <view class='msg-info'>
       <view class='info-header'>{{item.msgContent.title}}</view>

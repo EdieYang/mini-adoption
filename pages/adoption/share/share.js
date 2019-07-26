@@ -20,6 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu()
     petId = options.petId
     // petId = '349ac45d6d624ad79baabc3c2c45adb7'
     userId = app.globalData.userId
@@ -159,6 +160,7 @@ Page({
   },
 
   download: function() {
+    var that = this
     var width = wx.getSystemInfoSync().windowWidth
     var contextHidden = wx.createCanvasContext('post-adoption-hidden', this)
     contextHidden.draw(false, wx.canvasToTempFilePath({
@@ -230,7 +232,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-    wx.hideShareMenu()
-  }
+  onShareAppMessage: function() {}
 })

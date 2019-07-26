@@ -152,6 +152,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideShareMenu()
     //判断是否加载缓存
     var that = this
     userId = app.globalData.userId
@@ -205,7 +206,8 @@ Page({
           }
         }
 
-
+        var regionArr = petInfo.address.split(' ')
+        var regionSpllit = ['上海市', regionArr[0], regionArr[1]]
         that.setData({
           petName: petInfo.petName,
           agePickVal: petInfo.petAge,
@@ -220,7 +222,7 @@ Page({
           petCharacter: petCharacter,
           requirements: adoptRequire,
           story: petInfo.story,
-          region: petInfo.address.split(' '),
+          region: regionSpllit,
           hasArea: true,
           wxAccount: petInfo.wxId,
           phone: petInfo.mobilePhone,
@@ -952,7 +954,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    wx.hideShareMenu()
+
   }
 })
 
