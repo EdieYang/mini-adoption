@@ -23,18 +23,18 @@
         data-img='{{photoPrefix}}{{item.data}}'></image>
     </view>
   </block>
-  <view style='height:200rpx;width:100%;'></view>
+  <view style='height:{{scrollTopHeight}}rpx;width:100%;'></view>
 
 </scroll-view>
 
-<view class='tool-bar'>
+<view class='tool-bar' style="bottom:{{bottom}}px">
   <view class='bar-item'>
     <image src='../../../images/send-img.png' class='bar-img' bindtap='chooseImage'></image>
   </view>
   <view class='bar-item'>
     <image src='../../../images/keyboard-img.png' class='bar-img'></image>
   </view>
-  <input class='bar-input' adjust-position='true' placeholder='请输入...' type='text' cursor-spacing='20' bindinput="bindKeyInput" value='{{inputValue}}' confirm-type='send' confirm-hold='true' bindconfirm='sendmsg'></input>
+  <input class='bar-input' adjust-position='{{false}}' placeholder='请输入...' type='text' cursor-spacing='20' bindinput="bindKeyInput" value='{{inputValue}}' confirm-type='send' confirm-hold='true' bindconfirm='sendmsg' bindfocus="focus" bindblur="blur"></input>
   <form report-submit='true' bindsubmit="sendmsg">
     <button class='bar-btn' form-type="submit">发送</button>
   </form>

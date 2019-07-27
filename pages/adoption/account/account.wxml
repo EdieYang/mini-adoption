@@ -1,0 +1,13 @@
+<nav-bar title-text="关注公众号" backIcon='../../images/back-pre-black.png'></nav-bar>
+
+<view class="content" style='margin-top:{{marginNav}}px'>
+  <image src="../../../images/account.jpg" class="qrCode"></image>
+  <view class="header">关注“一起关爱流浪动物”公众号</view>
+  <view class="body">重要平台信息将通过公众号发布</view>
+  <view class="qr-btn" bindtap="saveQrCode">保存二维码图片</view>
+  <view class="header">如何关注公众号？</view>
+  <view class="tipper">1.保存二维码图片到手机相册，点击微信扫一扫</view>
+  <image class="tipper-img" src="../../../images/account-1.png" mode="aspectFit"></image>
+  <view class="tipper">2.点击右上角的“相册”，选择二维码图片</view>
+  <image class="tipper-img" src="../../../images/account-2.png" mode="aspectFit"></image>
+</view>

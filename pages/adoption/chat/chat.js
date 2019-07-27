@@ -5,6 +5,8 @@ var userId;
 var targetUserId;
 var socketTask;
 var socketStatus = 'AUTO'
+var scrollTimeout
+
 Page({
 
   /**
@@ -17,7 +19,9 @@ Page({
     userId: '',
     userInfo: '',
     targetUserInfo: '',
-    photoPrefix: app.globalData.staticResourceUrlPrefix
+    photoPrefix: app.globalData.staticResourceUrlPrefix,
+    scrollTopHeight: 200,
+    bottom:0
   },
 
   /**
@@ -35,12 +39,11 @@ Page({
     this.getUserInfo()
     this.setData({
       userId: userId,
-      targetUserId: targetUserId
+      targetUserId: targetUserId,
+      scrollTopHeight:200
     })
 
     this.getChannelMessage()
-
-
   },
   initSocket: function() {
     var that = this
@@ -69,11 +72,9 @@ Page({
       var mgds = that.data.msgs;
       mgds.push(msg);
       that.setData({
-        msgs: mgds
-      })
-      that.setData({
+        msgs: mgds,
         scrollTop: 1000 * mgds.length // 这里我们的单对话区域最高1000，取了最大值，应该有方法取到精确的
-      });
+      })
     })
   },
 
@@ -291,12 +292,39 @@ Page({
         }
 
         that.setData({
-          msgs: mgds,
-          scrollTop: 1000 * mgds.length
+          msgs: mgds
         })
+        scrollTimeout = setTimeout(function () {
+          that.setScrollTop(1000 * mgds.length)
+        }, 1000)
         wx.hideLoading()
       }
     })
+  },
+  focus: function(e) {
+    var that=this
+    console.log(e.detail.height)
+    this.setData({
+      bottom: e.detail.height,
+      scrollTopHeight: e.detail.height*2+200,
+    })
+    console.log('bottom:'+this.data.bottom)
+   scrollTimeout = setTimeout(function () {
+      that.setScrollTop(that.data.scrollTop + e.detail.height + 220)
+    }, 1000)
+  },
+  setScrollTop:function(top){
+    this.setData({
+      scrollTop: top
+    })
+  },
+
+  blur: function (e) {
+    this.setData({
+      bottom: 0,
+      scrollTopHeight: 200,
+    })
+    console.log('bottom:' + this.data.bottom)
   },
 
   /**

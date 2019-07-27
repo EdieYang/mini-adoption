@@ -25,7 +25,6 @@ Page({
   onLoad: function(options) {
     var that = this
     wx.hideShareMenu()
-    userId = app.globalData.userId
     applyId = options.applyId
     if (applyId == '' || typeof applyId == 'undefined' || applyId == null) {
       applyId = options.scene
@@ -34,8 +33,19 @@ Page({
         backIcon: ''
       })
     }
-    this.setData({
-      userId: userId
+    wx.showLoading({
+      title: '抓会儿蝴蝶~',
+    })
+    app.IfAccess().then(function (res) {
+      if (res) {
+        userId = app.globalData.userId;
+        if (userId && typeof (userId) != 'undefined' && userId != '') {
+          that.setData({
+            userId: userId
+          })
+          wx.hideLoading()
+        }
+      }
     })
   },
 
@@ -254,6 +264,19 @@ Page({
 
     return dayStr + "天" + hrStr + "小时" + minStr + "分钟" + secStr + "秒";
 
+  },
+  copyWx:function(){
+    var wxId = 'zmydwx83'
+    wx.setClipboardData({
+      data: wxId,
+      success(res) {
+        wx.showToast({
+          title: '复制成功',
+          icon: 'success',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**

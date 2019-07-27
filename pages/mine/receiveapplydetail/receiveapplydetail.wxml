@@ -31,6 +31,12 @@
     <block wx:if='{{applyInfo.applyStatus==2}}'>
       还剩{{leftTime}}可以签协议
     </block>
+    <block wx:if='{{applyInfo.applyStatus==4}}'>
+      <view class="success-cover">
+        <view class="success-item">加入爱心领养家庭群,请添加客服微信号!</view>
+        <button class="success-btn" bindtap="copyWx">一键复制客服微信号</button>
+      </view>
+    </block>
     <block wx:if='{{applyInfo.applyStatus==5}}'>
       取消原因：{{applyInfo.applyResp}}
     </block>

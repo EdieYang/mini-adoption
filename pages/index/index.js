@@ -40,7 +40,7 @@ Page({
     imgUrls: [],
     indicatorDots: true,
     indicatorColor: '#ffffff',
-    autoplay: false,
+    autoplay: true,
     interval: 5000,
     duration: 1000,
     leftHeight: 0,
@@ -58,6 +58,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.showLoading({
+      title: '抓会儿蝴蝶~',
+    })
     var that = this
     petType = 1
     this.getBannerList()
@@ -69,6 +72,7 @@ Page({
           that.setData({
             userId: userId
           })
+          wx.hideLoading()
           that.getPetAdoptList()
           that.getUnreadMessage()
         }

@@ -10,7 +10,7 @@
   color:#fff;
   background-color: #1c43b2;
   font-size: 26rpx;
-  z-index: 100;
+  z-index: 1000;
   border-radius: 0rpx
 }
 

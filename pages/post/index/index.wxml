@@ -17,7 +17,7 @@
                 <button formType="submit">
                   <form bindsubmit="addFormId" report-submit="true">
                     <button formType="submit">
-                      <view  class='item-btn-1' bindtap="adopt">发布</view>
+                      <view class='item-btn-1' bindtap="adopt">发布</view>
                     </button>
                   </form>
                 </button>
@@ -37,7 +37,7 @@
     <view class='item-header'>
       <text class='title-2'>送养攻略</text>
       <text>发布-审核-签协议</text>
-      
+
       <form bindsubmit="addFormId" report-submit="true">
         <button formType="submit">
           <form bindsubmit="addFormId" report-submit="true">
@@ -46,7 +46,7 @@
                 <button formType="submit">
                   <form bindsubmit="addFormId" report-submit="true">
                     <button formType="submit">
-                      <view  class='item-btn-2' bindtap="adoptTour">查看</view>
+                      <view class='item-btn-2' bindtap="adoptTour">查看</view>
                     </button>
                   </form>
                 </button>
@@ -61,41 +61,10 @@
 
   <view class='divider'>为了Ta的安全，请实际考察后再送养哦~</view>
 
-  <!-- 
-
-
-
-
-<view class='post-item'>
-  
-  <image></image>
-  <view class='item-header'  bindtap='lost'>
-    <text class='title-1'>宠物丢失</text>
-    <text>希望每个宝贝都能找回自己的家</text>
-    <view class='item-btn-1'>发布</view>
+  <view class="follow-btn" bindtap="followAccount">
+    <view>关注上海流浪宠物领养平台公众号</view>
+    <view>为流浪宠物打一次call！</view>
   </view>
-
-</view>
-
-
-
-<view class='post-item'>
-  
-  <image></image>
-  <view class='item-header' bindtap='find'>
-    <text class='title-2'>宠物寻主</text>
-    <text>帮助身边的流浪动物寻找主人</text>
-    <view class='item-btn-2'>填写信息</view>
-  </view>
-
-</view>
-
-
-
-
- -->
-
-
 </view>
 
 

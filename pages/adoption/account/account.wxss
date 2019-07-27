@@ -1,0 +1,52 @@
+page{
+  padding-bottom: 50rpx;
+}
+.content{
+  width:700rpx;
+  margin-left: 25rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top:20rpx;
+  padding-bottom: 20rpx;
+}
+
+.qrCode{
+  width:250rpx;
+  height:250rpx;
+}
+
+.header{
+  color:#000;
+  font-size: 32rpx;
+  height:100rpx;
+  line-height: 100rpx;
+}
+
+.body{
+  color:#999;
+  font-size: 28rpx;
+}
+
+.qr-btn{
+  width:320rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background-color: #1c43b2;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 100rpx;
+  text-align: center;
+  margin:40rpx auto;
+}
+
+.tipper{
+  color:#666;
+  font-size: 28rpx;
+  margin-top:30rpx;
+  margin-bottom: 30rpx;
+}
+
+.tipper-img{
+  width:400rpx;
+}

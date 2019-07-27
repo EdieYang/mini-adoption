@@ -180,7 +180,7 @@
       </view>
       <view class='info-label-pic'>身份证照片</view>
       <view class='info-item-pic'>
-        <image src="{{contractInfo.idCardBackUrl}}" class="info-pic" mode="aspectFill"></image>
+        <image src="{{contractInfo.idCardFrontUrl}}" class="info-pic" mode="aspectFill"></image>
         <image src="{{contractInfo.idCardBackUrl}}"  class="info-pic" mode="aspectFill"></image>
       </view>
       <view class='info-label'>领养人签名</view>

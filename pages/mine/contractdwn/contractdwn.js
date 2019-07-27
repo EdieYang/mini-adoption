@@ -28,7 +28,7 @@ Page({
     wx.getSystemInfo({
       success(res) {
         that.setData({
-          screenHeight: res.screenWidth * 6
+          screenHeight: res.screenWidth * 5.8
         })
         that.getPetAdoptAgreementDetial()
       }
@@ -122,7 +122,7 @@ Page({
         innerHeight = that.drawText('联系地址：' + contractInfo.applyAddress, 15, innerHeight, 50, screenWidth)
         innerHeight = that.drawText('签名：', 15, innerHeight, 50, screenWidth)
         wx.getImageInfo({
-          src: that.data.photoPrefix + contractInfo.adopterSign,
+          src: that.data.photoPrefix + contractInfo.applySign,
           success(res) {
             context.drawImage(res.path, 50, innerHeight - 20, 100, 100)
             innerHeight += 100

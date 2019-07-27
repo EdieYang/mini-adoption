@@ -179,6 +179,11 @@ Page({
   addFormId:function(e){
     this.genFormId(e.detail.formId)
   },
+  followAccount:function(){
+    wx.navigateTo({
+      url: '../../adoption/account/account',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

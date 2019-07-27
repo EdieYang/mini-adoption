@@ -129,7 +129,7 @@ page{
 }
 
 .ext-pic {
-  width: 300rpx;
+  width: 280rpx;
   height: 250rpx;
   border-radius: 10rpx;
   overflow: hidden;

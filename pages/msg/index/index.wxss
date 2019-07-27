@@ -37,7 +37,7 @@
 
   
 .msg-banner{
-  padding:5rpx 12rpx;
+  padding:5rpx 16rpx;
   background-color: #ec5358;
   font-size: 23rpx;
   color:#fff;

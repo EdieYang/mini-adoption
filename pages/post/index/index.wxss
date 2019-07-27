@@ -181,3 +181,21 @@ form button::after{
 .button-hover{
   background-color: #fff;
 }
+
+.follow-btn{
+  width:560rpx;
+  color:#ffff;
+  font-size: 28rpx;
+  background-color: #1c43b2;
+  box-shadow: 10rpx 16rpx 8rpx #eaeaea;
+  text-align: center;
+  margin:50rpx auto;
+  padding:20rpx 30rpx;
+  border:none;
+  letter-spacing: 1.5rpx;
+}
+
+.follow-btn::after{
+  border:none;
+  outline: none;
+}

@@ -12,6 +12,7 @@
     "pages/adoption/chat/chat",
     "pages/adoption/share/share",
     "pages/adoption/rule/rule",
+    "pages/adoption/account/account",
     "pages/lost/index/index",
     "pages/lost/detail/detail",
     "pages/msg/index/index",

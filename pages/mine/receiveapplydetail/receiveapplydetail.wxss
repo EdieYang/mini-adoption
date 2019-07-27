@@ -24,7 +24,7 @@ page {
 .body {
   width: 90%;
   margin-left: 5%;
-  color: #ffffff;
+  color: #fff;
   font-size: 28rpx;
 }
 
@@ -252,7 +252,7 @@ page {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border:1rpx solid #eaeaea;
+  border: 1rpx solid #eaeaea;
 }
 
 .footer-item {
@@ -261,7 +261,6 @@ page {
   font-size: 25rpx;
   color: #000;
 }
- 
 
 .adopt-btn {
   background-color: #1c43b2;
@@ -366,7 +365,6 @@ page {
   width: 544rpx;
 }
 
-
 /* 送养人信息样式 */
 
 .det-contact {
@@ -469,9 +467,8 @@ page {
   border-top: 1rpx solid #eaeaea;
 }
 
-
-.disabled{
-  color:#c6c7d2;
+.disabled {
+  color: #c6c7d2;
 }
 
 .header-line {
@@ -490,7 +487,6 @@ page {
   font-size: 26rpx;
   color: #000;
 }
-
 
 .btn-icon {
   width: 40rpx;
@@ -541,4 +537,33 @@ page {
 .warn {
   font-size: 28rpx;
   color: #fe395c;
+}
+
+.success-cover {
+  background-color: #000;
+  padding: 20rpx 10rpx;
+  border-radius: 20rpx;
+}
+
+.success-item {
+  font-size: 28rpx;
+  color: #fff;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.success-btn {
+  font-size: 26rpx;
+  color: #000;
+  border: none;
+  width: 320rpx;
+  border-radius: 100rpx;
+  background-color: #fff;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.success-btn::after {
+  border: none;
+  outline: none;
 }
