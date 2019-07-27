@@ -62,8 +62,8 @@
   <view class='divider'>为了Ta的安全，请实际考察后再送养哦~</view>
 
   <view class="follow-btn" bindtap="followAccount">
-    <view>关注上海流浪宠物领养平台公众号</view>
-    <view>为流浪宠物打一次call！</view>
+    <view class='follow-item'>关注上海流浪宠物领养平台公众号</view>
+    <view class='follow-item'>为流浪宠物打一次call！</view>
   </view>
 </view>
 

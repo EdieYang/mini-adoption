@@ -199,3 +199,7 @@ form button::after{
   border:none;
   outline: none;
 }
+
+.follow-item{
+  color:#fff;
+}
