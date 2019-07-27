@@ -82,10 +82,10 @@
       </view>
     </view>
 
-    <view class='check-ok' bindtap='obeyRules'>
-      <image class='check-ok-icon' src='{{!obeyRules?"../../../images/check-ok-icon.png":"../../../images/checked-ok-icon.png"}}'></image>
+    <view class='check-ok'>
+      <image class='check-ok-icon' src='{{!obeyRules?"../../../images/check-ok-icon.png":"../../../images/checked-ok-icon.png"}}'  bindtap='obeyRules'></image>
       <view class='ok-item'>我已阅读，并同意遵守
-        <text class='rule-item'>《邻宠领养平台送养规则》</text>
+        <text class='rule-item' bindtap="adoptRules">《邻宠领养平台送养规则》</text>
       </view>
     </view>
     <button class='publish' form-type="submit">提交申请</button>

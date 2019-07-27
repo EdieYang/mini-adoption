@@ -11,6 +11,7 @@
     "pages/adoption/detail/detail",
     "pages/adoption/chat/chat",
     "pages/adoption/share/share",
+    "pages/adoption/rule/rule",
     "pages/lost/index/index",
     "pages/lost/detail/detail",
     "pages/msg/index/index",

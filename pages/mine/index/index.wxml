@@ -99,4 +99,31 @@
 
   <view style='height:1rpx; background-color:#eaeaea'></view>
 
+
+  <view class='oper-item' bindtap='adoptRules'>
+    <view class='oper-left'>
+      <image class='oper-icon' src='../../../images/oper-8.png'></image>
+      <text>平台领养规则</text>
+    </view>
+    <image class='oper-in' src='../../../images/arrow-r.png'></image>
+  </view>
+  <view class='oper-item' >
+    <view class='oper-left'>
+      <image class='oper-icon' src='../../../images/oper-9.png'></image>
+      <button open-type='share' class='oper-btn'>推荐邻宠给朋友</button>
+    </view>
+    <image class='oper-in' src='../../../images/arrow-r.png'></image>
+  </view>
+
+  <view class="footer-cover">
+    <view class="footer-item">欢迎添加客服微信：
+      <text class="warning">zmydwx83</text>
+    </view>
+    <view class="footer-item">工作时间：欢迎随时来打扰，有问必答</view>
+  </view>
+
+  <view class="footer-cover">
+    <text class="footer-keyword">——领养从邻宠开始——</text>
+  </view>
+
 </view>

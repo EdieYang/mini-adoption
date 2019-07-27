@@ -101,6 +101,11 @@ Page({
       obeyRules: !obey
     })
   },
+  adoptRules: function () {
+    wx.navigateTo({
+      url: '../../adoption/rule/rule',
+    })
+  },
   submitApply: function(e) {
     var formId = e.detail.formId
     var that = this

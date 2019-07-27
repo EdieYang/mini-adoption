@@ -1,0 +1,28 @@
+.content {
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  width: 700rpx;
+  margin-left: 25rpx;
+}
+
+.top {
+  color: #2d2d2d;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 50rpx;
+  margin-bottom: 30rpx;
+}
+
+.content-item {
+  font-size: 28rpx;
+  color: #2d2d2d;
+  line-height: 50rpx;
+}
+
+.header {
+  font-size: 34rpx;
+  font-weight: bold;
+  line-height: 50rpx;
+  margin-top:30rpx;
+  margin-bottom: 30rpx;
+}

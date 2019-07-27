@@ -1,0 +1,47 @@
+<nav-bar title-text="领养平台规则" backIcon='../../images/back-pre-black.png'></nav-bar>
+
+<view class="content" style='margin-top:{{marginNav}}px'>
+
+  <view class="top">
+    为使用邻宠领养平台（以下简称本平台）领养动物，你应当阅读并遵守《邻宠平台使用规则》（以下简称“本协议”）。请您务必仔细阅读、充分理解各条款内容，特别是免除或限制责任的相应条款。
+  </view>
+
+  <view class="content-item">除非你已阅读并接受本协议所有条款，否则你无权使用本平台领养动物。你对本服务的登录、查看、填写申请信息等行为即视为你已阅读并同意本协议的约束。</view>
+  <view class="header">一、协议的范围</view>
+  <view class="content-item">1.1 本平台是有邻宠个人开发者开发，其目的在于动物的日常线上领养。任何人在遵守本协议的情况下，都可以使用本平台领养动物。本协议是你与邻宠领养之间关于你使用本平台所订立的协议。
+    <text style="font-weight:bold">如有任何问题请联系客服：zmydwx83</text>。</view>
+  <view class="content-item">在本平台使用领养相关功能，并不会以任何名义向用户索要费用，无偿领养拒绝欺骗与不负责任的领养人。平台并不会以领养名义向用户索要费用。请勿擅自向他人转账，谨防诈骗。本平台领养相关内容仅做信息展示功能，不涉及资金交易。请务必注意您的资金安全。</view>
+
+  <view class="header">二、基本权利及义务</view>
+  <view class="content-item">2.1 你同意承诺不会利用本服务从事任何非法的或违反本协议目的或者侵犯其他第三方权益的行为，否则邻宠有权立即单方面终止提供本服务，并不承担热河责任；如果因你的行为给邻宠造成任何损失的，你应承担全部赔偿责任。</view>
+  <view class="content-item">2.2 你授权邻宠在你使用本服务期间或邻宠终止提供本服务后，有权保留你在使用本服务期间所形成的相关信息数据，同时该授权不可撤销。</view>
+  <view class="content-item">2.3 邻宠对你的注册额信息负有保密义务，但在必要时邻宠有权将相关信息提供给监管机关等。</view>
+  <view class="content-item">2.4 在领养动物时，你所填写的地址信息及联系方式等信息，代表你自愿将这些信息公布，被申请者本人、送养者及平台工作人员将看到你填写的具体内容。</view>
+
+
+  <view class="header">三、用户行为规范</view>
+  <view class="content-item">3.1 本协议所述信息内容是指用户使用本服务过程中所填写的个人基本信息如地址信息、联系方式等内容，你须确保自己填写的信息均为真实有效。</view>
+  <view class="content-item">3.2 邻宠一直致力于倡导，关爱流浪动物、文明养宠、科学喂养等理念。请您在申请领养钱仔细阅读以下条款：</view>
+  <view class="content-item">1）领养钱，您需征得家庭成员同意（若租、借住房屋需征得房主或室友同意）充分考虑妊娠、移居、工作变动等因素对饲养伴侣动物的影响，有充足的准备在这些情况下不得放弃伴侣动物饲养。</view>
+  <view class="content-item">2）领养后，请对适龄的伴侣动物进行绝育，以免繁殖过剩和预防疾病。</view>
+  <view class="content-item">3）领养后，伴侣动物将成为你的家人，请不要轻易做出买卖、遗弃和虐待等行为。</view>
+  <view class="content-item">4）领养后，请科学喂养，文明养宠不得影响他人和邻里之间的正常生活。</view>
+
+  <view class="header">四、法律责任</view>
+  <view class="content-item">4.1 如果邻宠发现或收到他人投诉用户违反本协议约定的，邻宠有权不经通知随时对相关内容进行删除、屏蔽、限制或禁止违规用户使用部分或全部功能。</view>
+  <view class="content-item">4.2 你理解并同意，当出现以下行为时，邻宠有权合理判断对违反有关法律法规或本协议规定的行为进行处罚，对违法违规的任何人采取适当的法律信用，并依据法律法规保存有关信息想有关部门报告等，用户应肚子承担由此而产生的一切法律责任。</view>
+  <view class="content-item">1）违反宪法确定的基本原则的；</view>
+  <view class="content-item">2）危害国家安全，泄露国家机密，颠覆国家政权，破坏国家统一的；</view>
+  <view class="content-item">3）损害国家荣誉和利益的；</view>
+  <view class="content-item">4）煽动民族仇恨、民族歧视，破坏民族团结的；</view>
+  <view class="content-item">5）破坏国家宗教政策，宣扬邪教和封建迷信的；</view>
+  <view class="content-item">6）散布谣言，扰乱社会秩序，破坏社会稳定的；</view>
+  <view class="content-item">7）散布淫秽、色情、赌博、包里、恐怖或者教唆犯罪的；</view>
+  <view class="content-item">8）侮辱或诽谤他人，侵害他人合法权益的；</view>
+  <view class="content-item">9）煽动非法集会、结社、游行、示威、聚众扰乱社会秩序的；</view>
+  <view class="content-item">10）以非法民间组织名义活动的；</view>
+  <view class="content-item">11）含有法律、行政法规禁止的其他内容的。</view>
+  <view class="content-item">4.3 你理解并同意，因你违反本协议或相关服务条款的规定，导致或产生第三方主张的任何索赔、要求或损失，你应当独立承担责任；包括邻宠因此遭受损失的，你也应当一并赔偿。</view>
+  <view class="top" style="margin-top:50rpx;">最后的最后，感谢您使用邻宠上海宠物领养平台作为迎接新生命的渠道，您的支持和爱心无疑温暖了为这个平台默默付出的所有人，更温暖了所有无家可归的毛孩子，谢谢您，我们一起加油！</view>
+
+</view>

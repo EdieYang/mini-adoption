@@ -242,6 +242,11 @@ Page({
       return true
     }
   },
+  adoptRules: function () {
+    wx.navigateTo({
+      url: '../../adoption/rule/rule',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -297,5 +302,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+    return {
+      title: '上海宠物领养平台-邻宠',
+      imageUrl: '',
+      path: '/pages/adoption/index/index'
+    }
   }
 })
