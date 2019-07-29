@@ -23,7 +23,7 @@
   </view>
   <view class='tabview' bindtap='filter'>
     <view class='tabTxt'>筛选</view>
-    <view class='tintPoint' style='background-color:#fe859b"'></view>
+    <view class='tintPoint' style='background-color:#fe859b"' wx:if='{{filtered}}'></view>
   </view>
 </view>
 
@@ -41,7 +41,7 @@
   </view>
   <view class='tabview' bindtap='filter'>
     <view class='tabTxt'>筛选</view>
-    <view class='tintPoint' style='background-color:#fe859b"'></view>
+    <view class='tintPoint' style='background-color:#fe859b"' wx:if='{{filtered}}'></view>
   </view>
 </view>
 
@@ -210,4 +210,4 @@
   </view>
 </block>
 
-<view class='footer-cover' wx:if='{{bottomLast}}'>数据加载完毕</view>
+<view class='footer-cover' wx:if='{{bottomLast}}'>没有更多数据罗~</view>

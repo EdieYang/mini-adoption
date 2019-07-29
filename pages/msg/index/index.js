@@ -89,7 +89,7 @@ Page({
       success: function(res) {
         var messageList = res.data.data
         var old = that.data.chatlist
-        if (old.length == 0) {
+        if (old.length == 0 && messageList != null) {
           for (var i = 0; i < messageList.length; i++) {
             //缓存消息识别是否为最新消息
             var msgLatest = wx.getStorageSync(messageList[i].userId)
@@ -104,14 +104,17 @@ Page({
           })
           return
         }
-        for (var j = 0; j < messageList.length; j++) {
-          var msgLatest = wx.getStorageSync(messageList[j].userId)
-          if (msgLatest == 'SHOW_CHAT_MSG') {
-            messageList[j].fresh = true
-          } else {
-            messageList[j].fresh = false
+        if (messageList != null) {
+          for (var j = 0; j < messageList.length; j++) {
+            var msgLatest = wx.getStorageSync(messageList[j].userId)
+            if (msgLatest == 'SHOW_CHAT_MSG') {
+              messageList[j].fresh = true
+            } else {
+              messageList[j].fresh = false
+            }
           }
         }
+
         that.setData({
           chatlist: messageList,
         })
@@ -156,6 +159,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    
+
   }
 })

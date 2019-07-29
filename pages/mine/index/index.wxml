@@ -119,6 +119,7 @@
     <view class="footer-item">欢迎添加客服微信：
       <text class="warning">zmydwx83</text>
     </view>
+    <button class="footer-item-btn" bindtap='copyWx'>一键复制客服微信</button>
     <view class="footer-item">工作时间：每日 9:00-23:00</view>
   </view>
 

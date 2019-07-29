@@ -142,6 +142,18 @@ Page({
       }
     })
   },
+  copyWx: function(e) {
+    wx.setClipboardData({
+      data: 'zmydwx83',
+      success(res) {
+        wx.showToast({
+          title: '复制成功',
+          icon: 'success',
+          duration: 2000
+        })
+      }
+    })
+  },
   home: function() {
     if (!this.authorizedFilter()) {
       return

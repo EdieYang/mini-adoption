@@ -220,3 +220,16 @@ page {
   border: none;
   outline: none;
 }
+
+
+.footer-item-btn{
+  width:280rpx;
+  color: #999;
+  font-size: 26rpx;
+  margin-top: 20rpx;
+  height:55rpx;
+  line-height: 55rpx;
+  border-radius: 100rpx;
+  border:1rpx solid #999;
+  background-color: #fff;
+}

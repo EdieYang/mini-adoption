@@ -39,7 +39,7 @@
   <form bindsubmit="addFormId" report-submit="true">
     <button formType="submit">
       <view class="follow-btn" bindtap="followAccount">
-        <view class='follow-item'>关注上海流浪宠物领养平台公众号</view>
+        <view class='follow-item'>点我！关注上海流浪宠物领养平台公众号</view>
         <view class='follow-item'>为流浪宠物打一次call！</view>
       </view>
     </button>

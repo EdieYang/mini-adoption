@@ -191,6 +191,7 @@ form button::after{
   text-align: center;
   margin:50rpx auto;
   padding:20rpx 30rpx;
+  border-radius: 30rpx;
   border:none;
   letter-spacing: 1.5rpx;
 }

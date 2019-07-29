@@ -24,6 +24,7 @@ Page({
   data: {
     marginNav: app.globalData.marginNav,
     tabFix: false,
+    filtered:false,
     collectMini: true,
     chosenId: 2,
     userId: '',
@@ -336,6 +337,7 @@ Page({
     sex = 1
     healthStatus = 1
     this.setData({
+      filtered:false,
       ageType: age,
       sexType: sex,
       healthStatus: healthStatus
@@ -343,20 +345,24 @@ Page({
     this.genFormId(e.detail.formId)
   },
   submit: function(e) {
+    var filtered=false
     var formId = e.detail.formId
     if (age == 1) {
       this.setData({
         ageArr: ''
       })
     } else if (age == 2) {
+      filtered=true
       this.setData({
         ageArr: '0-3个月,4-6个月,7-12个月'
       })
     } else if (age == 3) {
+      filtered = true
       this.setData({
         ageArr: '1岁,2岁,3岁,4岁,5岁,6岁,7岁,8岁'
       })
     } else {
+      filtered = true
       this.setData({
         ageArr: '9岁，10岁，11岁，12岁，13岁，14岁，15岁，16岁，17岁，18岁，19岁，20岁'
       })
@@ -367,10 +373,12 @@ Page({
         sexArr: ''
       })
     } else if (sex == 2) {
+      filtered = true
       this.setData({
         sexArr: '2'
       })
     } else {
+      filtered = true
       this.setData({
         sexArr: '3'
       })
@@ -383,18 +391,21 @@ Page({
         parasite: ''
       })
     } else if (healthStatus == 2) {
+      filtered = true
       this.setData({
         sterilization: '1',
         vaccine: '',
         parasite: ''
       })
     } else if (healthStatus == 3) {
+      filtered = true
       this.setData({
         sterilization: '',
         vaccine: '1',
         parasite: ''
       })
     } else {
+      filtered = true
       this.setData({
         sterilization: '',
         vaccine: '',
@@ -409,6 +420,7 @@ Page({
       petCols: [],
       col1: [],
       col2: [],
+      filtered: filtered
     })
     col1H = 0
     col2H = 0
