@@ -123,11 +123,13 @@ Page({
     })
   },
   copyWx: function(e) {
+    var formId = e.detail.formId
+    this.genFormId(formId)
     app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
-          var wxId = e.currentTarget.dataset.wx
+          var wxId = e.detail.value.wxId
           if (wxId == '') {
             return
           }
@@ -151,11 +153,13 @@ Page({
 
   },
   call: function(e) {
+    var formId = e.detail.formId
+    this.genFormId(formId)
     app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
-          var phone = e.currentTarget.dataset.phone
+          var phone = e.detail.value.phone
           if (phone == '') {
             return
           }
@@ -172,12 +176,16 @@ Page({
     })
   },
   home: function(e) {
-    var targetUserId = e.currentTarget.dataset.userid
+    var targetUserId = e.detail.value.adopterUserId
+    var formId = e.detail.formId
+    this.genFormId(formId)
     wx.navigateTo({
       url: '../../mine/home/home?userId=' + targetUserId,
     })
   },
-  report: function() {
+  report: function(e) {
+    var formId = e.detail.formId
+    this.genFormId(formId)
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
@@ -222,7 +230,9 @@ Page({
       }
     })
   },
-  modify: function() {
+  modify: function(e) {
+    var formId = e.detail.formId
+    this.genFormId(formId)
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
@@ -239,7 +249,9 @@ Page({
       }
     })
   },
-  apply: function() {
+  apply: function(e) {
+    var formId = e.detail.formId
+    this.genFormId(formId)
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
@@ -257,12 +269,15 @@ Page({
     })
   },
   collect: function(e) {
+    var formId = e.detail.formId
+    this.genFormId(formId)
+
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
-          var id = e.currentTarget.dataset.collect
+          var id = e.detail.value.collect
           if (id == 1) {
             wx.request({
               url: app.globalData.requestUrlCms + '/adopt/pets/collect', // 仅为示例，并非真实的接口地址
@@ -331,12 +346,15 @@ Page({
     })
   },
   chat: function(e) {
+    var formId = e.detail.formId
+    this.genFormId(formId)
+
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
-          var userId = e.currentTarget.dataset.userid
+          var userId = e.detail.value.adopterUserId
           wx.navigateTo({
             url: '../../adoption/chat/chat?userId=' + userId,
           })
@@ -511,8 +529,9 @@ Page({
     }
   },
   online: function(e) {
+    var formId = e.detail.formId
+    this.genFormId(formId)
     var that = this
-    var petId = e.currentTarget.dataset.petid
     var dataReq = {
       petId: petId,
       adoptStatus: '3',

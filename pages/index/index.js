@@ -24,6 +24,7 @@ Page({
   data: {
     marginNav: app.globalData.marginNav,
     tabFix: false,
+    collectMini: true,
     chosenId: 2,
     userId: '',
     photoPrefix: app.globalData.staticResourceUrlPrefix,
@@ -63,8 +64,9 @@ Page({
     })
     var that = this
     petType = 1
+    pageNum = 1
+    bottomLast = false
     this.getBannerList()
-
     app.IfAccess().then(function(res) {
       if (res) {
         userId = app.globalData.userId;
@@ -77,6 +79,12 @@ Page({
           that.getUnreadMessage()
         }
       }
+    })
+  },
+  closeCollectTop: function() {
+    wx.setStorageSync('collectMini', true)
+    this.setData({
+      collectMini: false
     })
   },
   onImageLoad: function(e) {
@@ -482,6 +490,11 @@ Page({
   onPageScroll: function(res) {
     var that = this
     console.log(res);
+    if (res.scrollTop > 40) {
+      this.setData({
+        collectMini: false
+      })
+    }
     if (res.scrollTop >= 185) {
       this.setData({
         tabFix: true
@@ -514,7 +527,7 @@ Page({
     } else {
       that.getPetAdoptList()
     }
-
+    wx.stopPullDownRefresh()
   },
 
 

@@ -28,6 +28,7 @@ Page({
     wx.hideShareMenu()
     userId = app.globalData.userId
     adoptlistArr = []
+    adoptStatus = '0,1,2,3'
   },
 
   chooseTab: function(e) {

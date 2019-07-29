@@ -190,6 +190,7 @@ page{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  flex-wrap:wrap;
 }
 
 .ext-tag {
@@ -197,11 +198,11 @@ page{
   border: none;
   border-radius: 25rpx;
   font-size: 23rpx;
-  padding: 5rpx 20rpx;
+  padding: 5rpx 18rpx;
   color: #9a9caf;
   height: 40rpx;
   line-height: 40rpx;
-  margin-right: 10rpx;
+  margin-right: 8rpx;
 }
 
 .ext-location {

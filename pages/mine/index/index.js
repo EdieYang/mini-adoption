@@ -304,8 +304,8 @@ Page({
   onShareAppMessage: function() {
     return {
       title: '上海宠物领养平台-邻宠',
-      imageUrl: '',
-      path: '/pages/adoption/index/index'
+      imageUrl: app.globalData.staticResourceUrlPrefix+'cms/logo/share-img.png',
+      path: '/pages/index/index'
     }
   }
 })

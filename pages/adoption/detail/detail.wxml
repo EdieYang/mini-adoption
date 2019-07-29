@@ -49,7 +49,7 @@
     <view class='info-item' wx:if='{{petInfo.petAge!="不详"}}'>{{petInfo.petAge}}</view>
   </view>
   <view class='det-tags'>
-    <view class='tag' wx:for='{{petInfo.petCharacteristic}}'  wx:key='{{index}}'>{{item.name}}</view>
+    <view class='tag' wx:for='{{petInfo.petCharacteristic}}' wx:key='{{index}}'>{{item.name}}</view>
   </view>
   <view class='det-spec'>
     <image class='det-icon' src='../../../images/det-spec.png'></image>
@@ -155,12 +155,14 @@
     <view class='con-title'>
       送养人信息
     </view>
-    <view class='con-tip' bindtap='report'>
-      <image src='../../../images/tip.png' class='tip-icon'></image>
-      <text>举报</text>
-    </view>
+    <form report-submit="true" bindsubmit="report">
+      <button class='con-tip' form-type='submit'>
+        <image src='../../../images/tip.png' class='tip-icon'></image>
+        <text>举报</text>
+      </button>
+    </form>
   </view>
-  <view class='det-contact-item' bindtap='home' data-userid='{{adoptUserInfo.userId}}'>
+  <view class='det-contact-item'>
     <view class='det-contact-left'>
       <image class='contact-img' src='{{adoptUserInfo.portrait}}'></image>
       <view class='contact-info'>
@@ -182,23 +184,37 @@
         </view>
       </view>
     </view>
-    <image class='con-entrance' src='../../../images/entrance.png'></image>
+    <form report-submit="true" bindsubmit="home">
+      <input value='{{adoptUserInfo.userId}}' name='adopterUserId' style='display:none'></input>
+      <button form-type="submit" class='formid-cover'>
+        <image class='con-entrance' src='../../../images/entrance.png'></image>
+      </button>
+    </form>
   </view>
 
   <view class='contact-btns' wx:if='{{adoptUserInfo.userId!=userId}}'>
     <view class='header-line'>
-      <view class='line-btn' data-userid='{{adoptUserInfo.userId}}' bindtap='chat'>
-        <image class='btn-icon' src='../../../images/pmsg.png' style='width:30rpx;height:30rpx;'></image>
-        <text>发私信</text>
-      </view>
-      <view class='line-btn' data-wx='{{petInfo.wxId}}' bindtap='copyWx'>
-        <image class='btn-icon' src='../../../images/wechat.png' style='width:45rpx;height:45rpx;'></image>
-        <text class='{{petInfo.wxId?"":"disabled"}}'>复制微信号</text>
-      </view>
-      <view class='line-btn' data-phone='{{petInfo.mobilePhone}}' bindtap='call'>
-        <image class='btn-icon' src='../../../images/tel.png'></image>
-        <text class='{{petInfo.mobilePhone?"":"disabled"}}'>拨打电话</text>
-      </view>
+      <form report-submit="true" bindsubmit="chat">
+        <button class='line-btn' form-type='submit'>
+          <input value='{{adoptUserInfo.userId}}' name='adopterUserId' style='display:none'></input>
+          <image class='btn-icon' src='../../../images/pmsg.png' style='width:30rpx;height:30rpx;'></image>
+          <text>发私信</text>
+        </button>
+      </form>
+      <form report-submit="true" bindsubmit="copyWx">
+        <button class='line-btn' form-type='submit'>
+          <input value='{{petInfo.wxId}}' name='wxId' style='display:none'></input>
+          <image class='btn-icon' src='../../../images/wechat.png' style='width:45rpx;height:45rpx;'></image>
+          <text class='{{petInfo.wxId?"":"disabled"}}'>复制微信号</text>
+        </button>
+      </form>
+      <form report-submit="true" bindsubmit="call">
+        <button class='line-btn' form-type='submit'>
+          <input value='{{petInfo.mobilePhone}}' name='phone' style='display:none'></input>
+          <image class='btn-icon' src='../../../images/tel.png'></image>
+          <text class='{{petInfo.mobilePhone?"":"disabled"}}'>拨打电话</text>
+        </button>
+      </form>
     </view>
 
     <view class='body-line'>
@@ -295,19 +311,30 @@
 
 
 <view class='footer' wx:if='{{petInfo.adoptStatus==3 && adoptUserInfo.userId!=userId}}'>
-  <view class='footer-item' bindtap='collect' wx:if='{{!petInfo.collected}}' data-collect='1'>
-    <image class='footer-icon' src='../../../images/collect_.png'></image>
-    <text>收藏</text>
-  </view>
-  <view class='footer-item' bindtap='collect' wx:if='{{petInfo.collected}}' data-collect='2'>
-    <image class='footer-icon' src='../../../images/collected.png'></image>
-    <text>已收藏</text>
-  </view>
-  <view class='footer-item' bindtap='chat' data-userid='{{adoptUserInfo.userId}}'>
-    <image class='footer-icon' src='../../../images/pmsg_.png'></image>
-    <text>私信</text>
-  </view>
-  <view class='adopt-btn' bindtap='apply'>申请领养</view>
+  <form report-submit="true" bindsubmit="collect" wx:if='{{!petInfo.collected}}'>
+    <button class='footer-item' form-type='submit'>
+      <input name='collect' value='1' style='display:none'></input>
+      <image class='footer-icon' src='../../../images/collect_.png'></image>
+      <text>收藏</text>
+    </button>
+  </form>
+  <form report-submit="true" bindsubmit="collect" wx:if='{{petInfo.collected}}'>
+    <button class='footer-item' form-type='submit'>
+      <input name='collect' value='2' style='display:none'></input>
+      <image class='footer-icon' src='../../../images/collected.png'></image>
+      <text>已收藏</text>
+    </button>
+  </form>
+  <form report-submit="true" bindsubmit="chat">
+    <button class='footer-item' form-type='submit'>
+      <input name='adopterUserId' value='{{adoptUserInfo.userId}}' style='display:none'></input>
+      <image class='footer-icon' src='../../../images/pmsg_.png'></image>
+      <text>私信</text>
+    </button>
+  </form>
+  <form report-submit="true" bindsubmit="apply">
+    <button class='adopt-btn' form-type='submit'>申请领养</button>
+  </form>
 </view>
 
 <block wx:if='{{(petInfo.adoptStatus==0|| petInfo.adoptStatus==1) && adoptUserInfo.userId==userId}}'>
@@ -326,16 +353,26 @@
     </view>
   </block>
   <view class='footer'>
-    <view class='adopt-btn' bindtap='modify'>编辑</view>
+    <form report-submit="true" bindsubmit="modify">
+      <button class='adopt-btn' form-type='submit'>编辑</button>
+    </form>
   </view>
 </block>
 
 
 <block wx:if='{{(petInfo.adoptStatus==2 || petInfo.adoptStatus==3) && adoptUserInfo.userId==userId}}'>
   <view class='footer' style='border-top:1rpx solid #eaeaea'>
-    <view wx:if='{{petInfo.adoptStatus==2}}' class='adopt-btn' bindtap='online' data-petid='{{petInfo.petId}}'>上线</view>
-    <view wx:if='{{petInfo.adoptStatus==3}}' class='adopt-btn' bindtap='offline' data-petid='{{petInfo.petId}}'>下线</view>
-    <view class='adopt-btn' bindtap='modify'>编辑</view>
+    <form report-submit="true" bindsubmit="online">
+      <button wx:if='{{petInfo.adoptStatus==2}}' class='adopt-btn' form-type='submit'>上线</button>
+    </form>
+
+
+    <form report-submit="true" bindsubmit="offline">
+      <button wx:if='{{petInfo.adoptStatus==3}}' class='adopt-btn' form-type='submit'>下线</button>
+    </form>
+    <form report-submit="true" bindsubmit="modify">
+      <button class='adopt-btn' form-type='submit'>编辑</button>
+    </form>
   </view>
 </block>
 
