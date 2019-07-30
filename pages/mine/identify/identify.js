@@ -187,6 +187,11 @@ Page({
       }
     })
   },
+  example:function(){
+    wx.navigateTo({
+      url: '../identifyexample/identifyexample',
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -5,7 +5,7 @@
     <view class='identify-cover' style='margin-top:{{marginNav+30}}px'>
       <view class='header'>
         <view class='title'>实名认证材料</view>
-        <view class='example'>查看示例</view>
+        <view class='example' bindtap="example">查看示例</view>
       </view>
 
       <view class='tip'>认证材料仅用于平台审核及送养协议备案</view>

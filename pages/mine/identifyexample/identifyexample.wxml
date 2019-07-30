@@ -1,0 +1,3 @@
+<nav-bar title-text="示例" backIcon='../../images/back-pre-black.png' ></nav-bar>
+
+<image src="{{photoPrefix}}cms/logo/example.png" style="margin-top:{{marginNav}}px;width:750rpx;height:925rpx"></image>

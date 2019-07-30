@@ -158,13 +158,16 @@ Page({
     userId = app.globalData.userId
     loadState = options.loadState
     petId = options.petId
+    ImageUrls=[]
     //修改
     if (loadState == 1) {
       wx.showLoading({
         title: '正在加载',
       })
       ImageUrls = []
-      this.data.ImageUrls = []
+      that.setData({
+        ImageUrls : []
+      })
       this.getAdoptionDetail()
     }
   },

@@ -70,7 +70,9 @@ Page({
         context.fillText('Hi，我叫 ' + petInfo.petName, 70, 260)
         context.fillText(that.genInfo2(), 70, 288)
         context.fillText(petInfo.address, 70, 320)
-        that.drawText(context, petInfo.story, 45, 350, 280)
+        var story = petInfo.story
+        story = story.replace(/\s*/g, "");
+        that.drawText(context, story, 45, 350, 280)
         context.fillText('长按识别右侧二维码', 45, 520)
         context.setFillStyle('#fc6653')
         context.fillRect(45, 538, 150, 32)

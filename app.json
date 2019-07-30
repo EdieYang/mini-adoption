@@ -21,6 +21,7 @@
     "pages/mine/home/home",
     "pages/mine/modify/modify",
     "pages/mine/identify/identify",
+    "pages/mine/identifyexample/identifyexample",
     "pages/mine/collect/collect",
     "pages/mine/adopt/adopt",
     "pages/mine/sendapply/sendapply",
