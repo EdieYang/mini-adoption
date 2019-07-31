@@ -4,7 +4,7 @@ const app = getApp()
 var userId;
 var pageNum = 1
 var pageSize = 10
-var petType = 1
+var petType = 2
 
 var age = 1;
 var sex = 1
@@ -12,7 +12,7 @@ var healthStatus = 1
 var petInfoListArr = []
 let col1H = 0
 let col2H = 0
-let chosenId = 2
+let chosenId = 3
 let bottomLast = false
 var changingStatus = false
 var loadingCount = 10
@@ -26,7 +26,7 @@ Page({
     tabFix: false,
     filtered:false,
     collectMini: true,
-    chosenId: 2,
+    chosenId: 3,
     userId: '',
     photoPrefix: app.globalData.staticResourceUrlPrefix,
     showFilter: false,
@@ -64,7 +64,7 @@ Page({
       title: '抓会儿蝴蝶~',
     })
     var that = this
-    petType = 1
+    petType = 2
     pageNum = 1
     bottomLast = false
     this.getBannerList()

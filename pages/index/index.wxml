@@ -15,11 +15,11 @@
   <view class='tabview' data-id='1' bindtap='chooseTab'>
     <view class='tabTxt' style='{{chosenId==1?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>关注</view>
   </view>
-  <view class='tabview' data-id='2' bindtap='chooseTab'>
-    <view class='tabTxt' style='{{chosenId==2?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>狗狗</view>
-  </view>
   <view class='tabview' data-id='3' bindtap='chooseTab'>
     <view class='tabTxt' style='{{chosenId==3?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>猫咪</view>
+  </view>
+  <view class='tabview' data-id='2' bindtap='chooseTab'>
+    <view class='tabTxt' style='{{chosenId==2?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>狗狗</view>
   </view>
   <view class='tabview' bindtap='filter'>
     <view class='tabTxt'>筛选</view>
@@ -33,11 +33,11 @@
   <view class='tabview' data-id='1' bindtap='chooseTab'>
     <view class='tabTxt' style='{{chosenId==1?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>关注</view>
   </view>
-  <view class='tabview' data-id='2' bindtap='chooseTab'>
-    <view class='tabTxt' style='{{chosenId==2?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>狗狗</view>
-  </view>
   <view class='tabview' data-id='3' bindtap='chooseTab'>
     <view class='tabTxt' style='{{chosenId==3?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>猫咪</view>
+  </view>
+  <view class='tabview' data-id='2' bindtap='chooseTab'>
+    <view class='tabTxt' style='{{chosenId==2?"color:#fe395c;font-weight:800;font-size:36rpx;border-bottom:4rpx solid #fe395c":""}}'>狗狗</view>
   </view>
   <view class='tabview' bindtap='filter'>
     <view class='tabTxt'>筛选</view>
