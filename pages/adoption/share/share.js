@@ -5,6 +5,8 @@ var userId
 var petId
 var context
 var destHeight
+var destWidth
+
 
 Page({
 
@@ -60,24 +62,21 @@ Page({
     var that = this
     var petInfo = this.data.petInfo
     context = wx.createCanvasContext("post-adoption", this)
-    context.drawImage('../../../images/post-adoption.png', 15, 0, that.data.screenWidth - 30, 613)
+    context.drawImage('../../../images/post-adoption.png', 15, 0, that.data.screenWidth - 30, 620)
     wx.getImageInfo({
       src: that.data.photoPrefix + petInfo.mediaList[0].mediaPath,
       success(res) {
-        var petPhoto = res.path;
-        context.drawImage(petPhoto, 45, 60, 112, destHeight)
-        context.setFontSize(16)
-        context.fillText('Hi，我叫 ' + petInfo.petName, 70, 260)
-        context.fillText(that.genInfo2(), 70, 288)
-        context.fillText(petInfo.address, 70, 320)
+        var petPhoto = res.path
+        context.drawImage(petPhoto, (that.data.screenWidth - destWidth) / 2, 110, destWidth, destHeight)
+        context.setFontSize(20)
+        var header = 'Hi，我叫 ' + petInfo.petName
+        var headerWidth = context.measureText(header).width
+        context.fillText(header, (that.data.screenWidth - headerWidth) / 2, 395)
         var story = petInfo.story
         story = story.replace(/\s*/g, "");
-        that.drawText(context, story, 45, 350, 280)
-        context.fillText('长按识别右侧二维码', 45, 520)
-        context.setFillStyle('#fc6653')
-        context.fillRect(45, 538, 150, 32)
-        context.setFillStyle("#ffffff")
-        context.fillText('查看待领养宠物详情', 48, 560)
+        context.setFontSize(15)
+        context.setFillStyle("#999999")
+        that.drawText(context, story, 45, 420, 280)
         wx.request({
           url: app.globalData.requestUrlWechat + '/miniSystemApi/generateWxACode',
           dataType: "json",
@@ -92,7 +91,7 @@ Page({
               src: wxAcodeUrl,
               success(res) {
                 wxAcodeUrl = res.path;
-                context.drawImage(wxAcodeUrl, 220, 490, 90, 90)
+                context.drawImage(wxAcodeUrl, 225, 490, 90, 90)
                 context.draw()
                 wx.hideLoading()
               }
@@ -108,11 +107,28 @@ Page({
     var that = this
     let oImgW = e.detail.width; //图片原始宽度
     let oImgH = e.detail.height; //图片原始高
-    destHeight = oImgH / oImgW * 112
-    console.log(destHeight)
-    if (destHeight > 150) {
-      destHeight = 150
+
+    if (oImgW > oImgH) {
+      if (oImgW > 275) {
+        destWidth = 275
+        destHeight = oImgH / oImgW * 275
+        if (destHeight > 255) {
+          destHeight = 255
+        }
+      } else {
+        destWidth = oImgW
+        destHeight = oImgH
+      }
+    } else {
+      if (oImgH > 255) {
+        destHeight = 255
+        destWidth = oImgW / oImgH * 255
+      } else {
+        destWidth = oImgW
+        destHeight = oImgH
+      }
     }
+
     wx.getSystemInfo({
       success(res) {
         that.setData({
@@ -121,21 +137,6 @@ Page({
         that.generatePost()
       }
     })
-  },
-  genInfo1: function() {
-    var petInfo = this.data.petInfo
-    var phrase = ''
-    if (petInfo.petFrom == 1) {
-      phrase += '我在家，期待新主人领养'
-    } else {
-      phrase += '我被好心人暂时收养，好期待一个家~'
-    }
-    return phrase
-  },
-  genInfo2: function() {
-    var petInfo = this.data.petInfo
-    var phrase = '发布时间：' + petInfo.createDate
-    return phrase
   },
   drawText: function(ctx, str, leftWidth, initHeight, canvasWidth) {
     var lineWidth = 0;
@@ -148,7 +149,7 @@ Page({
         lineWidth = 0;
         lastSubStrIndex = i;
       }
-      if (i >= 80) {
+      if (i >= 50) {
         ctx.fillText('...', leftWidth, initHeight);
         break
       }
@@ -169,9 +170,9 @@ Page({
       x: 15,
       y: 0,
       width: that.data.screenWidth - 30,
-      height: 613,
+      height: 620,
       destWidth: that.data.screenWidth * 750 / width,
-      destHeight: 613 * 750 / width,
+      destHeight: 620 * (that.data.screenWidth * 750 / width) / 350,
       canvasId: 'post-adoption',
       success(res) {
         wx.saveImageToPhotosAlbum({
