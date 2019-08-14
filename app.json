@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/organize/home/home",
     "pages/post/index/index",
     "pages/post/adopt/adopt",
     "pages/post/lost/lost",

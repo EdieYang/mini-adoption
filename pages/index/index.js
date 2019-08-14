@@ -53,7 +53,8 @@ Page({
     pageStatus: true,
     col1: [],
     col2: [],
-    images: []
+    images: [],
+    brandImgUrls: ['https://cn.bing.com/th?id=OIP.zUQKiYCwbuq_hV9vDU5ebQHaDO&pid=Api&rs=1', 'http://img0.imgtn.bdimg.com/it/u=1142798834,2765456614&fm=26&gp=0.jpg', 'http://www.royal-canin.cn/img/logo.11b53227.png'],
   },
 
   /**
@@ -455,6 +456,11 @@ Page({
         "content-type": "application/x-www-form-urlencoded"
       },
       success: function(res) {}
+    })
+  },
+  orgDetail:function(e){
+    wx.navigateTo({
+      url: '../organize/home/home',
     })
   },
 

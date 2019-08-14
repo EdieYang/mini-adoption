@@ -1,6 +1,6 @@
 <nav-bar title-text="上海宠物领养"></nav-bar>
 
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color='{{indicatorColor}}' style='margin-top:{{marginNav}}px;height:375rpx;'>
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color='{{indicatorColor}}' style='margin-top:{{marginNav}}px;height:250rpx;'>
   <block wx:for="{{imgUrls}}" wx:key='{{index}}'>
     <swiper-item bindtap='redirectUrl' data-index='{{index}}'>
       <image src="{{photoPrefix}}{{item.bannerImgUrl}}" class="slide-image" />
@@ -8,6 +8,18 @@
   </block>
 </swiper>
 
+
+<view class="header">
+  公益组织
+</view>
+<scroll-view scroll-x class="brand_scroll">
+  <block wx:for="{{brandImgUrls}}" wx:key='{{index}}'>
+    <view class="scroll_cover" bindtap="orgDetail" data-index='{{item}}'>
+      <image src="{{item}}" class="scroll_img" mode="aspectFit" bindtap="brandDetail"></image>
+      <view class="scroll_text">安安宠医</view>
+    </view>
+  </block>
+</scroll-view>
 
 <cover-image bindtap='closeCollectTop' src='../../images/attention.png' style='position:fixed;top:{{marginNav-12}}px;right:45rpx;width:450rpx;height:157rpx;z-index:9000' wx:if='{{collectMini}}'></cover-image>
 
