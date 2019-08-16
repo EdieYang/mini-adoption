@@ -53,8 +53,7 @@ Page({
     pageStatus: true,
     col1: [],
     col2: [],
-    images: [],
-    brandImgUrls: ['https://cn.bing.com/th?id=OIP.zUQKiYCwbuq_hV9vDU5ebQHaDO&pid=Api&rs=1', 'http://img0.imgtn.bdimg.com/it/u=1142798834,2765456614&fm=26&gp=0.jpg', 'http://www.royal-canin.cn/img/logo.11b53227.png'],
+    images: []
   },
 
   /**
@@ -79,6 +78,7 @@ Page({
           wx.hideLoading()
           that.getPetAdoptList()
           that.getUnreadMessage()
+          that.getOrgList()
         }
       }
     })
@@ -209,6 +209,18 @@ Page({
           petCols: petInfoList
         })
         wx.stopPullDownRefresh()
+      }
+    })
+  },
+  getOrgList:function(){
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/orgs/list',
+      method: "GET",
+      success: function (res) {
+        that.setData({
+          orgList: res.data.data
+        })
       }
     })
   },
@@ -460,7 +472,7 @@ Page({
   },
   orgDetail:function(e){
     wx.navigateTo({
-      url: '../organize/home/home',
+      url: '../organize/home/home?orgId='+e.currentTarget.dataset.orgid,
     })
   },
 

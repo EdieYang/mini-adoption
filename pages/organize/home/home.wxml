@@ -1,2 +1,157 @@
-<!--pages/organize/home/home.wxml-->
-<text>pages/organize/home/home.wxml</text>
+<nav-bar title-text="{{navTitle}}" backIcon='../../images/back-pre.png' background='{{background}}'></nav-bar>
+
+<image class='cover_img' src="{{orgDetail.coverImg}}"></image>
+
+<view class="cover_scroll" style="margin-top:{{150+marginNav}}px">
+  <image class="scroll_portrait" src="{{orgDetail.logo}}"></image>
+  <view class="scroll_info">
+    <view class="org_header">
+      <view class="org_name">{{orgDetail.orgName}}</view>
+      <button class="follow">关注</button>
+    </view>
+    <view class="org_title">
+      <image class='title_img' src="../../../images/yellow-vip.png"></image>
+      <view class="title">{{orgDetail.title}}</view>
+    </view>
+    <view class="org_brief">关于我：{{orgDetail.brief}}</view>
+    <view class="bottom_info">
+      <view class="info_item">粉丝
+        <text class="strong_num">123</text>
+      </view>
+      <view class="info_item">发布
+        <text class="strong_num">123</text>
+      </view>
+      <view class="info_item">送养成功
+        <text class="strong_num">123</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="scroll_info_bottom">
+    <view class="info_header">
+      <view class="tab_bar">
+        <view class="tab_top">231</view>
+        <view class="tab_bottom">送养宠物</view>
+        <view class="bottom_line"></view>
+      </view>
+      <view class="tab_bar">
+        <view class="tab_top">231</view>
+        <view class="tab_bottom">相册</view>
+        <view class="bottom_line"></view>
+      </view>
+      <view class="tab_bar">
+        <view class="tab_top">231</view>
+        <view class="tab_bottom">活动</view>
+        <view class="bottom_line"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="scroll_content">
+
+
+    <view class='collect-out'>
+      <view style='display:none'>
+        <block wx:for="{{petCols}}" wx:key='{{index}}'>
+          <image wx:key="" id="{{item.petId}}" src="{{photoPrefix}}{{item.mediaList[0].mediaPath}}" bindload="onImageLoad" mode="widthFix" class="collecting-img shadow-bottom" lazy-load="true"></image>
+        </block>
+      </view>
+    </view>
+    <view class='space-between'>
+      <view class="collect-out" style='float:left' wx:if="{{col1.length}}">
+        <block wx:for="{{col1}}" wx:key="{{index}}" wx:for-index="idx" wx:for-item="item">
+          <view class="img_box" bindtap='toAdoptionDetail' data-petid='{{item.petId}}'>
+            <view class='item-content'>
+              <image src="{{photoPrefix}}{{item.mediaList[0].mediaPath}}" mode="widthFix" data-index="{{index}}" class='img_box_img'></image>
+              <view class="item_desc">
+                <view class='item-info'>
+                  <view class='item-header'>
+                    <view class='item-name'>{{item.petName}}</view>
+                  </view>
+                  <view class='item-detail'>
+                    <view class='item-age'>
+                      <block wx:if='{{item.petAge!="不详"}}'>
+                        {{item.petAge}}
+                      </block>
+                      <block wx:if='{{item.petAge=="不详"}}'>
+                        年龄不详
+                      </block>
+                    </view>
+                    <view class='item-gender'>
+                      <image class='gender-icon' src='../../../images/boy.png' wx:if='{{item.petSex==2}}'></image>
+                      <image class='gender-icon' src='../../../images/girl.png' wx:if='{{item.petSex==3}}'></image>
+                      <text wx:if='{{item.petSex==2}}'>男孩</text>
+                      <text wx:if='{{item.petSex==3}}'>女孩</text>
+                    </view>
+                  </view>
+                  <view class='item-tags'>
+                    <block wx:for="{{item.petCharacteristic}}" wx:for-item="character" wx:for-index="idx" wx:key="unique">
+                      <block wx:if='{{idx<2}}'>
+                        <view class='tag'>
+                          {{character.name}}
+                        </view>
+                      </block>
+                    </block>
+                  </view>
+                  <view class='item-footer'>
+                    <image class='location' src='../../../images/lost.png'></image>
+                    <view class='locate'>{{item.address}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="collect-out" style='float:left' wx:if="{{col2.length}}">
+        <block wx:for="{{col2}}" wx:key="" wx:for-index="idx" wx:for-item="item">
+          <view class="img_box" bindtap='toAdoptionDetail' data-petid='{{item.petId}}'>
+            <view class='item-content'>
+              <image src="{{photoPrefix}}{{item.mediaList[0].mediaPath}}" mode="widthFix" data-index="{{index}}" class='img_box_img'></image>
+              <view class="item_desc">
+                <view class='item-info'>
+                  <view class='item-header'>
+                    <view class='item-name'>{{item.petName}}</view>
+                  </view>
+                  <view class='item-detail'>
+                    <view class='item-age'>
+                      <block wx:if='{{item.petAge!="不详"}}'>
+                        {{item.petAge}}
+                      </block>
+                      <block wx:if='{{item.petAge=="不详"}}'>
+                        年龄不详
+                      </block>
+                    </view>
+                    <view class='item-gender'>
+                      <image class='gender-icon' src='../../../images/boy.png' wx:if='{{item.petSex==2}}'></image>
+                      <image class='gender-icon' src='../../../images/girl.png' wx:if='{{item.petSex==3}}'></image>
+                      <text wx:if='{{item.petSex==2}}'>男孩</text>
+                      <text wx:if='{{item.petSex==3}}'>女孩</text>
+                    </view>
+                  </view>
+                  <view class='item-tags'>
+                    <block wx:for="{{item.petCharacteristic}}" wx:for-item="character" wx:for-index="idx" wx:key="unique">
+                      <block wx:if='{{idx<2}}'>
+                        <view class='tag'>
+                          {{character.name}}
+                        </view>
+                      </block>
+                    </block>
+                  </view>
+                  <view class='item-footer'>
+                    <image class='location' src='../../../images/lost.png'></image>
+                    <view class='locate'>{{item.address}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+
+
+  </view>
+
+</view>

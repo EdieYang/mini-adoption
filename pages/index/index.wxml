@@ -13,10 +13,10 @@
   公益组织
 </view>
 <scroll-view scroll-x class="brand_scroll">
-  <block wx:for="{{brandImgUrls}}" wx:key='{{index}}'>
-    <view class="scroll_cover" bindtap="orgDetail" data-index='{{item}}'>
-      <image src="{{item}}" class="scroll_img" mode="aspectFit" bindtap="brandDetail"></image>
-      <view class="scroll_text">安安宠医</view>
+  <block wx:for="{{orgList}}" wx:key='{{index}}'>
+    <view class="scroll_cover" bindtap="orgDetail" data-orgid='{{item.orgId}}'>
+      <image src="{{item.coverImg}}" class="scroll_img" ></image>
+      <view class="scroll_text">{{item.orgName}}</view>
     </view>
   </block>
 </scroll-view>
