@@ -10,13 +10,15 @@ var age = 1;
 var sex = 1
 var healthStatus = 1
 var petInfoListArr = []
+var galleryListArr = []
+var activityListArr = []
 let col1H = 0
 let col2H = 0
 let chosenId = 3
 let bottomLast = false
 var changingStatus = false
 var loadingCount = 10
-
+var images=[]
 
 Page({
 
@@ -29,7 +31,7 @@ Page({
     tabFix: false,
     filtered: false,
     collectMini: true,
-    chosenId: 3,
+    chosenId: 1,
     userId: '',
     photoPrefix: app.globalData.staticResourceUrlPrefix,
     showFilter: false,
@@ -65,7 +67,8 @@ Page({
   onLoad: function(options) {
     var orgId = options.orgId
     this.getOrgDetail('1')
-    this.getPetAdoptList()
+    this.getOrgStatistic('1')
+    this.getOrgPetAdoptList('1')
   },
 
   getOrgDetail: function(orgId) {
@@ -83,12 +86,28 @@ Page({
       }
     })
   },
-  getPetAdoptList: function() {
+  getOrgStatistic: function(orgId) {
     var that = this
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/pets/list',
+      url: app.globalData.requestUrlCms + '/adopt/orgs/statistic',
       data: {
-        petType: petType,
+        orgId: orgId
+      },
+      method: "GET",
+      success: function(res) {
+        that.setData({
+          orgStatistic: res.data.data
+        })
+      }
+    })
+  },
+  getOrgPetAdoptList: function(id) {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/orgs/pets',
+      data: {
+        orgId: id,
+        petType: '',
         ageArr: this.data.ageArr,
         sexArr: this.data.sexArr,
         sterilization: this.data.sterilization,
@@ -118,6 +137,86 @@ Page({
         wx.stopPullDownRefresh()
       }
     })
+  },
+  getOrgGalleryList: function(id) {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/orgs/gallery',
+      data: {
+        orgId: id,
+        pageNum: pageNum,
+        pageSize: pageSize
+      },
+      method: "GET",
+      success: function(res) {
+        var galleryList = res.data.data.list
+        var bottomLast = false
+        if (res.data.data.list.length < pageSize) {
+          bottomLast = true
+        }
+        galleryListArr = galleryListArr.concat(galleryList)
+        changingStatus = false
+        that.setData({
+          galleryList: galleryListArr,
+          showLoading: false,
+          galleryCols: galleryList
+        })
+        wx.stopPullDownRefresh()
+      }
+    })
+  },
+  getOrgActivityList: function (id) {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/orgs/activity',
+      data: {
+        orgId: id,
+        pageNum: pageNum,
+        pageSize: pageSize
+      },
+      method: "GET",
+      success: function (res) {
+        var activityList = res.data.data.list
+        var bottomLast = false
+        if (res.data.data.list.length < pageSize) {
+          bottomLast = true
+        }
+        activityListArr = activityListArr.concat(activityList)
+        that.setData({
+          activityList: activityListArr,
+          showLoading: false
+        })
+        wx.stopPullDownRefresh()
+      }
+    })
+  },
+  chooseTab: function(e) {
+    var that = this
+    chosenId = e.currentTarget.dataset.id;
+    this.setData({
+      showLoading: true,
+      chosenId: chosenId,
+      petInfoList: [],
+      col1: [],
+      col2: [],
+      petCols: [],
+      galleryCols: [],
+      loadingCount: 10
+    })
+    changingStatus = true
+    petInfoListArr = []
+    galleryListArr = []
+    galleryListArr = []
+    pageNum = 1
+    col1H = 0
+    col2H = 0
+    if (chosenId == 1) {
+      that.getOrgPetAdoptList('1')
+    } else if (chosenId == 2) {
+      that.getOrgGalleryList('1')
+    } else{
+      that.getOrgActivityList('1')
+    }
   },
   onImageLoad: function(e) {
     let petId = e.currentTarget.id;
@@ -164,48 +263,61 @@ Page({
     this.setData(data);
   },
 
-  loadImage: function(e) {
-    var vm = this;
-    var windowWidth = wx.getSystemInfoSync().windowWidth;
-    var index = e.currentTarget.dataset.index;
-    vm.data.petInfoList[index].height = windowWidth / 2 / e.detail.width * e.detail.height;
-    var count = 0;
-    for (var i = (pageNum - 1) * vm.data.length; i < vm.data.petInfoList.length; i++) {
-      if (vm.data.petInfoList[i].height) {
-        count++;
+  onGalleryImageLoad: function(e) {
+    let id = e.currentTarget.id;
+    let oImgW = e.detail.width; //图片原始宽度
+    let oImgH = e.detail.height; //图片原始高度
+    let imgWidth = 155.5; //图片设置的宽度
+    let scale = imgWidth / oImgW; //比例计算
+    let imgHeight = oImgH * scale; //自适应高度
+    let galleryObj = null;
+
+    let galleryList = this.data.galleryList
+    for (let i = 0; i < galleryList.length; i++) {
+      let gallery = galleryList[i]
+      if (gallery.id === id) {
+        galleryObj = gallery
+        break;
       }
     }
+    loadingCount = loadingCount - 1;
 
-    var descHeight = 109
-    // if (vm.data.petInfoList[index].petCharacteristic.length==0){
-    //   descHeight=100
-    // } else if (vm.data.petInfoList[index].petCharacteristic.length < 3){
-    //   descHeight=120
-    // }else{
-    //   descHeight = 109
-    // }
-
-    if (count == vm.data.petInfoList.length) {
-      for (var i = (pageNum - 1) * vm.data.length; i < vm.data.petInfoList.length; i++) {
-        if (vm.data.leftHeight <= vm.data.rightHeight) {
-          vm.data.petInfoList[i].top = vm.data.leftHeight;
-          vm.data.petInfoList[i].left = windowWidth * 0.005;
-          vm.setData({
-            leftHeight: vm.data.leftHeight + vm.data.petInfoList[i].height + descHeight
-          });
-        } else {
-          vm.data.petInfoList[i].top = vm.data.rightHeight;
-          vm.data.petInfoList[i].left = windowWidth / 2 - windowWidth * 0.005;
-          vm.setData({
-            rightHeight: vm.data.rightHeight + vm.data.petInfoList[i].height + descHeight
-          });
-        }
-      }
-      vm.setData({
-        petInfoList: vm.data.petInfoList
-      });
+    let col1 = this.data.col1;
+    let col2 = this.data.col2;
+    if (col1H <= col2H) {
+      col1H += imgHeight;
+      col1.push(galleryObj);
+    } else {
+      col2H += imgHeight;
+      col2.push(galleryObj);
     }
+    let data = {
+      col1: col1,
+      col2: col2
+    };
+    if (loadingCount == 0) {
+      data.galleryCols = [];
+    }
+    if (changingStatus) {
+      this.setData({
+        col1: [],
+        col2: []
+      })
+      return
+    }
+    this.setData(data);
   },
+  viewGallery: function(e) {
+    var src = e.currentTarget.dataset.image
+    for (var i = 0; i < galleryListArr.length; i++) {
+      images.push(galleryListArr[i].image)
+    }
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: images // 需要预览的图片http链接列表
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -245,7 +357,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    var that = this
+    //刷新页面
+    if (!bottomLast) {
+      pageNum++;
+      if (chosenId == 1) {
+        that.getOrgPetAdoptList('1')
+      }
+    }
   },
 
   /**

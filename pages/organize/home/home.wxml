@@ -16,40 +16,38 @@
     <view class="org_brief">关于我：{{orgDetail.brief}}</view>
     <view class="bottom_info">
       <view class="info_item">粉丝
-        <text class="strong_num">123</text>
+        <text class="strong_num">{{orgStatistic.fans}}</text>
       </view>
       <view class="info_item">发布
-        <text class="strong_num">123</text>
+        <text class="strong_num">{{orgStatistic.publishNum}}</text>
       </view>
       <view class="info_item">送养成功
-        <text class="strong_num">123</text>
+        <text class="strong_num">{{orgStatistic.adoptSuccessNum}}</text>
       </view>
     </view>
   </view>
 
   <view class="scroll_info_bottom">
     <view class="info_header">
-      <view class="tab_bar">
-        <view class="tab_top">231</view>
+      <view class="tab_bar" data-id='1' bindtap='chooseTab'>
+        <view class="tab_top">{{orgStatistic.adoptPets}}</view>
         <view class="tab_bottom">送养宠物</view>
-        <view class="bottom_line"></view>
+        <view class="bottom_line" wx:if="{{chosenId==1}}"></view>
       </view>
-      <view class="tab_bar">
-        <view class="tab_top">231</view>
+      <view class="tab_bar" data-id='2' bindtap='chooseTab'>
+        <view class="tab_top">{{orgStatistic.galleryNum}}</view>
         <view class="tab_bottom">相册</view>
-        <view class="bottom_line"></view>
+        <view class="bottom_line" wx:if="{{chosenId==2}}"></view>
       </view>
-      <view class="tab_bar">
-        <view class="tab_top">231</view>
+      <view class="tab_bar" data-id='3' bindtap='chooseTab'>
+        <view class="tab_top">{{orgStatistic.activityNum}}</view>
         <view class="tab_bottom">活动</view>
-        <view class="bottom_line"></view>
+        <view class="bottom_line" wx:if="{{chosenId==3}}"></view>
       </view>
     </view>
   </view>
 
-  <view class="scroll_content">
-
-
+  <view class="scroll_content" wx:if='{{chosenId==1}}'>
     <view class='collect-out'>
       <view style='display:none'>
         <block wx:for="{{petCols}}" wx:key='{{index}}'>
@@ -153,5 +151,45 @@
 
 
   </view>
+
+
+  <view class="scroll_content" wx:if='{{chosenId==2}}'>
+    <view class='collect-out'>
+      <view style='display:none'>
+        <block wx:for="{{galleryCols}}" wx:key='{{index}}'>
+          <image wx:key="" id="{{item.id}}" src="{{item.image}}" bindload="onGalleryImageLoad" mode="widthFix" class="collecting-img shadow-bottom" lazy-load="true"></image>
+        </block>
+      </view>
+    </view>
+    <view class='space-between'>
+      <view class="collect-out" style='float:left' wx:if="{{col1.length}}">
+        <block wx:for="{{col1}}" wx:key="{{index}}" wx:for-index="idx" wx:for-item="item">
+          <view class="gellery_box" bindtap='viewGallery' data-image='{{item.image}}'>
+            <image src="{{item.image}}" mode="widthFix" class='img_box_img'></image>
+          </view>
+        </block>
+      </view>
+      <view class="collect-out" style='float:left' wx:if="{{col2.length}}">
+        <block wx:for="{{col2}}" wx:key="" wx:for-index="idx" wx:for-item="item">
+          <view class="gellery_box" bindtap='viewGallery' data-image='{{item.image}}'>
+            <image src="{{item.image}}" mode="widthFix" class='img_box_img'></image>
+          </view>
+        </block>
+      </view>
+      <view style='clear:both'></view>
+    </view>
+  </view>
+
+  <view class="scroll_content" wx:if='{{chosenId==3}}'>
+    <block wx:for="{{activityList}}" wx:key='{{index}}'>
+      <view class="activity_item" bindtap="toActivityDetail" data-id='{{item.id}}'>
+        <image class='cover_item' src="{{item.activityCover}}"  mode='aspectFill'></image>
+        <view class="cover_title">
+          {{item.title}}
+        </view>
+      </view>
+    </block>
+  </view>
+
 
 </view>

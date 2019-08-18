@@ -133,49 +133,6 @@ Page({
     }
     this.setData(data);
   },
-
-  loadImage: function(e) {
-    var vm = this;
-    var windowWidth = wx.getSystemInfoSync().windowWidth;
-    var index = e.currentTarget.dataset.index;
-    vm.data.petInfoList[index].height = windowWidth / 2 / e.detail.width * e.detail.height;
-    var count = 0;
-    for (var i = (pageNum - 1) * vm.data.length; i < vm.data.petInfoList.length; i++) {
-      if (vm.data.petInfoList[i].height) {
-        count++;
-      }
-    }
-
-    var descHeight = 109
-    // if (vm.data.petInfoList[index].petCharacteristic.length==0){
-    //   descHeight=100
-    // } else if (vm.data.petInfoList[index].petCharacteristic.length < 3){
-    //   descHeight=120
-    // }else{
-    //   descHeight = 109
-    // }
-
-    if (count == vm.data.petInfoList.length) {
-      for (var i = (pageNum - 1) * vm.data.length; i < vm.data.petInfoList.length; i++) {
-        if (vm.data.leftHeight <= vm.data.rightHeight) {
-          vm.data.petInfoList[i].top = vm.data.leftHeight;
-          vm.data.petInfoList[i].left = windowWidth * 0.005;
-          vm.setData({
-            leftHeight: vm.data.leftHeight + vm.data.petInfoList[i].height + descHeight
-          });
-        } else {
-          vm.data.petInfoList[i].top = vm.data.rightHeight;
-          vm.data.petInfoList[i].left = windowWidth / 2 - windowWidth * 0.005;
-          vm.setData({
-            rightHeight: vm.data.rightHeight + vm.data.petInfoList[i].height + descHeight
-          });
-        }
-      }
-      vm.setData({
-        petInfoList: vm.data.petInfoList
-      });
-    }
-  },
   getPetAdoptList: function() {
     var that = this
     wx.request({
