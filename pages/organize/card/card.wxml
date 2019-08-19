@@ -1,0 +1,9 @@
+<nav-bar title-text="分享公益名片" backIcon='../../images/back-pre-black.png'></nav-bar>
+<view style='display:none'>
+    <image src="{{orgDetail.postImg}}" bindload="onImageLoad" mode="widthFix"  lazy-load="true"></image>
+</view>
+
+<canvas style="width: {{destWidth}}px; height: {{destHeight}}px;margin-top:{{marginNav}}px;z-index: 100" canvas-id="post-adoption"></canvas>
+<canvas style="width: {{destWidth}}px; height: {{destHeight}}px;margin-top:{{marginNav}}px;z-index: 100;display:none" canvas-id="post-adoption-hidden"></canvas>
+
+<cover-view class="footer" bindtap="download">保存名片至相册</cover-view>

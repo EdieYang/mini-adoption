@@ -126,7 +126,10 @@
       <block wx:if='{{petInfo.petFrom==1}}'>
         我在家，期待新主人领养
       </block>
-      <block wx:if='{{petInfo.petFrom==2 || petInfo.petFrom==3}}'>
+      <block wx:if='{{petInfo.petFrom==2}}'>
+        我被公益机构救助，好期待一个家~
+      </block>
+      <block wx:if='{{petInfo.petFrom==3}}'>
         我被好心人暂时收养，好期待一个家~
       </block>
     </view>

@@ -25,6 +25,10 @@ Component({
       type: Boolean,
       value: ''
     },
+    orgIcon:{
+      type: String,
+      value: '' 
+    },
     fontSize: {
       type: Number,
       value: 16

@@ -1,53 +1,61 @@
-<nav-bar title-text="{{navTitle}}" backIcon='../../images/back-pre.png' background='{{background}}'></nav-bar>
+<nav-bar title-text="{{navTitle}}" backIcon='{{backIcon}}' background='{{background}}' homeIcon='{{homeIcon}}' orgIcon='{{orgIcon}}'></nav-bar>
 
 <image class='cover_img' src="{{orgDetail.coverImg}}"></image>
 
-<view class="cover_scroll" style="margin-top:{{150+marginNav}}px">
-  <image class="scroll_portrait" src="{{orgDetail.logo}}"></image>
-  <view class="scroll_info">
-    <view class="org_header">
-      <view class="org_name">{{orgDetail.orgName}}</view>
-      <button class="follow">关注</button>
-    </view>
-    <view class="org_title">
-      <image class='title_img' src="../../../images/yellow-vip.png"></image>
-      <view class="title">{{orgDetail.title}}</view>
-    </view>
-    <view class="org_brief">关于我：{{orgDetail.brief}}</view>
-    <view class="bottom_info">
-      <view class="info_item">粉丝
-        <text class="strong_num">{{orgStatistic.fans}}</text>
+<view class="cover_scroll" style="margin-top:{{130+marginNav}}px">
+  <image class="scroll_portrait" src="{{orgDetail.logo}}" wx:if='{{orgIconShow}}'></image>
+  <image class='card' src="../../../images/share-mini.png" bindtap="orgPostCard"></image>
+  <text style="font-size:24rpx;position:absolute;top: 100rpx;right: 44rpx;width:120rpx;text-align:center">公益名片</text>
+  <view style="{{posFix}};background-color:#fafafa;width:100%;">
+    <view class="scroll_info" style="{{posFix!=''?'display:none;animation: fadeOut 1s;':''}}">
+      <view class="org_header">
+        <view class="org_name">{{orgDetail.orgName}}</view>
       </view>
-      <view class="info_item">发布
-        <text class="strong_num">{{orgStatistic.publishNum}}</text>
+      <view class="org_title">
+        <view class="org_title_left">
+          <image class='title_img' src="../../../images/yellow-vip.png"></image>
+          <view class="title">{{orgDetail.title}}</view>
+        </view>
+        <button class="follow" bindtap="follow" wx:if='{{orgStatistic.isFollowed==0}}'>关注</button>
+        <button class="followed" bindtap="cancelFollow" wx:if='{{orgStatistic.isFollowed>0}}'>已关注</button>
       </view>
-      <view class="info_item">送养成功
-        <text class="strong_num">{{orgStatistic.adoptSuccessNum}}</text>
+      <scroll-view class="org_brief" scroll-y style="height: 160rpx;">
+        关于我：{{orgDetail.brief}}
+      </scroll-view>
+      <view class="bottom_info">
+        <view class="info_item">粉丝
+          <text class="strong_num">{{orgStatistic.fans}}</text>
+        </view>
+        <view class="info_item">发布
+          <text class="strong_num">{{orgStatistic.publishNum}}</text>
+        </view>
+        <view class="info_item">送养成功
+          <text class="strong_num">{{orgStatistic.adoptSuccessNum}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="scroll_info_bottom">
+      <view class="info_header">
+        <view class="tab_bar" data-id='1' bindtap='chooseTab'>
+          <view class="tab_top">{{orgStatistic.adoptPets}}</view>
+          <view class="tab_bottom" style="{{posFix!=''?'font-size:38rpx':''}}">送养宠物</view>
+          <view class="bottom_line" wx:if="{{chosenId==1}}"></view>
+        </view>
+        <view class="tab_bar" data-id='2' bindtap='chooseTab'>
+          <view class="tab_top">{{orgStatistic.galleryNum}}</view>
+          <view class="tab_bottom" style="{{posFix!=''?'font-size:38rpx':''}}">相册</view>
+          <view class="bottom_line" wx:if="{{chosenId==2}}"></view>
+        </view>
+        <view class="tab_bar" data-id='3' bindtap='chooseTab'>
+          <view class="tab_top">{{orgStatistic.activityNum}}</view>
+          <view class="tab_bottom" style="{{posFix!=''?'font-size:38rpx':''}}">活动</view>
+          <view class="bottom_line" wx:if="{{chosenId==3}}"></view>
+        </view>
       </view>
     </view>
   </view>
-
-  <view class="scroll_info_bottom">
-    <view class="info_header">
-      <view class="tab_bar" data-id='1' bindtap='chooseTab'>
-        <view class="tab_top">{{orgStatistic.adoptPets}}</view>
-        <view class="tab_bottom">送养宠物</view>
-        <view class="bottom_line" wx:if="{{chosenId==1}}"></view>
-      </view>
-      <view class="tab_bar" data-id='2' bindtap='chooseTab'>
-        <view class="tab_top">{{orgStatistic.galleryNum}}</view>
-        <view class="tab_bottom">相册</view>
-        <view class="bottom_line" wx:if="{{chosenId==2}}"></view>
-      </view>
-      <view class="tab_bar" data-id='3' bindtap='chooseTab'>
-        <view class="tab_top">{{orgStatistic.activityNum}}</view>
-        <view class="tab_bottom">活动</view>
-        <view class="bottom_line" wx:if="{{chosenId==3}}"></view>
-      </view>
-    </view>
-  </view>
-
-  <view class="scroll_content" wx:if='{{chosenId==1}}'>
+  <view class="scroll_content" wx:if='{{chosenId==1}}' style="{{posFix!=''?'padding-top:'+(80+marginNav)+'px':''}}">
     <view class='collect-out'>
       <view style='display:none'>
         <block wx:for="{{petCols}}" wx:key='{{index}}'>
@@ -148,12 +156,10 @@
       </view>
       <view style='clear:both'></view>
     </view>
-
-
   </view>
 
 
-  <view class="scroll_content" wx:if='{{chosenId==2}}'>
+  <view class="scroll_content" wx:if='{{chosenId==2}}' style="{{posFix!=''?'padding-top:'+(80+marginNav)+'px':''}}">
     <view class='collect-out'>
       <view style='display:none'>
         <block wx:for="{{galleryCols}}" wx:key='{{index}}'>
@@ -180,10 +186,10 @@
     </view>
   </view>
 
-  <view class="scroll_content" wx:if='{{chosenId==3}}'>
+  <view class="scroll_content" wx:if='{{chosenId==3}}' style="{{posFix!=''?'padding-top:'+(80+marginNav)+'px':''}}">
     <block wx:for="{{activityList}}" wx:key='{{index}}'>
-      <view class="activity_item" bindtap="toActivityDetail" data-id='{{item.id}}'>
-        <image class='cover_item' src="{{item.activityCover}}"  mode='aspectFill'></image>
+      <view class="activity_item" bindtap="toActivityDetail" data-id='{{item.activityPath}}'>
+        <image class='cover_item' src="{{item.activityCover}}" mode='aspectFill'></image>
         <view class="cover_title">
           {{item.title}}
         </view>

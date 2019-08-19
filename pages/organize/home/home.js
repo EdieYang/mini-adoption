@@ -14,11 +14,12 @@ var galleryListArr = []
 var activityListArr = []
 let col1H = 0
 let col2H = 0
-let chosenId = 3
-let bottomLast = false
+let chosenId = 1
+var  bottomLast = false
 var changingStatus = false
 var loadingCount = 10
-var images=[]
+var images = []
+var orgId=''
 
 Page({
 
@@ -27,7 +28,11 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    background: 'none',
+    background: '',
+    orgIcon: '',
+    orgIconShow: true,
+    backIcon: '../../images/back-pre.png',
+    posFix: '',
     tabFix: false,
     filtered: false,
     collectMini: true,
@@ -58,20 +63,29 @@ Page({
     pageStatus: true,
     col1: [],
     col2: [],
-    images: []
+    images: [],
+    homeIcon: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    var orgId = options.orgId
-    this.getOrgDetail('1')
-    this.getOrgStatistic('1')
-    this.getOrgPetAdoptList('1')
+  onLoad: function (options) {
+    orgId = options.orgId
+    if (options.orgId == '' || typeof options.orgId == 'undefined' || options.orgId == null) {
+      orgId = options.scene
+      that.setData({
+        homeIcon: true,
+        backIcon: ''
+      })
+    }
+    userId=app.globalData.userId
+    this.getOrgDetail()
+    this.getOrgStatistic()
+    this.getOrgPetAdoptList()
   },
 
-  getOrgDetail: function(orgId) {
+  getOrgDetail: function () {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/info',
@@ -79,34 +93,35 @@ Page({
         orgId: orgId
       },
       method: "GET",
-      success: function(res) {
+      success: function (res) {
         that.setData({
           orgDetail: res.data.data
         })
       }
     })
   },
-  getOrgStatistic: function(orgId) {
+  getOrgStatistic: function () {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/statistic',
       data: {
-        orgId: orgId
+        orgId: orgId,
+        userId:userId
       },
       method: "GET",
-      success: function(res) {
+      success: function (res) {
         that.setData({
           orgStatistic: res.data.data
         })
       }
     })
   },
-  getOrgPetAdoptList: function(id) {
+  getOrgPetAdoptList: function () {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/pets',
       data: {
-        orgId: id,
+        orgId: orgId,
         petType: '',
         ageArr: this.data.ageArr,
         sexArr: this.data.sexArr,
@@ -118,9 +133,9 @@ Page({
         pageSize: pageSize
       },
       method: "GET",
-      success: function(res) {
+      success: function (res) {
         var petInfoList = res.data.data.list
-        var bottomLast = false
+        bottomLast = false
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
         }
@@ -138,19 +153,19 @@ Page({
       }
     })
   },
-  getOrgGalleryList: function(id) {
+  getOrgGalleryList: function () {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/gallery',
       data: {
-        orgId: id,
+        orgId: orgId,
         pageNum: pageNum,
         pageSize: pageSize
       },
       method: "GET",
-      success: function(res) {
+      success: function (res) {
         var galleryList = res.data.data.list
-        var bottomLast = false
+       bottomLast = false
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
         }
@@ -165,19 +180,19 @@ Page({
       }
     })
   },
-  getOrgActivityList: function (id) {
+  getOrgActivityList: function () {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/activity',
       data: {
-        orgId: id,
+        orgId: orgId,
         pageNum: pageNum,
         pageSize: pageSize
       },
       method: "GET",
       success: function (res) {
         var activityList = res.data.data.list
-        var bottomLast = false
+       bottomLast = false
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
         }
@@ -190,9 +205,13 @@ Page({
       }
     })
   },
-  chooseTab: function(e) {
+  chooseTab: function (e) {
     var that = this
     chosenId = e.currentTarget.dataset.id;
+    wx.pageScrollTo({
+      scrollTop: 130+this.data.marginNav,
+      duration: 100
+    })
     this.setData({
       showLoading: true,
       chosenId: chosenId,
@@ -206,19 +225,18 @@ Page({
     changingStatus = true
     petInfoListArr = []
     galleryListArr = []
-    galleryListArr = []
     pageNum = 1
     col1H = 0
     col2H = 0
     if (chosenId == 1) {
-      that.getOrgPetAdoptList('1')
+      that.getOrgPetAdoptList()
     } else if (chosenId == 2) {
-      that.getOrgGalleryList('1')
-    } else{
-      that.getOrgActivityList('1')
+      that.getOrgGalleryList()
+    } else {
+      that.getOrgActivityList()
     }
   },
-  onImageLoad: function(e) {
+  onImageLoad: function (e) {
     let petId = e.currentTarget.id;
     let oImgW = e.detail.width; //图片原始宽度
     let oImgH = e.detail.height; //图片原始高度
@@ -263,7 +281,7 @@ Page({
     this.setData(data);
   },
 
-  onGalleryImageLoad: function(e) {
+  onGalleryImageLoad: function (e) {
     let id = e.currentTarget.id;
     let oImgW = e.detail.width; //图片原始宽度
     let oImgH = e.detail.height; //图片原始高度
@@ -307,7 +325,7 @@ Page({
     }
     this.setData(data);
   },
-  viewGallery: function(e) {
+  viewGallery: function (e) {
     var src = e.currentTarget.dataset.image
     for (var i = 0; i < galleryListArr.length; i++) {
       images.push(galleryListArr[i].image)
@@ -317,52 +335,143 @@ Page({
       urls: images // 需要预览的图片http链接列表
     })
   },
-
+  cancelFollow: function () {
+    var that = this
+    wx.showModal({
+      title: '',
+      content: '确定不再关注？',
+      success(res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.requestUrlCms + '/adopt/orgs/follow',
+            data: {
+              userId: userId,
+              orgId: orgId,
+            },
+            method: "DELETE",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded',
+            },
+            success: function (res) {
+              that.getOrgStatistic()
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  follow: function () {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/orgs/follow',
+      data: {
+        userId: userId,
+        orgId: orgId,
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        that.getOrgStatistic()
+      }
+    })
+  },
+  orgPostCard:function(){
+    wx.showLoading({
+      title: '生成名片中',
+    })
+    wx.navigateTo({
+      url: '../card/card?orgId=' + orgId,
+    })
+  },
+  toActivityDetail:function(e){
+    var url = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../../redirect/redirect?url=' + url,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
+  toAdoptionDetail: function (e) {
+    var petId = e.currentTarget.dataset.petid
+    wx.navigateTo({
+      url: '../../adoption/detail/detail?petId=' + petId,
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
+  },
+  onPageScroll: function (res) {
+    var that = this
+    console.log(res.scrollTop)
+    console.log(130 + that.data.marginNav)
+    if (res.scrollTop >= 130) {
+      this.setData({
+        navTitle: that.data.orgDetail.orgName,
+        background: 'rgba(255, 255, 255, 255)',
+        orgIcon: that.data.orgDetail.logo,
+        orgIconShow: false,
+        backIcon: '../../images/back-pre-black.png',
+        posFix: 'position: fixed;top:'+that.data.marginNav+'px;left:0;'
+      })
+    }
+
+    if (res.scrollTop < 130) {
+      this.setData({
+        backIcon: '../../images/back-pre.png',
+        posFix: '',
+        navTitle: '',
+        background: '',
+        orgIcon: '',
+        orgIconShow: true
+      })
+    }
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     var that = this
     //刷新页面
     if (!bottomLast) {
       pageNum++;
+      console.log('===')
       if (chosenId == 1) {
-        that.getOrgPetAdoptList('1')
+        console.log('===')
+        that.getOrgPetAdoptList()
       }
     }
   },
@@ -370,7 +479,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

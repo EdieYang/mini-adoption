@@ -7,7 +7,7 @@
       <view class='info-name'>{{item.nickName}}</view>
     </view>
     <view class='item-btn' data-followid='{{item.userId}}'  bindtap='cancelFollow' wx:if='{{item.followed>0 || targetUserId==userId}}'>已关注</view>
-     <view class='item-btn-follow'  data-followid='{{item.userId}}'   bindtap='follow' wx:if='{{item.followed==0 && targetUserId!=userId}}'>关注</view>
+    <view class='item-btn-follow'  data-followid='{{item.userId}}'   bindtap='follow' wx:if='{{item.followed==0 && targetUserId!=userId}}'>关注</view>
   </view>
 </view>
 

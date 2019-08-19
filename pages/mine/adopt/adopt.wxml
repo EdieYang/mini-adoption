@@ -40,11 +40,11 @@
             {{item.petAge}}
           </view>
           <view class='ext-gender'>
-            <block wx:if='{{item.petSex==1}}'>
+            <block wx:if='{{item.petSex==2}}'>
               <image class='gender-icon' src='../../../images/boy.png'></image>
               <text>男孩</text>
             </block>
-            <block wx:if='{{item.petSex==2}}'>
+            <block wx:if='{{item.petSex==3}}'>
               <image class='gender-icon' src='../../../images/girl.png'></image>
               <text>女孩</text>
             </block>

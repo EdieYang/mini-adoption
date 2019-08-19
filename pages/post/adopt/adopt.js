@@ -19,7 +19,6 @@ var reward = 0;
 var droplocation = '';
 var recordId = '';
 
-
 var showAddPhotoCover = true; //是否显示增加图片框
 var imgCount = 0; //已显示照片数
 var modifyFlag = false;
@@ -145,7 +144,8 @@ Page({
     obeyRules: false,
     showAddPhotoCover: true,
     petName: '',
-
+    organization: '公益机构',
+    organizationId:''
   },
 
   /**
@@ -158,7 +158,7 @@ Page({
     userId = app.globalData.userId
     loadState = options.loadState
     petId = options.petId
-    ImageUrls=[]
+    ImageUrls = []
     //修改
     if (loadState == 1) {
       wx.showLoading({
@@ -166,7 +166,7 @@ Page({
       })
       ImageUrls = []
       that.setData({
-        ImageUrls : []
+        ImageUrls: []
       })
       this.getAdoptionDetail()
     }
@@ -296,7 +296,40 @@ Page({
     })
   },
   chooseFrom: function(e) {
+    var that=this
     var fromType = e.currentTarget.dataset.type;
+    if (fromType == 2) {
+      wx.request({
+        url: app.globalData.requestUrlCms + '/adopt/orgs/list',
+        method: "GET",
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: function(res) {
+          var dataList = res.data.data
+          var orgList = []
+          for (var i = 0; i < dataList.length; i++) {
+            orgList.push(dataList[i].orgName)
+          }
+          wx.showActionSheet({
+            itemList: orgList,
+            success(res) {
+              that.setData({
+                organization: orgList[res.tapIndex],
+                organizationId: dataList[res.tapIndex].orgId
+              })
+            },
+            fail(res) {
+              console.log(res.errMsg)
+              that.setData({
+                organization:'公益机构',
+                organizationId: '',
+              })
+            }
+          })
+        }
+      })
+    }
     this.setData({
       fromType: fromType
     })
@@ -358,7 +391,7 @@ Page({
       obeyRules: !obey
     })
   },
-  adoptRules:function(){
+  adoptRules: function() {
     wx.navigateTo({
       url: '../../adoption/rule/rule',
     })
@@ -664,6 +697,7 @@ Page({
       return;
     }
 
+
     var sizeType = this.data.sizeType;
     if (this.checkEmptyVar(sizeType)) {
       wx.showToast({
@@ -707,10 +741,18 @@ Page({
       if (requirementList[i].checked) {
         var item = {}
         if (requirementList[i].value == 10) {
+          var requireOther = this.data.requirementOther
+          if (this.checkEmptyVar(requireOther) && loadState !=1) {
+            wx.showToast({
+              title: '须填写领养其他要求',
+              icon: 'none',
+              duration: 2000
+            })
+            return;
+          }
           item.name = this.data.requirementOther
         } else {
           item.name = requirementList[i].name
-
         }
         item.value = requirementList[i].value
         requirementReq.push(item)
@@ -812,6 +854,7 @@ Page({
         createBy: userId,
         adoptStatus: '0',
         mediaList: imageArr,
+        orgId: that.data.organizationId,
         formId: formId
       }
       wx.request({
@@ -862,6 +905,7 @@ Page({
         story: story,
         createBy: userId,
         mediaList: imageArr,
+        orgId: that.data.organizationId,
         formId: formId
       }
       wx.request({

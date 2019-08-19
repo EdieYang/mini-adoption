@@ -21,8 +21,8 @@ App({
     uploadUrl: 'https://www.linchongpets.com/lpCms/pet/portrait/upload',
     uploadImageUrl: 'https://www.linchongpets.com/lpCms/oss/image',
     staticResourceUrlPrefix: 'https://pic.linchongpets.com/',
-    requestUrlCms: 'http://localhost:8093/lpCms',
-    requestUrlWechat: 'http://localhost:8094/lpWechat',
+    requestUrlCms: 'http://linchong.natapp1.cc/lpCms',
+    requestUrlWechat: 'http://linchong.natapp1.cc/lpWechat',
     // uploadUrl: 'http://localhost:8093/pokemon/pet/portrait/upload',
     // uploadImageUrl: 'http://localhost:8093/lpCms/oss/image',
     socketStatus: 'AUTO'

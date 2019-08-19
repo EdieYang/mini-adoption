@@ -1,35 +1,97 @@
-.navbar{
-    position: relative
+.navbar {
+  position: relative;
 }
-.back-icon, .home-icon{
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-    display: flex;
+
+.back-icon, .home-icon, .org-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  display: flex;
 }
-.back-icon{
-    left: 16px;
+
+.back-icon {
+  left: 16px;
 }
-.home-icon{
-    left: 16px;
+
+.home-icon {
+  left: 16px;
 }
-.back-icon{
-    width: 20px!important;
-    height: 20px!important;
-    margin: auto;
+
+.org-icon {
+  left: 46px;
 }
-.home-icon{
-    width: 20px!important;
-    height: 20px!important;
-    margin: auto;
+
+.back-icon {
+  width: 20px !important;
+  height: 20px !important;
+  margin: auto;
 }
-.nav-title, .nav-icon{
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    font-size: 0;
-    font-weight: bold;
+
+.home-icon {
+  width: 20px !important;
+  height: 20px !important;
+  margin: auto;
+}
+
+@-webkit-keyframes fadeInOut {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  75% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeOutIn {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  75% {
+    opacity: 1;
+  }
+}
+
+.org-icon {
+  animation: fadeShow 3s;
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #fff;
+  border: 1rpx solid #ddd;
+  border-radius: 100%;
+  overflow: hidden;
+  margin: auto;
+  -webkit-animation-name: fadeOutIn;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count:initial;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-direction: alternate;
+}
+
+.nav-title, .nav-icon {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  font-size: 0;
+  font-weight: bold;
 }

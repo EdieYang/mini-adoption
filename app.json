@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/organize/home/home",
     "pages/index/index",
     "pages/post/index/index",
+    "pages/organize/home/home",
+    "pages/organize/card/card",
     "pages/post/adopt/adopt",
     "pages/post/lost/lost",
     "pages/post/maplocate/maplocate",

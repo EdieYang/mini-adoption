@@ -9,8 +9,8 @@
 </swiper>
 
 
-<view class="header">
-  公益组织
+<view class="brand_header">
+  <text class="brand_txt">公益组织</text>
 </view>
 <scroll-view scroll-x class="brand_scroll">
   <block wx:for="{{orgList}}" wx:key='{{index}}'>

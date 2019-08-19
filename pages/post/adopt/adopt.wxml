@@ -104,7 +104,7 @@
       <view class='input-item-left'>来源</view>
       <view class='input-item-right'>
         <view class='checkbox-item' style='{{fromType==1?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseFrom' data-type='1'>家养</view>
-        <view class='checkbox-item' style='{{fromType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseFrom' data-type='2'>救助站</view>
+        <view class='checkbox-item' style='{{fromType==2?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseFrom' data-type='2'>{{organization}}</view>
         <view class='checkbox-item' style='{{fromType==3?"border:1rpx solid #fc4768;background-color:#fc4768;color:#fff":""}}' bindtap='chooseFrom' data-type='3'>个人救助</view>
       </view>
       <view style='clear:both'></view>

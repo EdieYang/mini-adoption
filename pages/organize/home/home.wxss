@@ -1,135 +1,171 @@
-.cover_img{
+.cover_img {
   position: fixed;
-  top:0rpx;
+  top: 0rpx;
   left: 0;
-  width:100%;
+  width: 100%;
   min-height: 350rpx;
 }
 
-.cover_scroll{
+.cover_scroll {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   border-radius: 20rpx;
-  background-color:#fafafa;
+  background-color: #fafafa;
 }
 
-.scroll_portrait{
-  width:150rpx;
-  height:150rpx;
+.scroll_portrait {
+  width: 150rpx;
+  height: 150rpx;
   border-radius: 100%;
   overflow: hidden;
   position: absolute;
-  top:-50rpx;
-  left:50rpx;
+  top: -50rpx;
+  left: 70rpx;
+  background-color: #fff;
+  border: 1rpx solid #ddd;
 }
 
-.scroll_info{
+.card {
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  top: 20rpx;
+  right: 65rpx;
+}
+
+.scroll_info {
   display: flex;
   flex-direction: column;
   width: 670rpx;
-  padding-left:40rpx;
-  padding-right:40rpx;
-  padding-top:120rpx; 
-  padding-bottom:20rpx; 
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  padding-top: 120rpx;
+  padding-bottom: 20rpx;
   background-color: #fff;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;
 }
 
-.scroll_info_bottom{
-  margin-top:10rpx;
-  margin-bottom:10rpx;
+.scroll_info_bottom {
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
   display: flex;
   flex-direction: column;
   background-color: #fff;
+  width: 100%;
 }
 
-.org_header{
+.org_header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.follow{
-  width:140rpx;
-  height:50rpx;
+.follow {
+  width: 140rpx;
+  height: 50rpx;
   line-height: 50rpx;
-  color:#fff;
+  color: #fff;
   background-color: #fe3b1a;
   border-radius: 50rpx;
   text-align: center;
-  margin:0 0 ;
+  margin: 0 0;
   font-size: 25rpx;
 }
 
-.follow::after{
-  border:none;
+.follow::after {
+  border: none;
   outline: none;
 }
 
-.org_name{
-  font-size:32rpx;
+.followed {
+  width: 140rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #999;
+  border: 1rpx solid #eaeaea;
+  border-radius: 50rpx;
+  text-align: center;
+  margin: 0 0;
+  font-size: 25rpx;
+}
+
+.followed::after {
+  border: none;
+  outline: none;
+}
+
+.org_name {
+  font-size: 32rpx;
   font-weight: bold;
 }
 
-.org_title{
+.org_title {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  margin-top:10rpx;
+  justify-content: space-between;
+  margin-top: 10rpx;
 }
 
-.title_img{
-  height:40rpx;
+.org_title_left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.title_img {
+  height: 40rpx;
   width: 40rpx;
   margin-right: 10rpx;
 }
 
-.title{
+.title {
   font-size: 28rpx;
-  height:40rpx;
+  height: 40rpx;
 }
 
-.org_brief{
+.org_brief {
   font-size: 28rpx;
-  color:#999;
-  margin-top:10rpx;
+  color: #999;
+  margin-top: 10rpx;
 }
 
-.bottom_info{
-  margin-top:30rpx;
+.bottom_info {
+  margin-top: 30rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
 }
 
-.info_item{
+.info_item {
   margin-right: 34rpx;
   font-size: 28rpx;
 }
 
-.strong_num{
+.strong_num {
   font-size: 38rpx;
-  color:#2d2d2d;
+  color: #2d2d2d;
   font-weight: bold;
-  margin-left:4rpx;
+  margin-left: 4rpx;
 }
 
-.info_header{
-  height:160rpx;
+.info_header {
+  height: 160rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
 
-.tab_bar{
-  height:160rpx;
-  width:160rpx;
+.tab_bar {
+  height: 160rpx;
+  width: 160rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,32 +173,30 @@
   position: relative;
 }
 
-.tab_top{
+.tab_top {
   font-size: 28rpx;
   font-weight: bold;
 }
 
-.tab_bottom{
+.tab_bottom {
   font-size: 32rpx;
   font-weight: bold;
 }
 
-.bottom_line{
-  width:34rpx;
-  height:6rpx;
+.bottom_line {
+  width: 34rpx;
+  height: 6rpx;
   background-color: #fe3b1a;
   position: absolute;
-  bottom:0;
+  bottom: 0;
   left: 64rpx;
 }
 
-.scroll_content{
+.scroll_content {
   width: 100%;
   background-color: #fff;
+  min-height: 90vh;
 }
-
-
-
 
 /* 瀑布流区域 */
 
@@ -172,10 +206,10 @@
   margin-bottom: 40rpx;
 }
 
-.gellery_box{
+.gellery_box {
   text-align: center;
-  width:96%;
-  margin-left: 2%;  
+  width: 96%;
+  margin-left: 2%;
 }
 
 .img_box_img {
@@ -429,28 +463,27 @@
   clear: both;
 }
 
-.activity_item{
-  width:670rpx;
+.activity_item {
+  width: 670rpx;
   margin-left: 40rpx;
   display: flex;
   flex-direction: column;
   padding-bottom: 10rpx;
-  margin-top:30rpx;
-  margin-bottom:30rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
   border-radius: 20rpx;
   overflow: hidden;
-  border: 1rpx solid #000;
+  border: 1rpx solid #eaeaea;
 }
 
-.cover_item{
-  width:100%;
-  height:300rpx;
+.cover_item {
+  width: 100%;
+  height: 300rpx;
 }
 
-.cover_title{
-  width:90%;
+.cover_title {
+  width: 90%;
   font-size: 32rpx;
   margin-left: 5%;
-  padding-top:20rpx;
+  padding-top: 20rpx;
 }
-
