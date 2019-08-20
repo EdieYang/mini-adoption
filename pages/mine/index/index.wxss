@@ -111,7 +111,7 @@ page {
   color: #1c43b2;
   margin-right: 20rpx;
   background-color: #fff;
-  box-shadow: 0 5rpx 10rpx #000;
+  box-shadow: 0 4rpx 1rpx #000;
   border-radius: 50rpx;
   padding: 9rpx 20rpx;
 }

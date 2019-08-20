@@ -119,7 +119,6 @@ page {
 
 .img_box {
   text-align: center;
-  animation: fadeShow 1s;
   margin-bottom: 40rpx;
 }
 

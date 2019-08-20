@@ -16,7 +16,7 @@
         </view>
         <view class='identify-left'>
           <image class='left-top' src='{{imageBack}}' bindtap='chooseImage' data-img='2'></image>
-          <view class='left-info'>身份证正面</view>
+          <view class='left-info'>身份证反面</view>
         </view>
       </view>
       <view class="login-item">

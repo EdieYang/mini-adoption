@@ -2,8 +2,8 @@ const util = require('../../../utils/util.js')
 
 const app = getApp()
 var userId
-var imageFronDefault = '../../../images/identity-front.png'
-var imagebackDefault = '../../../images/identity-back.png'
+var imageFronDefault = '../../../images/identity-back.png'
+var imagebackDefault = '../../../images/identity-front.png'
 
 
 Page({

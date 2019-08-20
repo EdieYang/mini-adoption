@@ -15,11 +15,11 @@ var activityListArr = []
 let col1H = 0
 let col2H = 0
 let chosenId = 1
-var  bottomLast = false
+var bottomLast = false
 var changingStatus = false
 var loadingCount = 10
 var images = []
-var orgId=''
+var orgId = ''
 
 Page({
 
@@ -70,7 +70,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     orgId = options.orgId
     if (options.orgId == '' || typeof options.orgId == 'undefined' || options.orgId == null) {
       orgId = options.scene
@@ -79,13 +79,13 @@ Page({
         backIcon: ''
       })
     }
-    userId=app.globalData.userId
+    userId = app.globalData.userId
     this.getOrgDetail()
     this.getOrgStatistic()
     this.getOrgPetAdoptList()
   },
 
-  getOrgDetail: function () {
+  getOrgDetail: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/info',
@@ -93,30 +93,30 @@ Page({
         orgId: orgId
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         that.setData({
           orgDetail: res.data.data
         })
       }
     })
   },
-  getOrgStatistic: function () {
+  getOrgStatistic: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/statistic',
       data: {
         orgId: orgId,
-        userId:userId
+        userId: userId
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         that.setData({
           orgStatistic: res.data.data
         })
       }
     })
   },
-  getOrgPetAdoptList: function () {
+  getOrgPetAdoptList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/pets',
@@ -133,7 +133,7 @@ Page({
         pageSize: pageSize
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var petInfoList = res.data.data.list
         bottomLast = false
         if (res.data.data.list.length < pageSize) {
@@ -153,7 +153,7 @@ Page({
       }
     })
   },
-  getOrgGalleryList: function () {
+  getOrgGalleryList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/gallery',
@@ -163,9 +163,9 @@ Page({
         pageSize: pageSize
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var galleryList = res.data.data.list
-       bottomLast = false
+        bottomLast = false
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
         }
@@ -180,7 +180,7 @@ Page({
       }
     })
   },
-  getOrgActivityList: function () {
+  getOrgActivityList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/activity',
@@ -190,9 +190,9 @@ Page({
         pageSize: pageSize
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var activityList = res.data.data.list
-       bottomLast = false
+        bottomLast = false
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
         }
@@ -205,11 +205,11 @@ Page({
       }
     })
   },
-  chooseTab: function (e) {
+  chooseTab: function(e) {
     var that = this
     chosenId = e.currentTarget.dataset.id;
     wx.pageScrollTo({
-      scrollTop: 130+this.data.marginNav,
+      scrollTop: 130 + this.data.marginNav,
       duration: 100
     })
     this.setData({
@@ -236,7 +236,7 @@ Page({
       that.getOrgActivityList()
     }
   },
-  onImageLoad: function (e) {
+  onImageLoad: function(e) {
     let petId = e.currentTarget.id;
     let oImgW = e.detail.width; //图片原始宽度
     let oImgH = e.detail.height; //图片原始高度
@@ -281,7 +281,7 @@ Page({
     this.setData(data);
   },
 
-  onGalleryImageLoad: function (e) {
+  onGalleryImageLoad: function(e) {
     let id = e.currentTarget.id;
     let oImgW = e.detail.width; //图片原始宽度
     let oImgH = e.detail.height; //图片原始高度
@@ -325,7 +325,7 @@ Page({
     }
     this.setData(data);
   },
-  viewGallery: function (e) {
+  viewGallery: function(e) {
     var src = e.currentTarget.dataset.image
     for (var i = 0; i < galleryListArr.length; i++) {
       images.push(galleryListArr[i].image)
@@ -335,7 +335,7 @@ Page({
       urls: images // 需要预览的图片http链接列表
     })
   },
-  cancelFollow: function () {
+  cancelFollow: function() {
     var that = this
     wx.showModal({
       title: '',
@@ -352,7 +352,7 @@ Page({
             header: {
               'content-type': 'application/x-www-form-urlencoded',
             },
-            success: function (res) {
+            success: function(res) {
               that.getOrgStatistic()
             }
           })
@@ -362,7 +362,7 @@ Page({
       }
     })
   },
-  follow: function () {
+  follow: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/follow',
@@ -374,12 +374,12 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
+      success: function(res) {
         that.getOrgStatistic()
       }
     })
   },
-  orgPostCard:function(){
+  orgPostCard: function() {
     wx.showLoading({
       title: '生成名片中',
     })
@@ -387,7 +387,7 @@ Page({
       url: '../card/card?orgId=' + orgId,
     })
   },
-  toActivityDetail:function(e){
+  toActivityDetail: function(e) {
     var url = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '../../redirect/redirect?url=' + url,
@@ -396,18 +396,18 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
-  toAdoptionDetail: function (e) {
+  toAdoptionDetail: function(e) {
     var petId = e.currentTarget.dataset.petid
     wx.navigateTo({
       url: '../../adoption/detail/detail?petId=' + petId,
@@ -416,24 +416,24 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
-  onPageScroll: function (res) {
+  onPageScroll: function(res) {
     var that = this
     console.log(res.scrollTop)
     console.log(130 + that.data.marginNav)
@@ -444,7 +444,7 @@ Page({
         orgIcon: that.data.orgDetail.logo,
         orgIconShow: false,
         backIcon: '../../images/back-pre-black.png',
-        posFix: 'position: fixed;top:'+that.data.marginNav+'px;left:0;'
+        posFix: 'position: fixed;top:' + that.data.marginNav + 'px;left:0;'
       })
     }
 
@@ -463,15 +463,17 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     var that = this
     //刷新页面
     if (!bottomLast) {
       pageNum++;
-      console.log('===')
       if (chosenId == 1) {
-        console.log('===')
         that.getOrgPetAdoptList()
+      } else if (chosenId == 2) {
+        that.getOrgGalleryList()
+      } else {
+        that.getOrgActivityList()
       }
     }
   },
@@ -479,7 +481,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
