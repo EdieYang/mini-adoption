@@ -1,12 +1,12 @@
 <nav-bar title-text="{{navTitle}}" backIcon='{{backIcon}}' background='{{background}}' homeIcon='{{homeIcon}}' orgIcon='{{orgIcon}}'></nav-bar>
 
-<image class='cover_img' src="{{orgDetail.coverImg}}"></image>
+<image class='cover_img' src="{{orgDetail.coverImg}}" mode="aspectFill"></image>
 
 <view class="cover_scroll" style="margin-top:{{130+marginNav}}px">
   <image class="scroll_portrait" src="{{orgDetail.logo}}" wx:if='{{orgIconShow}}'></image>
   <image class='card' src="../../../images/share-mini.png" bindtap="orgPostCard"></image>
   <text style="font-size:24rpx;position:absolute;top: 100rpx;right: 44rpx;width:120rpx;text-align:center">公益名片</text>
-  <view style="{{posFix}};background-color:#fafafa;width:100%;">
+  <view style="{{posFix}};background-color:#fafafa;width:100%; border-top-left-radius: 20rpx;border-top-right-radius: 20rpx;">
     <view class="scroll_info" style="{{posFix!=''?'display:none;animation: fadeOut 1s;':''}}">
       <view class="org_header">
         <view class="org_name">{{orgDetail.orgName}}</view>

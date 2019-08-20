@@ -15,7 +15,7 @@
 <scroll-view scroll-x class="brand_scroll">
   <block wx:for="{{orgList}}" wx:key='{{index}}'>
     <view class="scroll_cover" bindtap="orgDetail" data-orgid='{{item.orgId}}'>
-      <image src="{{item.coverImg}}" class="scroll_img" ></image>
+      <image src="{{item.coverImg}}" class="scroll_img" mode="aspectFill"></image>
       <view class="scroll_text">{{item.orgName}}</view>
     </view>
   </block>
