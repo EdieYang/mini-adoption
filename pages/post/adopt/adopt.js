@@ -571,6 +571,7 @@ Page({
     var that = this
     wx.showLoading({
       title: '正在发布',
+      mask:true
     })
     var formId = e.detail.formId
 

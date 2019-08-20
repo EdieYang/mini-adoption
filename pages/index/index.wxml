@@ -10,7 +10,7 @@
 
 
 <view class="brand_header">
-  <text class="brand_txt">公益组织</text>
+  <text class="brand_txt">公益大家庭</text>
 </view>
 <scroll-view scroll-x class="brand_scroll">
   <block wx:for="{{orgList}}" wx:key='{{index}}'>
