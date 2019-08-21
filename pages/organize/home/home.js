@@ -80,9 +80,19 @@ Page({
         backIcon: ''
       })
     }
-    userId = app.globalData.userId
+    app.IfAccess().then(function (res) {
+      if (res) {
+        userId = app.globalData.userId;
+        if (userId && typeof (userId) != 'undefined' && userId != '') {
+          that.setData({
+            userId: userId
+          })
+          wx.hideLoading()
+          that.getOrgStatistic()
+        }
+      }
+    })
     this.getOrgDetail()
-    this.getOrgStatistic()
     this.getOrgPetAdoptList()
   },
 
@@ -439,19 +449,27 @@ Page({
     console.log(res.scrollTop)
     console.log(130 + that.data.marginNav)
     if (res.scrollTop >= 130) {
+      var backIcon = '../../images/back-pre-black.png'
+      if(that.data.homeIcon){
+        backIcon=''
+      }
       this.setData({
         navTitle: that.data.orgDetail.orgName,
         background: 'rgba(255, 255, 255, 255)',
         orgIcon: that.data.orgDetail.logo,
         orgIconShow: false,
-        backIcon: '../../images/back-pre-black.png',
+        backIcon: backIcon,
         posFix: 'position: fixed;top:' + that.data.marginNav + 'px;left:0;'
       })
     }
 
     if (res.scrollTop < 130) {
+      var backIcon = '../../images/back-pre.png'
+      if (that.data.homeIcon) {
+        backIcon = ''
+      }
       this.setData({
-        backIcon: '../../images/back-pre.png',
+        backIcon: backIcon,
         posFix: '',
         navTitle: '',
         background: '',

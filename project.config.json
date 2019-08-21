@@ -36,6 +36,18 @@
 		"game": {
 			"currentL": -1,
 			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "跳转海报主页",
+					"pathName": "pages/organize/home/home",
+					"query": "scene=1",
+					"scene": 1011
+				}
+			]
 		}
 	}
 }
