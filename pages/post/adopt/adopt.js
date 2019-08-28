@@ -145,7 +145,8 @@ Page({
     showAddPhotoCover: true,
     petName: '',
     organization: '公益机构',
-    organizationId:''
+    organizationId:'',
+    inputBorder: false
   },
 
   /**
@@ -748,6 +749,9 @@ Page({
               title: '须填写领养其他要求',
               icon: 'none',
               duration: 2000
+            })
+            that.setData({
+              inputBorder:true
             })
             return;
           }

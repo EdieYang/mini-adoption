@@ -165,35 +165,34 @@
       </button>
     </form>
   </view>
-  <view class='det-contact-item'>
-    <view class='det-contact-left'>
-      <image class='contact-img' src='{{adoptUserInfo.portrait}}'></image>
-      <view class='contact-info'>
-        <view class='con-name'>{{adoptUserInfo.nickName}}</view>
-        <!-- <view class='con-tag'>爱心救助人</view> -->
-        <view class='con-info'>
-          <view wx:if='{{adoptUserInfo.ageFrom!=""}}'>{{adoptUserInfo.ageFrom}}</view>
-          <view wx:if='{{adoptUserInfo.starSign!=""}}'>{{adoptUserInfo.starSign}}</view>
-          <view wx:if='{{adoptUserInfo.gender==0}}'>
-            男生
+  <form report-submit="true" bindsubmit='home'>
+    <button form-type="submit" class='formid-cover' hover-class='det-hover'>
+      <view class='det-contact-left'>
+        <image class='contact-img' src='{{adoptUserInfo.portrait}}'></image>
+        <view class='contact-info'>
+          <view class='con-name'>{{adoptUserInfo.nickName}}</view>
+          <!-- <view class='con-tag'>爱心救助人</view> -->
+          <view class='con-info'>
+            <view wx:if='{{adoptUserInfo.ageFrom!=""}}'>{{adoptUserInfo.ageFrom}}</view>
+            <view wx:if='{{adoptUserInfo.starSign!=""}}'>{{adoptUserInfo.starSign}}</view>
+            <view wx:if='{{adoptUserInfo.gender==0}}'>
+              男生
+            </view>
+            <view wx:if='{{adoptUserInfo.gender==1}}'>
+              女生
+            </view>
+            <view wx:if='{{adoptUserInfo.ageFrom=="" && adoptUserInfo.starSign==""}}'>
+              信息完善度：50%
+            </view>
+            <view class='con-ago'>{{adoptUserInfo.lastLoginTime}}</view>
           </view>
-          <view wx:if='{{adoptUserInfo.gender==1}}'>
-            女生
-          </view>
-          <view wx:if='{{adoptUserInfo.ageFrom=="" && adoptUserInfo.starSign==""}}'>
-            信息完善度：50%
-          </view>
-          <view class='con-ago'>{{adoptUserInfo.lastLoginTime}}</view>
         </view>
       </view>
-    </view>
-    <form report-submit="true" bindsubmit="home">
+
       <input value='{{adoptUserInfo.userId}}' name='adopterUserId' style='display:none'></input>
-      <button form-type="submit" class='formid-cover'>
-        <image class='con-entrance' src='../../../images/entrance.png'></image>
-      </button>
-    </form>
-  </view>
+      <image class='con-entrance' src='../../../images/entrance.png'></image>
+    </button>
+  </form>
 
   <view class='contact-btns' wx:if='{{adoptUserInfo.userId!=userId}}'>
     <view class='header-line'>

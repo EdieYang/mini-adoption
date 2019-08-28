@@ -16,13 +16,13 @@ App({
     entranceScene: '',
     chatSocket: {},
     // requestUrl: 'https://www.linchongpets.com/lpCms',
-    requestUrlCms: 'https://www.linchongpets.com/lpCms',
-    requestUrlWechat: 'https://www.linchongpets.com/lpWechat',
+    // requestUrlCms: 'https://www.linchongpets.com/lpCms',
+    // requestUrlWechat: 'https://www.linchongpets.com/lpWechat',
     uploadUrl: 'https://www.linchongpets.com/lpCms/pet/portrait/upload',
     uploadImageUrl: 'https://www.linchongpets.com/lpCms/oss/image',
     staticResourceUrlPrefix: 'https://pic.linchongpets.com/',
-    // requestUrlCms: 'http://linchong.natapp1.cc/lpCms',
-    // requestUrlWechat: 'http://linchong.natapp1.cc/lpWechat',
+    requestUrlCms: 'http://localhost:8093/lpCms',
+    requestUrlWechat: 'http://localhost:8094/lpWechat',
     // uploadUrl: 'http://localhost:8093/pokemon/pet/portrait/upload',
     // uploadImageUrl: 'http://localhost:8093/lpCms/oss/image',
     socketStatus: 'AUTO'
@@ -54,7 +54,7 @@ App({
     var that = this
     this.globalData.socketStatus = 'AUTO'
     this.globalData.chatSocket = wx.connectSocket({
-      url: 'wss://www.linchongpets.com/websocket?uid=' + this.globalData.userId,
+      url: 'ws://localhost:8098/websocket?uid=' + this.globalData.userId,
       header: {
         'content-type': 'application/json'
       },
@@ -114,7 +114,7 @@ App({
         if (res.code) {
           //register new temp user
           wx.request({
-            url: requestUrlWechat + '/miniSystem/login',
+            url: requestUrlWechat + '/wxmini/user/login',
             method: "GET",
             data: {
               code: res.code
@@ -142,7 +142,7 @@ App({
   checkIfUserAuthorized: function(userId, resolve) {
     var that = this
     wx.request({
-      url: requestUrlWechat + '/miniSystem/checkIfUserAuthorized',
+      url: requestUrlWechat + '/wxmini/user/checkIfUserAuthorized',
       method: "GET",
       data: {
         userId: userId
@@ -172,7 +172,7 @@ App({
   },
   doUserLastLogin: function(userId) {
     wx.request({
-      url: requestUrlWechat + '/miniSystem/lastLogin',
+      url: requestUrlWechat + '/wxmini/user/lastLogin',
       method: "POST",
       data: {
         userId: userId

@@ -155,7 +155,7 @@
 
 
         <view class='ruler-other' wx:if='{{index==9}}'>
-          <textarea class='check-textarea' placeholder='请输入信息' placeholder-style='color;#666' auto-height='true' adjust-position='true' disabled='{{!item.checked}}' name='requirementOther' cursor-spacing='30' bindinput='requirementOtherInput' maxlength='200' value='{{item.name!="其他(先勾选再填信息)"?item.name:""}}'></textarea>
+          <textarea class='check-textarea' placeholder='请输入信息' placeholder-style='color;#666' auto-height='true' adjust-position='true' disabled='{{!item.checked}}' name='requirementOther' cursor-spacing='30' bindinput='requirementOtherInput' maxlength='200' value='{{item.name!="其他(先勾选再填信息)"?item.name:""}}' style='{{inputBorder?"border: 1rpx solid #fc4768;":""}}'></textarea>
           <view class='currentLeftWords'>{{currentDetailWordNumber}}/200</view>
         </view>
       </block>
@@ -204,10 +204,6 @@
       </view>
       <view style='clear:both'></view>
     </view>
-    <!-- <view class='warn-item'>
-      <image class='check-icon' src='../../../images/check-icon.png'></image>
-      <text class='warn-item-txt'>手机号只作为短信通知用，不展示给领养人</text>
-    </view> -->
   </view>
 
   <view class='check-ok' >
