@@ -180,8 +180,8 @@
       </view>
       <view class='info-label-pic'>身份证照片</view>
       <view class='info-item-pic'>
-        <image src="{{contractInfo.idCardFrontUrl}}" class="info-pic" mode="aspectFill"></image>
-        <image src="{{contractInfo.idCardBackUrl}}"  class="info-pic" mode="aspectFill"></image>
+        <image src="{{contractInfo.idCardFrontUrl}}?x-oss-process=image/resize,w_200,h_200/auto-orient,1/quality,q_90/format,jpg/watermark,type_d3F5LXplbmhlaQ,size_10,text_5LuF5L6b6YK75a6g5bmz5Y-w5L2_55So,color_2d2d2d,t_90,g_center,voffset_0" class="info-pic" mode="aspectFill"></image>
+        <image src="{{contractInfo.idCardBackUrl}}?x-oss-process=image/resize,w_200,h_200/auto-orient,1/quality,q_90/format,jpg/watermark,type_d3F5LXplbmhlaQ,size_10,text_5LuF5L6b6YK75a6g5bmz5Y-w5L2_55So,color_2d2d2d,t_90,g_center,voffset_0"  class="info-pic" mode="aspectFill"></image>
       </view>
       <view class='info-label'>领养人签名</view>
       <view class='info-item' wx:if='{{contractInfo.applySign}}'>

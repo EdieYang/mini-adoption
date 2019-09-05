@@ -147,6 +147,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  width: 378rpx;
 }
 
 .ext-img-left {
@@ -200,6 +201,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  width:252rpx;
 }
 
 .ext-img {
@@ -211,7 +213,9 @@
 
 .ext-name {
   font-size: 28rpx;
+  width:150rpx;
   margin-left: 20rpx;
+  word-break: break-all;
 }
 
 .footer-cover {

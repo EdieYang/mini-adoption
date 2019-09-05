@@ -213,7 +213,7 @@
     </view>
   </view>
 
-  <button class='publish' form-type="submit">发布</button>
+  <button class='publish' form-type="submit" disabled='{{disabled}}'>发布</button>
 
 
 </form>

@@ -14,8 +14,9 @@ let col1H = 0
 let col2H = 0
 let chosenId = 3
 let bottomLast = false
-var changingStatus = false
-var loadingCount = 10
+
+
+
 Page({
 
   /**
@@ -24,7 +25,7 @@ Page({
   data: {
     marginNav: app.globalData.marginNav,
     tabFix: false,
-    filtered:false,
+    filtered: false,
     collectMini: true,
     chosenId: 3,
     userId: '',
@@ -93,8 +94,8 @@ Page({
     let petId = e.currentTarget.id;
     let oImgW = e.detail.width; //图片原始宽度
     let oImgH = e.detail.height; //图片原始高度
-    let imgWidth = 155.5; //图片设置的宽度
-    let scale = imgWidth / oImgW; //比例计算
+    let imgWidth = 180; //图片设置的宽度
+    let scale = imgWidth / oImgW;
     let imgHeight = oImgH * scale; //自适应高度
     let petObj = null;
 
@@ -106,7 +107,6 @@ Page({
         break;
       }
     }
-    loadingCount = loadingCount - 1;
 
     let col1 = this.data.col1;
     let col2 = this.data.col2;
@@ -121,17 +121,9 @@ Page({
       col1: col1,
       col2: col2
     };
-    if (loadingCount == 0) {
-      data.petCols = [];
-    }
-    if (changingStatus) {
-      this.setData({
-        col1: [],
-        col2: []
-      })
-      return
-    }
+
     this.setData(data);
+    
   },
   getPetAdoptList: function() {
     var that = this
@@ -150,8 +142,10 @@ Page({
       },
       method: "GET",
       success: function(res) {
+        setTimeout(function(){
+          wx.hideLoading()
+        },3000)
         var petInfoList = res.data.data.list
-        var bottomLast = false
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
         }
@@ -159,7 +153,6 @@ Page({
           petInfoList[i].petCharacteristic = JSON.parse(petInfoList[i].petCharacteristic)
         }
         petInfoListArr = petInfoListArr.concat(petInfoList)
-        changingStatus = false
         that.setData({
           petInfoList: petInfoListArr,
           showLoading: false,
@@ -169,12 +162,12 @@ Page({
       }
     })
   },
-  getOrgList:function(){
+  getOrgList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/list',
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         that.setData({
           orgList: res.data.data
         })
@@ -226,14 +219,12 @@ Page({
       method: "GET",
       success: function(res) {
         var petInfoList = res.data.data.list
-        var bottomLast = false
         if (petInfoList.length < pageSize) {
           bottomLast = true
         }
         for (var i = 0; i < petInfoList.length; i++) {
           petInfoList[i].petCharacteristic = JSON.parse(petInfoList[i].petCharacteristic)
         }
-        changingStatus = false
         petInfoListArr = petInfoListArr.concat(petInfoList)
         that.setData({
           petInfoList: petInfoListArr,
@@ -260,14 +251,13 @@ Page({
       petInfoList: [],
       col1: [],
       col2: [],
-      petCols: [],
-      loadingCount: 10
+      petCols: []
     })
-    changingStatus = true
     petInfoListArr = []
     pageNum = 1
     col1H = 0
     col2H = 0
+    bottomLast = false
     if (chosenId == 1) {
       that.getFollowAdoption()
     } else {
@@ -306,8 +296,13 @@ Page({
     age = 1
     sex = 1
     healthStatus = 1
+    petInfoListArr = []
+    pageNum = 1
+    col1H = 0
+    col2H = 0
+    bottomLast = false
     this.setData({
-      filtered:false,
+      filtered: false,
       ageType: age,
       sexType: sex,
       healthStatus: healthStatus
@@ -315,14 +310,14 @@ Page({
     this.genFormId(e.detail.formId)
   },
   submit: function(e) {
-    var filtered=false
+    var filtered = false
     var formId = e.detail.formId
     if (age == 1) {
       this.setData({
         ageArr: ''
       })
     } else if (age == 2) {
-      filtered=true
+      filtered = true
       this.setData({
         ageArr: '0-3个月,4-6个月,7-12个月'
       })
@@ -395,6 +390,7 @@ Page({
     col1H = 0
     col2H = 0
     pageNum = 1
+    bottomLast=false
     this.getPetAdoptList()
     this.genFormId(formId)
   },
@@ -427,9 +423,9 @@ Page({
       success: function(res) {}
     })
   },
-  orgDetail:function(e){
+  orgDetail: function(e) {
     wx.navigateTo({
-      url: '../organize/home/home?orgId='+e.currentTarget.dataset.orgid,
+      url: '../organize/home/home?orgId=' + e.currentTarget.dataset.orgid,
     })
   },
 
@@ -439,6 +435,9 @@ Page({
     //刷新页面
     if (!bottomLast) {
       pageNum++;
+      wx.showLoading({
+        title: '抓会儿蜜蜂~',
+      })
       if (chosenId == 1) {
         that.getFollowAdoption()
       } else {
@@ -482,13 +481,13 @@ Page({
         collectMini: false
       })
     }
-    if (res.scrollTop >= 185) {
+    if (res.scrollTop >= 220) {
       this.setData({
-        tabFix: true
+        tabFix: 'position:fixed;top:'+(that.data.marginNav-10)+'px;left:0;'
       })
-    } else if (res.scrollTop < 185) {
+    } else{
       this.setData({
-        tabFix: false
+        tabFix: ''
       })
     }
   },
@@ -498,6 +497,7 @@ Page({
    */
   onPullDownRefresh: function() {
     var that = this
+    bottomLast=false
     this.setData({
       showLoading: true,
       petInfoList: [],

@@ -55,10 +55,10 @@
             </view>
           </view>
         </view>
-        <view class='ext-right'>
+        <!-- <view class='ext-right'>
           <image class='ext-img' src='{{item.portrait}}'></image>
           <view class='ext-name'>{{item.nickName}}</view>
-        </view>
+        </view> -->
       </view>
       <view class='ext-msg' wx:if='{{item.applyStatus==5}}'>
         申请已取消：{{item.applyResp}}

@@ -408,6 +408,11 @@ page {
   font-size: 26rpx;
 }
 
+.publish::after{
+  border:none;
+  outline:none;
+}
+
 .ruler-cover {
   display: flex;
   flex-direction: column;

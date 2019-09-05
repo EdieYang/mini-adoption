@@ -22,12 +22,6 @@
     </view>
   </view>
 </view>
-<!-- 
-<view class='filter-btn' style='margin-top:{{marginNav+50}}px'>
-  <view class='filter-txt'>筛选条件</view>
-  <image class='filter-img' src='../../../images/arrow-down.png'></image>
-</view> -->
-
 
 <view class='collect-cover' style='margin-top:{{marginNav+50}}px;'>
 

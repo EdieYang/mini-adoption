@@ -28,7 +28,7 @@ Page({
     wx.getSystemInfo({
       success(res) {
         that.setData({
-          screenHeight: res.screenWidth * 5.8
+          screenHeight: res.screenWidth * 6.2
         })
         that.getPetAdoptAgreementDetial()
       }
@@ -56,6 +56,9 @@ Page({
   drawContract: function(contractInfo, petInfo) {
     var that = this
     var innerHeight = 0
+    context.setFillStyle('#ffffff')
+    context.fillRect(0, 0,screenWidth,that.data.screenHeight);
+    context.setFillStyle('#000000')
     context.setFontSize(20)
     context.fillText('领养协议', (screenWidth - context.measureText('领养协议').width) / 2, 40)
     context.setFontSize(16)
@@ -120,17 +123,33 @@ Page({
         context.setFontSize(16)
         innerHeight = that.drawText('姓名：' + contractInfo.applyName + '      手机号：' + contractInfo.applyPhone, 15, innerHeight, 50, screenWidth)
         innerHeight = that.drawText('联系地址：' + contractInfo.applyAddress, 15, innerHeight, 50, screenWidth)
-        innerHeight = that.drawText('签名：', 15, innerHeight, 50, screenWidth)
+        innerHeight = that.drawText('身份证：', 15, innerHeight, 50, screenWidth)
         wx.getImageInfo({
-          src: that.data.photoPrefix + contractInfo.applySign,
+          src: contractInfo.idCardFrontUrl +'?x-oss-process=image/resize,w_200,h_200/auto-orient,1/quality,q_90/format,jpg/watermark,type_d3F5LXplbmhlaQ,size_10,text_5LuF5L6b6YK75a6g5bmz5Y-w5L2_55So,color_2d2d2d,t_90,g_center,voffset_0',
           success(res) {
-            context.drawImage(res.path, 50, innerHeight - 20, 100, 100)
-            innerHeight += 100
-            innerHeight = that.drawText('日期：' + contractInfo.signTime, 15, innerHeight, 50, screenWidth)
-            context.draw()
-            wx.hideLoading()
+            context.drawImage(res.path, 50, innerHeight - 20, 200, 100)
+            wx.getImageInfo({
+              src: contractInfo.idCardBackUrl +'?x-oss-process=image/resize,w_200,h_200/auto-orient,1/quality,q_90/format,jpg/watermark,type_d3F5LXplbmhlaQ,size_10,text_5LuF5L6b6YK75a6g5bmz5Y-w5L2_55So,color_2d2d2d,t_90,g_center,voffset_0',
+              success(res) {
+                innerHeight += 110
+                context.drawImage(res.path, 50, innerHeight - 20, 200, 100)
+                innerHeight += 110
+                innerHeight = that.drawText('签名：', 15, innerHeight, 50, screenWidth)
+                wx.getImageInfo({
+                  src: that.data.photoPrefix + contractInfo.applySign,
+                  success(res) {
+                    context.drawImage(res.path, 50, innerHeight - 20, 100, 100)
+                    innerHeight += 100
+                    innerHeight = that.drawText('日期：' + contractInfo.signTime, 15, innerHeight, 50, screenWidth)
+                    context.draw()
+                    wx.hideLoading()
+                  }
+                })
+              }
+            })
           }
         })
+        
       }
     })
   },

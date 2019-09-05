@@ -35,6 +35,7 @@ Page({
   data: {
     marginNav: app.globalData.marginNav,
     photoPrefix: app.globalData.staticResourceUrlPrefix,
+    disabled:false,
     ImageUrls: [],
     content: '',
     showAddPhotoCover: showAddPhotoCover,
@@ -570,6 +571,9 @@ Page({
   },
   submitNew: function(e) {
     var that = this
+    this.setData({
+      disabled:true
+    })
     wx.showLoading({
       title: '正在发布',
       mask:true
@@ -611,6 +615,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -622,6 +629,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -632,6 +642,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -641,6 +654,9 @@ Page({
         title: '须选择宠物类别',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -653,6 +669,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -663,6 +682,9 @@ Page({
         title: '须选择是否绝育',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -676,6 +698,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -686,6 +711,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -695,6 +723,9 @@ Page({
         title: '须选择宠物来源',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -707,6 +738,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -716,6 +750,9 @@ Page({
         title: '须选择宠物毛发',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -733,10 +770,6 @@ Page({
       }
     }
 
-
-
-
-
     var requirementList = this.data.requirements
     var requirementReq = []
     for (var i = 0; i < requirementList.length; i++) {
@@ -751,8 +784,10 @@ Page({
               duration: 2000
             })
             that.setData({
-              inputBorder:true
+              inputBorder:true,
+              disabled:false
             })
+
             return;
           }
           item.name = this.data.requirementOther
@@ -771,6 +806,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -780,6 +818,9 @@ Page({
         title: '须填写宠物送养故事',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -791,12 +832,18 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     } else if (region[0] != '上海市') {
       wx.showToast({
         title: '仅限上海本地送养！',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -815,6 +862,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -824,6 +874,9 @@ Page({
         duration: 1000,
         icon: 'none'
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -832,6 +885,9 @@ Page({
         title: '须同意邻宠领养平台送养规则',
         duration: 3000,
         icon: 'none'
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
