@@ -12,7 +12,8 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
-    photoPrefix: app.globalData.staticResourceUrlPrefix
+    photoPrefix: app.globalData.staticResourceUrlPrefix,
+    waterPrint: '?x-oss-process=image/resize,w_200,h_200/auto-orient,1/quality,q_90/format,jpg/watermark,type_d3F5LXplbmhlaQ,size_10,text_5LuF5L6b6YK75a6g5bmz5Y-w5L2_55So,color_2d2d2d,t_90,g_center,voffset_0'
   },
 
   /**
@@ -72,6 +73,15 @@ Page({
       success: function(res) {}
     })
   },
+  previewIdcard: function() {
+    var imageUrl = []
+    imageUrl.push(this.data.contractInfo.idCardFrontUrl + this.data.waterPrint)
+    imageUrl.push(this.data.contractInfo.idCardBackUrl + this.data.waterPrint)
+    wx.previewImage({
+      current: this.data.contractInfo.idCardFrontUrl + this.data.waterPrint,
+      urls: imageUrl
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -117,6 +127,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-  }
+  onShareAppMessage: function() {}
 })

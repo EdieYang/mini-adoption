@@ -129,14 +129,7 @@ Page({
       }
     }
 
-    wx.getSystemInfo({
-      success(res) {
-        that.setData({
-          screenWidth: res.screenWidth
-        })
-        that.generatePost()
-      }
-    })
+    that.generatePost()
   },
   drawText: function(ctx, str, leftWidth, initHeight, canvasWidth) {
     var lineWidth = 0;

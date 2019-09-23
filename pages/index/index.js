@@ -14,8 +14,8 @@ let col1H = 0
 let col2H = 0
 let chosenId = 3
 let bottomLast = false
-
-
+var imageOnLoadCounter = 0
+var listTimeOut = ''
 
 Page({
 
@@ -54,7 +54,8 @@ Page({
     pageStatus: true,
     col1: [],
     col2: [],
-    images: []
+    images: [],
+    bottomLast: bottomLast
   },
 
   /**
@@ -73,9 +74,6 @@ Page({
       if (res) {
         userId = app.globalData.userId;
         if (userId && typeof(userId) != 'undefined' && userId != '') {
-          that.setData({
-            userId: userId
-          })
           wx.hideLoading()
           that.getPetAdoptList()
           that.getUnreadMessage()
@@ -99,7 +97,7 @@ Page({
     let imgHeight = oImgH * scale; //自适应高度
     let petObj = null;
 
-    let petList = this.data.petInfoList;
+    let petList = petInfoListArr;
     for (let i = 0; i < petList.length; i++) {
       let pet = petList[i];
       if (pet.petId === petId) {
@@ -108,6 +106,11 @@ Page({
       }
     }
 
+    if (petObj == null) {
+      return
+    }
+
+    imageOnLoadCounter++;
     let col1 = this.data.col1;
     let col2 = this.data.col2;
     if (col1H <= col2H) {
@@ -117,13 +120,16 @@ Page({
       col2H += imgHeight;
       col2.push(petObj);
     }
-    let data = {
-      col1: col1,
-      col2: col2
-    };
 
-    this.setData(data);
-    
+    if (imageOnLoadCounter == 10) {
+      let data = {
+        col1: col1,
+        col2: col2
+      };
+      this.setData(data);
+      imageOnLoadCounter = 0
+    }
+
   },
   getPetAdoptList: function() {
     var that = this
@@ -142,9 +148,9 @@ Page({
       },
       method: "GET",
       success: function(res) {
-        setTimeout(function(){
+        listTimeOut = setTimeout(function() {
           wx.hideLoading()
-        },3000)
+        }, 3000)
         var petInfoList = res.data.data.list
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
@@ -154,9 +160,9 @@ Page({
         }
         petInfoListArr = petInfoListArr.concat(petInfoList)
         that.setData({
-          petInfoList: petInfoListArr,
           showLoading: false,
-          petCols: petInfoList
+          petCols: petInfoList,
+          bottomLast: bottomLast
         })
         wx.stopPullDownRefresh()
       }
@@ -227,7 +233,6 @@ Page({
         }
         petInfoListArr = petInfoListArr.concat(petInfoList)
         that.setData({
-          petInfoList: petInfoListArr,
           petCols: petInfoList,
           showLoading: false,
           bottomLast: bottomLast
@@ -248,7 +253,6 @@ Page({
     this.setData({
       showLoading: true,
       chosenId: chosenId,
-      petInfoList: [],
       col1: [],
       col2: [],
       petCols: []
@@ -305,7 +309,8 @@ Page({
       filtered: false,
       ageType: age,
       sexType: sex,
-      healthStatus: healthStatus
+      healthStatus: healthStatus,
+      bottomLast: bottomLast
     })
     this.genFormId(e.detail.formId)
   },
@@ -381,7 +386,6 @@ Page({
     this.setData({
       showFilter: false,
       showLoading: true,
-      petInfoList: [],
       petCols: [],
       col1: [],
       col2: [],
@@ -390,7 +394,7 @@ Page({
     col1H = 0
     col2H = 0
     pageNum = 1
-    bottomLast=false
+    bottomLast = false
     this.getPetAdoptList()
     this.genFormId(formId)
   },
@@ -464,28 +468,28 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearTimeout(listTimeOut)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    clearTimeout(listTimeOut)
   },
   onPageScroll: function(res) {
     var that = this
     console.log(res);
-    if (res.scrollTop > 40) {
+    if (res.scrollTop > 40 && this.data.collectMini) {
       this.setData({
         collectMini: false
       })
     }
-    if (res.scrollTop >= 220) {
+    if (res.scrollTop >= 220 && this.data.tabFix == '') {
       this.setData({
-        tabFix: 'position:fixed;top:'+(that.data.marginNav-10)+'px;left:0;'
+        tabFix: 'position:fixed;top:' + (that.data.marginNav - 10) + 'px;left:0;'
       })
-    } else{
+    } else if (res.scrollTop < 220 && this.data.tabFix != '') {
       this.setData({
         tabFix: ''
       })
@@ -497,13 +501,13 @@ Page({
    */
   onPullDownRefresh: function() {
     var that = this
-    bottomLast=false
+    bottomLast = false
     this.setData({
       showLoading: true,
-      petInfoList: [],
       col1: [],
       col2: [],
       petCols: [],
+      bottomLast: bottomLast
     })
     petInfoListArr = []
     pageNum = 1

@@ -9,20 +9,21 @@ var showMenu;
 var chooseTab;
 
 //表单数据初始化
-var petName = '';
-var breed = '';
-var wxAccount = '';
-var phone = '';
-var specialPoint = '';
-var detailInfo = '';
-var reward = 0;
-var droplocation = '';
-var recordId = '';
+var petName = ''
+var breed = ''
+var wxAccount = ''
+var phone = ''
+var specialPoint = ''
+var detailInfo = ''
+var reward = 0
+var droplocation = ''
+var recordId = ''
+var organizationId = ''
 
 var showAddPhotoCover = true; //是否显示增加图片框
 var imgCount = 0; //已显示照片数
-var modifyFlag = false;
-var keepStorage = false;
+var modifyFlag = false
+var keepStorage = false
 
 var loadState;
 
@@ -35,7 +36,7 @@ Page({
   data: {
     marginNav: app.globalData.marginNav,
     photoPrefix: app.globalData.staticResourceUrlPrefix,
-    disabled:false,
+    disabled: false,
     ImageUrls: [],
     content: '',
     showAddPhotoCover: showAddPhotoCover,
@@ -146,7 +147,6 @@ Page({
     showAddPhotoCover: true,
     petName: '',
     organization: '公益机构',
-    organizationId:'',
     inputBorder: false
   },
 
@@ -298,7 +298,7 @@ Page({
     })
   },
   chooseFrom: function(e) {
-    var that=this
+    var that = this
     var fromType = e.currentTarget.dataset.type;
     if (fromType == 2) {
       wx.request({
@@ -316,16 +316,16 @@ Page({
           wx.showActionSheet({
             itemList: orgList,
             success(res) {
+              organizationId = dataList[res.tapIndex].orgId
               that.setData({
                 organization: orgList[res.tapIndex],
-                organizationId: dataList[res.tapIndex].orgId
               })
             },
             fail(res) {
               console.log(res.errMsg)
+              organizationId = ''
               that.setData({
-                organization:'公益机构',
-                organizationId: '',
+                organization: '公益机构',
               })
             }
           })
@@ -572,11 +572,11 @@ Page({
   submitNew: function(e) {
     var that = this
     this.setData({
-      disabled:true
+      disabled: true
     })
     wx.showLoading({
       title: '正在发布',
-      mask:true
+      mask: true
     })
     var formId = e.detail.formId
 
@@ -777,15 +777,15 @@ Page({
         var item = {}
         if (requirementList[i].value == 10) {
           var requireOther = this.data.requirementOther
-          if (this.checkEmptyVar(requireOther) && loadState !=1) {
+          if (this.checkEmptyVar(requireOther) && loadState != 1) {
             wx.showToast({
               title: '须填写领养其他要求',
               icon: 'none',
               duration: 2000
             })
             that.setData({
-              inputBorder:true,
-              disabled:false
+              inputBorder: true,
+              disabled: false
             })
 
             return;
@@ -853,7 +853,17 @@ Page({
     var regionDetail = region[1] + ' ' + region[2]
 
     var wxAccount = e.detail.value.wxAccount;
-
+    if (this.checkEmptyVar(wxAccount)) {
+      wx.showToast({
+        title: '须填写微信号',
+        icon: 'none',
+        duration: 2000
+      })
+      that.setData({
+        disabled: false
+      })
+      return;
+    }
 
     var phone = e.detail.value.phone;
     if (this.checkEmptyVar(phone)) {
@@ -915,7 +925,7 @@ Page({
         createBy: userId,
         adoptStatus: '0',
         mediaList: imageArr,
-        orgId: that.data.organizationId,
+        orgId: organizationId,
         formId: formId
       }
       wx.request({
@@ -966,7 +976,7 @@ Page({
         story: story,
         createBy: userId,
         mediaList: imageArr,
-        orgId: that.data.organizationId,
+        orgId: organizationId,
         formId: formId
       }
       wx.request({

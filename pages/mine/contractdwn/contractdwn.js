@@ -57,7 +57,7 @@ Page({
     var that = this
     var innerHeight = 0
     context.setFillStyle('#ffffff')
-    context.fillRect(0, 0,screenWidth,that.data.screenHeight);
+    context.fillRect(0, 0, screenWidth, that.data.screenHeight);
     context.setFillStyle('#000000')
     context.setFontSize(20)
     context.fillText('领养协议', (screenWidth - context.measureText('领养协议').width) / 2, 40)
@@ -76,11 +76,12 @@ Page({
     innerHeight = this.drawText('2、提供适当的活动空间，进行家庭喂养，并保证领养动物的安全，不得将所领养动物异用和商业用途。', 15, innerHeight, 50, screenWidth)
     innerHeight = this.drawText('3、必要时为领养动物提供必要的医疗措施。', 15, innerHeight, 50, screenWidth)
     innerHeight = this.drawText('4、接受领养后，协助甲方对喂养情况进行了解和回访。', 15, innerHeight, 50, screenWidth)
-    innerHeight = this.drawText('5、事先与家人或房东做好沟通，签署领养协议后，不得因为家人反对，婚姻，生育，工作变动，动物不听话，东湖生病等原因随意抛弃或售卖领养动物。', 15, innerHeight, 50, screenWidth)
+    innerHeight = this.drawText('5、事先与家人或房东做好沟通，签署领养协议后，不得因为家人反对，婚姻，生育，工作变动，动物不听话，动物生病等原因随意抛弃或售卖领养动物。', 15, innerHeight, 50, screenWidth)
     innerHeight = this.drawText('6、由于特殊原因，无法继续喂养领养动物的情况下，必须将动物交回甲方；或与甲方协商，为动物寻找新的领养人，未经甲方同意不得自行转交他人。', 15, innerHeight, 50, screenWidth)
     innerHeight = this.drawText('7、任何情况下，乙方不得虐待领养动物。', 15, innerHeight, 50, screenWidth)
     innerHeight = this.drawText('8、带领养动物出门必须做好安全措施，如拴好牵引绳，保障宠物安全。出现意外情况必须及时向甲方反馈，不得隐瞒。', 15, innerHeight, 50, screenWidth)
     innerHeight = this.drawText('9、定期（成年后每年一次）为领养动物注射疫苗。', 15, innerHeight, 50, screenWidth)
+    innerHeight = this.drawText('10、领养人应当在动物适龄时带其去正规放心的宠物医院完成绝育手术。', 15, innerHeight, 50, screenWidth)
 
     innerHeight = this.drawText('补充协议', 15, innerHeight, 50, screenWidth)
     if (contractInfo.agreement != '') {
@@ -125,11 +126,11 @@ Page({
         innerHeight = that.drawText('联系地址：' + contractInfo.applyAddress, 15, innerHeight, 50, screenWidth)
         innerHeight = that.drawText('身份证：', 15, innerHeight, 50, screenWidth)
         wx.getImageInfo({
-          src: contractInfo.idCardFrontUrl +'?x-oss-process=image/resize,w_200,h_200/auto-orient,1/quality,q_90/format,jpg/watermark,type_d3F5LXplbmhlaQ,size_10,text_5LuF5L6b6YK75a6g5bmz5Y-w5L2_55So,color_2d2d2d,t_90,g_center,voffset_0',
+          src: contractInfo.idCardFrontUrl + '?x-oss-process=image/resize,w_200,h_200/auto-orient,1/quality,q_90/format,jpg/watermark,type_d3F5LXplbmhlaQ,size_10,text_5LuF5L6b6YK75a6g5bmz5Y-w5L2_55So,color_2d2d2d,t_90,g_center,voffset_0',
           success(res) {
             context.drawImage(res.path, 50, innerHeight - 20, 200, 100)
             wx.getImageInfo({
-              src: contractInfo.idCardBackUrl +'?x-oss-process=image/resize,w_200,h_200/auto-orient,1/quality,q_90/format,jpg/watermark,type_d3F5LXplbmhlaQ,size_10,text_5LuF5L6b6YK75a6g5bmz5Y-w5L2_55So,color_2d2d2d,t_90,g_center,voffset_0',
+              src: contractInfo.idCardBackUrl + '?x-oss-process=image/resize,w_200,h_200/auto-orient,1/quality,q_90/format,jpg/watermark,type_d3F5LXplbmhlaQ,size_10,text_5LuF5L6b6YK75a6g5bmz5Y-w5L2_55So,color_2d2d2d,t_90,g_center,voffset_0',
               success(res) {
                 innerHeight += 110
                 context.drawImage(res.path, 50, innerHeight - 20, 200, 100)
@@ -149,7 +150,7 @@ Page({
             })
           }
         })
-        
+
       }
     })
   },

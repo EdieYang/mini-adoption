@@ -540,7 +540,6 @@ page {
 }
 
 .success-cover {
-  background-color: #000;
   padding: 20rpx 10rpx;
   border-radius: 20rpx;
 }

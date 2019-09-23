@@ -5,7 +5,7 @@ var userId
 var applyId
 var actionSheetList = ['双方达成一致取消申请', '领养人资质不符合要求', '送养人不想送养了', '宠物已被领养']
 var actionSheetList2 = ['双方达成一致取消申请', '领养人不想领养了', '宠物已被领养']
-var reqPassTimeout,reqRefuseTimeout;
+var reqPassTimeout, reqRefuseTimeout;
 var interval;
 Page({
 
@@ -36,10 +36,10 @@ Page({
     wx.showLoading({
       title: '抓会儿蝴蝶~',
     })
-    app.IfAccess().then(function (res) {
+    app.IfAccess().then(function(res) {
       if (res) {
         userId = app.globalData.userId;
-        if (userId && typeof (userId) != 'undefined' && userId != '') {
+        if (userId && typeof(userId) != 'undefined' && userId != '') {
           that.setData({
             userId: userId
           })
@@ -154,7 +154,7 @@ Page({
             mask: true,
             icon: 'none'
           })
-          reqRefuseTimeout=setTimeout(function() {
+          reqRefuseTimeout = setTimeout(function() {
             that.getPetAdoptApplyDetial()
           }, 2000)
         }
@@ -179,7 +179,7 @@ Page({
             mask: true,
             icon: 'none'
           })
-          reqPassTimeout=setTimeout(function() {
+          reqPassTimeout = setTimeout(function() {
             that.getPetAdoptApplyDetial()
           }, 2000)
         }
@@ -265,7 +265,7 @@ Page({
     return dayStr + "天" + hrStr + "小时" + minStr + "分钟" + secStr + "秒";
 
   },
-  copyWx:function(){
+  copyWx: function() {
     var wxId = 'zmydwx83'
     wx.setClipboardData({
       data: wxId,
@@ -283,7 +283,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearTimeout(reqPassTimeout)
+    clearTimeout(reqRefuseTimeout)
+    clearInterval(interval)
   },
 
   /**
@@ -312,6 +314,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-  }
+  onShareAppMessage: function() {}
 })

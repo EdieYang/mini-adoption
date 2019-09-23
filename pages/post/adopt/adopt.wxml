@@ -193,7 +193,7 @@
     <view class='input-item'>
       <view class='input-item-left'>微信号</view>
       <view class='input-item-right'>
-        <input class='input-i' placeholder='选填' name='wxAccount' value='{{wxAccount}}' bindinput='wxAccountInput' maxlength='20'></input>
+        <input class='input-i' placeholder='必填' name='wxAccount' value='{{wxAccount}}' bindinput='wxAccountInput' maxlength='20'></input>
       </view>
       <view style='clear:both'></view>
     </view>

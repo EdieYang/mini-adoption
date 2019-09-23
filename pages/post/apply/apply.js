@@ -5,7 +5,7 @@ var userId;
 var petId;
 var job = ''
 var phone = ''
-
+var wxAccount = ''
 Page({
 
   /**
@@ -15,6 +15,7 @@ Page({
     marginNav: app.globalData.marginNav,
     hasArea: false,
     obeyRules: false,
+    disabled: false
   },
 
   /**
@@ -77,6 +78,9 @@ Page({
   phoneInput: function(event) {
     phone = event.detail.value;
   },
+  wxAccountInput: function(event) {
+    wxAccount = event.detail.value;
+  },
   verifyPhone: function(event) {
     var phone = event.detail.value
     if (!(/^1(3|4|5|7|8)\d{9}$/.test(phone))) {
@@ -101,14 +105,17 @@ Page({
       obeyRules: !obey
     })
   },
-  adoptRules: function () {
+  adoptRules: function() {
     wx.navigateTo({
       url: '../../adoption/rule/rule',
     })
   },
   submitApply: function(e) {
-    var formId = e.detail.formId
     var that = this
+    that.setData({
+      disabled: true
+    })
+    var formId = e.detail.formId
     wx.showLoading({
       title: '正在提交',
     })
@@ -121,6 +128,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -132,6 +142,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -141,6 +154,9 @@ Page({
         title: '须选择养宠经验',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -153,6 +169,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -163,6 +182,9 @@ Page({
         title: '须选择住房情况',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -175,6 +197,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -185,6 +210,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        disabled: false
+      })
       return;
     } else if (region[0] != '上海市') {
       wx.showToast({
@@ -192,11 +220,28 @@ Page({
         duration: 1000,
         icon: 'none'
       })
+      that.setData({
+        disabled: false
+      })
       return
     }
 
     var regionArr = region
     var regionDetail = region[0] + ' ' + region[1] + ' ' + region[2]
+
+    var wxAccount = e.detail.value.wxAccount;
+    if (this.checkEmptyVar(wxAccount)) {
+      wx.showToast({
+        title: '须填写微信号',
+        icon: 'none',
+        duration: 2000
+      })
+      that.setData({
+        disabled: false
+      })
+      return;
+    }
+
 
     var phone = e.detail.value.phone;
     if (this.checkEmptyVar(phone)) {
@@ -204,6 +249,9 @@ Page({
         title: '须填写手机号',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -214,6 +262,9 @@ Page({
         duration: 1000,
         icon: 'none'
       })
+      that.setData({
+        disabled: false
+      })
       return;
     }
 
@@ -222,6 +273,9 @@ Page({
         title: '须同意邻宠领养平台送养规则',
         duration: 3000,
         icon: 'none'
+      })
+      that.setData({
+        disabled: false
       })
       return;
     }
@@ -237,6 +291,7 @@ Page({
       job: job,
       address: regionDetail,
       mobilePhone: phone,
+      wxAccount: wxAccount,
       toAdopter: this.data.story,
       formId: formId
     }
@@ -336,6 +391,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-   
+
   }
 })

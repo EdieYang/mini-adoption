@@ -16,8 +16,6 @@ let col1H = 0
 let col2H = 0
 let chosenId = 1
 var bottomLast = false
-var changingStatus = false
-var loadingCount = 10
 var images = []
 var orgId = ''
 
@@ -71,7 +69,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that=this
+    var that = this
     orgId = options.orgId
     if (options.orgId == '' || typeof options.orgId == 'undefined' || options.orgId == null) {
       orgId = options.scene
@@ -80,10 +78,10 @@ Page({
         backIcon: ''
       })
     }
-    app.IfAccess().then(function (res) {
+    app.IfAccess().then(function(res) {
       if (res) {
         userId = app.globalData.userId;
-        if (userId && typeof (userId) != 'undefined' && userId != '') {
+        if (userId && typeof(userId) != 'undefined' && userId != '') {
           that.setData({
             userId: userId
           })
@@ -154,7 +152,6 @@ Page({
           petInfoList[i].petCharacteristic = JSON.parse(petInfoList[i].petCharacteristic)
         }
         petInfoListArr = petInfoListArr.concat(petInfoList)
-        changingStatus = false
         that.setData({
           petInfoList: petInfoListArr,
           showLoading: false,
@@ -181,7 +178,6 @@ Page({
           bottomLast = true
         }
         galleryListArr = galleryListArr.concat(galleryList)
-        changingStatus = false
         that.setData({
           galleryList: galleryListArr,
           showLoading: false,
@@ -230,10 +226,8 @@ Page({
       col1: [],
       col2: [],
       petCols: [],
-      galleryCols: [],
-      loadingCount: 10
+      galleryCols: []
     })
-    changingStatus = true
     petInfoListArr = []
     galleryListArr = []
     pageNum = 1
@@ -264,7 +258,6 @@ Page({
         break;
       }
     }
-    loadingCount = loadingCount - 1;
 
     let col1 = this.data.col1;
     let col2 = this.data.col2;
@@ -279,16 +272,6 @@ Page({
       col1: col1,
       col2: col2
     };
-    if (loadingCount == 0) {
-      data.petCols = [];
-    }
-    if (changingStatus) {
-      this.setData({
-        col1: [],
-        col2: []
-      })
-      return
-    }
     this.setData(data);
   },
 
@@ -309,7 +292,6 @@ Page({
         break;
       }
     }
-    loadingCount = loadingCount - 1;
 
     let col1 = this.data.col1;
     let col2 = this.data.col2;
@@ -324,16 +306,6 @@ Page({
       col1: col1,
       col2: col2
     };
-    if (loadingCount == 0) {
-      data.galleryCols = [];
-    }
-    if (changingStatus) {
-      this.setData({
-        col1: [],
-        col2: []
-      })
-      return
-    }
     this.setData(data);
   },
   viewGallery: function(e) {
@@ -450,8 +422,8 @@ Page({
     console.log(130 + that.data.marginNav)
     if (res.scrollTop >= 130) {
       var backIcon = '../../images/back-pre-black.png'
-      if(that.data.homeIcon){
-        backIcon=''
+      if (that.data.homeIcon) {
+        backIcon = ''
       }
       this.setData({
         navTitle: that.data.orgDetail.orgName,

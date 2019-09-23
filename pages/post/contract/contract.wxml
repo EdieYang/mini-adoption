@@ -11,11 +11,12 @@
   <view class='contract-item'>2、提供适当的活动空间，进行家庭喂养，并保证领养动物的安全，不得将所领养动物异用和商业用途。</view>
   <view class='contract-item'>3、必要时为领养动物提供必要的医疗措施。</view>
   <view class='contract-item'>4、接受领养后，协助甲方对喂养情况进行了解和回访。</view>
-  <view class='contract-item'>5、事先与家人或房东做好沟通，签署领养协议后，不得因为家人反对，婚姻，生育，工作变动，动物不听话，东湖生病等原因随意抛弃或售卖领养动物。</view>
+  <view class='contract-item'>5、事先与家人或房东做好沟通，签署领养协议后，不得因为家人反对，婚姻，生育，工作变动，动物不听话，动物生病等原因随意抛弃或售卖领养动物。</view>
   <view class='contract-item'>6、由于特殊原因，无法继续喂养领养动物的情况下，必须将动物交回甲方；或与甲方协商，为动物寻找新的领养人，未经甲方同意不得自行转交他人。</view>
   <view class='contract-item'>7、任何情况下，乙方不得虐待领养动物。</view>
   <view class='contract-item'>8、带领养动物出门必须做好安全措施，如拴好牵引绳，保障宠物安全。出现意外情况必须及时向甲方反馈，不得隐瞒。</view>
   <view class='contract-item'>9、定期（成年后每年一次）为领养动物注射疫苗。</view>
+  <view class='contract-item'>10、领养人应当在动物适龄时带其去正规放心的宠物医院完成绝育手术。</view>
   <block wx:if='{{status>1}}'>
     <view class='header'>补充协议</view>
     <view class='contract-item'>{{contractInfo.agreement}}</view>
