@@ -77,7 +77,7 @@ Page({
         if (res.errMsg != 'getUserInfo:fail:auth deny' && res.code) {
           //register new temp user
           wx.request({
-            url: app.globalData.requestUrlWechat + '/miniSystem/login',
+            url: app.globalData.requestUrlWechat + '/wxmini/user/login',
             method: "GET",
             data: {
               code: res.code
@@ -96,7 +96,7 @@ Page({
                     if (res.errMsg == "getUserInfo:ok") {
                       //decrypt encrypeted userInfo
                       wx.request({
-                        url: app.globalData.requestUrlWechat + '/miniSystem/authorizeUser/' + userId,
+                        url: app.globalData.requestUrlWechat + '/wxmini/user/authorizeUser/' + userId,
                         data: {
                           encryptedData: res.encryptedData,
                           iv: res.iv,
@@ -130,7 +130,8 @@ Page({
 
               } else {
                 wx.showToast({
-                  title: '微信功能报错,请稍后再试',
+                  title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
+                  icon:'none',
                   duration: 100000,
                   mask: true,
                 })

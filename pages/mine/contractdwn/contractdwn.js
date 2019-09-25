@@ -5,7 +5,7 @@ var userId
 var agreementId
 var applyId
 var context;
-var screenWidth = 370;
+var screenWidth = 360;
 Page({
 
   /**
@@ -28,7 +28,7 @@ Page({
     wx.getSystemInfo({
       success(res) {
         that.setData({
-          screenHeight: res.screenWidth * 6.2
+          screenHeight: res.screenWidth * 6.5
         })
         that.getPetAdoptAgreementDetial()
       }

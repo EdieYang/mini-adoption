@@ -85,8 +85,8 @@ App({
   IfAccess: function() {
     var that = this
     return new Promise(function(resolve, reject) {
-      // var userId = wx.getStorageSync("userId")
-      const userId = '037159a061054151aa1f3a31ca3a5332'
+      var userId = wx.getStorageSync("userId")
+      // const userId = '037159a061054151aa1f3a31ca3a5332'
       //put userId into global variable dataset
       that.globalData.userId = userId;
       //define api request url

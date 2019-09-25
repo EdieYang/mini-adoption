@@ -19,7 +19,7 @@ Page({
    */
   onLoad: function(options) {
     wx.hideShareMenu()
-    userId=app.globalData.userId
+    userId = app.globalData.userId
   },
 
 
@@ -89,7 +89,7 @@ Page({
         if (res.errMsg != 'getUserInfo:fail:auth deny' && res.code) {
           //register new temp user
           wx.request({
-            url: app.globalData.requestUrlWechat + '/miniSystem/login',
+            url: app.globalData.requestUrlWechat + '/wxmini/user/login',
             method: "GET",
             data: {
               code: res.code
@@ -108,7 +108,7 @@ Page({
                     if (res.errMsg == "getUserInfo:ok") {
                       //decrypt encrypeted userInfo
                       wx.request({
-                        url: app.globalData.requestUrlWechat + '/miniSystem/authorizeUser/' + userId,
+                        url: app.globalData.requestUrlWechat + '/wxmini/user/authorizeUser/' + userId,
                         data: {
                           encryptedData: res.encryptedData,
                           iv: res.iv,
@@ -139,6 +139,8 @@ Page({
                   fail: function(res) {
                     wx.showToast({
                       title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
+                      icon: 'none',
+                      duration: 3000
                     })
                     console.log(res)
                   }
@@ -147,8 +149,8 @@ Page({
               } else {
                 wx.showToast({
                   title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
-                  duration: 100000,
-                  mask: true,
+                  icon: 'none',
+                  duration: 3000
                 })
                 console.log("服务器配置微信环境出错，请检查APPID和APPSECRT是否匹配！")
               }
@@ -170,16 +172,16 @@ Page({
       url: '../lost/lost?chooseTab=1',
     })
   },
-  adoptTour:function(e){
+  adoptTour: function(e) {
     var url = 'https://mp.weixin.qq.com/s/jNI3MjT4Q-QJLKs3L6RdaQ'
     wx.navigateTo({
       url: '../../redirect/redirect?url=' + url,
     })
   },
-  addFormId:function(e){
+  addFormId: function(e) {
     this.genFormId(e.detail.formId)
   },
-  followAccount:function(){
+  followAccount: function() {
     wx.navigateTo({
       url: '../../adoption/account/account',
     })
@@ -229,6 +231,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-  }
+  onShareAppMessage: function() {}
 })
