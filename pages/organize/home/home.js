@@ -226,10 +226,12 @@ Page({
       col1: [],
       col2: [],
       petCols: [],
-      galleryCols: []
+      galleryCols: [],
+      activityList:[]
     })
     petInfoListArr = []
     galleryListArr = []
+    activityListArr = []
     pageNum = 1
     col1H = 0
     col2H = 0
@@ -373,7 +375,7 @@ Page({
   toActivityDetail: function(e) {
     var url = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../../redirect/redirect?url=' + url,
+      url: '../../redirect/redirect?url=' + encodeURIComponent(url),
     })
   },
   /**

@@ -6,7 +6,7 @@ var petId
 var context
 var destHeight
 var destWidth
-
+var screenWidth = 750
 
 Page({
 
@@ -62,16 +62,16 @@ Page({
     var that = this
     var petInfo = this.data.petInfo
     context = wx.createCanvasContext("post-adoption", this)
-    context.drawImage('../../../images/post-adoption.png', 15, 0, that.data.screenWidth - 30, 620)
+    context.drawImage('../../../images/post-adoption.png', 15, 0, screenWidth - 30, 620)
     wx.getImageInfo({
       src: that.data.photoPrefix + petInfo.mediaList[0].mediaPath,
       success(res) {
         var petPhoto = res.path
-        context.drawImage(petPhoto, (that.data.screenWidth - destWidth) / 2, 110, destWidth, destHeight)
+        context.drawImage(petPhoto, (screenWidth - destWidth) / 2, 110, destWidth, destHeight)
         context.setFontSize(20)
         var header = 'Hi，我叫 ' + petInfo.petName
         var headerWidth = context.measureText(header).width
-        context.fillText(header, (that.data.screenWidth - headerWidth) / 2, 395)
+        context.fillText(header, (screenWidth - headerWidth) / 2, 395)
         var story = petInfo.story
         story = story.replace(/\s*/g, "");
         context.setFontSize(15)
@@ -129,7 +129,12 @@ Page({
       }
     }
 
-    that.generatePost()
+    wx.getSystemInfo({
+      success(res) {
+        screenWidth = res.screenWidth
+        that.generatePost()
+      }
+    })
   },
   drawText: function(ctx, str, leftWidth, initHeight, canvasWidth) {
     var lineWidth = 0;
@@ -162,10 +167,10 @@ Page({
     contextHidden.draw(false, wx.canvasToTempFilePath({
       x: 15,
       y: 0,
-      width: that.data.screenWidth - 30,
+      width: screenWidth - 30,
       height: 620,
-      destWidth: that.data.screenWidth * 750 / width,
-      destHeight: 620 * (that.data.screenWidth * 750 / width) / 350,
+      destWidth: screenWidth * 750 / width,
+      destHeight: 620 * (screenWidth * 750 / width) / 350,
       canvasId: 'post-adoption',
       success(res) {
         wx.saveImageToPhotosAlbum({

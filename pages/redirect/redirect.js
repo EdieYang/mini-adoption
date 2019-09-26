@@ -14,7 +14,7 @@ Page({
   onLoad: function (options) {
     var url = options.url;
     this.setData({
-      redirectUrl: url
+      redirectUrl: decodeURIComponent(url)
     })
   },
 

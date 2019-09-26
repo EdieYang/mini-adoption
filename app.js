@@ -16,15 +16,15 @@ App({
     entranceScene: '',
     chatSocket: {},
     // requestUrl: 'https://www.linchongpets.com/lpCms',
-    // requestUrlCms: 'https://www.linchongpets.com/lpCms',
-    // requestUrlWechat: 'https://www.linchongpets.com/lpWechat',
+    requestUrlCms: 'https://www.linchongpets.com/lpCms',
+    requestUrlWechat: 'https://www.linchongpets.com/lpWechat',
     uploadUrl: 'https://www.linchongpets.com/lpCms/pet/portrait/upload',
     uploadImageUrl: 'https://www.linchongpets.com/lpCms/oss/image',
     staticResourceUrlPrefix: 'https://pic.linchongpets.com/',
     // requestUrlCms: 'http://localhost:8095/lpCmsTest',
     // requestUrlWechat: 'http://localhost:8096/lpWechatTest',
-    requestUrlCms: 'https://www.linchongpets.com/lpCmsTest',
-    requestUrlWechat: 'https://www.linchongpets.com/lpWechatTest',
+    // requestUrlCms: 'https://www.linchongpets.com/lpCmsTest',
+    // requestUrlWechat: 'https://www.linchongpets.com/lpWechatTest',
     // uploadUrl: 'http://localhost:8093/pokemon/pet/portrait/upload',
     // uploadImageUrl: 'http://localhost:8093/lpCms/oss/image',
     socketStatus: 'AUTO'
@@ -56,7 +56,7 @@ App({
     var that = this
     this.globalData.socketStatus = 'AUTO'
     this.globalData.chatSocket = wx.connectSocket({
-      url: 'wss://www.linchongpets.com/websocketTest?uid=' + this.globalData.userId,
+      url: 'wss://www.linchongpets.com/websocket?uid=' + this.globalData.userId,
       header: {
         'content-type': 'application/json'
       },
