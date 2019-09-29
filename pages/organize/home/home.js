@@ -475,6 +475,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: this.data.orgDetail.orgName,
+      path: '/pages/organize/home/home?scene='+orgId
+    }
   }
 })
