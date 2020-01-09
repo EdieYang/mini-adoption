@@ -1,0 +1,19 @@
+<!--pages/circle/index/index.wxml-->
+<nav-bar title-text="上海宠物领养"></nav-bar>
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color='{{indicatorColor}}' style='margin-top:{{marginNav}}px;height:250rpx;'>
+	<block wx:for="{{imgUrls}}" wx:key='{{index}}'>
+		<swiper-item bindtap='redirectUrl' data-index='{{index}}'>
+			<image src="{{photoPrefix}}{{item.bannerImgUrl}}" class="slide-image" />
+		</swiper-item>
+	</block>
+</swiper>
+
+<view class="circle-label">最热的圈子</view>
+<view wx:for="{{circles}}" class="circle" bindtap="goDetail" data-index="{{index}}">
+  <image src="{{item.groupBanner}}"></image>
+  <view style="position:relative;flex:1">
+    <view class="circle-title">{{item.groupName}}</view>
+    <view class="circle-count">{{item.fansCount+"人关注  "+item.contentCount+"篇内容"}}</view>
+    <view class="circle-desc">{{item.groupInfo}}</view>
+  </view>
+</view>

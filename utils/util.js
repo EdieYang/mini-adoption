@@ -9,6 +9,28 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+const formatDay = date => {
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return [month, day].map(formatNumber).join('/')
+}
+
+const formatDayTime = date => {
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  return [month, day].map(formatNumber).join('/') + ' ' + [hour, minute].map(formatNumber).join(':')
+}
+
+const formatDayWeek = date => {
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const week = date.getDay()
+  var weeks = ['日', '一', '二', '三', '四', '五', '六']
+  return [month, day].map(formatNumber).join('/') + ' 周' + weeks[week]
+}
+
 const formatTimeYMD = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -87,5 +109,8 @@ module.exports = {
   throttle: throttle,
   getLocalTime: getLocalTime,
   formatDateDiff: formatDateDiff,
-  formatDateDiffMills: formatDateDiffMills
+  formatDateDiffMills: formatDateDiffMills,
+  formatDay: formatDay,
+  formatDayWeek: formatDayWeek,
+  formatDayTime: formatDayTime
 }

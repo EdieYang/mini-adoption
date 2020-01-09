@@ -1,0 +1,134 @@
+/* pages/circle/activityDetail/index.wxss */
+
+.banner {
+  width: 690rpx;
+  height: 368rpx;
+  box-shadow: 0rpx 2rpx 16rpx 0rpx rgba(178, 178, 178, 0.5);
+  border-radius: 8rpx;
+  margin: 30rpx;
+}
+
+.activity-content {
+  padding: 0 30rpx 45rpx 30rpx;
+}
+
+.activity-title {
+  font-size: 36rpx;
+  font-family: PingFang-SC-Bold, PingFang-SC;
+  font-weight: bold;
+  color: black;
+}
+
+.activity-count {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: black;
+  border-bottom: 1rpx solid rgba(229, 229, 229, 1);
+  margin-top: 20rpx;
+  padding-bottom: 30rpx;
+}
+
+.activity-count text {
+  color: #233DCB;
+}
+
+.info {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: black;
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.info image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+}
+
+.info view {
+  flex: 1;
+}
+
+.coin-content {
+  display: flex;
+  margin-top: 50rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coin {
+  width: 160rpx;
+  height: 56rpx;
+  background: rgba(255, 205, 0, 1);
+  border-radius: 28rpx;
+  font-size: 24rpx;
+  font-family: PingFang-SC-Bold, PingFang-SC;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coin image {
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 8rpx;
+}
+
+.share {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.detail {
+  border-top: 20rpx solid #F1F1F3;
+  font-size: 36rpx;
+  font-family: PingFang-SC-Bold, PingFang-SC;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 1);
+  padding-top: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.apply {
+  width: 390rpx;
+  height: 74rpx;
+  background: rgba(35, 61, 203, 1);
+  border-radius: 37rpx;
+  font-size: 36rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: rgba(254, 254, 254, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom {
+  width: 100%;
+  position: fixed;
+  bottom: 0rpx;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+  padding: 10rpx 30rpx 10rpx 60rpx;
+  background-color: white;
+}
+
+.bottom-btn {
+  font-size: 20rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: rgba(0, 0, 0, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-btn image {
+  width: 54rpx;
+  height: 54rpx;
+}

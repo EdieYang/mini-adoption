@@ -1,0 +1,14 @@
+<!--pages/circle/apply/index.wxml-->
+
+<view class="activities">
+	<image src="{{activity.activityBanner}}"></image>
+	<view class="activity-content">
+		<view class="activity-title">{{activity.activityTitle}}</view>
+		<view class="activity-addr">{{activity.activityArea}}</view>
+		<view class="activity-price">{{activity.activityIsFree === 0 ? '免费': item.activityCost+'元'}}</view>
+		<view class="apply">
+			<view class="apply-btn" wx:if="{{item.activityStatus==='活动报名中'}}">立即报名</view>
+			<view class="activity-status" style="color:{{item.activityStatus==='活动已下线'||item.activityStatus==='活动已结束'?'rgba(162,162,162,1)':'rgba(66,188,86,1)'}}">{{item.activityStatus}}</view>
+		</view>
+	</view>
+</view>

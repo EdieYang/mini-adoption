@@ -1,0 +1,28 @@
+<!--pages/circle/activity/index.wxml-->
+<view style="display:flex;flex-direction:column">
+	<view class="head">
+		<image src="{{circle.groupBanner}}" class="banner"></image>
+		<view class="circle-content">
+			<view class="circle-name">{{circle.groupName}}</view>
+			<view class="circle-info">
+				<view class="circle-count">粉丝 {{circle.fansCount}} 内容 {{circle.contentCount}}</view>
+				<view class="follow">关注</view>
+				<image src="/images/share-white.png"></image>
+			</view>
+		</view>
+	</view>
+	<view class="circle-desc">{{circleDesc}}<text bindtap="expand" wx:if="{{showExpand}}">展开</text></view>
+</view>
+
+<view class="activities" wx:for="{{activities}}" data-index="{{index}}" bindtap="goDetail">
+	<image src="{{item.activityBanner}}"></image>
+	<view class="activity-content">
+		<view class="activity-title">{{item.activityTitle}}</view>
+		<view class="activity-addr">{{item.activityArea}}</view>
+		<view class="activity-price">{{item.activityIsFree === 0 ? '免费': item.activityCost+'元'}}</view>
+		<view class="apply">
+			<view class="apply-btn" wx:if="{{item.activityStatus==='活动报名中'}}">立即报名</view>
+			<view class="activity-status" style="color:{{item.activityStatus==='活动已下线'||item.activityStatus==='活动已结束'?'rgba(162,162,162,1)':'rgba(66,188,86,1)'}}">{{item.activityStatus}}</view>
+		</view>
+	</view>
+</view>

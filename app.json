@@ -33,7 +33,11 @@
     "pages/mine/contractdwn/contractdwn",
     "pages/mine/followlist/followlist",
     "pages/mine/followedlist/followedlist",
-    "pages/redirect/redirect"
+    "pages/redirect/redirect",
+    "pages/circle/index/index",
+    "pages/circle/activity/index",
+    "pages/circle/activityDetail/index",
+    "pages/circle/apply/index"
   ],
   "window": {
     "enablePullDownRefresh": true,
@@ -66,8 +70,8 @@
         "selectedIconPath": "/images/post.png"
       },
       {
-        "pagePath": "pages/msg/index/index",
-        "text": "消息",
+        "pagePath": "pages/circle/index/index",
+        "text": "圈子",
         "iconPath": "/images/msg_.png",
         "selectedIconPath": "/images/msg.png"
       },

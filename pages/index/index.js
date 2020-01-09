@@ -29,7 +29,7 @@ Page({
     collectMini: true,
     chosenId: 3,
     userId: '',
-    photoPrefix: app.globalData.staticResourceUrlPrefix,
+    photoPrefix: app.globalData.staticResourceUrlPrefix, 
     showFilter: false,
     ageType: 1,
     sexType: 1,
@@ -55,7 +55,9 @@ Page({
     col1: [],
     col2: [],
     images: [],
-    bottomLast: bottomLast
+    bottomLast: bottomLast,
+    activities: [],
+    toLeft: true
   },
 
   /**
@@ -78,6 +80,7 @@ Page({
           that.getPetAdoptList()
           that.getUnreadMessage()
           that.getOrgList()
+          that.getActivities()
         }
       }
     })
@@ -238,6 +241,32 @@ Page({
           bottomLast: bottomLast
         })
       }
+    })
+  },
+  getActivities: function() {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/group/activities/page',
+      data: {
+        isActive: 1,
+        pageNum: 1,
+        pageSize: 3
+      },
+      method: "GET",
+      success: function(res) {
+        res.data.data.list.map(item => {
+          item.activityBanner = that.data.photoPrefix + item.activityBanner
+          item.time = item.activityType === '1' ?  util.formatDay(new Date(Date.parse(item.activityStartTime))) + '-' + util.formatDay(new Date(Date.parse(item.activityEndTime))): util.formatDayWeek(new Date(Date.parse(item.activityStartTime)))
+        })
+        that.setData({
+          activities: res.data.data.list
+        })
+      }
+    })
+  },
+  handleScroll: function(e) {
+    this.setData({
+      toLeft: e.detail.scrollLeft <= 10
     })
   },
   chooseTab: function(e) {
@@ -485,11 +514,11 @@ Page({
         collectMini: false
       })
     }
-    if (res.scrollTop >= 220 && this.data.tabFix == '') {
+    if (res.scrollTop >= 330 && this.data.tabFix == '') {
       this.setData({
         tabFix: 'position:fixed;top:' + (that.data.marginNav - 10) + 'px;left:0;'
       })
-    } else if (res.scrollTop < 220 && this.data.tabFix != '') {
+    } else if (res.scrollTop < 330 && this.data.tabFix != '') {
       this.setData({
         tabFix: ''
       })
@@ -518,6 +547,7 @@ Page({
     } else {
       that.getPetAdoptList()
     }
+    that.getActivities()
     wx.stopPullDownRefresh()
   },
 
