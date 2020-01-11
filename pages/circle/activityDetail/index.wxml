@@ -6,7 +6,7 @@
 	<view class="info">
 		<image src="/images/time.png"></image>{{activity.activityStartTime+'-'+activity.activityEndTime}}
 	</view>
-	<view class="info">
+	<view class="info" wx:if="{{activity.activityType === 2}}">
 		<image src="/images/position.png"></image>
 		<view>{{activity.activityArea}}{{activity.activityAddress}}</view>
 		<text style="color:#B9B6B6;margin-left:30rpx">></text>

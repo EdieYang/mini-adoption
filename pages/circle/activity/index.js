@@ -13,19 +13,32 @@ Page({
     circle: {},
     circleDesc: '',
     showExpand: false,
-    activities: []
+    activities: [],
+    posts: [],
+    isActivityCircle: false,
+    prefix: '',
+    userId: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.groupId = options.groupId
-    this.getCircles()
-    this.getActivities()
+    this.setData({
+      groupId: options.groupId,
+      isActivityCircle: options.groupType === '1',
+      prefix: app.globalData.staticResourceUrlPrefix,
+      userId: app.globalData.userId
+    })
+    this.getCircleDetail()
+    if (this.data.isActivityCircle) {
+      this.getActivities()
+    } else {
+      this.getPosts()
+    }
   },
 
-  getCircles: function () {
+  getCircleDetail: function () {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/group',
@@ -74,6 +87,115 @@ Page({
     })
   },
 
+  getPosts: function () {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/group/post/page',
+      data: {
+        groupId: this.data.groupId,
+        isValid: 1,
+        pageNum: pageNum,
+        pageSize: pageSize
+      },
+      method: "GET",
+      success: function (res) {
+        var posts = res.data.data.list
+        if (res.data.data.list.length < pageSize) {
+          bottomLast = true
+        }
+        that.setData({
+          posts: posts,
+          bottomLast: bottomLast
+        })
+        wx.stopPullDownRefresh()
+      }
+    })
+  },
+
+  showAll(e) {
+    this.data.posts[e.currentTarget.dataset.index].showAll = true
+    this.setData({
+      posts: this.data.posts
+    })
+  },
+
+  switchLike(e) {
+    var that = this
+    let obj = this.data.posts[e.currentTarget.dataset.index]
+    wx.request({
+      url: app.globalData.requestUrlCms + '/group/post/like',
+      data: {
+        postId: obj.postId,
+        type: !obj.isLiked ? 1 : 0,
+        userId: app.globalData.userId
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      success: function (res) {
+        if (res.data.success) {
+          if (!obj.isLiked) {
+            obj.likeAmount++
+          } else {
+            obj.likeAmount--
+          }
+          obj.isLiked = !obj.isLiked
+          that.setData({
+            posts: that.data.posts
+          })
+        }
+      }
+    })
+  },
+
+  switchFollow(e) {
+    var that = this
+    let obj = this.data.posts[e.currentTarget.dataset.index]
+    wx.request({
+      url: app.globalData.requestUrlCms + '/users/attention',
+      data: {
+        followBy: obj.userId,
+        userId: app.globalData.userId
+      },
+      method: obj.isFollowed ? "DELETE" : "POST",
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        if (res.data.success) {
+          obj.isFollowed = !obj.isFollowed
+          that.setData({
+            posts: that.data.posts
+          })
+        }
+      }
+    })
+  },
+
+  followCircle() {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/group/follow',
+      data: {
+        groupId: this.data.groupId,
+        userId: this.data.userId
+      },
+      method: that.data.circle.isFollowed ? "DELETE" : "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.data.success) {
+          that.data.circle.isFollowed = !that.data.circle.isFollowed
+          that.setData({
+            circle: that.data.circle
+          })
+        }
+      }
+    })
+  },
+
   expand() {
     this.setData({
       circleDesc: this.data.circle.groupInfo,
@@ -84,6 +206,12 @@ Page({
   goDetail(e) {
     wx.navigateTo({
       url: '/pages/circle/activityDetail/index?id=' + this.data.activities[e.currentTarget.dataset.index].id,
+    })
+  },
+
+  joinCircle() {
+    wx.navigateTo({
+      url: '/pages/circle/post/index?groupId=' + this.data.groupId,
     })
   },
 
@@ -133,7 +261,11 @@ Page({
       wx.showLoading({
         title: '抓会儿蜜蜂~',
       })
-      that.getActivities()
+      if (that.data.isActivityCircle) {
+        that.getActivities()
+      } else {
+        that.getPosts()
+      }
     }
   },
 

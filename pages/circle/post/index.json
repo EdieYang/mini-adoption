@@ -1,0 +1,9 @@
+{
+  "backgroundColor": "#fafafa",
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "一起讨论",
+  "usingComponents": {}
+}

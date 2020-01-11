@@ -142,3 +142,127 @@
   color: rgba(0, 0, 0, 1);
   margin-left: auto;
 }
+
+.post-container {
+  padding: 30rpx;
+  border-top: 20rpx solid rgba(241, 241, 243, 1);
+}
+
+.post-head {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border: 1rpx solid rgba(235, 235, 235, 1);
+  border-radius: 40rpx;
+}
+
+.nick-time {
+  margin-left: 30rpx;
+  flex: 1;
+  font-size: 28rpx;
+  font-family: PingFang-SC-Bold, PingFang-SC;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 1);
+}
+
+.post-time {
+  font-size: 24rpx;
+  font-family: PingFang-SC-Medium, PingFang-SC;
+  font-weight: 500;
+  color: rgba(178, 178, 178, 1);
+}
+
+.post-follow {
+  width: 120rpx;
+  height: 60rpx;
+  background: rgba(35, 61, 203, 1);
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  font-family: PingFang-SC-Bold, PingFang-SC;
+  font-weight: bold;
+  color: rgba(254, 254, 254, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-content {
+  font-size: 28rpx;
+  font-family: PingFang-SC-Medium, PingFang-SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+  margin-top: 30rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.show-all {
+  font-size: 28rpx;
+  font-family: PingFang-SC-Medium, PingFang-SC;
+  font-weight: bold;
+  color: #233DCB;
+}
+
+.post-img {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15rpx;
+}
+
+.img-item {
+  flex: 1;
+  border-radius: 8rpx;
+  margin-top: 15rpx;
+  margin-right: 15rpx;
+  min-width: 30%;
+  height: 220rpx;
+}
+
+.options {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.options image {
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.like {
+  font-size: 20rpx;
+  font-family: PingFang-SC-Medium, PingFang-SC;
+  font-weight: 500;
+  color: rgba(117, 117, 117, 1);
+  margin-right: 50rpx;
+  display: flex;
+}
+
+.add-circle {
+  font-size: 28rpx;
+  font-family: PingFang-SC-Bold, PingFang-SC;
+  font-weight: bold;
+  color: rgba(254, 254, 254, 1);
+  width: 180rpx;
+  height: 72rpx;
+  background: rgba(35, 61, 203, 1);
+  box-shadow: 0rpx 2rpx 15rpx 0rpx rgba(35, 61, 203, 0.7);
+  border-radius: 36rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 70rpx;
+}

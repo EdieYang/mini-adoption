@@ -18,7 +18,6 @@ Page({
    */
   onLoad: function (options) {
     this.data.activityId = options.id
-    // this.data.activityId = '9ed5bba15807465a9f2cc1de30e639b5'
     this.getActivity()
   },
 
@@ -28,6 +27,7 @@ Page({
       url: app.globalData.requestUrlCms + '/group/activities',
       data: {
         activityId: this.data.activityId,
+        userId: app.globalData.userId
       },
       method: "GET",
       success: function (res) {
@@ -36,7 +36,8 @@ Page({
         activity.activityStartTime = util.formatDayTime(new Date(Date.parse(activity.activityStartTime)))
         activity.activityEndTime = util.formatDayTime(new Date(Date.parse(activity.activityEndTime)))
         that.setData({
-          activity: activity
+          activity: activity,
+          isFollow: activity.hasFollowed === 1
         })
       }
     })
@@ -68,6 +69,9 @@ Page({
         userId: app.globalData.userId
       },
       method: this.data.isFollow ? 'DELETE' : "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
       success: function (res) {
         if (res.data.success) {
           that.setData({

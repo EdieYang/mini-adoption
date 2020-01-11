@@ -104,11 +104,9 @@ Page({
 
   goDetail(e) {
     let item = this.data.circles[e.currentTarget.dataset.index]
-    if (item.groupType === '1') {
-      wx.navigateTo({
-        url: '/pages/circle/activity/index?groupId=' + item.groupId,
-      })
-    }
+    wx.navigateTo({
+      url: '/pages/circle/activity/index?groupId=' + item.groupId + "&groupType=" + item.groupType,
+    })
   },
 
   /**
