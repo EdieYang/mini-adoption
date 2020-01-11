@@ -3,7 +3,7 @@
 <textarea bindinput="inputContent" placeholder="有什么想聊的一起分享出来吧~" class="content"></textarea>
 
 <view class="{{uploaderList.length === 0 ? 'ui-uploader-cell':'ui-uploader-cell-other'}}">
-	<view class='ui-uploader-item' wx:for="{{uploaderList}}" wx:key="{{index}}">
+	<view class='ui-uploader-item' wx:for="{{uploaderList}}" wx:key="index">
 		<image bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
 	</view>
 	<view class='ui-uploader' bindtap='upload' wx:if="{{showUpload}}">+</view>

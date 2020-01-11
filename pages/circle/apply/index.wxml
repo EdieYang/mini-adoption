@@ -11,7 +11,7 @@
 
 <view class="date">
 	<view class="apply-title">报名日期：</view>
-	<view class="apply-item" wx:for="{{pickTime}}" bindtap="check" data-index="{{index}}">
+	<view class="apply-item" wx:for="{{pickTime}}" wx:key="index" bindtap="check" data-index="{{index}}">
 		<view class="{{item.isCheck ? 'check' : 'uncheck'}}">{{item.isCheck ? '√':''}}</view>
 		<view>{{item.time}}</view>
 	</view>

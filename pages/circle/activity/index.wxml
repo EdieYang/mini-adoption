@@ -7,14 +7,16 @@
 			<view class="circle-info">
 				<view class="circle-count">粉丝 {{circle.fansCount}} 内容 {{circle.contentCount}}</view>
 				<view class="follow" bindtap="followCircle">{{circle.isFollowed?'已关注':'关注'}}</view>
-				<image src="/images/share-white.png"></image>
+				<button open-type="share" plain="true" style="border:0">
+					<image src="/images/share-white.png"></image>
+				</button>
 			</view>
 		</view>
 	</view>
 	<view class="circle-desc">{{circleDesc}}<text bindtap="expand" wx:if="{{showExpand}}">展开</text></view>
 </view>
 
-<view class="activities" wx:for="{{activities}}" data-index="{{index}}" bindtap="goDetail" wx:if='{{isActivityCircle}}'>
+<view class="activities" wx:for="{{activities}}" wx:key="index" data-index="{{index}}" bindtap="goDetail" wx:if='{{isActivityCircle}}'>
 	<image src="{{item.activityBanner}}"></image>
 	<view class="activity-content">
 		<view class="activity-title">{{item.activityTitle}}</view>
@@ -27,7 +29,7 @@
 	</view>
 </view>
 
-<view wx:if='{{!isActivityCircle}}' class="post-container" wx:for='{{posts}}'>
+<view wx:if='{{!isActivityCircle}}' class="post-container" wx:for='{{posts}}' wx:key="index">
 	<view class="post-head">
 		<image src="{{item.portrait}}" class="avatar"></image>
 		<view class="nick-time">
@@ -37,19 +39,36 @@
 		<view wx:if="{{item.userId !== userId}}" class="post-follow" bindtap="switchFollow" data-index="{{index}}">{{item.isFollowed?'已关注':'关注'}}</view>
 	</view>
 
-	<view class="post-content">{{item.postContent}}</view>
+	<view class="post-content" style="-webkit-line-clamp:{{item.showAll?'0':'2'}}">{{item.postContent}}</view>
 	<view class="show-all" wx:if='{{!item.showAll}}' bindtap="showAll" data-index="{{index}}">显示全文</view>
 
 	<view class="post-img">
-		<image wx:for-item="imgItem" src="{{prefix + imgItem.imgUrl}}" wx:for="{{item.groupPostImgList}}" class="img-item" style="max-width:{{item.groupPostImgList.length>2?'30%':'100%'}}"></image>
+		<image wx:for-item="imgItem" src="{{prefix + imgItem.imgUrl}}" wx:for="{{item.groupPostImgList}}" wx:key="index" class="img-item" style="max-width:{{item.groupPostImgList.length>2?'30%':'100%'}}"></image>
 	</view>
 
 	<view class="options">
 		<view class="like" bindtap="switchLike" data-index="{{index}}">
 			<image src="{{item.isLiked ? '/images/like_check.png' : '/images/like.png'}}"></image>{{item.likeAmount ? item.likeAmount : ''}}
 		</view>
-		<image src="/images/share-2.png"></image>
+		<view>
+			<button open-type="share" plain="true" style="border:0;">
+				<image src="/images/share-2.png" style="padding-top:40rpx"></image>
+			</button>
+		</view>
 	</view>
 
 	<view class="add-circle" bindtap="joinCircle">发帖</view>
 </view>
+
+<block wx:if="{{showFilter}}">
+	<view class="tip_container" catchtouchmove='preventTouchMove'>
+	</view>
+	<view class="tipTap" catchtouchmove='preventTouchMove'>
+		<view class='filter-header'>为了更好地展示领养信息，领养平台需要您的授权登录</view>
+		<view class='filter-content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>
+		<view class='filter-btn-cover'>
+			<view class='filter-btn' bindtap='cancelLogin'>暂不登录</view>
+			<button class="filter-btn-sumbit" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+		</view>
+	</view>
+</block>

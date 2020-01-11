@@ -6,16 +6,21 @@
 	<view class="info">
 		<image src="/images/time.png"></image>{{activity.activityStartTime+'-'+activity.activityEndTime}}
 	</view>
-	<view class="info" wx:if="{{activity.activityType === 2}}">
+	<view class="info" bindtap="goLocation" wx:if="{{activity.activityType === 2}}">
 		<image src="/images/position.png"></image>
 		<view>{{activity.activityArea}}{{activity.activityAddress}}</view>
 		<text style="color:#B9B6B6;margin-left:30rpx">></text>
 	</view>
+
 	<view class="coin-content">
 		<view class="coin">
 			<image src="/images/coin.png"></image>{{activity.activityCost}}{{activity.activityIsFree===0?"积分":"元"}}
 		</view>
-		<image src="/images/share-1.png" class="share"></image>
+		<view>
+			<button open-type="share" plain="true" style="border:0;">
+				<image src="/images/share-1.png" class="share"></image>
+			</button>
+		</view>
 	</view>
 </view>
 <view class="detail">
@@ -32,3 +37,16 @@
 	</view>
 	<view class="apply" bindtap="apply">立即报名</view>
 </view>
+
+<block wx:if="{{showFilter}}">
+	<view class="tip_container" catchtouchmove='preventTouchMove'>
+	</view>
+	<view class="tipTap" catchtouchmove='preventTouchMove'>
+		<view class='filter-header'>为了更好地展示领养信息，领养平台需要您的授权登录</view>
+		<view class='filter-content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>
+		<view class='filter-btn-cover'>
+			<view class='filter-btn' bindtap='cancelLogin'>暂不登录</view>
+			<button class="filter-btn-sumbit" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+		</view>
+	</view>
+</block>

@@ -17,7 +17,8 @@ Page({
     posts: [],
     isActivityCircle: false,
     prefix: '',
-    userId: ''
+    userId: '',
+    showFilter: false
   },
 
   /**
@@ -33,8 +34,6 @@ Page({
     this.getCircleDetail()
     if (this.data.isActivityCircle) {
       this.getActivities()
-    } else {
-      this.getPosts()
     }
   },
 
@@ -93,6 +92,7 @@ Page({
       url: app.globalData.requestUrlCms + '/group/post/page',
       data: {
         groupId: this.data.groupId,
+        userId: app.globalData.userId,
         isValid: 1,
         pageNum: pageNum,
         pageSize: pageSize
@@ -103,6 +103,9 @@ Page({
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
         }
+        posts.map(item => {
+          item.showAll = item.postContent.length < 48
+        })
         that.setData({
           posts: posts,
           bottomLast: bottomLast
@@ -121,28 +124,39 @@ Page({
 
   switchLike(e) {
     var that = this
-    let obj = this.data.posts[e.currentTarget.dataset.index]
-    wx.request({
-      url: app.globalData.requestUrlCms + '/group/post/like',
-      data: {
-        postId: obj.postId,
-        type: !obj.isLiked ? 1 : 0,
-        userId: app.globalData.userId
-      },
-      method: "POST",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success: function (res) {
-        if (res.data.success) {
-          if (!obj.isLiked) {
-            obj.likeAmount++
-          } else {
-            obj.likeAmount--
-          }
-          obj.isLiked = !obj.isLiked
+    app.IfAccess().then(function (res) {
+      if (res) {
+        //only authorized user can get platform information
+        if (app.globalData.authorized) {
+          let obj = that.data.posts[e.currentTarget.dataset.index]
+          wx.request({
+            url: app.globalData.requestUrlCms + '/group/post/like',
+            data: {
+              postId: obj.postId,
+              type: !obj.isLiked ? 1 : 0,
+              userId: app.globalData.userId
+            },
+            method: "POST",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            success: function (res) {
+              if (res.data.success) {
+                if (!obj.isLiked) {
+                  obj.likeAmount++
+                } else {
+                  obj.likeAmount--
+                }
+                obj.isLiked = !obj.isLiked
+                that.setData({
+                  posts: that.data.posts
+                })
+              }
+            }
+          })
+        } else {
           that.setData({
-            posts: that.data.posts
+            showFilter: true
           })
         }
       }
@@ -151,22 +165,33 @@ Page({
 
   switchFollow(e) {
     var that = this
-    let obj = this.data.posts[e.currentTarget.dataset.index]
-    wx.request({
-      url: app.globalData.requestUrlCms + '/users/attention',
-      data: {
-        followBy: obj.userId,
-        userId: app.globalData.userId
-      },
-      method: obj.isFollowed ? "DELETE" : "POST",
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        if (res.data.success) {
-          obj.isFollowed = !obj.isFollowed
+    app.IfAccess().then(function (res) {
+      if (res) {
+        //only authorized user can get platform information
+        if (app.globalData.authorized) {
+          let obj = that.data.posts[e.currentTarget.dataset.index]
+          wx.request({
+            url: app.globalData.requestUrlCms + '/users/attention',
+            data: {
+              followBy: obj.userId,
+              userId: app.globalData.userId
+            },
+            method: obj.isFollowed ? "DELETE" : "POST",
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            success: function (res) {
+              if (res.data.success) {
+                obj.isFollowed = !obj.isFollowed
+                that.setData({
+                  posts: that.data.posts
+                })
+              }
+            }
+          })
+        } else {
           that.setData({
-            posts: that.data.posts
+            showFilter: true
           })
         }
       }
@@ -175,21 +200,32 @@ Page({
 
   followCircle() {
     var that = this
-    wx.request({
-      url: app.globalData.requestUrlCms + '/group/follow',
-      data: {
-        groupId: this.data.groupId,
-        userId: this.data.userId
-      },
-      method: that.data.circle.isFollowed ? "DELETE" : "POST",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        if (res.data.success) {
-          that.data.circle.isFollowed = !that.data.circle.isFollowed
+    app.IfAccess().then(function (res) {
+      if (res) {
+        //only authorized user can get platform information
+        if (app.globalData.authorized) {
+          wx.request({
+            url: app.globalData.requestUrlCms + '/group/follow',
+            data: {
+              groupId: that.data.groupId,
+              userId: that.data.userId
+            },
+            method: that.data.circle.isFollowed ? "DELETE" : "POST",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+              if (res.data.success) {
+                that.data.circle.isFollowed = !that.data.circle.isFollowed
+                that.setData({
+                  circle: that.data.circle
+                })
+              }
+            }
+          })
+        } else {
           that.setData({
-            circle: that.data.circle
+            showFilter: true
           })
         }
       }
@@ -210,8 +246,128 @@ Page({
   },
 
   joinCircle() {
-    wx.navigateTo({
-      url: '/pages/circle/post/index?groupId=' + this.data.groupId,
+    var that = this
+    app.IfAccess().then(function (res) {
+      if (res) {
+        //only authorized user can get platform information
+        if (app.globalData.authorized) {
+          wx.navigateTo({
+            url: '/pages/circle/post/index?groupId=' + that.data.groupId,
+          })
+        } else {
+          that.setData({
+            showFilter: true
+          })
+        }
+      }
+    })
+  },
+
+  cancelLogin: function () {
+    this.setData({
+      showFilter: false
+    })
+  },
+
+  bindGetUserInfo: function (e) {
+    if (e.detail.errMsg == 'getUserInfo:fail auth deny') {
+      return
+    }
+    wx.showLoading({
+      title: '登录中',
+      mask: true
+    })
+    var that = this;
+    if (app.globalData.authorized) {
+      wx.showToast({
+        title: '登录成功',
+        duration: 2000,
+        mask: true
+      })
+      that.setData({
+        showFilter: false,
+        isAuthorized: true,
+        userInfo: app.globalData.userInfo
+      })
+      return;
+    }
+    //完善用户信息
+    this.data.userId = app.globalData.userId;
+    //login
+    wx.login({
+      success: res => {
+        if (res.errMsg != 'getUserInfo:fail:auth deny' && res.code) {
+          //register new temp user
+          wx.request({
+            url: app.globalData.requestUrlWechat + '/wxmini/user/login',
+            method: "GET",
+            data: {
+              code: res.code
+            },
+            dataType: "json",
+            success: function (res) {
+              const userId = res.data.userId;
+              const openId = res.data.openId;
+              const sessionKey = res.data.sessionKey;
+              if (userId && typeof (userId) != 'undefined' && userId != '') {
+                //授权回调函数获取用户详情    
+                wx.getUserInfo({
+                  withCredentials: true,
+                  success: function (res) {
+                    console.log(res);
+                    if (res.errMsg == "getUserInfo:ok") {
+                      //decrypt encrypeted userInfo
+                      wx.request({
+                        url: app.globalData.requestUrlWechat + '/wxmini/user/authorizeUser/' + userId,
+                        data: {
+                          encryptedData: res.encryptedData,
+                          iv: res.iv,
+                          sessionKey: sessionKey
+                        },
+                        dataType: "json",
+                        method: "POST",
+                        success: function (res) {
+                          console.log('[bindGetUserInfo]->完善用户信息', res.data)
+                          app.globalData.authorized = res.data.authorized;
+                          app.globalData.userInfo = res.data.userInfo;
+                          app.globalData.userId = app.globalData.userInfo.userId;
+                          wx.setStorageSync("userId", app.globalData.userId)
+                          wx.hideLoading();
+                          wx.showToast({
+                            title: '授权成功',
+                            duration: 2000
+                          })
+                          that.setData({
+                            showFilter: false,
+                            isAuthorized: true,
+                            userInfo: app.globalData.userInfo,
+                          })
+                        }
+                      })
+                    }
+                  },
+                  fail: function (res) {
+                    wx.showToast({
+                      title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
+                      icon: 'none',
+                      duration: 3000
+                    })
+                    console.log(res)
+                  }
+                })
+
+              } else {
+                wx.showToast({
+                  title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
+                  icon: 'none',
+                  duration: 3000
+                })
+                console.log("服务器配置微信环境出错，请检查APPID和APPSECRT是否匹配！")
+              }
+            }
+          })
+        }
+      }
     })
   },
 
@@ -226,7 +382,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!this.data.isActivityCircle) {
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 300
+      })
+      pageNum = 1
+      bottomLast = false
+      this.getPosts()
+    }
   },
 
   /**
@@ -273,6 +437,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: this.data.circle.groupName,
+      imageUrl: this.data.circle.groupBanner,
+      path: '/pages/circle/activity/index?groupId=' + this.data.circle.groupId + "&groupType=" + this.data.circle.groupType
+    }
   }
 })

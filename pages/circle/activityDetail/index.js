@@ -1,6 +1,9 @@
 // pages/circle/activityDetail/index.js
 const util = require('../../../utils/util.js')
 const app = getApp()
+var QQMapWX = require('../../../libs/qqmap-wx-jssdk.js');
+var qqmapsdk;
+var userId;
 Page({
 
   /**
@@ -10,7 +13,8 @@ Page({
     activityId: '',
     activity: {},
     photoPrefix: app.globalData.staticResourceUrlPrefix,
-    isFollow: false
+    isFollow: false,
+    poi: {}
   },
 
   /**
@@ -18,6 +22,10 @@ Page({
    */
   onLoad: function (options) {
     this.data.activityId = options.id
+    userId = app.globalData.userId
+    qqmapsdk = new QQMapWX({
+      key: '4SOBZ-N4Z6P-2WEDV-V3NWZ-U25BF-IOBCM'
+    });
     this.getActivity()
   },
 
@@ -35,11 +43,46 @@ Page({
         activity.activityBanner = that.data.photoPrefix + activity.activityBanner
         activity.activityStartTime = util.formatDayTime(new Date(Date.parse(activity.activityStartTime)))
         activity.activityEndTime = util.formatDayTime(new Date(Date.parse(activity.activityEndTime)))
+        if (activity.activityType === 2) {
+          that.getPoi(activity.activityArea + activity.activityAddress)
+        }
         that.setData({
           activity: activity,
           isFollow: activity.hasFollowed === 1
         })
       }
+    })
+  },
+
+  getPoi(address) {
+    var that = this;
+    qqmapsdk.geocoder({
+      address: address,
+      success: function (res) {
+        console.log(res);
+        var res = res.result;
+        var latitude = res.location.lat;
+        var longitude = res.location.lng;
+        that.setData({
+          poi: {
+            latitude: latitude,
+            longitude: longitude
+          }
+        });
+      },
+      fail: function (error) {
+        console.error(error);
+      },
+      complete: function (res) {
+        console.log(res);
+      }
+    })
+  },
+
+  goLocation() {
+    wx.openLocation({
+      latitude: this.data.poi.latitude,
+      longitude: this.data.poi.longitude,
     })
   },
 
@@ -62,20 +105,31 @@ Page({
 
   follow() {
     var that = this
-    wx.request({
-      url: app.globalData.requestUrlCms + '/group/activities/follow',
-      data: {
-        activityId: this.data.activityId,
-        userId: app.globalData.userId
-      },
-      method: this.data.isFollow ? 'DELETE' : "POST",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success: function (res) {
-        if (res.data.success) {
+    app.IfAccess().then(function (res) {
+      if (res) {
+        //only authorized user can get platform information
+        if (app.globalData.authorized) {
+          wx.request({
+            url: app.globalData.requestUrlCms + '/group/activities/follow',
+            data: {
+              activityId: that.data.activityId,
+              userId: app.globalData.userId
+            },
+            method: that.data.isFollow ? 'DELETE' : "POST",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            success: function (res) {
+              if (res.data.success) {
+                that.setData({
+                  isFollow: !that.data.isFollow
+                })
+              }
+            }
+          })
+        } else {
           that.setData({
-            isFollow: !that.data.isFollow
+            showFilter: true
           })
         }
       }
@@ -83,8 +137,128 @@ Page({
   },
 
   apply() {
-    wx.navigateTo({
-      url: '/pages/circle/apply/index?data=' +encodeURIComponent(JSON.stringify(this.data.activity)),
+    var that = this
+    app.IfAccess().then(function (res) {
+      if (res) {
+        //only authorized user can get platform information
+        if (app.globalData.authorized) {
+          wx.navigateTo({
+            url: '/pages/circle/apply/index?data=' + encodeURIComponent(JSON.stringify(that.data.activity)),
+          })
+        } else {
+          that.setData({
+            showFilter: true
+          })
+        }
+      }
+    })
+  },
+
+  cancelLogin: function () {
+    this.setData({
+      showFilter: false
+    })
+  },
+
+  bindGetUserInfo: function (e) {
+    if (e.detail.errMsg == 'getUserInfo:fail auth deny') {
+      return
+    }
+    wx.showLoading({
+      title: '登录中',
+      mask: true
+    })
+    var that = this;
+    if (app.globalData.authorized) {
+      wx.showToast({
+        title: '登录成功',
+        duration: 2000,
+        mask: true
+      })
+      that.setData({
+        showFilter: false,
+        isAuthorized: true,
+        userInfo: app.globalData.userInfo
+      })
+      return;
+    }
+    //完善用户信息
+    this.data.userId = app.globalData.userId;
+    //login
+    wx.login({
+      success: res => {
+        if (res.errMsg != 'getUserInfo:fail:auth deny' && res.code) {
+          //register new temp user
+          wx.request({
+            url: app.globalData.requestUrlWechat + '/wxmini/user/login',
+            method: "GET",
+            data: {
+              code: res.code
+            },
+            dataType: "json",
+            success: function (res) {
+              const userId = res.data.userId;
+              const openId = res.data.openId;
+              const sessionKey = res.data.sessionKey;
+              if (userId && typeof (userId) != 'undefined' && userId != '') {
+                //授权回调函数获取用户详情    
+                wx.getUserInfo({
+                  withCredentials: true,
+                  success: function (res) {
+                    console.log(res);
+                    if (res.errMsg == "getUserInfo:ok") {
+                      //decrypt encrypeted userInfo
+                      wx.request({
+                        url: app.globalData.requestUrlWechat + '/wxmini/user/authorizeUser/' + userId,
+                        data: {
+                          encryptedData: res.encryptedData,
+                          iv: res.iv,
+                          sessionKey: sessionKey
+                        },
+                        dataType: "json",
+                        method: "POST",
+                        success: function (res) {
+                          console.log('[bindGetUserInfo]->完善用户信息', res.data)
+                          app.globalData.authorized = res.data.authorized;
+                          app.globalData.userInfo = res.data.userInfo;
+                          app.globalData.userId = app.globalData.userInfo.userId;
+                          wx.setStorageSync("userId", app.globalData.userId)
+                          wx.hideLoading();
+                          wx.showToast({
+                            title: '授权成功',
+                            duration: 2000
+                          })
+                          that.setData({
+                            showFilter: false,
+                            isAuthorized: true,
+                            userInfo: app.globalData.userInfo,
+                          })
+                        }
+                      })
+                    }
+                  },
+                  fail: function (res) {
+                    wx.showToast({
+                      title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
+                      icon: 'none',
+                      duration: 3000
+                    })
+                    console.log(res)
+                  }
+                })
+
+              } else {
+                wx.showToast({
+                  title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
+                  icon: 'none',
+                  duration: 3000
+                })
+                console.log("服务器配置微信环境出错，请检查APPID和APPSECRT是否匹配！")
+              }
+            }
+          })
+        }
+      }
     })
   },
 
@@ -134,6 +308,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: this.data.activity.activityTitle,
+      imageUrl: this.data.activity.activityBanner,
+      path: '/pages/circle/activityDetail/index?id=' + this.data.activity.id,
+    }
   }
 })

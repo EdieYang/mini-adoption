@@ -23,11 +23,11 @@
 
 <view class="activity_title">
 	<text>最新活动</text>
-	<text class="more">更多活动 ></text>
+	<text class="more" bindtap="goMoreActivity">更多活动 ></text>
 </view>
 <scroll-view scroll-x style="height:378rpx" bindscroll="handleScroll">
 	<view style="display:flex">
-		<view wx:for="{{activities}}" class="activity-item">
+		<view wx:for="{{activities}}" wx:key="index" class="activity-item" bindtap="goActivity" data-index="{{index}}">
 			<image src="{{item.activityBanner}}" class="activity-banner"></image>
 			<view class="activity-content">
 				<text class="activity-title">{{item.activityTitle}}</text>

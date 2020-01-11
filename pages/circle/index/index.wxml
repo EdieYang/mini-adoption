@@ -1,19 +1,60 @@
 <!--pages/circle/index/index.wxml-->
 <nav-bar title-text="上海宠物领养"></nav-bar>
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color='{{indicatorColor}}' style='margin-top:{{marginNav}}px;height:250rpx;'>
-	<block wx:for="{{imgUrls}}" wx:key='{{index}}'>
+	<block wx:for="{{imgUrls}}" wx:key='index'>
 		<swiper-item bindtap='redirectUrl' data-index='{{index}}'>
 			<image src="{{photoPrefix}}{{item.bannerImgUrl}}" class="slide-image" />
 		</swiper-item>
 	</block>
 </swiper>
 
+
+<view wx:if='{{activities.length !== 0}}' class="activity-container">
+	<view class="activity_title">
+		<text>我关注的活动</text>
+		<text class="more" bindtap="goMoreActivity">更多活动 ></text>
+	</view>
+	<scroll-view scroll-x style="height:378rpx" bindscroll="handleScroll">
+		<view style="display:flex">
+			<view wx:for="{{activities}}" wx:key="index" class="activity-item" bindtap="goFollowedActivity" data-index="{{index}}">
+				<image src="{{item.activityBanner}}" class="activity-banner"></image>
+				<view class="activity-content">
+					<text class="activity-title">{{item.activityTitle}}</text>
+					<view style="display:flex;justify-content:space-between;">
+						<text class="activity-time">{{item.time}}</text>
+						<text class="activity-area">{{item.activityType === "1" ? '线上活动' : item.activityArea}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+	<view class="indicator" style="visibility:{{activities.length>2?'visible': 'hidden'}}">
+		<view class="{{toLeft?'bg-blue': 'bg-grey'}}"></view>
+		<view class="{{toLeft?'bg-grey': 'bg-blue'}}"></view>
+	</view>
+</view>
+
+
+<view class="activity-container">
+	<view class="activity_title">
+		<text>关注的圈子</text>
+	</view>
+	<scroll-view scroll-x style="height:260rpx">
+		<view style="display:flex;margin:30rpx 0 30rpx 30rpx">
+			<view wx:for="{{followedCircles}}" wx:key="index" class="circle-item" bindtap="goFollowedCircle" data-index="{{index}}">
+				<image src="{{item.groupBanner}}" class="circle-banner"></image>
+				<view class="circle-name">{{item.groupName}}</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>
+
 <view class="circle-label">最热的圈子</view>
-<view wx:for="{{circles}}" class="circle" bindtap="goDetail" data-index="{{index}}">
-  <image src="{{item.groupBanner}}"></image>
-  <view style="position:relative;flex:1">
-    <view class="circle-title">{{item.groupName}}</view>
-    <view class="circle-count">{{item.fansCount+"人关注  "+item.contentCount+"篇内容"}}</view>
-    <view class="circle-desc">{{item.groupInfo}}</view>
-  </view>
+<view wx:for="{{circles}}" wx:key="index" class="circle" bindtap="goDetail" data-index="{{index}}">
+	<image src="{{item.groupBanner}}"></image>
+	<view style="position:relative;flex:1">
+		<view class="circle-title">{{item.groupName}}</view>
+		<view class="circle-count">{{item.fansCount+"人关注 "+item.contentCount+"篇内容"}}</view>
+		<view class="circle-desc">{{item.groupInfo}}</view>
+	</view>
 </view>

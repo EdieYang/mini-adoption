@@ -269,6 +269,27 @@ Page({
       toLeft: e.detail.scrollLeft <= 10
     })
   },
+  goActivity(e) {
+    wx.navigateTo({
+      url: '/pages/circle/activityDetail/index?id=' + this.data.activities[e.currentTarget.dataset.index].id,
+    })
+  },
+  goMoreActivity() {
+    wx.request({
+      url: app.globalData.requestUrlCms + '/group/list',
+      data: {
+        groupType: '1',
+        isActive: 1
+      },
+      method: "GET",
+      success: function (res) {
+        let item = res.data.data[0]
+        wx.navigateTo({
+          url: '/pages/circle/activity/index?groupId=' + item.groupId + "&groupType=" + item.groupType,
+        })
+      }
+    })
+  },
   chooseTab: function(e) {
     var that = this
     chosenId = e.currentTarget.dataset.id;
