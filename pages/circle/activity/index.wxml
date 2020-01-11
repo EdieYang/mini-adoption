@@ -1,5 +1,5 @@
 <!--pages/circle/activity/index.wxml-->
-<view style="display:flex;flex-direction:column">
+<view style="display:flex;flex-direction:column" wx:if="{{groupId}}">
 	<view class="head">
 		<image src="{{circle.groupBanner}}" class="banner"></image>
 		<view class="circle-content">
@@ -37,6 +37,7 @@
 			<view class="post-time">{{item.createDate}}</view>
 		</view>
 		<view wx:if="{{item.userId !== userId}}" class="post-follow" bindtap="switchFollow" data-index="{{index}}">{{item.isFollowed?'已关注':'关注'}}</view>
+		<image data-index="{{index}}" wx:if="{{!groupId}}" class="sheet" src="/images/sheet.png" bindtap="showSheet"></image>
 	</view>
 
 	<view class="post-content" style="-webkit-line-clamp:{{item.showAll?'0':'2'}}">{{item.postContent}}</view>
@@ -72,3 +73,11 @@
 		</view>
 	</view>
 </block>
+
+<view class="mask" wx:if="{{showMask}}" bindtap="clickMask">
+	<image class="mask-bg" src="/images/congratulations.png"></image>
+	<view class="mask-content">
+		<view class="mask-point"><text>+{{addPointValue}}</text> 积分</view>
+		<view class="i-know">我知道了</view>
+	</view>
+</view>

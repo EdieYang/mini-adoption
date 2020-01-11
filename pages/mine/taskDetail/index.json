@@ -1,0 +1,9 @@
+{
+  "backgroundColor": "#fafafa",
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "任务详情",
+  "usingComponents": {}
+}

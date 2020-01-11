@@ -42,7 +42,7 @@ Page({
   getAdoptUserInfo: function(targetUserId) {
     var that = this
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/adoptUser',
+      url: app.globalData.requestUrlCms + '/users/adoptUser',
       data: {
         userId: targetUserId
       },
@@ -94,7 +94,7 @@ Page({
   getFollowedStatus: function() {
     var that = this
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/attention',
+      url: app.globalData.requestUrlCms + '/users/attention',
       data: {
         userId: userId,
         targetUserId: targetUserId
@@ -113,7 +113,7 @@ Page({
       title: '',
     })
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/attention',
+      url: app.globalData.requestUrlCms + '/users/attention',
       data: {
         userId: targetUserId,
         attentBy: userId,
@@ -142,7 +142,7 @@ Page({
       title: '',
     })
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/attention',
+      url: app.globalData.requestUrlCms + '/users/attention',
       data: {
         userId: targetUserId,
         attentBy: userId,

@@ -29,7 +29,7 @@ Page({
   getFollowList: function () {
     var that = this
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/' + targetUserId + '/attentBy',
+      url: app.globalData.requestUrlCms + '/users/' + targetUserId + '/attentBy',
       data: {
         userId: userId,
         pageNum: pageNum,
@@ -67,7 +67,7 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.request({
-            url: app.globalData.requestUrlCms + '/adopt/users/attention',
+            url: app.globalData.requestUrlCms + '/users/attention',
             data: {
               userId: followUserId,
               attentBy: userId,
@@ -91,7 +91,7 @@ Page({
     var that = this
     var followUserId = e.currentTarget.dataset.followid
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/attention',
+      url: app.globalData.requestUrlCms + '/users/attention',
       data: {
         userId: followUserId,
         attentBy: userId,

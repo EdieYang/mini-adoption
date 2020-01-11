@@ -102,7 +102,7 @@ Page({
   getUserInfo: function() {
     var that = this
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/adoptUser',
+      url: app.globalData.requestUrlCms + '/users/adoptUser',
       data: {
         userId: userId
       },

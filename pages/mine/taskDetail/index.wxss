@@ -1,0 +1,7 @@
+/* pages/mine/taskDetail/index.wxss */
+
+.content {
+  font-size: 28rpx;
+  white-space: pre;
+  padding-left: 30rpx;
+}

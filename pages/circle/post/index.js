@@ -93,7 +93,7 @@ Page({
       })
     })
     let cmsGroupPost = {
-      groupId:  this.data.groupId,
+      groupId: this.data.groupId,
       postContent: this.data.content,
       userId: app.globalData.userId
     }
@@ -109,6 +109,10 @@ Page({
       },
       success: function (res) {
         if (res.data.success) {
+          var prePage = getCurrentPages()[getCurrentPages().length - 2]
+          prePage.setData({
+            isGetPoint: true
+          })
           wx.navigateBack({
             delta: 1
           })

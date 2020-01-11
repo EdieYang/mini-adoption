@@ -18,7 +18,10 @@ Page({
     isActivityCircle: false,
     prefix: '',
     userId: '',
-    showFilter: false
+    showFilter: false,
+    showMask: false,
+    addPointValue: '',
+    isGetPoint: false
   },
 
   /**
@@ -38,6 +41,9 @@ Page({
   },
 
   getCircleDetail: function () {
+    if (!this.data.groupId) {
+      return
+    }
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/group',
@@ -88,15 +94,19 @@ Page({
 
   getPosts: function () {
     var that = this
+    let queryData = {
+      isValid: 1,
+      pageNum: pageNum,
+      pageSize: pageSize
+    }
+    if (this.data.groupId) {
+      queryData.groupId = this.data.groupId
+    } else {
+      queryData.userId = app.globalData.userId
+    }
     wx.request({
       url: app.globalData.requestUrlCms + '/group/post/page',
-      data: {
-        groupId: this.data.groupId,
-        userId: app.globalData.userId,
-        isValid: 1,
-        pageNum: pageNum,
-        pageSize: pageSize
-      },
+      data: queryData,
       method: "GET",
       success: function (res) {
         var posts = res.data.data.list
@@ -245,6 +255,43 @@ Page({
     })
   },
 
+  showSheet(e) {
+    let that = this
+    wx.showActionSheet({
+      itemList: ['删除'],
+      success(res) {
+        that.deletePost(e.currentTarget.dataset.index)
+      }
+    })
+  },
+
+  deletePost(index) {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/group/post',
+      data: {
+        postId: that.data.posts[index].postId,
+        memo: '用户删帖',
+      },
+      method: "DELETE",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      success: function (res) {
+        that.data.posts.splice(index, 1)
+        that.setData({
+          posts: that.data.posts
+        })
+      }
+    })
+  },
+
+  clickMask() {
+    this.setData({
+      showMask: false
+    })
+  },
+
   joinCircle() {
     var that = this
     app.IfAccess().then(function (res) {
@@ -371,6 +418,30 @@ Page({
     })
   },
 
+  getAddPoint() {
+    let that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/pointStatement',
+      data: {
+        userId: app.globalData.userId,
+        channel: 8
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.data.success) {
+          if (res.data.data > 0) {
+            that.setData({
+              showMask: true,
+              addPointValue: res.data.data
+            })
+          }
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -390,6 +461,10 @@ Page({
       pageNum = 1
       bottomLast = false
       this.getPosts()
+      if (this.data.isGetPoint) {
+        this.getAddPoint()
+        this.data.isGetPoint = false
+      }
     }
   },
 

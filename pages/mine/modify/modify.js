@@ -28,7 +28,7 @@ Page({
     userId = app.globalData.userId
     // userId = '9e02dbdc2e0347ed899e056b6780f1a3'
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/user',
+      url: app.globalData.requestUrlCms + '/users/user',
       method: "GET",
       data: {
         userId: userId
@@ -197,7 +197,7 @@ Page({
     userInfo.birthday = birthday
     userInfo.nickName = nickName
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/user',
+      url: app.globalData.requestUrlCms + '/users/user',
       data: {
         userId: userId,
         nickName: nickName,
