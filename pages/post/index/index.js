@@ -40,20 +40,6 @@ Page({
       }
     })
   },
-  genFormId: function(formId) {
-    wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/formId',
-      data: {
-        formId: formId,
-        userId: userId
-      },
-      method: "POST",
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      success: function(res) {}
-    })
-  },
   cancelLogin: function() {
     this.setData({
       showFilter: false
@@ -177,9 +163,6 @@ Page({
     wx.navigateTo({
       url: '../../redirect/redirect?url=' + url,
     })
-  },
-  addFormId: function(e) {
-    this.genFormId(e.detail.formId)
   },
   followAccount: function() {
     wx.navigateTo({

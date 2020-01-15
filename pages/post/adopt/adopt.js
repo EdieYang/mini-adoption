@@ -392,6 +392,10 @@ Page({
     this.setData({
       obeyRules: !obey
     })
+    wx.requestSubscribeMessage({
+      tmplIds: ['bP86rGBY1p6XP8C-UTjPnnyQP8Qi5i3GKBfmU9-rxL0', 'dPDzxprSMn8oar0v2DKNDLhtHLy-SjhAUHm-nSG_GkE'],
+      success(res) { }
+    })
   },
   adoptRules: function() {
     wx.navigateTo({
@@ -578,8 +582,6 @@ Page({
       title: '正在发布',
       mask: true
     })
-    var formId = e.detail.formId
-
     var imageArr = [];
     var imageLength = 0
     if (loadState == 1) {
@@ -925,8 +927,7 @@ Page({
         createBy: userId,
         adoptStatus: '0',
         mediaList: imageArr,
-        orgId: organizationId,
-        formId: formId
+        orgId: organizationId
       }
       wx.request({
         url: app.globalData.requestUrlCms + '/adopt/pets/info',
@@ -976,8 +977,7 @@ Page({
         story: story,
         createBy: userId,
         mediaList: imageArr,
-        orgId: organizationId,
-        formId: formId
+        orgId: organizationId
       }
       wx.request({
         url: app.globalData.requestUrlCms + '/adopt/pets/info',

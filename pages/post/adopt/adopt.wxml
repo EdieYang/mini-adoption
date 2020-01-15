@@ -1,6 +1,6 @@
 <nav-bar title-text="发布宠物信息" backIcon='../../images/back-pre-black.png'></nav-bar>
 
-<form bindsubmit="submitNew" report-submit='true' report-submit-timeout='1000'>
+<form bindsubmit="submitNew">
   <view class='top-warning' style='margin-top:{{marginNav+10}}px'>(只限上海地区发布领养) 虚假违法内容将被介入删除！</view>
 
   <view class='cover-item'>
@@ -14,7 +14,6 @@
             <image data-index='{{index}}' bindtap='delImg' class='del-img' src='../../../images/del.png'></image>
           </view>
         </view>
-
       </block>
 
       <block wx:if='{{showAddPhotoCover}}'>

@@ -62,10 +62,6 @@
 	</view>
 </view>
 
-
-
-
-
 <view class='loading_cover' wx:if='{{showLoading}}'>
 	<view class="spinner">
 		<view class="double-bounce1"></view>
@@ -73,7 +69,6 @@
 	</view>
 	<view class='loading_text'>加载中</view>
 </view>
-
 
 <view class='collect-out'>
 	<view style='display:none'>

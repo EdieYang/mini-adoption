@@ -1,133 +1,138 @@
 <nav-bar title-text="我的" background='#1c43b2' color='#fff'></nav-bar>
 
 <view class='top-cover' style='padding-top:{{marginNav/2}}px'>
-	<view class='user-cover-default' wx:if='{{!isAuthorized}}'>
-		<view class='user-info-default'>
-			<image class='co-portrait-default' mode='aspectFill' src='../../../images/portrait.png'></image>
-			<view class='info-cover-default'>
-				<button class='cover-btn' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
-			</view>
-		</view>
-	</view>
-	<view class='user-cover' wx:if='{{isAuthorized}}'>
-		<view class='user-info'>
-			<image class='co-portrait' mode='aspectFill' src='{{userInfo.portrait}}'></image>
-			<view class='info-cover'>
-				<view class='co-name'>
-					{{userInfo.nickName}}
-				</view>
-				<view class='co-follows' style='margin-bottom:10rpx'>
-					<view class='follow' wx:if='{{userInfo.gender==0}}'>男神 </view>
-					<view class='follow' wx:if='{{userInfo.gender==1}}'> 女神 </view>
-					<view class='follow' wx:if='{{userInfo.location}}'>{{userInfo.location}}</view>
-				</view>
-				<view class='co-follows'>
-					<view class='follow-btn' bindtap='followlist'>关注 {{userInfo.followNum}} </view>
-					<view class='follow-btn' bindtap='followedlist'>被关注 {{userInfo.followByNum}} </view>
-					<view class='follow-btn' style="flex:1">当前积分 {{userInfo.points}} </view>
-					<view class='follow-btn' bindtap='home'>个人主页 > </view>
-				</view>
-			</view>
-		</view>
-	</view>
-	<view class='co-intro' wx:if='{{userInfo.intro && isAuthorized}}'>简介：{{userInfo.intro}}</view>
-	<view class='co-intro' wx:if='{{!userInfo.intro && isAuthorized}}'>简介：这个人很懒，什么也没写~</view>
-	<view class='modi-info' wx:if='{{isAuthorized}}' bindtap='modify'>
-		<image class='modi-icon' src='../../../images/modi-icon.png'></image>
-		<text class='modi-txt'>编辑个人信息</text>
-	</view>
+  <view class='user-cover-default' wx:if='{{!isAuthorized}}'>
+    <view class='user-info-default'>
+      <image class='co-portrait-default' mode='aspectFill' src='../../../images/portrait.png'></image>
+      <view class='info-cover-default'>
+        <button class='cover-btn' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+      </view>
+    </view>
+  </view>
+  <view class='user-cover' wx:if='{{isAuthorized}}'>
+    <view class='user-info'>
+      <image class='co-portrait' mode='aspectFill' src='{{userInfo.portrait}}'></image>
+      <view class='info-cover'>
+        <view class='co-name'>
+          {{userInfo.nickName}}
+        </view>
+        <view class='co-follows' style='margin-bottom:10rpx'>
+          <view class='follow' wx:if='{{userInfo.gender==0}}'>男神 </view>
+          <view class='follow' wx:if='{{userInfo.gender==1}}'> 女神 </view>
+          <view class='follow' wx:if='{{userInfo.location}}'>{{userInfo.location}}</view>
+        </view>
+        <view class='co-follows-line2'>
+          <view class="co-follows-item">
+            <view class='follow-btn' bindtap='followlist'>关注 {{userInfo.followNum}} </view>
+            <view class='follow-btn' bindtap='followedlist'>被关注 {{userInfo.followByNum}} </view>
+          </view>
+          <view class='follow-btn' bindtap='home'>个人主页 > </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='co-intro' wx:if='{{userInfo.intro && isAuthorized}}'>简介：{{userInfo.intro}}</view>
+  <view class='co-intro' wx:if='{{!userInfo.intro && isAuthorized}}'>简介：这个人很懒，什么也没写~</view>
+  <view class='modi-info' wx:if='{{isAuthorized}}' bindtap='modify'>
+    <view class="modi-left">
+      <image class='modi-icon' src='../../../images/modi-icon.png'></image>
+      <text class='modi-txt'>编辑个人信息</text>
+    </view>
+    <view class='modi-right'>当前积分 {{userInfo.points}} </view>
+  </view>
+
 </view>
 
 <view class="options-container">
-	<view style="display:flex">
-		<view class="option-item" bindtap='adoptlist'>
-			<image src='/images/oper-1.png'></image>我的送养
-		</view>
-		<view class="option-item flex-auto" bindtap='receiveApply'>
-			<image src='/images/oper-2.png'></image>我收到的领养申请
-		</view>
-		<view class="option-item padding-r" bindtap='collect'>
-			<image src='/images/oper-6.png'></image>我的收藏
-		</view>
-	</view>
-	<view style="display:flex">
-		<view class="option-item" bindtap='certify'>
-			<image src='/images/oper-4.png'></image>实名认证
-		</view>
-		<view class="option-item flex-auto" bindtap='sendApply'>
-			<image src='/images/oper-3.png'></image>我发出的领养申请
-		</view>
-		<view class="option-item">
-			<image src='/images/oper-9.png'></image>
-			<button open-type='share' class='oper-btn'>推荐给朋友</button>
-		</view>
-	</view>
-	<view style="display:flex;margin-bottom:40rpx">
-		<view class="option-item">
-			<image src='/images/oper-10.png'></image>消息中心
-		</view>
-		<view class="option-item flex-auto" bindtap="myPosts">
-			<image src='/images/oper-11.png'></image>我发出的帖子
-		</view>
-		<view class="option-item padding-r">
-			<image src='/images/oper-12.png'></image>邻宠生活
-		</view>
-	</view>
+  <view style="display:flex">
+    <view class="option-item" bindtap='adoptlist'>
+      <image src='/images/oper-1.png'></image>我的送养
+    </view>
+    <view class="option-item flex-auto" bindtap='receiveApply'>
+      <image src='/images/oper-2.png'></image>我收到的领养申请
+    </view>
+    <view class="option-item padding-r" bindtap='collect'>
+      <image src='/images/oper-6.png'></image>我的收藏
+    </view>
+  </view>
+  <view style="display:flex">
+    <view class="option-item" bindtap='certify'>
+      <image src='/images/oper-4.png'></image>实名认证
+    </view>
+    <view class="option-item flex-auto" bindtap='sendApply'>
+      <image src='/images/oper-3.png'></image>我发出的领养申请
+    </view>
+    <view class="option-item">
+      <image src='/images/oper-9.png'></image>
+      <button open-type='share' class='oper-btn'>推荐给朋友</button>
+    </view>
+  </view>
+  <view style="display:flex;margin-bottom:40rpx">
+    <view class="option-item">
+      <image src='/images/oper-10.png'></image>消息中心
+    </view>
+    <view class="option-item flex-auto" bindtap="myPosts">
+      <image src='/images/oper-11.png'></image>我发出的帖子
+    </view>
+    <view class="option-item padding-r">
+      <image src='/images/oper-12.png'></image>邻宠生活
+    </view>
+  </view>
 </view>
 
 <view class="options-container">
-	<view class="title-container">
-		<view class="vertical-line"></view>
-		<view class="title">连续签到</view>
-		<view class="sign-in" bindtap="signIn" style="background:{{hasSigned?'rgba(216,216,216,1)':'linear-gradient(90deg, rgba(250, 217, 97, 1) 0%, rgba(247, 107, 28, 1) 100%)'}}">点击签到</view>
-	</view>
+  <view class="title-container">
+    <view class="vertical-line"></view>
+    <view class="title">连续签到</view>
+    <view class="sign-in" bindtap="signIn" style="background:{{hasSigned?'rgba(216,216,216,1)':'linear-gradient(90deg, rgba(250, 217, 97, 1) 0%, rgba(247, 107, 28, 1) 100%)'}}">点击签到</view>
+  </view>
 
-	<view class="sign-in-container">
-		<view class="day-container" wx:for="{{signDays}}" wx:key="index">
-			<view class="divider-day"></view>
-			<view style="position:relative">
-				<view class="sign-day">
-					<view class="point-value" wx:if="{{!item.complete}}">{{item.point}}</view>
-					<image src="/images/sign-in.png" class="sign-ok" wx:else></image>
-					<view class="day">{{index+1}}天</view>
-				</view>
-				<image class="add-point" src="{{item.picUrl}}" wx:if="{{!item.complete}}"></image>
-			</view>
-			<view class="divider-day"></view>
-		</view>
-	</view>
+  <view class="sign-in-container">
+    <view class="day-container" wx:for="{{signDays}}" wx:key="index">
+      <view class="divider-day"></view>
+      <view style="position:relative">
+        <view class="sign-day">
+          <view class="point-value" wx:if="{{!item.complete}}">{{item.point}}</view>
+          <image src="/images/sign-in.png" class="sign-ok" wx:else></image>
+          <view class="day">{{index+1}}天</view>
+        </view>
+        <image class="add-point" src="{{item.picUrl}}" wx:if="{{!item.complete}}"></image>
+      </view>
+      <view class="divider-day"></view>
+    </view>
+  </view>
 </view>
 
 <view class="options-container">
-	<view class="title-container">
-		<view class="vertical-line"></view>
-		<view class="title">积分任务</view>
-		<view class="learn-more" bindtap="taskDetail">了解详情 ></view>
-	</view>
+  <view class="title-container">
+    <view class="vertical-line"></view>
+    <view class="title">积分任务</view>
+    <view class="learn-more" bindtap="taskDetail">了解详情 ></view>
+  </view>
 
-	<view class="task" wx:for="{{tasks}}" wx:key="index">
-		<view>
-			<view class="task-name">{{item.taskName}}</view>
-			<view class="task-point">{{item.taskValue ? '+'+item.taskValue+'积分': ''}}{{item.limit?'    每日上限'+item.limit+'次':''}}</view>
-		</view>
-		<view class="point-btn" wx:if="{{item.taskOption}}" data-index="{{index}}" bindtap="completeTask">{{item.isCompleted ? '已完成': item.taskOption}}</view>
-	</view>
+  <view class="task" wx:for="{{tasks}}" wx:key="index">
+    <view>
+      <view class="task-name">{{item.taskName}}</view>
+      <view class="task-point">{{item.taskValue ? '+'+item.taskValue+'积分': ''}}{{item.limit?' 每日上限'+item.limit+'次':''}}</view>
+    </view>
+    <view class="point-btn" wx:if="{{item.taskOption}}" data-index="{{index}}" bindtap="completeTask">{{item.isCompleted ? '已完成': item.taskOption}}</view>
+  </view>
 </view>
 
 <view class="options-container">
-	<view class="title-container" bindtap='feedback'>
-		<view class="vertical-line"></view>
-		<view class="title">帮助与反馈</view>
-	</view>
-	<view class="divider"></view>
-	<view class="title-container" bindtap='adoptRules'>
-		<view class="vertical-line"></view>
-		<view class="title">平台领养规则</view>
-	</view>
+  <view class="title-container" bindtap='feedback'>
+    <view class="vertical-line"></view>
+    <view class="title">帮助与反馈</view>
+  </view>
+  <view class="divider"></view>
+  <view class="title-container" bindtap='adoptRules'>
+    <view class="vertical-line"></view>
+    <view class="title">平台领养规则</view>
+  </view>
 </view>
 
 <view class='oper-cover'>
-	<!-- <view class='oper-item' bindtap='modify'>
+  <!-- <view class='oper-item' bindtap='modify'>
 		<view class='oper-left'>
 			<image class='oper-icon' src='../../../images/oper-5.png'></image>
 			<text>我的资料</text>
@@ -135,38 +140,41 @@
 		<image class='oper-in' src='../../../images/arrow-r.png'></image>
 	</view> -->
 
-	<view class="footer-cover">
-		<view class="footer-item">欢迎添加客服微信：
-			<text class="warning">zmydwx83</text>
-		</view>
-		<button class="footer-item-btn" bindtap='copyWx'>一键复制客服微信</button>
-		<view class="footer-item">工作时间：每日 9:00-23:00</view>
-	</view>
+  <view class="footer-cover">
+    <view class="footer-item">欢迎添加客服微信：
+      <text class="warning">zmydwx83</text>
+    </view>
+    <button class="footer-item-btn" bindtap='copyWx'>一键复制客服微信</button>
+    <view class="footer-item">工作时间：每日 9:00-23:00</view>
+  </view>
 
-	<view class="footer-cover">
-		<text class="footer-keyword">——  实时发现，用心了解宠物世界  ——</text>
-	</view>
+  <view class="footer-cover">
+    <text class="footer-keyword">——  实时发现，用心了解宠物世界  ——</text>
+  </view>
 
 </view>
 
 <view class="mask" wx:if="{{showMask}}" bindtap="clickMask">
-	<view class="mask-txt">签到成功<view wx:if="{{maskDay!==-1}}">第</view><text>{{maskDay}}</text>
-		<view wx:if="{{maskDay!==-1}}">天</view>
-	</view>
-	<view class="mask-txt">恭喜获得<text>{{maskPoint}}</text>积分</view>
-	<image class="mask-icon" src="/images/sign-in-big.png"></image>
-	<image class="mask-close" src="/images/close.png"></image>
+  <view class="mask-txt">签到成功
+    <view wx:if="{{maskDay!==-1}}">第</view>
+    <text>{{maskDay}}</text>
+    <view wx:if="{{maskDay!==-1}}">天</view>
+  </view>
+  <view class="mask-txt">恭喜获得
+    <text>{{maskPoint}}</text>积分</view>
+  <image class="mask-icon" src="/images/sign-in-big.png"></image>
+  <image class="mask-close" src="/images/close.png"></image>
 </view>
 
 <block wx:if="{{showFilter}}">
-	<view class="tip_container" catchtouchmove='preventTouchMove'>
-	</view>
-	<view class="tipTap" catchtouchmove='preventTouchMove'>
-		<view class='filter-header'>为了更好地展示领养信息，领养平台需要您的授权登录</view>
-		<view class='filter-content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>
-		<view class='filter-btn-cover'>
-			<view class='filter-btn' bindtap='cancelLogin'>暂不登录</view>
-			<button class="filter-btn-sumbit" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
-		</view>
-	</view>
+  <view class="tip_container" catchtouchmove='preventTouchMove'>
+  </view>
+  <view class="tipTap" catchtouchmove='preventTouchMove'>
+    <view class='filter-header'>为了更好地展示领养信息，领养平台需要您的授权登录</view>
+    <view class='filter-content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>
+    <view class='filter-btn-cover'>
+      <view class='filter-btn' bindtap='cancelLogin'>暂不登录</view>
+      <button class="filter-btn-sumbit" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+    </view>
+  </view>
 </block>

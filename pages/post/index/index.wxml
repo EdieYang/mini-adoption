@@ -9,11 +9,7 @@
     <view class='item-header'>
       <text class='title-1'>我要送养</text>
       <text>领养从真诚开始</text>
-      <form bindsubmit="addFormId" report-submit="true">
-        <button formType="submit">
-          <view class='item-btn-1' bindtap="adopt">发布</view>
-        </button>
-      </form>
+     <view class='item-btn-1' bindtap="adopt">发布</view>
     </view>
   </view>
 
@@ -25,12 +21,7 @@
     <view class='item-header'>
       <text class='title-2'>送养攻略</text>
       <text>发布-审核-签协议</text>
-
-      <form bindsubmit="addFormId" report-submit="true">
-        <button formType="submit">
-          <view class='item-btn-2' bindtap="adoptTour">查看</view>
-        </button>
-      </form>
+      <view class='item-btn-2' bindtap="adoptTour">查看</view>
     </view>
 
   </view>

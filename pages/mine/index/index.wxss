@@ -61,7 +61,7 @@ page {
 }
 
 .info-cover {
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -103,6 +103,20 @@ page {
   margin-top: 10rpx;
 }
 
+.co-follows-line2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}
+
+.co-follows-item {
+  width: 400rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
 .follow {
   font-size: 25rpx;
   color: #fff;
@@ -126,8 +140,24 @@ page {
   height: 100rpx;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modi-left {
+  width: 300rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+
+.modi-right {
+  width: 300rpx;
+  font-size: 26rpx;
+  color: #fff;
+  text-align: right;
 }
 
 .co-intro {
@@ -195,7 +225,6 @@ page {
   border: none;
   outline: none;
 }
-
 
 .footer-item-btn {
   width: 280rpx;
@@ -408,7 +437,7 @@ page {
 }
 
 .mask-txt text {
-  color: #FFCD00;
+  color: #ffcd00;
 }
 
 .mask-icon {
