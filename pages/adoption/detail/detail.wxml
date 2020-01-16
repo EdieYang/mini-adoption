@@ -394,3 +394,11 @@
     </view>
   </view>
 </block>
+
+<view class="mask" wx:if="{{showMask}}" bindtap="clickMask">
+	<image class="mask-bg" src="/images/congratulations.png"></image>
+	<view class="mask-content">
+		<view class="mask-point"><text>+{{addPointValue}}</text> 积分</view>
+		<view class="i-know">我知道了</view>
+	</view>
+</view>

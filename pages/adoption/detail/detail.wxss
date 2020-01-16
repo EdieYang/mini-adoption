@@ -731,3 +731,56 @@ page {
   font-size: 28rpx;
   margin: 0 0;
 }
+
+.mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  flex-direction: column;
+  background: rgba(9, 9, 9, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mask-bg {
+  width: 496rpx;
+  height: 437rpx;
+  position: absolute;
+}
+
+.mask-content {
+  margin-top: 100rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.mask-point {
+  font-size: 40rpx;
+  font-family: PingFang-SC-Bold, PingFang-SC;
+  font-weight: bold;
+  color: black;
+}
+
+.mask-point text {
+  color: rgba(255, 93, 0, 1);
+}
+
+.i-know {
+  width: 235rpx;
+  height: 72rpx;
+  background: rgba(255, 205, 0, 1);
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  font-family: PingFang-SC-Bold, PingFang-SC;
+  font-weight: bold;
+  color: rgba(254, 254, 254, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 44rpx;
+}

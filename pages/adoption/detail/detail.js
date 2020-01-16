@@ -16,7 +16,10 @@ Page({
     showFilter: false,
     photoPrefix: app.globalData.staticResourceUrlPrefix,
     homeIcon: false,
-    backIcon: '../../images/back-pre-black.png'
+    backIcon: '../../images/back-pre-black.png',
+    showMask: false,
+    addPointValue: '',
+    isGetPoint: false
   },
 
   /**
@@ -32,6 +35,7 @@ Page({
         backIcon: ''
       })
     }
+    this.getAddPoint(5)
     userId = app.globalData.userId
     wx.showLoading({
       title: '正在加载',
@@ -496,6 +500,37 @@ Page({
       success: function(res) {}
     })
   },
+  clickMask() {
+    this.setData({
+      showMask: false
+    })
+  },
+
+  getAddPoint(channel) {
+    let that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/pointStatement',
+      data: {
+        userId: app.globalData.userId,
+        channel: channel,
+        targetId: petId
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.data.success) {
+          if (res.data.data > 0) {
+            that.setData({
+              showMask: true,
+              addPointValue: res.data.data
+            })
+          }
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -528,6 +563,10 @@ Page({
           }
         }
       })
+    }
+    if (this.data.isGetPoint) {
+      this.getAddPoint(4)
+      this.data.isGetPoint = false
     }
   },
   online: function(e) {
@@ -618,6 +657,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+    this.data.isGetPoint = true
     return {
       title: '我叫' + this.data.petInfo.petName + "，快把我带回家吧！",
       imageUrl: this.data.imgUrls[0],

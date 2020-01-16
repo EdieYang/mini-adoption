@@ -14,7 +14,10 @@ Page({
     activity: {},
     photoPrefix: app.globalData.staticResourceUrlPrefix,
     isFollow: false,
-    poi: {}
+    poi: {},
+    showMask: false,
+    addPointValue: '',
+    isGetPoint: false
   },
 
   /**
@@ -43,6 +46,7 @@ Page({
         activity.activityBanner = that.data.photoPrefix + activity.activityBanner
         activity.activityStartTime = util.formatDayTime(new Date(Date.parse(activity.activityStartTime)))
         activity.activityEndTime = util.formatDayTime(new Date(Date.parse(activity.activityEndTime)))
+        activity.activityContent = activity.activityContent.replace(/\<img/gi, '<img class="rich-img" ');
         if (activity.activityType === 2) {
           that.getPoi(activity.activityArea + activity.activityAddress)
         }
@@ -262,6 +266,38 @@ Page({
     })
   },
 
+  clickMask() {
+    this.setData({
+      showMask: false
+    })
+  },
+
+  getAddPoint() {
+    let that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/pointStatement',
+      data: {
+        userId: app.globalData.userId,
+        channel: 6,
+        targetId: that.data.activityId
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.data.success) {
+          if (res.data.data > 0) {
+            that.setData({
+              showMask: true,
+              addPointValue: res.data.data
+            })
+          }
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -273,7 +309,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (this.data.isGetPoint) {
+      this.getAddPoint()
+      this.data.isGetPoint = false
+    }
   },
 
   /**
@@ -308,6 +347,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    this.data.isGetPoint = true
     return {
       title: this.data.activity.activityTitle,
       imageUrl: this.data.activity.activityBanner,
