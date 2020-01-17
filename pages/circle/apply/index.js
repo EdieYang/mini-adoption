@@ -73,7 +73,7 @@ Page({
           wx.hideLoading()
           if (res.data.success) {
             wx.navigateBack({
-              delta: 2
+              delta: 3
             })
           } else {
             wx.showToast({

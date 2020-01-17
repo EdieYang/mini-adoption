@@ -1,6 +1,6 @@
-.identify-cover{
-  width:90%;
-  margin-left:5%;
+.identify-cover {
+  width: 90%;
+  margin-left: 5%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -8,42 +8,42 @@
 
 
 
-.header{
+.header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.title{
-  color:#000;
+.title {
+  color: #000;
   font-size: 38rpx;
   font-weight: bold;
 }
 
-.example{
+.example {
   font-size: 30rpx;
-  color:#ec5358;
+  color: #ec5358;
   text-decoration: underline;
 }
 
-.tip{
+.tip {
   width: 600rpx;
   font-size: 28rpx;
-  color:#999;
-  margin-top:30rpx;
+  color: #999;
+  margin-top: 30rpx;
 }
 
-.identify-item{
+.identify-item {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  margin-top:100rpx;
+  margin-top: 100rpx;
   margin-bottom: 100rpx;
 }
 
-.identify-left{
+.identify-left {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,46 +51,46 @@
 }
 
 
-.left-top{
-  width:260rpx;
-  height:161rpx;
+.left-top {
+  width: 260rpx;
+  height: 161rpx;
 }
 
-.left-info{
-  margin-top:10rpx;
-  color:#333;
+.left-info {
+  margin-top: 10rpx;
+  color: #333;
   font-size: 24rpx;
 }
 
 
-.help-cover{
-  margin-top:40rpx;
+.help-cover {
+  margin-top: 40rpx;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-bottom: 140rpx;
 }
 
-.help-header{
-  color:#000;
+.help-header {
+  color: #000;
   font-size: 32rpx;
-  margin-bottom:30rpx;
+  margin-bottom: 30rpx;
 }
 
-.help-item{
+.help-item {
   font-size: 28rpx;
-  color:#000;
-  margin-top:20rpx;
-  margin-bottom:10rpx;
+  color: #000;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
 }
 
-.check-btn{
-  height:70rpx;
+.check-btn {
+  height: 70rpx;
   line-height: 70rpx;
-  color:#fff;
+  color: #fff;
   background-color: #1c43b2;
   border-radius: 100rpx;
-  width:320rpx;
+  width: 320rpx;
   position: fixed;
   bottom: 20rpx;
   left: 215rpx;
@@ -99,27 +99,27 @@
 }
 
 
-.progress{
-  height:94rpx;
-  width:598rpx;
-  margin:0 auto;
+.progress {
+  height: 94rpx;
+  width: 598rpx;
+  margin: 0 auto;
 }
 
-.check-header{
-  margin-top:300rpx;
+.check-header {
+  margin-top: 300rpx;
   font-size: 38rpx;
-  color:#000;
+  color: #000;
   text-align: center;
-  width:100%;
+  width: 100%;
 
 }
 
-.check-info{
-  margin-top:50rpx;
+.check-info {
+  margin-top: 50rpx;
   font-size: 28rpx;
-  color:#333;
+  color: #333;
   text-align: center;
-  width:100%;
+  width: 100%;
 }
 
 
@@ -141,4 +141,20 @@
   line-height: 100rpx;
   font-size: 32rpx;
   border-bottom: 1rpx solid #eaeaea;
+}
+
+.code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 30rpx;
+  font-family: PingFangSC-Regular;
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #fff;
+  background-color: #1c43b2;
+  border-radius: 100rpx;
+  width: 200rpx;
+  text-align: center;
+  font-size: 28rpx;
 }

@@ -22,7 +22,9 @@ Page({
     fromType: '',
     activityData: '',
     activityId: '',
-    questionnaireId: ''
+    questionnaireId: '',
+    countDown: 0,
+    tel: ''
   },
 
   /**
@@ -99,6 +101,9 @@ Page({
     var that = this
     var realName = e.detail.value.realName
     var idCard = e.detail.value.idCard
+    var wxAccount = e.detail.value.wxAccount
+    var mobilePhone = e.detail.value.mobilePhone
+    var verifyCode = e.detail.value.verifyCode
     if (realName == '') {
       wx.showToast({
         title: '请输入真实姓名',
@@ -110,6 +115,30 @@ Page({
     if (idCard == '') {
       wx.showToast({
         title: '请输入真实身份证',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    if (wxAccount == '') {
+      wx.showToast({
+        title: '请输入微信号',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    if (mobilePhone == '') {
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    if (verifyCode == '') {
+      wx.showToast({
+        title: '请输入验证码',
         icon: 'none',
         duration: 2000
       })
@@ -127,6 +156,9 @@ Page({
           userId: userId,
           idCard: idCard,
           realName: realName,
+          wxAccount: wxAccount,
+          mobilePhone: mobilePhone,
+          verifyCode: verifyCode,
           formId: e.detail.formId
         },
         method: "POST",
@@ -149,6 +181,11 @@ Page({
             } else {
               that.getCertification()
             }
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
           }
         }
       })
@@ -212,7 +249,52 @@ Page({
       url: '../identifyexample/identifyexample',
     })
   },
-
+  inputTel(e) {
+    this.data.tel = e.detail.value
+  },
+  sendCode() {
+    var self = this
+    if (this.data.countDown !== 0) {
+      return
+    } else if (!this.data.tel || !this.data.tel.match(/^1\d{10}$/)) {
+      wx.showToast({
+        title: '请输入正确的手机号码！',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    wx.request({
+      url: app.globalData.requestUrlCms + '/sms/verifyCode',
+      data: {
+        userId: userId,
+        mobilePhone: this.data.tel
+      },
+      method: "GET",
+      success: function (res) {
+        if (res.data.success) {
+          wx.showToast({
+            title: '验证码已发送',
+            duration: 1000
+          })
+        }
+      }
+    })
+    var tempInterval
+    var countNum = 60
+    self.data.countDown = countNum
+    tempInterval = setInterval(function () {
+      if (countNum === 0) {
+        clearInterval(tempInterval)
+        countNum = 60
+        return
+      }
+      countNum -= 1
+      self.setData({
+        countDown: countNum
+      })
+    }, 1000)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

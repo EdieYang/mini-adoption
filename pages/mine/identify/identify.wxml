@@ -1,82 +1,96 @@
 <nav-bar title-text="实名认证" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}'></nav-bar>
 
 <block wx:if='{{status==1}}'>
-  <form report-submit='true' bindsubmit="uploadCheck">
-    <view class='identify-cover' style='margin-top:{{marginNav+30}}px'>
-      <view class='header'>
-        <view class='title'>实名认证材料</view>
-        <view class='example' bindtap="example">查看示例</view>
-      </view>
+	<form report-submit='true' bindsubmit="uploadCheck">
+		<view class='identify-cover' style='margin-top:{{marginNav+30}}px'>
+			<view class='header'>
+				<view class='title'>实名认证材料</view>
+				<view class='example' bindtap="example">查看示例</view>
+			</view>
 
-      <view class='tip'>认证材料仅用于平台审核及送养协议备案</view>
-      <view class='identify-item'>
-        <view class='identify-left'>
-          <image class='left-top' src='{{imageFront}}' bindtap='chooseImage' data-img='1'></image>
-          <view class='left-info'>身份证正面</view>
-        </view>
-        <view class='identify-left'>
-          <image class='left-top' src='{{imageBack}}' bindtap='chooseImage' data-img='2'></image>
-          <view class='left-info'>身份证反面</view>
-        </view>
-      </view>
-      <view class="login-item">
-        <view class="label">真实姓名：</view>
-        <input class='login-input' type="text" placeholder="请输入姓名" name='realName' maxlength="10"></input>
-      </view>
-      <view class="login-item">
-        <view class="label">身份证号：</view>
-        <input class='login-input' type="text" placeholder="请输入身份证号" name='idCard' maxlength="20"></input>
-      </view>
+			<view class='tip'>认证材料仅用于平台审核及送养协议备案</view>
+			<view class='identify-item'>
+				<view class='identify-left'>
+					<image class='left-top' src='{{imageFront}}' bindtap='chooseImage' data-img='1'></image>
+					<view class='left-info'>身份证正面</view>
+				</view>
+				<view class='identify-left'>
+					<image class='left-top' src='{{imageBack}}' bindtap='chooseImage' data-img='2'></image>
+					<view class='left-info'>身份证反面</view>
+				</view>
+			</view>
+			<view class="login-item">
+				<view class="label">真实姓名：</view>
+				<input class='login-input' type="text" placeholder="请输入姓名" name='realName' maxlength="10"></input>
+			</view>
+			<view class="login-item">
+				<view class="label">身份证号：</view>
+				<input class='login-input' type="text" placeholder="请输入身份证号" name='idCard' maxlength="20"></input>
+			</view>
+			<view class="login-item">
+				<view class="label">微信号：</view>
+				<input class='login-input' type="text" placeholder="请输入微信号" name='wxAccount'></input>
+			</view>
+			<view class="login-item">
+				<view class="label">手机号：</view>
+				<input class='login-input' type="text" placeholder="请输入手机号" name='mobilePhone' maxlength="11" bindinput="inputTel"></input>
+			</view>
+			<view class="login-item">
+				<view class="label">验证码：</view>
+				<view style="display:flex;align-items:center">
+					<input style="flex:1" class='login-input' type="text" placeholder="请输入验证码" name='verifyCode' maxlength="6"></input>
+					<text class="code" bindtap='sendCode'>{{countDown||'发送'}}</text>
+				</view>
+			</view>
 
+			<view class='help-cover'>
+				<view class='help-header'>
+					为什么要做实名认证：
+				</view>
+				<view class='help-item'>
+					1. 实名认证后将获得实名认证标识
+				</view>
+				<view class='help-item'>
+					2. 实名认证有利于与其他用户建立信任关系
+				</view>
+				<view class='help-item'>
+					3. 实名认证将更好的规范领养双方行为，所发布信息更具参考价值
+				</view>
+			</view>
 
-      <view class='help-cover'>
-        <view class='help-header'>
-          为什么要做实名认证：
-        </view>
-        <view class='help-item'>
-          1. 实名认证后将获得实名认证标识
-        </view>
-        <view class='help-item'>
-          2. 实名认证有利于与其他用户建立信任关系
-        </view>
-        <view class='help-item'>
-          3. 实名认证将更好的规范领养双方行为，所发布信息更具参考价值
-        </view>
-      </view>
+		</view>
 
-    </view>
-
-    <button class='check-btn' form-type="submit">提交审核</button>
-  </form>
+		<button class='check-btn' form-type="submit">提交审核</button>
+	</form>
 </block>
 
 <block wx:if='{{status==2}}'>
-  <view class='identify-cover' style='margin-top:{{marginNav+30}}px'>
-    <block wx:if='{{checkInfo.status==0}}'>
-      <image src='../../../images/identify-progress2.png' class='progress'></image>
-      <view class='check-header'>
-        实名认证材料已上传成功！
-      </view>
-      <view class='check-info'>平台将会在1-3个工作日内审核。</view>
-    </block>
+	<view class='identify-cover' style='margin-top:{{marginNav+30}}px'>
+		<block wx:if='{{checkInfo.status==0}}'>
+			<image src='../../../images/identify-progress2.png' class='progress'></image>
+			<view class='check-header'>
+				实名认证材料已上传成功！
+			</view>
+			<view class='check-info'>平台将会在1-3个工作日内审核。</view>
+		</block>
 
-    <block wx:if='{{checkInfo.status==1}}'>
-      <image src='../../../images/identify-progress1.png' class='progress'></image>
-      <view class='check-header' style='color:#12a457'>
-        恭喜您的实名认证审核通过！
-      </view>
-      <view class='check-info'>请遵守平台领养条约，文明领养，爱护生命。</view>
-    </block>
+		<block wx:if='{{checkInfo.status==1}}'>
+			<image src='../../../images/identify-progress1.png' class='progress'></image>
+			<view class='check-header' style='color:#12a457'>
+				恭喜您的实名认证审核通过！
+			</view>
+			<view class='check-info'>请遵守平台领养条约，文明领养，爱护生命。</view>
+		</block>
 
-    <block wx:if='{{checkInfo.status==2}}'>
-      <image src='../../../images/identify-progress1.png' class='progress'></image>
-      <view class='check-header' style='color:#ec5358'>
-        您的实名认证审核未通过！
-      </view>
-      <view class='check-info'>未通过原因：{{checkInfo.memo}}</view>
-      <view class='check-btn' bindtap='reUpload'>重新上传</view>
-    </block>
-  </view>
+		<block wx:if='{{checkInfo.status==2}}'>
+			<image src='../../../images/identify-progress1.png' class='progress'></image>
+			<view class='check-header' style='color:#ec5358'>
+				您的实名认证审核未通过！
+			</view>
+			<view class='check-info'>未通过原因：{{checkInfo.memo}}</view>
+			<view class='check-btn' bindtap='reUpload'>重新上传</view>
+		</block>
+	</view>
 
 
 </block>
