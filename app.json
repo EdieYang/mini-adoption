@@ -39,7 +39,8 @@
     "pages/circle/activityDetail/index",
     "pages/circle/apply/index",
     "pages/circle/post/index",
-    "pages/mine/taskDetail/index"
+    "pages/mine/taskDetail/index",
+    "pages/circle/questionnaire/index"
   ],
   "window": {
     "enablePullDownRefresh": true,

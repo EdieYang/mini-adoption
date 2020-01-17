@@ -146,9 +146,27 @@ Page({
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
-          wx.navigateTo({
-            url: '/pages/circle/apply/index?data=' + encodeURIComponent(JSON.stringify(that.data.activity)),
-          })
+          if (that.data.activity.activityShouldVerify === 1) {
+            if (that.data.activity.isAuthenticated === 1 && that.data.activity.activityShouldQuestionnaire === 1) {
+              wx.navigateTo({
+                url: '/pages/circle/questionnaire/index?data=' + encodeURIComponent(JSON.stringify(that.data.activity)) + "&activityId=" + that.data.activity.id + "&questionnaireId=" + that.data.activity.questionnaireId,
+              })
+            } else {
+              wx.navigateTo({
+                url: '/pages/mine/identify/identify?fromType=activity&data=' + encodeURIComponent(JSON.stringify(that.data.activity))
+                  + "&activityId=" + that.data.activity.id + "&questionnaireId=" + (that.data.activity.activityShouldQuestionnaire === 1
+                    ? that.data.activity.questionnaireId : ''),
+              })
+            }
+          } else if (that.data.activity.activityShouldQuestionnaire === 1) {
+            wx.navigateTo({
+              url: '/pages/circle/questionnaire/index?data=' + encodeURIComponent(JSON.stringify(that.data.activity)) + "&activityId=" + that.data.activity.id + "&questionnaireId=" + that.data.activity.questionnaireId,
+            })
+          } else {
+            wx.navigateTo({
+              url: '/pages/circle/apply/index?data=' + encodeURIComponent(JSON.stringify(that.data.activity)),
+            })
+          }
         } else {
           that.setData({
             showFilter: true

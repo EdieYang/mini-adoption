@@ -54,6 +54,10 @@ Page({
       })
     } else {
       var that = this
+      wx.showLoading({
+        title: '加载中...',
+        mask: true
+      })
       wx.request({
         url: app.globalData.requestUrlCms + '/group/activity/register',
         data: {
@@ -66,9 +70,15 @@ Page({
           'content-type': 'application/x-www-form-urlencoded' // 默认值
         },
         success: function (res) {
+          wx.hideLoading()
           if (res.data.success) {
             wx.navigateBack({
               delta: 2
+            })
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
             })
           }
         }

@@ -18,17 +18,25 @@ Page({
     status: 0,
     photoPrefix: app.globalData.staticResourceUrlPrefix,
     homeIcon: false,
-    backIcon: '../../images/back-pre-black.png'
+    backIcon: '../../images/back-pre-black.png',
+    fromType: '',
+    activityData: '',
+    activityId: '',
+    questionnaireId: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var that = this
     wx.hideShareMenu()
     userId = app.globalData.userId
     var scene = options.scene
+    this.data.fromType = options.fromType
+    this.data.activityData = options.data
+    this.data.activityId = options.activityId
+    this.data.questionnaireId = options.questionnaireId
     if (scene == 1) {
       that.setData({
         homeIcon: true,
@@ -38,14 +46,14 @@ Page({
 
   },
 
-  chooseImage: function(e) {
+  chooseImage: function (e) {
     var that = this;
     var index = e.currentTarget.dataset.img
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
-      success: function(res) {
+      success: function (res) {
         wx.showLoading({
           title: '上传中',
         })
@@ -87,7 +95,7 @@ Page({
     });
   },
 
-  uploadCheck: function(e) {
+  uploadCheck: function (e) {
     var that = this
     var realName = e.detail.value.realName
     var idCard = e.detail.value.idCard
@@ -125,10 +133,22 @@ Page({
         header: {
           'content-type': 'application/x-www-form-urlencoded' // 默认值
         },
-        success: function(res) {
+        success: function (res) {
           wx.hideLoading()
           if (res.data.success) {
-            that.getCertification()
+            if (that.data.fromType === 'activity') {
+              if (that.data.questionnaireId) {
+                wx.navigateTo({
+                  url: '/pages/circle/questionnaire/index?data=' + that.data.activityData + "&activityId=" + that.data.activityId + "&questionnaireId=" + that.data.questionnaireId,
+                })
+              } else {
+                wx.navigateTo({
+                  url: '/pages/circle/apply/index?data=' + that.data.activityData,
+                })
+              }
+            } else {
+              that.getCertification()
+            }
           }
         }
       })
@@ -140,7 +160,7 @@ Page({
       })
     }
   },
-  getCertification: function() {
+  getCertification: function () {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/certification',
@@ -148,7 +168,7 @@ Page({
         userId: userId
       },
       method: "GET",
-      success: function(res) {
+      success: function (res) {
         var checkInfo = res.data.data
         if (checkInfo == null) {
           that.setData({
@@ -164,7 +184,7 @@ Page({
     })
   },
 
-  reUpload: function() {
+  reUpload: function () {
     var that = this
     wx.showLoading({
       title: '取消此审核中',
@@ -177,7 +197,7 @@ Page({
         status: 3
       },
       method: "PUT",
-      success: function(res) {
+      success: function (res) {
         wx.hideLoading()
         if (res.data.success) {
           that.setData({
@@ -187,7 +207,7 @@ Page({
       }
     })
   },
-  example:function(){
+  example: function () {
     wx.navigateTo({
       url: '../identifyexample/identifyexample',
     })
@@ -196,47 +216,47 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function(e) {
+  onShow: function (e) {
     this.getCertification()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {}
+  onShareAppMessage: function () { }
 })

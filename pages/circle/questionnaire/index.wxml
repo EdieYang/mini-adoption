@@ -1,0 +1,19 @@
+<!--pages/circle/questionnaire/index.wxml-->
+
+<view class="item">
+	<view class="questionnaire-title">{{questionnaire.questionnaireTitle}}</view>
+	<view class="desc">
+		<rich-text nodes="{{questionnaire.questionnaireContent}}" class="rich-text"></rich-text>
+	</view>
+</view>
+
+<view class="item" wx:for="{{questionnaireItemList}}" wx:key="index">
+	<view class="title">{{item.sort +"、" + item.questionnaireItemTitle}}</view>
+	<view data-parentIndex="{{index}}" bindtap="checkAnswer" wx:if="{{item.questionnaireItemType === 2 || item.questionnaireItemType === 3}}" class="option" style="background:{{isCheck?'#EBF3FF':'#FFFFFF'}}" wx:for-item="option" wx:for="{{item.questionnaireItemContent}}" wx:for-index="in" wx:key="in" data-index="{{in}}">
+		<image src="{{(item.questionnaireItemType === 2 && option.isCheck) ? '/images/select_round_pre.png' : (item.questionnaireItemType === 2 && !option.isCheck)?'/images/select_round_nor.png':(item.questionnaireItemType === 3 && option.isCheck)?'/images/select_square_pre.png':'/images/select_square_nor.png'}}"></image>
+		<div class="option-content">{{option.content}}</div>
+	</view>
+	<view wx:if="{{item.questionnaireItemType === 1}}"><textarea id="{{index}}" bindinput="inputValue" placeholder="{{item.questionnaireItemContent}}" auto-height style="margin-top:20rpx"></textarea></view>
+</view>
+
+<view class="submit" bindtap="submit">提交</view>
