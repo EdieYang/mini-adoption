@@ -29,7 +29,7 @@
 }
 
 .activity-count text {
-  color: #233DCB;
+  color: #233dcb;
 }
 
 .info {
@@ -84,12 +84,13 @@
 }
 
 .detail {
-  border-top: 20rpx solid #F1F1F3;
+  border-top: 20rpx solid #f1f1f3;
   font-size: 36rpx;
   font-family: PingFang-SC-Bold, PingFang-SC;
   font-weight: bold;
   color: rgba(0, 0, 0, 1);
   padding-top: 30rpx;
+  padding-bottom: 110rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,6 +104,19 @@
   font-size: 36rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   color: rgba(254, 254, 254, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.has-apply{
+  width: 390rpx;
+  height: 74rpx;
+  background: #eaeaea;
+  border-radius: 37rpx;
+  font-size: 36rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color:rgba(35, 61, 203, 1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -209,6 +223,9 @@
 
 .rich-text {
   width: 690rpx;
+  font-size: 30rpx;
+  color:#2d2d2d;
+  text-align: center;
 }
 
 rich-text .rich-img {

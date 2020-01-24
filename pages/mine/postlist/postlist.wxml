@@ -1,0 +1,26 @@
+<nav-bar title-text="我发出的帖子" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+<view style='margin-top:{{marginNav}}px'>
+  <view class="post-container" wx:for='{{posts}}' wx:key="index">
+    <view class="post-head">
+      <image src="{{item.portrait}}" class="avatar"></image>
+      <view class="nick-time">
+        <view>{{item.nickName}}</view>
+        <view class="post-time">{{item.createDate}}</view>
+      </view>
+      <image data-index="{{index}}" wx:if="{{!groupId}}" class="sheet" src="/images/sheet.png" bindtap="showSheet"></image>
+    </view>
+
+    <view class="post-content" style="-webkit-line-clamp:{{item.showAll?'0':'2'}}">{{item.postContent}}</view>
+    <view class="show-all" wx:if='{{!item.showAll}}' bindtap="showAll" data-index="{{index}}">显示全文</view>
+
+    <view class="post-img">
+      <image wx:for-item="imgItem" bindtap="previewImg" data-img="{{item.groupPostImgList}}" mode="aspectFill" src="{{prefix + imgItem.imgUrl}}" wx:for="{{item.groupPostImgList}}" wx:key="index" class="img-item" style="max-width:{{item.groupPostImgList.length>2?'30%':'100%'}}"></image>
+    </view>
+
+    <view class="options">
+      <view class="like" data-index="{{index}}">
+        <text>共获得{{item.likeAmount ? item.likeAmount : 0}}个赞</text>
+      </view>
+    </view>
+  </view>
+</view>

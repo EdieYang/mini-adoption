@@ -62,9 +62,10 @@
 					"scene": 1011
 				},
 				{
-					"id": -1,
-					"name": "pages/circle/index/index",
-					"pathName": "pages/circle/index/index",
+					"id": 1,
+					"name": "pages/circle/post/index",
+					"pathName": "pages/circle/post/index",
+					"query": "",
 					"scene": null
 				}
 			]

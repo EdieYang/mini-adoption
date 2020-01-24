@@ -4,6 +4,7 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
   "enablePullDownRefresh": false,
-  "navigationBarTitleText": "确认活动",
-  "usingComponents": {}
+  "usingComponents": {
+    "nav-bar": "/component/navbar/navbar"
+  }
 }

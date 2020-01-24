@@ -64,11 +64,11 @@ rich-text .rich-img {
 }
 
 .submit {
-  height: 56rpx;
+  height: 90rpx;
   margin: 20rpx;
   background: white;
-  border-radius: 28rpx;
-  font-size: 24rpx;
+  border-radius: 50rpx;
+  font-size: 30rpx;
   font-family: PingFang-SC-Bold, PingFang-SC;
   font-weight: bold;
   color: rgba(35, 61, 203, 1);

@@ -1,5 +1,5 @@
-<!--pages/circle/activityDetail/index.wxml-->
-<image src="{{activity.activityBanner}}" class="banner"></image>
+<nav-bar title-text="精彩活动" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
+<image src="{{activity.activityBanner}}" class="banner" style="margin-top:{{marginNav}}px;"></image>
 <view class="activity-content">
 	<view class="activity-title">{{activity.activityTitle}}</view>
 	<view class="activity-count" wx:if="{{activity.registerLimit}}">报名人数：限<text>{{activity.registerLimit}}</text>人</view>
@@ -24,7 +24,7 @@
 	</view>
 </view>
 <view class="detail">
-	<view>活动详情</view>
+	<view style="margin-bottom:30rpx;">活动详情</view>
 	<rich-text nodes="{{activity.activityContent}}" class="rich-text"></rich-text>
 </view>
 
@@ -35,7 +35,8 @@
 	<view class="bottom-btn" bindtap="contact">
 		<image src="/images/admin.png"></image>联系管理员
 	</view>
-	<view class="apply" bindtap="apply">立即报名</view>
+	<view class="apply" bindtap="apply" wx:if="{{activity.hasRegistered !=1}}">立即报名</view>
+  	<view class="has-apply" wx:if="{{activity.hasRegistered ==1}}">已报名</view>
 </view>
 
 <block wx:if="{{showFilter}}">

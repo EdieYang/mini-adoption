@@ -4,7 +4,8 @@
   width: 100%;
   padding: 30rpx;
   box-sizing: border-box;
-  height: 220rpx;
+  line-height: 40rpx;
+  font-size: 32rpx;
 }
 
 .post {
@@ -45,18 +46,23 @@
 }
 
 .ui-uploader-item {
-  width: 220rpx;
-  height: 220rpx;
+  margin-bottom: 10rpx;
+  width: 210rpx;
+  height: 210rpx;
+  margin-right: 10rpx;
+  position: relative;
 }
 
 .ui-uploader-item image {
   width: 100%;
   height: 100%;
+  border-radius: 5rpx;
+  position: relative;
 }
 
 .ui-uploader {
-  width: 190rpx;
-  height: 190rpx;
+  width: 206rpx;
+  height: 206rpx;
   background: rgba(254, 254, 254, 1);
   border: 2rpx solid rgba(232, 234, 242, 1);
   font-size: 70rpx;
@@ -64,5 +70,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15rpx;
+}
+
+.del-cover {
+  position: absolute;
+  top: 0rpx;
+  right: 0rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 5rpx;
+  background-color: #000;
+  opacity: 0.4;
+  z-index: 1000;
+}
+
+.del-img {
+  position: absolute!important;
+  top: 5rpx!important;
+  right: 5rpx!important;
+  width: 30rpx!important;
+  height: 30rpx!important;
+  z-index: 1100!important;
 }

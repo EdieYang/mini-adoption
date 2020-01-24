@@ -428,7 +428,12 @@ Page({
   },
   myPosts() {
     wx.navigateTo({
-      url: '/pages/circle/activity/index?groupType=2',
+      url: '/pages/mine/postlist/postlist',
+    })
+  },
+  toMsgList(){
+    wx.navigateTo({
+      url: '/pages/msg/index/index',
     })
   },
   cancelLogin: function () {

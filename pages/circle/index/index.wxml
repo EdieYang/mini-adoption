@@ -1,5 +1,4 @@
-<!--pages/circle/index/index.wxml-->
-<nav-bar title-text="上海宠物领养"></nav-bar>
+<nav-bar title-text="圈子"></nav-bar>
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color='{{indicatorColor}}' style='margin-top:{{marginNav}}px;height:250rpx;'>
 	<block wx:for="{{imgUrls}}" wx:key='index'>
 		<swiper-item bindtap='redirectUrl' data-index='{{index}}'>
@@ -14,7 +13,7 @@
 		<text>我关注的活动</text>
 		<text class="more" bindtap="goMoreActivity">更多活动 ></text>
 	</view>
-	<scroll-view scroll-x style="height:378rpx" bindscroll="handleScroll">
+	<scroll-view scroll-x style="height:378rpx;width: 700rpx;margin-left: 10rpx;" bindscroll="handleScroll">
 		<view style="display:flex">
 			<view wx:for="{{activities}}" wx:key="index" class="activity-item" bindtap="goFollowedActivity" data-index="{{index}}">
 				<image src="{{item.activityBanner}}" class="activity-banner"></image>
@@ -39,7 +38,7 @@
 	<view class="activity_title">
 		<text>关注的圈子</text>
 	</view>
-	<scroll-view scroll-x style="height:260rpx">
+	<scroll-view scroll-x style="height:260rpx;width: 700rpx;margin-left: 10rpx;">
 		<view style="display:flex;margin:30rpx 0 30rpx 30rpx">
 			<view wx:for="{{followedCircles}}" wx:key="index" class="circle-item" bindtap="goFollowedCircle" data-index="{{index}}">
 				<image src="{{item.groupBanner}}" class="circle-banner"></image>

@@ -33,6 +33,7 @@
     "pages/mine/contractdwn/contractdwn",
     "pages/mine/followlist/followlist",
     "pages/mine/followedlist/followedlist",
+    "pages/mine/postlist/postlist",
     "pages/redirect/redirect",
     "pages/circle/index/index",
     "pages/circle/activity/index",
@@ -44,7 +45,8 @@
   ],
   "window": {
     "enablePullDownRefresh": true,
-    "onReachBottomDistance": 100
+    "onReachBottomDistance": 100,
+    "navigationStyle": "custom"
   },
   "permission": {
     "scope.userLocation": {

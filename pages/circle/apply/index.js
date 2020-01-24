@@ -1,4 +1,4 @@
-// pages/circle/apply/index.js
+
 const util = require('../../../utils/util.js')
 const app = getApp()
 Page({
@@ -7,6 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    marginNav: app.globalData.marginNav,
+    homeIcon: false,
+    backIcon: '../../images/back-pre-black.png',
     activity: {},
     pickTime: []
   },

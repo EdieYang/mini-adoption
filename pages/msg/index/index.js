@@ -11,6 +11,8 @@ Page({
    */
   data: {
     marginNav: app.globalData.marginNav,
+    homeIcon: false,
+    backIcon: '../../images/back-pre-black.png',
     chatlist: []
   },
 

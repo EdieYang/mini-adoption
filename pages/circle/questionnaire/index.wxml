@@ -1,6 +1,6 @@
-<!--pages/circle/questionnaire/index.wxml-->
+<nav-bar title-text="填写问卷" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 
-<view class="item">
+<view class="item" style="margin-top:{{marginNav+20}}px;">
 	<view class="questionnaire-title">{{questionnaire.questionnaireTitle}}</view>
 	<view class="desc">
 		<rich-text nodes="{{questionnaire.questionnaireContent}}" class="rich-text"></rich-text>

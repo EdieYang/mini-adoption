@@ -1,4 +1,3 @@
-// pages/circle/post/index.js
 const app = getApp()
 Page({
 
@@ -6,6 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    marginNav: app.globalData.marginNav,
+    homeIcon: false,
+    backIcon: '../../images/back-pre-black.png',
     content: '',
     uploaderList: [],
     uploaderUrlArray: [],
@@ -75,6 +77,15 @@ Page({
 
   inputContent(e) {
     this.data.content = e.detail.value
+  },
+  delImg(e){
+    var index=e.currentTarget.dataset.index
+    this.data.uploaderUrlArray.splice(index, 1)
+    this.data.uploaderList.splice(index, 1)
+    this.setData({
+      uploaderList: this.data.uploaderList,
+      uploaderUrlArray: this.data.uploaderUrlArray
+    })
   },
 
   post() {

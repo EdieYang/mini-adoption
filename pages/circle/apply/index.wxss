@@ -55,40 +55,51 @@ page {
 .apply-title {
   font-size: 30rpx;
   font-family: PingFangSC-Regular, PingFang SC;
-  color: black;
+  color: #2d2d2d;
 }
 
 .apply-item {
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
-  color: black;
+  color: #2d2d2d;
   margin-top: 25rpx;
   display: flex;
   align-items: center;
+  padding-left: 10rpx;
+  padding-top:10rpx;
+  padding-bottom: 10rpx;
+}
+
+
+.item-check{
+  border:1rpx solid #233DCB;
+  background-color: #809cec;
+  border-radius: 5rpx;
+  color: #fff;
 }
 
 .check {
-  width: 24rpx;
-  height: 24rpx;
-  font-size: 14rpx;
+  width: 23rpx;
+  height: 23rpx;
   color: #233DCB;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 8rpx;
-  border-radius: 12rpx;
-  background: rgba(213, 219, 255, 1);
-  border: 1rpx solid rgba(35, 61, 203, 1);
+  margin-right: 12rpx;
+  border-radius: 14rpx;
+  background: #233DCB;
+  border: 3rpx solid rgba(236, 236, 236, 1);
 }
 
 .uncheck {
   width: 24rpx;
   height: 24rpx;
   background: rgba(236, 236, 236, 1);
-  margin-right: 8rpx;
+  margin-right: 12rpx;
   border-radius: 12rpx;
   border: none;
 }
+
 
 .bottom {
   position: fixed;

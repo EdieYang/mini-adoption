@@ -4,6 +4,7 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
   "enablePullDownRefresh": false,
-  "navigationBarTitleText": "圈子",
-  "usingComponents": {}
+  "usingComponents": {
+    "nav-bar": "/component/navbar/navbar"
+  }
 }

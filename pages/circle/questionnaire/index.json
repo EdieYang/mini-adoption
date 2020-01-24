@@ -4,6 +4,7 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
   "enablePullDownRefresh": false,
-  "navigationBarTitleText": "表单",
-  "usingComponents": {}
+  "usingComponents": {
+    "nav-bar": "/component/navbar/navbar"
+  }
 }

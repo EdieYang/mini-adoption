@@ -236,6 +236,7 @@ page {
   border-radius: 100rpx;
   border: 1rpx solid #999;
   background-color: #fff;
+  outline: none;
 }
 
 .options-container {
@@ -411,7 +412,7 @@ page {
 }
 
 .sign-ok {
-  width: 60rpx;
+  width: 50rpx;
   height: 60rpx;
 }
 

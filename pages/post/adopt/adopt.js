@@ -510,7 +510,6 @@ Page({
       ImageUrls: ImageUrls,
       showAddPhotoCover: showAddPhotoCover
     })
-
   },
   toMapLocate: function() {
     showLocationHistory = true

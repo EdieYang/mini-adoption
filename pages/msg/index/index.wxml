@@ -1,4 +1,4 @@
-<nav-bar title-text="消息中心"></nav-bar>
+<nav-bar title-text="消息中心" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 
 <view class='msg-cover' style='margin-top:{{marginNav}}px'>
   <view class='msg-item' wx:if='{{messageList.sysMsg!=null}}' bindtap='detaillist' data-type='0'>

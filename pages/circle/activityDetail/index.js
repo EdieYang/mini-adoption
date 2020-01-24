@@ -1,4 +1,3 @@
-// pages/circle/activityDetail/index.js
 const util = require('../../../utils/util.js')
 const app = getApp()
 var QQMapWX = require('../../../libs/qqmap-wx-jssdk.js');
@@ -10,6 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    marginNav: app.globalData.marginNav,
+    homeIcon: false,
+    backIcon: '../../images/back-pre-black.png',
     activityId: '',
     activity: {},
     photoPrefix: app.globalData.staticResourceUrlPrefix,
@@ -23,7 +25,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.data.activityId = options.id
     userId = app.globalData.userId
     qqmapsdk = new QQMapWX({
@@ -32,7 +34,7 @@ Page({
     this.getActivity()
   },
 
-  getActivity: function () {
+  getActivity: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/group/activities',
@@ -41,7 +43,8 @@ Page({
         userId: app.globalData.userId
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
+        console.log(res)
         var activity = res.data.data
         activity.activityBanner = that.data.photoPrefix + activity.activityBanner
         activity.activityStartTime = util.formatDayTime(new Date(Date.parse(activity.activityStartTime)))
@@ -62,7 +65,7 @@ Page({
     var that = this;
     qqmapsdk.geocoder({
       address: address,
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         var res = res.result;
         var latitude = res.location.lat;
@@ -74,10 +77,10 @@ Page({
           }
         });
       },
-      fail: function (error) {
+      fail: function(error) {
         console.error(error);
       },
-      complete: function (res) {
+      complete: function(res) {
         console.log(res);
       }
     })
@@ -109,7 +112,7 @@ Page({
 
   follow() {
     var that = this
-    app.IfAccess().then(function (res) {
+    app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
@@ -123,8 +126,14 @@ Page({
             header: {
               'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
-            success: function (res) {
+            success: function(res) {
               if (res.data.success) {
+                wx.showToast({
+                  title: that.data.isFollow ? '已取消关注' : "已关注",
+                  duration: 2000,
+                  icon: 'none',
+                  mask: true
+                })
                 that.setData({
                   isFollow: !that.data.isFollow
                 })
@@ -142,7 +151,7 @@ Page({
 
   apply() {
     var that = this
-    app.IfAccess().then(function (res) {
+    app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
@@ -151,11 +160,15 @@ Page({
               wx.navigateTo({
                 url: '/pages/circle/questionnaire/index?data=' + encodeURIComponent(JSON.stringify(that.data.activity)) + "&activityId=" + that.data.activity.id + "&questionnaireId=" + that.data.activity.questionnaireId,
               })
+            } else if (that.data.activity.isAuthenticated === 1 && that.data.activity.activityShouldQuestionnaire === 0) {
+              wx.navigateTo({
+                url: '/pages/circle/apply/index?data=' + encodeURIComponent(JSON.stringify(that.data.activity)),
+              })
             } else {
               wx.navigateTo({
-                url: '/pages/mine/identify/identify?fromType=activity&data=' + encodeURIComponent(JSON.stringify(that.data.activity))
-                  + "&activityId=" + that.data.activity.id + "&questionnaireId=" + (that.data.activity.activityShouldQuestionnaire === 1
-                    ? that.data.activity.questionnaireId : ''),
+                url: '/pages/mine/identify/identify?fromType=activity&data=' + encodeURIComponent(JSON.stringify(that.data.activity)) +
+                  "&activityId=" + that.data.activity.id + "&questionnaireId=" + (that.data.activity.activityShouldQuestionnaire === 1 ?
+                    that.data.activity.questionnaireId : ''),
               })
             }
           } else if (that.data.activity.activityShouldQuestionnaire === 1) {
@@ -176,13 +189,13 @@ Page({
     })
   },
 
-  cancelLogin: function () {
+  cancelLogin: function() {
     this.setData({
       showFilter: false
     })
   },
 
-  bindGetUserInfo: function (e) {
+  bindGetUserInfo: function(e) {
     if (e.detail.errMsg == 'getUserInfo:fail auth deny') {
       return
     }
@@ -218,15 +231,15 @@ Page({
               code: res.code
             },
             dataType: "json",
-            success: function (res) {
+            success: function(res) {
               const userId = res.data.userId;
               const openId = res.data.openId;
               const sessionKey = res.data.sessionKey;
-              if (userId && typeof (userId) != 'undefined' && userId != '') {
+              if (userId && typeof(userId) != 'undefined' && userId != '') {
                 //授权回调函数获取用户详情    
                 wx.getUserInfo({
                   withCredentials: true,
-                  success: function (res) {
+                  success: function(res) {
                     console.log(res);
                     if (res.errMsg == "getUserInfo:ok") {
                       //decrypt encrypeted userInfo
@@ -239,7 +252,7 @@ Page({
                         },
                         dataType: "json",
                         method: "POST",
-                        success: function (res) {
+                        success: function(res) {
                           console.log('[bindGetUserInfo]->完善用户信息', res.data)
                           app.globalData.authorized = res.data.authorized;
                           app.globalData.userInfo = res.data.userInfo;
@@ -259,7 +272,7 @@ Page({
                       })
                     }
                   },
-                  fail: function (res) {
+                  fail: function(res) {
                     wx.showToast({
                       title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
                       icon: 'none',
@@ -303,7 +316,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success) {
           if (res.data.data > 0) {
             that.setData({
@@ -319,14 +332,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     if (this.data.isGetPoint) {
       this.getAddPoint()
       this.data.isGetPoint = false
@@ -336,35 +349,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     this.data.isGetPoint = true
     return {
       title: this.data.activity.activityTitle,

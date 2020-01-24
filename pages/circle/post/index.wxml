@@ -1,12 +1,14 @@
-<!--pages/circle/post/index.wxml-->
+<nav-bar title-text="圈子发帖" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 
-<textarea bindinput="inputContent" placeholder="有什么想聊的一起分享出来吧~" class="content"></textarea>
+<textarea bindinput="inputContent" placeholder="有什么想聊的一起分享出来吧~" class="content" style="margin-top:{{marginNav}}px;margin-bottom:30rpx;" auto-height></textarea>
 
 <view class="{{uploaderList.length === 0 ? 'ui-uploader-cell':'ui-uploader-cell-other'}}">
-	<view class='ui-uploader-item' wx:for="{{uploaderList}}" wx:key="index">
-		<image bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
-	</view>
-	<view class='ui-uploader' bindtap='upload' wx:if="{{showUpload}}">+</view>
+  <view class='ui-uploader-item' wx:for="{{uploaderList}}" wx:key="index">
+    <image bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+    <view class='del-cover' data-index='{{index}}' bindtap='delImg'></view>
+    <image data-index='{{index}}' bindtap='delImg' class='del-img' src='../../../images/del.png'></image>
+  </view>
+  <view class='ui-uploader' bindtap='upload' wx:if="{{showUpload}}">+</view>
 </view>
 
 <view class="post" bindtap="post">发圈</view>

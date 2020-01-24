@@ -1,6 +1,6 @@
-<!--pages/circle/apply/index.wxml-->
+<nav-bar title-text="活动报名" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 
-<view class="activities">
+<view class="activities" style="margin-top:{{marginNav}}px;">
 	<image src="{{activity.activityBanner}}"></image>
 	<view class="activity-content">
 		<view class="activity-title">{{activity.activityTitle}}</view>
@@ -11,8 +11,8 @@
 
 <view class="date">
 	<view class="apply-title">报名日期：</view>
-	<view class="apply-item" wx:for="{{pickTime}}" wx:key="index" bindtap="check" data-index="{{index}}">
-		<view class="{{item.isCheck ? 'check' : 'uncheck'}}">{{item.isCheck ? '√':''}}</view>
+	<view class="apply-item {{item.isCheck ? 'item-check' : ''}}" wx:for="{{pickTime}}" wx:key="index" bindtap="check" data-index="{{index}}">
+		<view class="{{item.isCheck ? 'check' : 'uncheck'}}"></view>
 		<view>{{item.time}}</view>
 	</view>
 </view>
