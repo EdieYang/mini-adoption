@@ -25,7 +25,7 @@
 			</view>
 			<view class="login-item">
 				<view class="label">身份证号：</view>
-				<input class='login-input' type="text" placeholder="请输入身份证号" name='idCard' maxlength="20"></input>
+				<input class='login-input' type="number" placeholder="请输入身份证号" name='idCard' maxlength="20"></input>
 			</view>
 			<view class="login-item">
 				<view class="label">微信号：</view>
@@ -33,13 +33,13 @@
 			</view>
 			<view class="login-item">
 				<view class="label">手机号：</view>
-				<input class='login-input' type="text" placeholder="请输入手机号" name='mobilePhone' maxlength="11" bindinput="inputTel"></input>
+				<input class='login-input' type="number" placeholder="请输入手机号" name='mobilePhone' maxlength="11" bindinput="inputTel"></input>
 			</view>
 			<view class="login-item">
 				<view class="label">验证码：</view>
 				<view style="display:flex;align-items:center">
-					<input style="flex:1" class='login-input' type="text" placeholder="请输入验证码" name='verifyCode' maxlength="6"></input>
-					<text class="code" bindtap='sendCode'>{{countDown||'发送'}}</text>
+					<input style="flex:1" class='login-input' type="number" placeholder="请输入验证码" name='verifyCode' maxlength="6"></input>
+					<text class="code" bindtap='sendCode'>{{countDown!=0?'重新获取('+countDown+')':'发送'}}</text>
 				</view>
 			</view>
 

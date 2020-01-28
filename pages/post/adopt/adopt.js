@@ -52,55 +52,55 @@ Page({
     immuneType: '',
     sterilizeType: '',
     petCharacter: [{
-        name: '讲卫生',
-        value: '1',
-        checked: false
-      },
-      {
-        name: '亲人',
-        value: '2',
-        checked: false
-      },
-      {
-        name: '不乱叫',
-        value: '3',
-        checked: false
-      },
-      {
-        name: '高冷',
-        value: '4',
-        checked: false
-      },
-      {
-        name: '胆小',
-        value: '5',
-        checked: false
-      },
-      {
-        name: '健康',
-        value: '6',
-        checked: false
-      },
-      {
-        name: '无攻击性',
-        value: '7',
-        checked: false
-      },
-      {
-        name: '会看家',
-        value: '8',
-        checked: false
-      },
-      {
-        name: '活泼',
-        value: '9',
-        checked: false
-      },
-      {
-        name: '聪明',
-        value: '10',
-        checked: false
-      }
+      name: '讲卫生',
+      value: '1',
+      checked: false
+    },
+    {
+      name: '亲人',
+      value: '2',
+      checked: false
+    },
+    {
+      name: '不乱叫',
+      value: '3',
+      checked: false
+    },
+    {
+      name: '高冷',
+      value: '4',
+      checked: false
+    },
+    {
+      name: '胆小',
+      value: '5',
+      checked: false
+    },
+    {
+      name: '健康',
+      value: '6',
+      checked: false
+    },
+    {
+      name: '无攻击性',
+      value: '7',
+      checked: false
+    },
+    {
+      name: '会看家',
+      value: '8',
+      checked: false
+    },
+    {
+      name: '活泼',
+      value: '9',
+      checked: false
+    },
+    {
+      name: '聪明',
+      value: '10',
+      checked: false
+    }
     ],
     requirements: [{
       name: '领养前取得家人的同意。',
@@ -153,7 +153,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     wx.hideShareMenu()
     //判断是否加载缓存
     var that = this
@@ -173,7 +173,7 @@ Page({
       this.getAdoptionDetail()
     }
   },
-  getAdoptionDetail: function() {
+  getAdoptionDetail: function () {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/pets/' + petId,
@@ -181,7 +181,7 @@ Page({
       data: {
         userId: userId
       },
-      success: function(res) {
+      success: function (res) {
         var petInfo = res.data.data.petInfo
         var userInfo = res.data.data.userInfo
         var mediaList = petInfo.mediaList
@@ -237,13 +237,13 @@ Page({
       }
     })
   },
-  chooseSpecies: function(e) {
+  chooseSpecies: function (e) {
     var species = e.currentTarget.dataset.type;
     this.setData({
       speciesType: species
     })
   },
-  bindAgeRange: function(e) {
+  bindAgeRange: function (e) {
     var index = e.detail.value;
     var agePickValArr = this.data.ageRange;
     var agePickVal = agePickValArr[index];
@@ -251,13 +251,13 @@ Page({
       agePickVal: agePickVal
     })
   },
-  chooseGender: function(e) {
+  chooseGender: function (e) {
     var gender = e.currentTarget.dataset.type;
     this.setData({
       genderType: gender
     })
   },
-  bindRegionChange: function(e) {
+  bindRegionChange: function (e) {
     console.log(e.detail.value);
     this.setData({
       region: e.detail.value,
@@ -271,33 +271,33 @@ Page({
       })
     }
   },
-  chooseSterilize: function(e) {
+  chooseSterilize: function (e) {
     var sterilize = e.currentTarget.dataset.type;
     this.setData({
       sterilizeType: sterilize
     })
   },
-  chooseVaccine: function(e) {
+  chooseVaccine: function (e) {
     var vaccineType = e.currentTarget.dataset.type;
     this.setData({
       vaccineType: vaccineType
     })
   },
 
-  chooseParasite: function(e) {
+  chooseParasite: function (e) {
     var parasiteType = e.currentTarget.dataset.type;
     this.setData({
       parasiteType: parasiteType
     })
   },
 
-  chooseChip: function(e) {
+  chooseChip: function (e) {
     var chip = e.currentTarget.dataset.type;
     this.setData({
       chipType: chip
     })
   },
-  chooseFrom: function(e) {
+  chooseFrom: function (e) {
     var that = this
     var fromType = e.currentTarget.dataset.type;
     if (fromType == 2) {
@@ -307,7 +307,7 @@ Page({
         header: {
           'content-type': 'application/json' // 默认值
         },
-        success: function(res) {
+        success: function (res) {
           var dataList = res.data.data
           var orgList = []
           for (var i = 0; i < dataList.length; i++) {
@@ -336,19 +336,19 @@ Page({
       fromType: fromType
     })
   },
-  chooseSize: function(e) {
+  chooseSize: function (e) {
     var sizeType = e.currentTarget.dataset.type;
     this.setData({
       sizeType: sizeType
     })
   },
-  chooseHair: function(e) {
+  chooseHair: function (e) {
     var hairType = e.currentTarget.dataset.type;
     this.setData({
       hairType: hairType
     })
   },
-  chooseCharacter: function(e) {
+  chooseCharacter: function (e) {
     var index = e.currentTarget.dataset.type;
     var petCharacters = this.data.petCharacter
     var checked = petCharacters[index].checked
@@ -374,7 +374,7 @@ Page({
       petCharacter: petCharacters
     })
   },
-  chooseRequirement: function(e) {
+  chooseRequirement: function (e) {
     var index = e.currentTarget.dataset.type;
     var requirements = this.data.requirements
     var checked = requirements[index].checked
@@ -387,28 +387,30 @@ Page({
       requirements: requirements
     })
   },
-  obeyRules: function() {
+  obeyRules: function () {
     var obey = this.data.obeyRules
+    if (!obey) {
+      wx.requestSubscribeMessage({
+        tmplIds: ['bP86rGBY1p6XP8C-UTjPnnyQP8Qi5i3GKBfmU9-rxL0', 'dPDzxprSMn8oar0v2DKNDLhtHLy-SjhAUHm-nSG_GkE'],
+        success(res) { }
+      })
+    }
     this.setData({
       obeyRules: !obey
     })
-    wx.requestSubscribeMessage({
-      tmplIds: ['bP86rGBY1p6XP8C-UTjPnnyQP8Qi5i3GKBfmU9-rxL0', 'dPDzxprSMn8oar0v2DKNDLhtHLy-SjhAUHm-nSG_GkE'],
-      success(res) { }
-    })
   },
-  adoptRules: function() {
+  adoptRules: function () {
     wx.navigateTo({
       url: '../../adoption/rule/rule',
     })
   },
-  bindDateChange: function(e) {
+  bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
   },
-  addPhoto: function() {
+  addPhoto: function () {
     var that = this;
     imgCount = 0;
     for (var i = 0; i < ImageUrls.length; i++) {
@@ -420,7 +422,7 @@ Page({
       count: 6 - imgCount, // 默认9
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
-      success: function(res) {
+      success: function (res) {
         for (var i = 0; i < res.tempFiles.length; i++) {
           var fileSize = res.tempFiles[i].size
           if (fileSize > 1024 * 1024 * 5) {
@@ -502,7 +504,7 @@ Page({
       },
     });
   },
-  delImg: function(event) {
+  delImg: function (event) {
     var index = event.currentTarget.dataset.index;
     ImageUrls[index].notDeleted = false;
     showAddPhotoCover = true;
@@ -511,13 +513,13 @@ Page({
       showAddPhotoCover: showAddPhotoCover
     })
   },
-  toMapLocate: function() {
+  toMapLocate: function () {
     showLocationHistory = true
     wx.navigateTo({
       url: '../maplocate/maplocate',
     })
   },
-  verifyPhone: function(event) {
+  verifyPhone: function (event) {
     var phone = event.detail.value
     if (!(/^1(3|4|5|7|8)\d{9}$/.test(phone))) {
       wx.showToast({
@@ -528,7 +530,7 @@ Page({
       return;
     }
   },
-  requirementOtherInput: function(event) {
+  requirementOtherInput: function (event) {
     // 获取输入框的内容
     var value = event.detail.value;
     // 获取输入框内容的长度
@@ -550,7 +552,7 @@ Page({
       currentDetailWordNumber: 200 - len //当前字数
     });
   },
-  storyInput: function(event) {
+  storyInput: function (event) {
     // 获取输入框的内容
     var value = event.detail.value;
     // 获取输入框内容的长度
@@ -572,7 +574,7 @@ Page({
       currentStoryWordNumber: 200 - len //当前字数
     });
   },
-  submitNew: function(e) {
+  submitNew: function (e) {
     var that = this
     this.setData({
       disabled: true
@@ -935,7 +937,7 @@ Page({
         header: {
           'content-type': 'application/json' // 默认值
         },
-        success: function(res) {
+        success: function (res) {
           var petId = res.data.data
           wx.hideLoading();
           wx.showToast({
@@ -949,7 +951,7 @@ Page({
           that.setData({
             ImageUrls: []
           })
-          setTimeout(function() {
+          setTimeout(function () {
             wx.navigateBack({
               delta: 1
             })
@@ -985,7 +987,7 @@ Page({
         header: {
           'content-type': 'application/json' // 默认值
         },
-        success: function(res) {
+        success: function (res) {
           var petId = res.data.data
           imageArr = []
           ImageUrls = []
@@ -999,7 +1001,7 @@ Page({
             duration: 2000,
             mask: true
           })
-          setTimeout(function() {
+          setTimeout(function () {
             wx.redirectTo({
               url: '../../adoption/detail/detail?petId=' + petId,
             })
@@ -1009,51 +1011,51 @@ Page({
     }
   },
 
-  checkEmptyVar: function(param) {
-    if (!param || typeof(param) == 'undefined' || param == "") {
+  checkEmptyVar: function (param) {
+    if (!param || typeof (param) == 'undefined' || param == "") {
       return true;
     } else {
       return false;
     }
   },
 
-  nameInput: function(event) {
+  nameInput: function (event) {
     petName = event.detail.value;
   },
-  breedInput: function(event) {
+  breedInput: function (event) {
     breed = event.detail.value;
   },
-  wxAccountInput: function(event) {
+  wxAccountInput: function (event) {
     wxAccount = event.detail.value;
   },
-  phoneInput: function(event) {
+  phoneInput: function (event) {
     phone = event.detail.value;
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function(options) {
+  onShow: function (options) {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
@@ -1061,21 +1063,21 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

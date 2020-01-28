@@ -48,7 +48,8 @@ Page({
   initSocket: function() {
     var that = this
     app.globalData.chatSocket = wx.connectSocket({
-      url: 'wss://www.linchongpets.com/websocket?uid=' + userId,
+      // url: 'wss://www.linchongpets.com/websocket?uid=' + userId,
+      url: 'ws://linchongpets.natapp1.cc/websocket?uid=' + userId,
       header: {
         'content-type': 'application/json'
       },
@@ -81,7 +82,7 @@ Page({
   getTargetUserInfo: function() {
     var that = this
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/user',
+      url: app.globalData.requestUrlCms + '/users/user',
       method: "GET",
       data: {
         userId: targetUserId
@@ -100,7 +101,7 @@ Page({
   getUserInfo: function() {
     var that = this
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/user',
+      url: app.globalData.requestUrlCms + '/users/user',
       method: "GET",
       data: {
         userId: userId

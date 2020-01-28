@@ -69,6 +69,7 @@
   </view>
   <view style="display:flex;margin-bottom:40rpx">
     <view class="option-item"  bindtap='toMsgList'>
+      <view class="msg-dot" wx:if="{{unreadMsg}}"></view>
       <image src='/images/oper-10.png'></image>消息中心
     </view>
     <view class="option-item flex-auto" bindtap="myPosts">

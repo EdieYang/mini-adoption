@@ -40,7 +40,7 @@ Page({
     vaccine: '',
     parasite: '',
     showLoading: true,
-    imgUrls: [],
+    bannerlist: [],
     indicatorDots: true,
     indicatorColor: '#ffffff',
     autoplay: true,
@@ -78,7 +78,6 @@ Page({
         if (userId && typeof (userId) != 'undefined' && userId != '') {
           wx.hideLoading()
           that.getPetAdoptList()
-          that.getUnreadMessage()
           that.getOrgList()
           that.getActivities()
         }
@@ -183,36 +182,18 @@ Page({
       }
     })
   },
-  getUnreadMessage: function () {
-    var that = this
-    wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/messages/unreadlist',
-      data: {
-        userId: userId
-      },
-      method: "GET",
-      success: function (res) {
-        var msgList = res.data.data
-        if (msgList.length > 0) {
-          wx.showTabBarRedDot({
-            index: 2
-          })
-        }
-      }
-    })
-  },
   getBannerList: function () {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/banner/list',
       data: {
-
+        position:1  
       },
       method: "GET",
       success: function (res) {
         var bannerlist = res.data.data
         that.setData({
-          imgUrls: bannerlist
+          bannerlist: bannerlist
         })
       }
     })
@@ -256,7 +237,8 @@ Page({
       success: function (res) {
         res.data.data.list.map(item => {
           item.activityBanner = that.data.photoPrefix + item.activityBanner
-          item.time = item.activityType === '1' ? util.formatDay(new Date(Date.parse(item.activityStartTime))) + '-' + util.formatDay(new Date(Date.parse(item.activityEndTime))) : util.formatDayWeek(new Date(Date.parse(item.activityStartTime)))
+          //IOS只识别2018/03/09这样的格式
+          item.time = item.activityType === '1' ? util.formatDay(new Date(Date.parse(item.activityStartTime.replace(/-/g, '/')))) + '-' + util.formatDay(new Date(Date.parse(item.activityEndTime.replace(/-/g, '/')))) : util.formatDayWeek(new Date(Date.parse(item.activityStartTime.replace(/-/g, '/'))))
         })
         that.setData({
           activities: res.data.data.list
@@ -456,10 +438,18 @@ Page({
 
   redirectUrl: function (e) {
     var index = e.currentTarget.dataset.index
-    var url = this.data.imgUrls[index].bannerRedirectUrl
-    wx.navigateTo({
-      url: '../redirect/redirect?url=' + url,
-    })
+    var type = this.data.bannerlist[index].type
+    var extraData = this.data.bannerlist[index].extraData
+    if(type == 2){
+      wx.navigateToMiniProgram({
+        appId: extraData,
+        // path: 'page/index/index?id=123',
+      })  
+    }else if(type ==3){
+      wx.navigateTo({
+        url: '../redirect/redirect?url=' + extraData,
+      })
+    }
   },
 
   orgDetail: function (e) {
@@ -519,11 +509,11 @@ Page({
         collectMini: false
       })
     }
-    if (res.scrollTop >= 330 && this.data.tabFix == '') {
+    if (res.scrollTop >= 345 && this.data.tabFix == '') {
       this.setData({
         tabFix: 'position:fixed;top:' + (that.data.marginNav - 10) + 'px;left:0;'
       })
-    } else if (res.scrollTop < 330 && this.data.tabFix != '') {
+    } else if (res.scrollTop < 345 && this.data.tabFix != '') {
       this.setData({
         tabFix: ''
       })

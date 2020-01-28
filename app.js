@@ -21,10 +21,10 @@ App({
     // uploadUrl: 'https://www.linchongpets.com/lpCms/pet/portrait/upload',
     // uploadImageUrl: 'https://www.linchongpets.com/lpCms/oss/image',
     staticResourceUrlPrefix: 'https://linkpets-adopt-platform-bucket-test.oss-cn-shanghai.aliyuncs.com/',
-    requestUrlCms: 'http://linchong.natapp1.cc/lpCmsTest',
-    requestUrlWechat: 'http://linchong.natapp1.cc/lpWechatTest',
-    uploadUrl: 'https://linchong.natapp1.cc/lpCmsTest/pet/portrait/upload',
-    uploadImageUrl: 'http://linchong.natapp1.cc/lpCmsTest/oss/image',
+    requestUrlCms: 'http://linchongpets.natapp1.cc/lpCmsTest',
+    requestUrlWechat: 'http://linchongpets.natapp1.cc/lpWechatTest',
+    uploadUrl: 'https://linchongpets.natapp1.cc/lpCmsTest/pet/portrait/upload',
+    uploadImageUrl: 'http://linchongpets.natapp1.cc/lpCmsTest/oss/image',
     // requestUrlCms: 'http://localhost:8095/lpCmsTest',
     // requestUrlWechat: 'http://localhost:8096/lpWechatTest',
     // requestUrlCms: 'https://www.linchongpets.com/lpCmsTest',
@@ -60,7 +60,7 @@ App({
     var that = this
     this.globalData.socketStatus = 'AUTO'
     this.globalData.chatSocket = wx.connectSocket({
-      url: 'wss://www.linchongpets.com/websocket?uid=' + this.globalData.userId,
+      url: 'ws://linchongpets.natapp1.cc/websocket?uid=' + this.globalData.userId,
       header: {
         'content-type': 'application/json'
       },
@@ -79,10 +79,6 @@ App({
         //消息存入缓存
         var resJson = JSON.parse(res.data)
         wx.setStorageSync(resJson.userId, "SHOW_CHAT_MSG")
-        //消息弹出提示
-        wx.showTabBarRedDot({
-          index: 2
-        })
       }
     })
   },

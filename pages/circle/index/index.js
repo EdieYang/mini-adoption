@@ -19,7 +19,7 @@ Page({
     indicatorColor: '#ffffff',
     marginNav: app.globalData.marginNav,
     photoPrefix: app.globalData.staticResourceUrlPrefix,
-    imgUrls: [],
+    bannerlist: [],
     userId: '',
     circles: [],
     toLeft: true,
@@ -30,36 +30,41 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.getBannerList()
   },
-
-  getBannerList: function () {
+  getBannerList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/banner/list',
       data: {
-
+        position: 2
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var bannerlist = res.data.data
         that.setData({
-          imgUrls: bannerlist
+          bannerlist: bannerlist
         })
       }
     })
   },
-
-  redirectUrl: function (e) {
+  redirectUrl: function(e) {
     var index = e.currentTarget.dataset.index
-    var url = this.data.imgUrls[index].bannerRedirectUrl
-    wx.navigateTo({
-      url: '../redirect/redirect?url=' + url,
-    })
+    var type = this.data.bannerlist[index].type
+    var extraData = this.data.bannerlist[index].extraData
+    if (type == 2) {
+      wx.navigateToMiniProgram({
+        appId: extraData,
+        // path: 'page/index/index?id=123',
+      })
+    } else if (type == 3) {
+      wx.navigateTo({
+        url: '../../redirect/redirect?url=' + extraData,
+      })
+    }
   },
-
-  getCircles: function () {
+  getCircles: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/group/page',
@@ -70,7 +75,7 @@ Page({
         pageSize: pageSize
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var circleList = res.data.data.list
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
@@ -86,15 +91,13 @@ Page({
       }
     })
   },
-
   goDetail(e) {
     let item = this.data.circles[e.currentTarget.dataset.index]
     wx.navigateTo({
       url: '/pages/circle/activity/index?groupId=' + item.groupId + "&groupType=" + item.groupType,
     })
   },
-
-  getActivities: function () {
+  getActivities: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/group/activities/follow/list',
@@ -102,10 +105,10 @@ Page({
         userId: app.globalData.userId
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         res.data.data.map(item => {
           item.activityBanner = that.data.photoPrefix + item.activityBanner
-          item.time = item.activityType === '1' ? util.formatDay(new Date(Date.parse(item.activityStartTime))) + '-' + util.formatDay(new Date(Date.parse(item.activityEndTime))) : util.formatDayWeek(new Date(Date.parse(item.activityStartTime)))
+          item.time = item.activityType === '1' ? util.formatDay(new Date(Date.parse(item.activityStartTime.replace(/-/g, '/')))) + '-' + util.formatDay(new Date(Date.parse(item.activityEndTime.replace(/-/g, '/')))) : util.formatDayWeek(new Date(Date.parse(item.activityStartTime.replace(/-/g, '/'))))
         })
         that.setData({
           activities: res.data.data
@@ -113,8 +116,7 @@ Page({
       }
     })
   },
-
-  getFollowedCircles: function () {
+  getFollowedCircles: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/group/follow',
@@ -122,7 +124,7 @@ Page({
         userId: app.globalData.userId
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         res.data.data.map(item => {
           item.groupBanner = that.data.photoPrefix + item.groupBanner
         })
@@ -158,7 +160,7 @@ Page({
     })
   },
 
-  handleScroll: function (e) {
+  handleScroll: function(e) {
     this.setData({
       toLeft: e.detail.scrollLeft <= 10
     })
@@ -172,7 +174,7 @@ Page({
         isActive: 1
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         let item = res.data.data[0]
         wx.navigateTo({
           url: '/pages/circle/activity/index?groupId=' + item.groupId + "&groupType=" + item.groupType,
@@ -184,14 +186,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     pageNum = 1
     bottomLast = false
     this.getCircles()
@@ -202,28 +204,28 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     wx.stopPullDownRefresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     var that = this
     //刷新页面
     if (!bottomLast) {
@@ -238,7 +240,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

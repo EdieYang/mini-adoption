@@ -258,12 +258,23 @@ page {
   font-size: 26rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   color: rgba(26, 26, 26, 1);
+  position: relative;
 }
 
 .option-item image {
   width: 42rpx;
   height: 42rpx;
   margin-bottom: 10rpx;
+}
+
+.msg-dot {
+  position: absolute;
+  right: 35rpx;
+  top: 35rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #fe395c;
+  border-radius: 50%;
 }
 
 .flex-auto {
@@ -297,12 +308,12 @@ page {
 }
 
 .sign-in {
-  font-size: 24rpx;
+  font-size: 25rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   color: rgba(254, 254, 254, 1);
-  width: 126rpx;
-  height: 41rpx;
-  border-radius: 21rpx;
+  width: 138rpx;
+  height: 46rpx;
+  border-radius: 25rpx;
   display: flex;
   justify-content: center;
   align-items: center;

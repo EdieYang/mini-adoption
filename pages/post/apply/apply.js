@@ -101,6 +101,12 @@ Page({
   },
   obeyRules: function() {
     var obey = this.data.obeyRules
+    if(!obey){
+      wx.requestSubscribeMessage({
+        tmplIds: ['bP86rGBY1p6XP8C-UTjPnnyQP8Qi5i3GKBfmU9-rxL0', 'BIkEd9GjX_lA2NFyWArRMfdzt0WbJcHnt4KFtN4jJy8', 'p9QlNOPBEtJG9X1pJjAnymX5yNCXMtnFqlK6yeJN-dw'],
+        success(res) { }
+      })
+    }
     this.setData({
       obeyRules: !obey
     })

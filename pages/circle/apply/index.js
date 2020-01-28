@@ -11,7 +11,8 @@ Page({
     homeIcon: false,
     backIcon: '../../images/back-pre-black.png',
     activity: {},
-    pickTime: []
+    pickTime: [],
+    delta:0
   },
 
   /**
@@ -21,8 +22,8 @@ Page({
     this.setData({
       activity: JSON.parse(decodeURIComponent(options.data))
     })
-    this.data.activity.activityStartTime = util.formatDayTime(new Date(Date.parse(this.data.activity.activityStartTime)))
-    this.data.activity.activityEndTime = util.formatDayTime(new Date(Date.parse(this.data.activity.activityEndTime)))
+    this.data.activity.activityStartTime = util.formatDayTime(new Date(Date.parse(this.data.activity.activityStartTime.replace(/-/g, '/'))))
+    this.data.activity.activityEndTime = util.formatDayTime(new Date(Date.parse(this.data.activity.activityEndTime.replace(/-/g, '/'))))
     if (this.data.activity.activityPickTime) {
       this.data.activity.activityPickTime.split(',').map(item => {
         this.data.pickTime.push({
@@ -31,7 +32,7 @@ Page({
         })
       })
     }
-
+    this.data.delta=options.delta
     this.setData({
       pickTime: this.data.pickTime
     })
@@ -76,7 +77,7 @@ Page({
           wx.hideLoading()
           if (res.data.success) {
             wx.navigateBack({
-              delta: 3
+              delta: parseInt(that.data.delta)
             })
           } else {
             wx.showToast({

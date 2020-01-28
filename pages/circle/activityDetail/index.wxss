@@ -116,7 +116,7 @@
   border-radius: 37rpx;
   font-size: 36rpx;
   font-family: PingFangSC-Regular, PingFang SC;
-  color:rgba(35, 61, 203, 1);
+  color:#000;
   display: flex;
   justify-content: center;
   align-items: center;

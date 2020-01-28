@@ -1,6 +1,6 @@
 <nav-bar title-text="圈子"></nav-bar>
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color='{{indicatorColor}}' style='margin-top:{{marginNav}}px;height:250rpx;'>
-	<block wx:for="{{imgUrls}}" wx:key='index'>
+	<block wx:for="{{bannerlist}}" wx:key='index'>
 		<swiper-item bindtap='redirectUrl' data-index='{{index}}'>
 			<image src="{{photoPrefix}}{{item.bannerImgUrl}}" class="slide-image" />
 		</swiper-item>

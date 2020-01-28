@@ -8,7 +8,6 @@ var name
 var phone
 var address
 var agreement
-var formId
 var status = 0
 var applySign
 var adopterSign
@@ -30,13 +29,16 @@ Page({
     wx.hideShareMenu()
     userId = app.globalData.userId
     applyId = options.applyId
+    wx.showLoading({
+      title: '加载信息中',
+    })
     this.getPetAdoptApplyDetial()
     this.getUserInfo()
   },
   getUserInfo: function() {
     var that = this
     wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/users/user',
+      url: app.globalData.requestUrlCms + '/users/user',
       data: {
         userId: userId
       },
@@ -45,7 +47,7 @@ Page({
         var userInfo = res.data.data
         that.setData({
           userInfo: userInfo,
-          isAuthorized: true,
+          isAuthorized: userInfo.authenticated===1,
         })
       }
     })
@@ -76,6 +78,7 @@ Page({
         }
 
         petInfo.petCharacteristic = JSON.parse(petInfo.petCharacteristic)
+        wx.hideLoading()
         that.setData({
           petImg: petImg,
           applyInfo: applyInfo,
@@ -112,7 +115,6 @@ Page({
     phone = e.detail.value.phone
     address = e.detail.value.address
     agreement = e.detail.value.agreement
-    formId = e.detail.formId
     if (this.checkEmptyVar(name)) {
       wx.showToast({
         title: '请填写姓名',
@@ -165,7 +167,6 @@ Page({
     name = e.detail.value.name
     phone = e.detail.value.phone
     address = e.detail.value.address
-    formId = e.detail.formId
     if (this.checkEmptyVar(name)) {
       wx.showToast({
         title: '请填写姓名',
@@ -231,7 +232,6 @@ Page({
           applyAddress: address,
           applySign: returnUrl,
           signStatus: 1,
-          formId: formId,
           operateUserId: userId
         }
 
@@ -262,8 +262,6 @@ Page({
 
   submitFormAdopter: function(e) {
     var that = this
-    formId = e.detail.formId
-
     if (this.checkEmptyVar(this.data.contractInfo.adopterSign)) {
       wx.showToast({
         title: '请签下您的大名',
@@ -296,7 +294,6 @@ Page({
           applyId: applyId,
           adopterSign: returnUrl,
           signStatus: 2,
-          formId: formId,
           operateUserId: userId
         }
 
@@ -343,7 +340,6 @@ Page({
       adopterAddress: address,
       signStatus: 0,
       createBy: this.data.adopterUser.userId,
-      formId: formId,
       operateUserId: userId
     }
 

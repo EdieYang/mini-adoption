@@ -1,61 +1,64 @@
 <nav-bar title-text="精彩活动" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
 <image src="{{activity.activityBanner}}" class="banner" style="margin-top:{{marginNav}}px;"></image>
 <view class="activity-content">
-	<view class="activity-title">{{activity.activityTitle}}</view>
-	<view class="activity-count" wx:if="{{activity.registerLimit}}">报名人数：限<text>{{activity.registerLimit}}</text>人</view>
-	<view class="info">
-		<image src="/images/time.png"></image>{{activity.activityStartTime+'-'+activity.activityEndTime}}
-	</view>
-	<view class="info" bindtap="goLocation" wx:if="{{activity.activityType === 2}}">
-		<image src="/images/position.png"></image>
-		<view>{{activity.activityArea}}{{activity.activityAddress}}</view>
-		<text style="color:#B9B6B6;margin-left:30rpx">></text>
-	</view>
+  <view class="activity-title">{{activity.activityTitle}}</view>
+  <view class="activity-count" wx:if="{{activity.registerLimit}}">报名人数：限
+    <text>{{activity.registerLimit}}</text>人</view>
+  <view class="info">
+    <image src="/images/time.png"></image>{{activity.activityStartTime+'-'+activity.activityEndTime}}
+  </view>
+  <view class="info" bindtap="goLocation" wx:if="{{activity.activityType === 2}}">
+    <image src="/images/position.png"></image>
+    <view>{{activity.activityArea}}{{activity.activityAddress}}</view>
+    <text style="color:#B9B6B6;margin-left:30rpx">></text>
+  </view>
 
-	<view class="coin-content">
-		<view class="coin">
-			<image src="/images/coin.png"></image>{{activity.activityCost}}{{activity.activityIsFree===0?"积分":"元"}}
-		</view>
-		<view>
-			<button open-type="share" plain="true" style="border:0;">
-				<image src="/images/share-1.png" class="share"></image>
-			</button>
-		</view>
-	</view>
+  <view class="coin-content">
+    <view class="coin">
+      <image src="/images/coin.png"></image>{{activity.activityCost}}{{activity.activityIsFree===0?"积分":"元"}}
+    </view>
+    <view>
+      <button open-type="share" plain="true" style="border:0;">
+        <image src="/images/share-1.png" class="share"></image>
+      </button>
+    </view>
+  </view>
 </view>
 <view class="detail">
-	<view style="margin-bottom:30rpx;">活动详情</view>
-	<rich-text nodes="{{activity.activityContent}}" class="rich-text"></rich-text>
+  <view style="margin-bottom:30rpx;">活动详情</view>
+  <rich-text nodes="{{activity.activityContent}}" class="rich-text"></rich-text>
 </view>
 
 <view class="bottom">
-	<view class="bottom-btn" bindtap="follow">
-		<image src="/images/follow.png"></image>{{isFollow?'已关注':'关注'}}
-	</view>
-	<view class="bottom-btn" bindtap="contact">
-		<image src="/images/admin.png"></image>联系管理员
-	</view>
-	<view class="apply" bindtap="apply" wx:if="{{activity.hasRegistered !=1}}">立即报名</view>
-  	<view class="has-apply" wx:if="{{activity.hasRegistered ==1}}">已报名</view>
+  <view class="bottom-btn" bindtap="follow">
+    <image src="/images/follow.png"></image>{{isFollow?'已关注':'关注'}}
+  </view>
+  <view class="bottom-btn" bindtap="contact">
+    <image src="/images/admin.png"></image>联系管理员
+  </view>
+  <view class="apply" bindtap="apply" wx:if="{{activity.hasRegistered !=1 && activity.activityStatus =='活动报名中'}}">立即报名</view>
+  <view class="has-apply" wx:if="{{activity.hasRegistered ==1 && activity.activityStatus =='活动报名中' }}">已报名</view>
+  <view class="has-apply" wx:if="{{activity.activityStatus !='活动报名中' }}">{{activity.activityStatus}}</view>
 </view>
 
 <block wx:if="{{showFilter}}">
-	<view class="tip_container" catchtouchmove='preventTouchMove'>
-	</view>
-	<view class="tipTap" catchtouchmove='preventTouchMove'>
-		<view class='filter-header'>为了更好地展示领养信息，领养平台需要您的授权登录</view>
-		<view class='filter-content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>
-		<view class='filter-btn-cover'>
-			<view class='filter-btn' bindtap='cancelLogin'>暂不登录</view>
-			<button class="filter-btn-sumbit" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
-		</view>
-	</view>
+  <view class="tip_container" catchtouchmove='preventTouchMove'>
+  </view>
+  <view class="tipTap" catchtouchmove='preventTouchMove'>
+    <view class='filter-header'>为了更好地展示领养信息，领养平台需要您的授权登录</view>
+    <view class='filter-content'>授权会获取您的微信头像和昵称，也可以去个人中心进行自定义哦！</view>
+    <view class='filter-btn-cover'>
+      <view class='filter-btn' bindtap='cancelLogin'>暂不登录</view>
+      <button class="filter-btn-sumbit" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+    </view>
+  </view>
 </block>
 
 <view class="mask" wx:if="{{showMask}}" bindtap="clickMask">
-	<image class="mask-bg" src="/images/congratulations.png"></image>
-	<view class="mask-content">
-		<view class="mask-point"><text>+{{addPointValue}}</text> 积分</view>
-		<view class="i-know">我知道了</view>
-	</view>
+  <image class="mask-bg" src="/images/congratulations.png"></image>
+  <view class="mask-content">
+    <view class="mask-point">
+      <text>+{{addPointValue}}</text> 积分</view>
+    <view class="i-know">我知道了</view>
+  </view>
 </view>

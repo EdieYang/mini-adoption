@@ -182,10 +182,8 @@
       </view>
       <view class='info-label-pic'>身份证照片</view>
       <view class='info-item-pic'>
-        <image src="{{contractInfo.idCardFrontUrl}}{{waterPrint}}" class="info-pic"
-          mode="aspectFill" bindtap="previewIdcard"></image>
-        <image src="{{contractInfo.idCardBackUrl}}{{waterPrint}}" class="info-pic"
-          mode="aspectFill" bindtap="previewIdcard"></image>
+        <image src="{{contractInfo.idCardFrontUrl}}{{waterPrint}}" class="info-pic" mode="aspectFill" bindtap="previewIdcard"></image>
+        <image src="{{contractInfo.idCardBackUrl}}{{waterPrint}}" class="info-pic" mode="aspectFill" bindtap="previewIdcard"></image>
       </view>
       <view class='info-label'>领养人签名</view>
       <view class='info-item' wx:if='{{contractInfo.applySign}}'>
@@ -195,15 +193,11 @@
   </block>
 
   <block wx:if='{{contractInfo.signStatus==0}}'>
-    <form report-submit="true" bindsubmit="addFormId">
-      <button class='waiting-btn' form-type="submit">等待领养人签署协议</button>
-    </form>
+    <button class='waiting-btn' form-type="submit">等待领养人签署协议</button>
   </block>
 
   <block wx:if='{{contractInfo.signStatus==1}}'>
-    <form report-submit="true" bindsubmit="addFormId">
-      <button class='waiting-btn' form-type="submit">等待送养人签署协议</button>
-    </form>
+    <button class='waiting-btn' form-type="submit">等待送养人签署协议</button>
   </block>
 
   <block wx:if='{{contractInfo.signStatus==2}}'>

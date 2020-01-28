@@ -13,7 +13,8 @@ Page({
     questionnaireItemList: [],
     activityId: '',
     activityData: '',
-    questionnaireId: ''
+    questionnaireId: '',
+    delta: 0
   },
 
   // questionnaire_item_type 问题类型 1：填空 2：单选 3：多选
@@ -119,7 +120,7 @@ Page({
         wx.hideLoading()
         if (res.data.success) {
           wx.navigateTo({
-            url: '/pages/circle/apply/index?data=' + that.data.activityData,
+            url: '/pages/circle/apply/index?data=' + that.data.activityData+"&delta="+(parseInt(that.data.delta)+1),
           })
         }
       }
@@ -133,6 +134,7 @@ Page({
     this.data.activityId = options.activityId
     this.data.activityData = options.data
     this.data.questionnaireId = options.questionnaireId
+    this.data.delta=options.delta
     this.getQuestionnaire()
   },
 

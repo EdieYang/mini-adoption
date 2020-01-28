@@ -23,6 +23,7 @@ Page({
     activityData: '',
     activityId: '',
     questionnaireId: '',
+    delta: 0,
     countDown: 0,
     tel: ''
   },
@@ -39,6 +40,7 @@ Page({
     this.data.activityData = options.data
     this.data.activityId = options.activityId
     this.data.questionnaireId = options.questionnaireId
+    this.data.delta = options.delta
     if (scene == 1) {
       that.setData({
         homeIcon: true,
@@ -171,11 +173,11 @@ Page({
             if (that.data.fromType === 'activity') {
               if (that.data.questionnaireId) {
                 wx.navigateTo({
-                  url: '/pages/circle/questionnaire/index?data=' + that.data.activityData + "&activityId=" + that.data.activityId + "&questionnaireId=" + that.data.questionnaireId,
+                  url: '/pages/circle/questionnaire/index?data=' + that.data.activityData + "&activityId=" + that.data.activityId + "&questionnaireId=" + that.data.questionnaireId + "&delta=" + (parseInt(that.data.delta) + 1),
                 })
               } else {
                 wx.navigateTo({
-                  url: '/pages/circle/apply/index?data=' + that.data.activityData,
+                  url: '/pages/circle/apply/index?data=' + that.data.activityData + "&delta=" + (parseInt(that.data.delta) + 1),
                 })
               }
             } else {

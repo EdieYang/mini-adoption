@@ -171,38 +171,21 @@ Page({
     })
   },
   contract:function(e){
-    this.genFormId(e.detail.formId)
     var applyId = e.detail.value.applyId
     wx.navigateTo({
       url: '../../post/contract/contract?applyId=' + applyId,
     })
   },
   contractDetail:function(e){
-    this.genFormId(e.detail.formId)
     var applyId = e.detail.value.applyId
     wx.navigateTo({
       url: '../../mine/contract/contract?applyId=' + applyId,
     })
   },
   signContract: function (e) {
-    this.genFormId(e.detail.formId)
     var applyId = e.detail.value.applyId
     wx.navigateTo({
       url: '../../post/contract/contract?applyId=' + applyId,
-    })
-  },
-  genFormId: function (formId) {
-    wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/formId',
-      data: {
-        formId: formId,
-        userId: userId
-      },
-      method: "POST",
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) { }
     })
   },
   /**

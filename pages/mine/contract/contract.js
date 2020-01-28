@@ -47,7 +47,6 @@ Page({
     })
   },
   download: function(e) {
-    this.genFormId(e.detail.formId)
     wx.showLoading({
       title: '协议制作中',
     })
@@ -55,23 +54,6 @@ Page({
       url: '../contractdwn/contractdwn?applyId=' + e.detail.value.applyId,
     })
     wx.hideLoading()
-  },
-  addFormId: function(e) {
-    this.genFormId(e.detail.formId)
-  },
-  genFormId: function(formId) {
-    wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/formId',
-      data: {
-        formId: formId,
-        userId: userId
-      },
-      method: "POST",
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      success: function(res) {}
-    })
   },
   previewIdcard: function() {
     var imageUrl = []

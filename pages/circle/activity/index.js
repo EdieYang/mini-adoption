@@ -31,6 +31,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     this.setData({
       groupId: options.groupId,
       prefix: app.globalData.staticResourceUrlPrefix,
@@ -52,7 +55,6 @@ Page({
       },
       method: "GET",
       success: function(res) {
-        console.log(res)
         let data = res.data.data
         data.groupBanner = app.globalData.staticResourceUrlPrefix + data.groupBanner
         if (data.groupType === '1') {
@@ -64,6 +66,7 @@ Page({
           circleDesc: data.groupInfo.length > 40 ? data.groupInfo.substring(0, 40) + '...' : data.groupInfo,
           showExpand: data.groupInfo.length > 40
         })
+        wx.hideLoading()
       }
     })
   },

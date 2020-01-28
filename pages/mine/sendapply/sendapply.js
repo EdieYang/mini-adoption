@@ -87,7 +87,6 @@ Page({
     })
   },
   toDetail: function(e) {
-    this.genFormId(e.detail.formId)
     var applyId = e.detail.value.applyId
     wx.navigateTo({
       url: '../receiveapplydetail/receiveapplydetail?applyId=' + applyId,
@@ -138,30 +137,14 @@ Page({
   },
   signContract: function(e) {
     var applyId = e.detail.value.applyId
-    this.genFormId(e.detail.formId)
     wx.navigateTo({
       url: '../../post/contract/contract?applyId=' + applyId,
     })
   },
   contract: function(e) {
     var applyId = e.detail.value.applyId
-    this.genFormId(e.detail.formId)
     wx.navigateTo({
       url: '../../mine/contract/contract?applyId=' + applyId,
-    })
-  },
-  genFormId: function(formId) {
-    wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/formId',
-      data: {
-        formId: formId,
-        userId: userId
-      },
-      method: "POST",
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      success: function(res) {}
     })
   },
   /**

@@ -74,6 +74,7 @@ Page({
     }],
     maskPoint: '',
     maskDay: '',
+    unreadMsg:false,
     showFilter: false
   },
 
@@ -209,6 +210,24 @@ Page({
       }
     })
   },
+  getUnreadMessage: function () {
+    var that = this
+    wx.request({
+      url: app.globalData.requestUrlCms + '/adopt/messages/unreadlist',
+      data: {
+        userId: userId
+      },
+      method: "GET",
+      success: function (res) {
+        var msgList = res.data.data
+        if (msgList.length > 0) {
+          that.setData({
+            unreadMsg:true
+          })
+        }
+      }
+    })
+  },
   copyWx: function (e) {
     wx.setClipboardData({
       data: 'zmydwx83',
@@ -329,6 +348,9 @@ Page({
   signIn() {
     let that = this
     if (!this.data.hasSigned) {
+      wx.showLoading({
+        title: '获取积分中',
+      })
       app.IfAccess().then(function (res) {
         if (res) {
           //only authorized user can get platform information
@@ -343,6 +365,7 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
               },
               success: function (res) {
+                wx.hideLoading()
                 if (res.data.success) {
                   that.setData({
                     maskPoint: res.data.data.points,
@@ -351,6 +374,7 @@ Page({
                     showMask: true
                   })
                   that.getTotalSignDays()
+                  that.getUserInfo()
                 }
               }
             })
@@ -459,6 +483,7 @@ Page({
         if (app.globalData.authorized) {
           userId = app.globalData.userId
           that.getUserInfo()
+          that.getUnreadMessage()
         }
       }
     })

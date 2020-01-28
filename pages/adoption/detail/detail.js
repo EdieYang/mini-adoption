@@ -3,7 +3,7 @@ const util = require('../../../utils/util.js')
 const app = getApp()
 var userId
 var petId
-
+var pointTimeout = ''
 Page({
 
   /**
@@ -127,8 +127,6 @@ Page({
     })
   },
   copyWx: function(e) {
-    var formId = e.detail.formId
-    this.genFormId(formId)
     app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
@@ -157,8 +155,6 @@ Page({
 
   },
   call: function(e) {
-    var formId = e.detail.formId
-    this.genFormId(formId)
     app.IfAccess().then(function(res) {
       if (res) {
         //only authorized user can get platform information
@@ -181,15 +177,11 @@ Page({
   },
   home: function(e) {
     var targetUserId = e.detail.value.adopterUserId
-    var formId = e.detail.formId
-    this.genFormId(formId)
     wx.navigateTo({
       url: '../../mine/home/home?userId=' + targetUserId,
     })
   },
   report: function(e) {
-    var formId = e.detail.formId
-    this.genFormId(formId)
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
@@ -235,8 +227,6 @@ Page({
     })
   },
   modify: function(e) {
-    var formId = e.detail.formId
-    this.genFormId(formId)
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
@@ -254,8 +244,6 @@ Page({
     })
   },
   apply: function(e) {
-    var formId = e.detail.formId
-    this.genFormId(formId)
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
@@ -273,9 +261,6 @@ Page({
     })
   },
   collect: function(e) {
-    var formId = e.detail.formId
-    this.genFormId(formId)
-
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
@@ -350,9 +335,6 @@ Page({
     })
   },
   chat: function(e) {
-    var formId = e.detail.formId
-    this.genFormId(formId)
-
     var that = this
     app.IfAccess().then(function(res) {
       if (res) {
@@ -478,26 +460,11 @@ Page({
   },
   sharePost: function(e) {
     var formId = e.detail.formId
-    this.genFormId(formId)
     wx.showLoading({
       title: '生成海报中',
     })
     wx.navigateTo({
       url: '../share/share?petId=' + petId,
-    })
-  },
-  genFormId: function(formId) {
-    wx.request({
-      url: app.globalData.requestUrlCms + '/adopt/formId',
-      data: {
-        formId: formId,
-        userId: userId
-      },
-      method: "POST",
-      header: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      success: function(res) {}
     })
   },
   clickMask() {
@@ -519,13 +486,15 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.success) {
           if (res.data.data > 0) {
-            that.setData({
-              showMask: true,
-              addPointValue: res.data.data
-            })
+            pointTimeout = setTimeout(function() {
+              that.setData({
+                showMask: true,
+                addPointValue: res.data.data
+              })
+            }, 5000)
           }
         }
       }
@@ -570,8 +539,6 @@ Page({
     }
   },
   online: function(e) {
-    var formId = e.detail.formId
-    this.genFormId(formId)
     var that = this
     var dataReq = {
       petId: petId,
@@ -629,7 +596,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearTimeout(pointTimeout)
   },
 
   /**
