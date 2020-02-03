@@ -26,7 +26,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.activityId = options.id
+    var activityId = options.id
+    if (activityId == '' || typeof activityId == 'undefined' || activityId == null) {
+      activityId = options.scene
+      that.setData({
+        homeIcon: true,
+        backIcon: ''
+      })
+    }
+    this.data.activityId = activityId
     userId = app.globalData.userId
     qqmapsdk = new QQMapWX({
       key: '4SOBZ-N4Z6P-2WEDV-V3NWZ-U25BF-IOBCM'
@@ -48,7 +56,10 @@ Page({
         activity.activityBanner = that.data.photoPrefix + activity.activityBanner
         activity.activityStartTime = util.formatDayTime(new Date(Date.parse(activity.activityStartTime.replace(/-/g, '/'))))
         activity.activityEndTime = util.formatDayTime(new Date(Date.parse(activity.activityEndTime.replace(/-/g, '/'))))
-        activity.activityContent = activity.activityContent.replace(/\<img/gi, '<img class="rich-img" ');
+        activity.activityContent = activity.activityContent.replace(/\<img/gi, '<img class="rich-img" ').replace(/<section/g, '<section class="rich-section" ')
+          .replace(/<img[^>]*>/gi, function (match, capture) {
+            return match.replace(/style\s*?=\s*?([‘"])[\s\S]*?\1/ig, 'style="max-width:100%;height:auto;"') // 替换style
+          })
         if (activity.activityType === 2) {
           that.getPoi(activity.activityArea + activity.activityAddress)
         }
@@ -56,6 +67,7 @@ Page({
           activity: activity,
           isFollow: activity.hasFollowed === 1
         })
+        wx.hideLoading()
       }
     })
   },
@@ -339,6 +351,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     this.getActivity()
     if (this.data.isGetPoint) {
       this.getAddPoint()

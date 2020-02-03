@@ -5,7 +5,8 @@
   <view class="activity-count" wx:if="{{activity.registerLimit}}">报名人数：限
     <text>{{activity.registerLimit}}</text>人</view>
   <view class="info">
-    <image src="/images/time.png"></image>{{activity.activityStartTime+'-'+activity.activityEndTime}}
+    <image src="/images/time.png"></image>
+    {{activity.activityStartTime==undefined?'':activity.activityStartTime+'-'+activity.activityEndTime==undefined?'':activity.activityEndTime}}
   </view>
   <view class="info" bindtap="goLocation" wx:if="{{activity.activityType === 2}}">
     <image src="/images/position.png"></image>

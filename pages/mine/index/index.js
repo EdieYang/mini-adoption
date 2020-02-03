@@ -74,8 +74,7 @@ Page({
     }],
     maskPoint: '',
     maskDay: '',
-    unreadMsg:false,
-    showFilter: false
+    unreadMsg:false
   },
 
   /**
@@ -83,6 +82,10 @@ Page({
    */
   onLoad: function (options) {
     wx.hideShareMenu()
+    wx.showLoading({
+      title: '加载个人信息',
+      mask:true
+    })
     var that = this
     app.IfAccess().then(function (res) {
       if (res) {
@@ -91,6 +94,8 @@ Page({
           userId = app.globalData.userId;
           that.getUserInfo()
           that.getTotalSignDays()
+        }else{
+          wx.hideLoading()
         }
       }
     })
@@ -112,6 +117,7 @@ Page({
           hasSigned: userInfo.hasSigned === 1,
           tasks: that.data.tasks
         })
+        wx.hideLoading()
       }
     })
   },
@@ -197,10 +203,9 @@ Page({
 
               } else {
                 wx.showToast({
-                  title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
+                  title: '登录失败，请点击帮助反馈提交问题或与客服直接联系',
                   icon: 'none',
-                  duration: 100000,
-                  mask: true,
+                  duration: 5000,
                 })
                 console.log("服务器配置微信环境出错，请检查APPID和APPSECRT是否匹配！")
               }
@@ -223,6 +228,10 @@ Page({
         if (msgList.length > 0) {
           that.setData({
             unreadMsg:true
+          })
+        }else{
+          that.setData({
+            unreadMsg: false
           })
         }
       }
@@ -346,42 +355,34 @@ Page({
     })
   },
   signIn() {
+    if (!this.authorizedFilter()) {
+      return
+    }
     let that = this
     if (!this.data.hasSigned) {
       wx.showLoading({
         title: '获取积分中',
       })
-      app.IfAccess().then(function (res) {
-        if (res) {
-          //only authorized user can get platform information
-          if (app.globalData.authorized) {
-            wx.request({
-              url: app.globalData.requestUrlCms + '/users/signIn',
-              data: {
-                userId: app.globalData.userId
-              },
-              method: "POST",
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              success: function (res) {
-                wx.hideLoading()
-                if (res.data.success) {
-                  that.setData({
-                    maskPoint: res.data.data.points,
-                    maskDay: res.data.data.groupDays === -1 ? '首次' : res.data.data.groupDays,
-                    hasSigned: true,
-                    showMask: true
-                  })
-                  that.getTotalSignDays()
-                  that.getUserInfo()
-                }
-              }
-            })
-          } else {
+      wx.request({
+        url: app.globalData.requestUrlCms + '/users/signIn',
+        data: {
+          userId: app.globalData.userId
+        },
+        method: "POST",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          wx.hideLoading()
+          if (res.data.success) {
             that.setData({
-              showFilter: true
+              maskPoint: res.data.data.points,
+              maskDay: res.data.data.groupDays === -1 ? '首次' : res.data.data.groupDays,
+              hasSigned: true,
+              showMask: true
             })
+            that.getTotalSignDays()
+            that.getUserInfo()
           }
         }
       })
@@ -451,18 +452,19 @@ Page({
     }
   },
   myPosts() {
+    if (!this.authorizedFilter()) {
+      return
+    }
     wx.navigateTo({
       url: '/pages/mine/postlist/postlist',
     })
   },
   toMsgList(){
+    if (!this.authorizedFilter()) {
+      return
+    }
     wx.navigateTo({
       url: '/pages/msg/index/index',
-    })
-  },
-  cancelLogin: function () {
-    this.setData({
-      showFilter: false
     })
   },
   /**

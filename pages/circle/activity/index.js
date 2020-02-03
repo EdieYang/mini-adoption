@@ -30,7 +30,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     wx.showLoading({
       title: '加载中',
     })
@@ -42,7 +42,7 @@ Page({
     this.getCircleDetail()
   },
 
-  getCircleDetail: function() {
+  getCircleDetail: function () {
     if (!this.data.groupId) {
       return
     }
@@ -54,7 +54,8 @@ Page({
         userId: app.globalData.userId,
       },
       method: "GET",
-      success: function(res) {
+      success: function (res) {
+        wx.hideLoading()
         let data = res.data.data
         data.groupBanner = app.globalData.staticResourceUrlPrefix + data.groupBanner
         if (data.groupType === '1') {
@@ -66,12 +67,14 @@ Page({
           circleDesc: data.groupInfo.length > 40 ? data.groupInfo.substring(0, 40) + '...' : data.groupInfo,
           showExpand: data.groupInfo.length > 40
         })
-        wx.hideLoading()
       }
     })
   },
 
-  getActivities: function() {
+  getActivities: function () {
+    wx.showLoading({
+      title: '加载活动信息',
+    })
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/group/activities/page',
@@ -81,7 +84,7 @@ Page({
         pageSize: pageSize
       },
       method: "GET",
-      success: function(res) {
+      success: function (res) {
         console.log(res)
         wx.hideLoading()
         var activityList = res.data.data.list
@@ -99,7 +102,7 @@ Page({
     })
   },
 
-  getPosts: function() {
+  getPosts: function () {
     var that = this
     let queryData = {
       isValid: 1,
@@ -112,7 +115,7 @@ Page({
       url: app.globalData.requestUrlCms + '/group/post/page',
       data: queryData,
       method: "GET",
-      success: function(res) {
+      success: function (res) {
         console.log(res)
         wx.hideLoading()
         var posts = res.data.data.list
@@ -129,15 +132,17 @@ Page({
       }
     })
   },
-  previewImg: function(e) {
+  previewImg: function (e) {
     var that = this
     var imgList = e.currentTarget.dataset.img
+    var index = e.currentTarget.dataset.index
     var imgUrls = []
     imgList.map(item => {
       imgUrls.push(that.data.prefix + item.imgUrl)
     })
     wx.previewImage({
-      urls: imgUrls,
+      current: imgUrls[index],
+      urls: imgUrls
     })
   },
   showAll(e) {
@@ -149,7 +154,7 @@ Page({
 
   switchLike(e) {
     var that = this
-    app.IfAccess().then(function(res) {
+    app.IfAccess().then(function (res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
@@ -165,7 +170,7 @@ Page({
             header: {
               'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
-            success: function(res) {
+            success: function (res) {
               if (res.data.success) {
                 if (!obj.isLiked) {
                   wx.showToast({
@@ -200,7 +205,7 @@ Page({
 
   switchFollow(e) {
     var that = this
-    app.IfAccess().then(function(res) {
+    app.IfAccess().then(function (res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
@@ -208,14 +213,14 @@ Page({
           wx.request({
             url: app.globalData.requestUrlCms + '/users/follow',
             data: {
-              followBy: obj.userId,
-              userId: app.globalData.userId
+              followBy: app.globalData.userId,
+              userId: obj.userId
             },
             method: obj.isFollowed ? "DELETE" : "POST",
             header: {
               'content-type': 'application/x-www-form-urlencoded'
             },
-            success: function(res) {
+            success: function (res) {
               if (res.data.success) {
                 wx.showToast({
                   title: obj.isFollowed ? "已取消关注" : "关注成功",
@@ -237,7 +242,7 @@ Page({
 
   followCircle() {
     var that = this
-    app.IfAccess().then(function(res) {
+    app.IfAccess().then(function (res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
@@ -251,7 +256,7 @@ Page({
             header: {
               'content-type': 'application/x-www-form-urlencoded'
             },
-            success: function(res) {
+            success: function (res) {
               if (res.data.success) {
                 wx.showToast({
                   title: that.data.circle.isFollowed ? "已取消关注" : "关注成功",
@@ -295,7 +300,7 @@ Page({
 
   joinCircle() {
     var that = this
-    app.IfAccess().then(function(res) {
+    app.IfAccess().then(function (res) {
       if (res) {
         //only authorized user can get platform information
         if (app.globalData.authorized) {
@@ -311,13 +316,13 @@ Page({
     })
   },
 
-  cancelLogin: function() {
+  cancelLogin: function () {
     this.setData({
       showFilter: false
     })
   },
 
-  bindGetUserInfo: function(e) {
+  bindGetUserInfo: function (e) {
     if (e.detail.errMsg == 'getUserInfo:fail auth deny') {
       return
     }
@@ -353,15 +358,15 @@ Page({
               code: res.code
             },
             dataType: "json",
-            success: function(res) {
+            success: function (res) {
               const userId = res.data.userId;
               const openId = res.data.openId;
               const sessionKey = res.data.sessionKey;
-              if (userId && typeof(userId) != 'undefined' && userId != '') {
+              if (userId && typeof (userId) != 'undefined' && userId != '') {
                 //授权回调函数获取用户详情    
                 wx.getUserInfo({
                   withCredentials: true,
-                  success: function(res) {
+                  success: function (res) {
                     console.log(res);
                     if (res.errMsg == "getUserInfo:ok") {
                       //decrypt encrypeted userInfo
@@ -374,7 +379,7 @@ Page({
                         },
                         dataType: "json",
                         method: "POST",
-                        success: function(res) {
+                        success: function (res) {
                           console.log('[bindGetUserInfo]->完善用户信息', res.data)
                           app.globalData.authorized = res.data.authorized;
                           app.globalData.userInfo = res.data.userInfo;
@@ -394,7 +399,7 @@ Page({
                       })
                     }
                   },
-                  fail: function(res) {
+                  fail: function (res) {
                     wx.showToast({
                       title: '登录失败，请点击我的底部栏，来到个人中心吐个槽',
                       icon: 'none',
@@ -431,7 +436,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         if (res.data.success) {
           if (res.data.data > 0) {
             that.setData({
@@ -446,19 +451,15 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     if (!this.data.isActivityCircle) {
-      wx.pageScrollTo({
-        scrollTop: 0,
-        duration: 300
-      })
       pageNum = 1
       bottomLast = false
       this.getPosts()
@@ -472,28 +473,28 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     var that = this
     //刷新页面
     if (!bottomLast) {
@@ -512,7 +513,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     return {
       title: this.data.circle.groupName,
       imageUrl: this.data.circle.groupBanner,

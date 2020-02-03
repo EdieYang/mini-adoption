@@ -21,9 +21,9 @@ App({
     // uploadUrl: 'https://www.linchongpets.com/lpCms/pet/portrait/upload',
     // uploadImageUrl: 'https://www.linchongpets.com/lpCms/oss/image',
     staticResourceUrlPrefix: 'https://linkpets-adopt-platform-bucket-test.oss-cn-shanghai.aliyuncs.com/',
+    // staticResourceUrlPrefix: 'https://pic.linchongpets.com/',
     requestUrlCms: 'http://linchongpets.natapp1.cc/lpCmsTest',
     requestUrlWechat: 'http://linchongpets.natapp1.cc/lpWechatTest',
-    uploadUrl: 'https://linchongpets.natapp1.cc/lpCmsTest/pet/portrait/upload',
     uploadImageUrl: 'http://linchongpets.natapp1.cc/lpCmsTest/oss/image',
     // requestUrlCms: 'http://localhost:8095/lpCmsTest',
     // requestUrlWechat: 'http://localhost:8096/lpWechatTest',
@@ -60,7 +60,7 @@ App({
     var that = this
     this.globalData.socketStatus = 'AUTO'
     this.globalData.chatSocket = wx.connectSocket({
-      url: 'ws://linchongpets.natapp1.cc/websocket?uid=' + this.globalData.userId,
+      url: 'wss://www.linchongpets.com/websocket?uid=' + this.globalData.userId,
       header: {
         'content-type': 'application/json'
       },

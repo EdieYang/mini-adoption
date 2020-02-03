@@ -15,7 +15,7 @@ let col2H = 0
 let chosenId = 3
 let bottomLast = false
 var imageOnLoadCounter = 0
-var listTimeOut = ''
+
 
 Page({
 
@@ -78,7 +78,7 @@ Page({
         if (userId && typeof (userId) != 'undefined' && userId != '') {
           wx.hideLoading()
           that.getPetAdoptList()
-          that.getOrgList()
+          // that.getOrgList()
           that.getActivities()
         }
       }
@@ -150,9 +150,7 @@ Page({
       },
       method: "GET",
       success: function (res) {
-        listTimeOut = setTimeout(function () {
-          wx.hideLoading()
-        }, 2000)
+        wx.hideLoading()
         var petInfoList = res.data.data.list
         if (res.data.data.list.length < pageSize) {
           bottomLast = true
@@ -492,14 +490,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    clearTimeout(listTimeOut)
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    clearTimeout(listTimeOut)
+
   },
   onPageScroll: function (res) {
     var that = this
@@ -509,14 +507,26 @@ Page({
         collectMini: false
       })
     }
-    if (res.scrollTop >= 345 && this.data.tabFix == '') {
-      this.setData({
-        tabFix: 'position:fixed;top:' + (that.data.marginNav - 10) + 'px;left:0;'
-      })
-    } else if (res.scrollTop < 345 && this.data.tabFix != '') {
-      this.setData({
-        tabFix: ''
-      })
+    if(this.data.activities.length==0){
+      if (res.scrollTop >= 125 && this.data.tabFix == '') {
+        this.setData({
+          tabFix: 'position:fixed;top:' + (that.data.marginNav - 10) + 'px;left:0;'
+        })
+      } else if (res.scrollTop < 125 && this.data.tabFix != '') {
+        this.setData({
+          tabFix: ''
+        })
+      }
+    }else{
+      if (res.scrollTop >= 345 && this.data.tabFix == '') {
+        this.setData({
+          tabFix: 'position:fixed;top:' + (that.data.marginNav - 10) + 'px;left:0;'
+        })
+      } else if (res.scrollTop < 345 && this.data.tabFix != '') {
+        this.setData({
+          tabFix: ''
+        })
+      }
     }
   },
 

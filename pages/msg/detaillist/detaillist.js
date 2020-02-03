@@ -39,9 +39,15 @@ Page({
         navTitle: navTitle,
         type: type
       })
-    } else {
+    } else if (type == 2) {
 
       var navTitle = '领养协议通知'
+      this.setData({
+        navTitle: navTitle,
+        type: type
+      })
+    } else{
+      var navTitle = '活动通知'
       this.setData({
         navTitle: navTitle,
         type: type
@@ -108,6 +114,12 @@ Page({
     var applyId = e.currentTarget.dataset.applyid
     wx.navigateTo({
       url: '../../mine/receiveapplydetail/receiveapplydetail?applyId=' + applyId,
+    })
+  },
+  activityDetail: function (e) {
+    var activityId = e.currentTarget.dataset.activityid
+    wx.navigateTo({
+      url: '../../circle/activityDetail/index?id=' + activityId,
     })
   },
   detail: function(e) {

@@ -1,5 +1,5 @@
 <nav-bar title-text="圈子" backIcon='{{backIcon}}' homeIcon='{{homeIcon}}' style='height: {{status + navHeight}}px;top:0px;position:fixed;width:100%;z-index:1000'></nav-bar>
-<view style="display:flex;flex-direction:column" wx:if="{{groupId}}">
+<view style="display:flex;flex-direction:column;border-bottom: 20rpx solid rgba(241, 241, 243, 1);" wx:if="{{groupId}}">
   <view class="head" style="margin-top:{{marginNav}}px;">
     <image src="{{circle.groupBanner}}" class="banner"></image>
     <view class="circle-content" style="position: absolute;bottom:40rpx">
@@ -45,7 +45,7 @@
   <view class="show-all" wx:if='{{!item.showAll}}' bindtap="showAll" data-index="{{index}}">显示全文</view>
 
   <view class="post-img">
-    <image wx:for-item="imgItem" bindtap="previewImg" data-img="{{item.groupPostImgList}}" mode="aspectFill" src="{{prefix + imgItem.imgUrl}}" wx:for="{{item.groupPostImgList}}" wx:key="index" class="img-item" style="max-width:{{item.groupPostImgList.length>2?'30%':'100%'}}"></image>
+    <image wx:for-item="imgItem" bindtap="previewImg" data-img="{{item.groupPostImgList}}" data-index="{{index}}" mode="aspectFill" src="{{prefix + imgItem.imgUrl}}" wx:for="{{item.groupPostImgList}}" wx:key="{{index}}" class="img-item" style="max-width:{{item.groupPostImgList.length>2?'30%':'100%'}}"></image>
   </view>
 
   <view class="options">
@@ -60,7 +60,8 @@
   </view>
 
 </view>
-
+<view wx:if='{{!isActivityCircle && bottomLast}}' class='footer-cover'>没有更多动态罗~</view>
+<view wx:if='{{isActivityCircle && bottomLast}}' class='footer-cover'>活动加载完毕~</view>
 <view wx:if='{{!isActivityCircle}}' class="add-circle" bindtap="joinCircle">发帖</view>
 
 

@@ -11,7 +11,7 @@ var agreement
 var status = 0
 var applySign
 var adopterSign
-
+var adopterUser
 Page({
 
   /**
@@ -65,7 +65,7 @@ Page({
         var contractInfo = res.data.data.contractInfo
         var petInfo = res.data.data.petInfo
         var applyUser = res.data.data.applyUser
-        var adopterUser = res.data.data.adopterUser
+       adopterUser = res.data.data.adopterUser
         var petImg = that.data.photoPrefix + petInfo.mediaList[0].mediaPath
         if (contractInfo == null) {
           status = 1
@@ -84,7 +84,6 @@ Page({
           applyInfo: applyInfo,
           petInfo: petInfo,
           contractInfo: contractInfo,
-          adopterUser: adopterUser,
           applyUser: applyUser,
           status: status
         })
@@ -331,7 +330,7 @@ Page({
 
     var dataReq = {
       applyId: applyId,
-      adopterId: this.data.adopterUser.userId,
+      adopterId: adopterUser.userId,
       petId: this.data.petInfo.petId,
       applyBy: this.data.applyInfo.applyBy,
       agreement: agreement,
@@ -339,7 +338,7 @@ Page({
       adopterPhone: phone,
       adopterAddress: address,
       signStatus: 0,
-      createBy: this.data.adopterUser.userId,
+      createBy: adopterUser.userId,
       operateUserId: userId
     }
 

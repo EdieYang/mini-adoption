@@ -43,6 +43,20 @@
     </view>
   </view>
 
+  <view class='msg-item' wx:if='{{messageList.activityMsg!=null}}' bindtap='detaillist' data-type='3'>
+    <view class='icon-cover'>
+      <image class='msg-icon' src='../../../images/msg-icon5.png'></image>
+      <view class='msg-banner' wx:if='{{messageList.activityMsg.unreadNumber>0}}'>{{messageList.activityMsg.unreadNumber}}</view>
+    </view>
+    <view class='msg-content'>
+      <view class='msg-header'>
+        <view class='title'>活动通知</view>
+        <view class='tag'>{{messageList.activityMsg.dateBefore}}</view>
+      </view>
+      <view class='msg-body'>{{messageList.activityMsg.msgTitle}}</view>
+    </view>
+  </view>
+
   <block wx:if='{{chatlist!=null}}' wx:for='{{chatlist}}' wx-index='index' wx:key='chatlist'>
     <view class='msg-item' bindtap='chat' data-userid='{{item.userId}}' data-index='{{index}}'>
       <view class='icon-cover'>

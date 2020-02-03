@@ -109,14 +109,14 @@
   align-items: center;
 }
 
-.has-apply{
+.has-apply {
   width: 390rpx;
   height: 74rpx;
   background: #eaeaea;
   border-radius: 37rpx;
   font-size: 36rpx;
   font-family: PingFangSC-Regular, PingFang SC;
-  color:#000;
+  color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,13 +224,22 @@
 .rich-text {
   width: 690rpx;
   font-size: 30rpx;
-  color:#2d2d2d;
+  color: #2d2d2d;
   text-align: center;
 }
 
 rich-text .rich-img {
+  max-width: 90%!important;
+  height: auto!important;
+  border-radius: 10rpx;
+}
+
+rich-text .rich-section{
   max-width: 100%;
-  height: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .mask {

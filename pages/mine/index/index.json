@@ -4,7 +4,7 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#1c43b2",
   "navigationBarTextStyle": "white",
-  "onReachBottomDistance": 200,
+  "onReachBottomDistance": 300,
   "navigationStyle": "custom",
   "usingComponents": {
     "nav-bar": "/component/navbar/navbar"

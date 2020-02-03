@@ -1,7 +1,7 @@
 <nav-bar title-text="{{navTitle}}" backIcon='../../images/back-pre-black.png'></nav-bar>
 
-<view class='msg-cover' style='margin-top:{{marginNav+5}}px' wx:if='{{type==0}}' >
-  <view class='msg-item' wx:for='{{messageList}}' wx:key='messageList3' >
+<view class='msg-cover' style='margin-top:{{marginNav+5}}px' wx:if='{{type==0}}'>
+  <view class='msg-item' wx:for='{{messageList}}' wx:key='messageList3'>
     <image class='msg-tip' src='../../../images/msg-icon3.png'></image>
     <view class='msg-info'>
       <view class='info-header'>{{item.msgContent.title}}</view>
@@ -16,13 +16,13 @@
 </view>
 
 
-<view class='msg-cover' style='margin-top:{{marginNav+5}}px' wx:if='{{type==1}}' >
+<view class='msg-cover' style='margin-top:{{marginNav+5}}px' wx:if='{{type==1}}'>
   <view class='msg-item' wx:for='{{messageList}}' wx:key='messageList'>
     <image class='msg-tip-portrait' src='{{item.msgContent.portrait}}'></image>
     <view class='msg-info'>
       <view class='info-header'>
-      <text wx:if='{{item.msgContent.status==0}}' style='color:#231231;font-size=29rpx;font-weight:bold'>{{item.msgContent.nickName}}</text>
-      {{item.msgContent.title}}</view>
+        <text wx:if='{{item.msgContent.status==0}}' style='color:#231231;font-size=29rpx;font-weight:bold'>{{item.msgContent.nickName}}</text> {{item.msgContent.title}}
+      </view>
       <view class='info-content'>{{item.msgContent.content}}</view>
       <view class='info-pet' bindtap='applyDetail' data-applyid='{{item.msgContent.applyId}}'>
         <image class='pet-pic' src='{{photoPrefix}}{{item.msgContent.petPic}}'></image>
@@ -35,20 +35,38 @@
 
 
 
-<view class='msg-cover' style='margin-top:{{marginNav+5}}px' wx:if='{{type==2}}' >
+<view class='msg-cover' style='margin-top:{{marginNav+5}}px' wx:if='{{type==2}}'>
   <view class='msg-item' wx:for='{{messageList}}' wx:key='messageList2'>
     <image class='msg-tip' src='../../../images/msg-icon3.png' wx:if='{{item.msgContent.status==4}}'></image>
-    <image class='msg-tip-portrait' src='{{item.msgContent.portrait}}'  wx:if='{{item.msgContent.status!=4}}'></image>
+    <image class='msg-tip-portrait' src='{{item.msgContent.portrait}}' wx:if='{{item.msgContent.status!=4}}'></image>
     <view class='msg-info'>
       <view class='info-header'>
-      <text style='color:#ff7e7e;font-size=29rpx;font-weight:bold'>{{item.msgContent.nickName}}</text>
-      {{item.msgContent.title}}</view>
+        <text style='color:#ff7e7e;font-size=29rpx;font-weight:bold'>{{item.msgContent.nickName}}</text> {{item.msgContent.title}}
+      </view>
       <view class='info-content'>{{item.msgContent.content}}</view>
       <view class='info-pet' bindtap='applyDetail' data-applyid='{{item.msgContent.applyId}}'>
         <image class='pet-pic' src='{{photoPrefix}}{{item.msgContent.petPic}}'></image>
         <view class='pet-name'>{{item.msgContent.petName}}</view>
       </view>
       <view class='info-date'>{{item.createTime}}</view>
+    </view>
+  </view>
+</view>
+
+
+
+<view class='msg-cover' style='margin-top:{{marginNav+5}}px' wx:if='{{type==3}}'>
+  <view class='msg-item' wx:for='{{messageList}}' wx:key='messageList3'>
+    <image class='msg-tip' src='../../../images/msg-icon4.png'></image>
+    <view class='msg-info'>
+      <view class='info-header'>{{item.msgTitle}}</view>
+      <view class='info-content'>报名参加时间：{{item.msgContent.involvementTime}}</view>
+      <view class='info-activity' bindtap='activityDetail' data-activityid='{{item.msgContent.activityId}}'>
+        <view class='activity-label'>活动名称：{{item.msgContent.activityTitle}}</view>
+        <view class='activity-label' wx:if='{{item.msgContent.activityAddress!=""}}'>活动地点：{{item.msgContent.activityAddress}}</view>
+        <view class='activity-label' wx:if='{{item.msgContent.type=="CANCEL"}}'>取消原因：{{item.msgContent.memo}}</view>
+      </view>
+      <view class='info-date '>{{item.createTime}}</view>
     </view>
   </view>
 </view>

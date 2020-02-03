@@ -49,7 +49,7 @@ Page({
     var that = this
     app.globalData.chatSocket = wx.connectSocket({
       // url: 'wss://www.linchongpets.com/websocket?uid=' + userId,
-      url: 'ws://linchongpets.natapp1.cc/websocket?uid=' + userId,
+      url: 'wss://www.linchongpets.com/websocket?uid=' + userId,
       header: {
         'content-type': 'application/json'
       },

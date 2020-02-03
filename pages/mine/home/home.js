@@ -94,7 +94,7 @@ Page({
   getFollowedStatus: function() {
     var that = this
     wx.request({
-      url: app.globalData.requestUrlCms + '/users/attention',
+      url: app.globalData.requestUrlCms + '/users/follow',
       data: {
         userId: userId,
         targetUserId: targetUserId
@@ -113,7 +113,7 @@ Page({
       title: '',
     })
     wx.request({
-      url: app.globalData.requestUrlCms + '/users/attention',
+      url: app.globalData.requestUrlCms + '/users/follow',
       data: {
         userId: targetUserId,
         attentBy: userId,
@@ -142,7 +142,7 @@ Page({
       title: '',
     })
     wx.request({
-      url: app.globalData.requestUrlCms + '/users/attention',
+      url: app.globalData.requestUrlCms + '/users/follow',
       data: {
         userId: targetUserId,
         attentBy: userId,
