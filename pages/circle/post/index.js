@@ -1,4 +1,5 @@
 const app = getApp()
+var uploadIndex=0
 Page({
 
   /**
@@ -36,14 +37,40 @@ Page({
     var that = this;
     wx.chooseImage({
       count: 9 - that.data.uploaderNum,
-      sizeType: ['original', 'compressed'],
+      sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
         console.log(res)
+        for (var i = 0; i < res.tempFiles.length; i++) {
+          var fileSize = res.tempFiles[i].size
+          if (fileSize > 1024 * 1024 * 5) {
+            wx.showToast({
+              title: '照片大小超出5M限制，请重新选择',
+              icon: 'none',
+              duration: 2000
+            })
+            return
+          }
+        }
+
+        wx.showToast({
+          title: '上传中',
+          icon: 'loading',
+          duration: 20000
+        })
+
+        //执行上传递归函数
+
+        var successUp = 0; //成功个数
+        var failUp = 0; //失败个数
+        var length = res.tempFilePaths.length; //总共个数
+        var i = 0; //第几个
+        that.uploadDIY(res.tempFilePaths, successUp, failUp, i, length);
+
         let tempFilePaths = res.tempFilePaths;
-        for (var i = 0; i < tempFilePaths.length; i++) {
-          that.uploadImage(tempFilePaths[i])
-        };
+        // for (var i = 0; i < tempFilePaths.length; i++) {
+        //   that.uploadImage(tempFilePaths[i], tempFilePaths.length)
+        // };
         let uploaderList = that.data.uploaderList.concat(tempFilePaths);
         if (uploaderList.length == 9) {
           that.setData({
@@ -57,24 +84,41 @@ Page({
       }
     })
   },
-
-  uploadImage(tempFilePath) {
+  uploadDIY(filePaths, successUp, failUp, i, length) {
     var that = this
     wx.uploadFile({
       url: app.globalData.uploadImageUrl,
-      filePath: tempFilePath,
+      filePath: filePaths[i],
       name: 'file',
       formData: {
         userId: app.globalData.userId,
         ossZone: 'groupPost'
       },
       success: (resp) => {
+        successUp++;
+        wx.hideToast();
+        wx.showToast({
+          title: '上传中' + successUp + '/' + length,
+          icon: 'loading',
+          duration: 20000
+        })
         var returnUrl = JSON.parse(resp.data);
+        var picUrl = returnUrl.data
         that.data.uploaderUrlArray.push(returnUrl.data)
-      }
+      },
+      fail: (res) => {
+        failUp++;
+      },
+      complete: () => {
+        i++;
+        if (i == length) {
+          wx.hideToast();
+        } else { //递归调用uploadDIY函数
+          that.uploadDIY(filePaths, successUp, failUp, i, length);
+        }
+      },
     });
   },
-
   inputContent(e) {
     this.data.content = e.detail.value
   },
@@ -82,7 +126,10 @@ Page({
     var index=e.currentTarget.dataset.index
     this.data.uploaderUrlArray.splice(index, 1)
     this.data.uploaderList.splice(index, 1)
+    --this.data.uploaderNum
     this.setData({
+      showUpload: true,
+      uploaderNum: this.data.uploaderNum,
       uploaderList: this.data.uploaderList,
       uploaderUrlArray: this.data.uploaderUrlArray
     })

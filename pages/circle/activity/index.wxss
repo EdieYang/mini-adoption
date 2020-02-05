@@ -231,7 +231,6 @@
   margin-top: 15rpx;
   margin-right: 15rpx;
   min-width: 30%;
-  height: 220rpx;
 }
 
 .options {

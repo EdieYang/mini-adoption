@@ -108,7 +108,7 @@
   <view class="title-container">
     <view class="vertical-line"></view>
     <view class="title">积分任务</view>
-    <view class="learn-more" bindtap="taskDetail">了解详情 ></view>
+    <!-- <view class="learn-more" bindtap="taskDetail">了解详情 ></view> -->
   </view>
 
   <view class="task" wx:for="{{tasks}}" wx:key="index">

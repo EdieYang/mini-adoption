@@ -45,7 +45,7 @@
   <view class="show-all" wx:if='{{!item.showAll}}' bindtap="showAll" data-index="{{index}}">显示全文</view>
 
   <view class="post-img">
-    <image wx:for-item="imgItem" bindtap="previewImg" data-img="{{item.groupPostImgList}}" data-index="{{index}}" mode="aspectFill" src="{{prefix + imgItem.imgUrl}}" wx:for="{{item.groupPostImgList}}" wx:key="{{index}}" class="img-item" style="max-width:{{item.groupPostImgList.length>2?'30%':'100%'}}"></image>
+    <image wx:for-item="imgItem" bindtap="previewImg" data-img="{{item.groupPostImgList}}" data-index="{{index}}" mode="aspectFill" src="{{prefix + imgItem.imgUrl}}" wx:for="{{item.groupPostImgList}}" wx:key="{{index}}" class="img-item" style="max-width:{{item.groupPostImgList.length>2?'30%':'100%'}};height:{{item.groupPostImgList.length>2?'220rpx':'690rpx'}}"></image>
   </view>
 
   <view class="options">
