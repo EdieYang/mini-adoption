@@ -19,8 +19,9 @@
       <image src="/images/coin.png"></image>{{activity.activityCost}}{{activity.activityIsFree===0?"积分":"元"}}
     </view>
     <view>
-      <button open-type="share" plain="true" style="border:0;">
+      <button open-type="share" plain="true" style="border:0;display:flex;align-items: center;">
         <image src="/images/share-1.png" class="share"></image>
+        <text style="font-size:25rpx;margin-left:5rpx;">分享活动</text>
       </button>
     </view>
   </view>

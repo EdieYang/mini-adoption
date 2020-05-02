@@ -261,6 +261,11 @@ page {
   position: relative;
 }
 
+.option-item::after{
+  border:none;
+  outline:none;
+}
+
 .option-item image {
   width: 42rpx;
   height: 42rpx;

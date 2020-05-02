@@ -63,6 +63,7 @@ Page({
       path: 'activity'
     }, {
       taskName: '成功参加活动',
+      taskValue: '完成活动返赠',
       taskOption: '去参加',
       path: 'activity'
     }, {
@@ -74,7 +75,7 @@ Page({
     }],
     maskPoint: '',
     maskDay: '',
-    unreadMsg:false
+    unreadMsg: false
   },
 
   /**
@@ -84,7 +85,7 @@ Page({
     wx.hideShareMenu()
     wx.showLoading({
       title: '加载个人信息',
-      mask:true
+      mask: true
     })
     var that = this
     app.IfAccess().then(function (res) {
@@ -94,7 +95,7 @@ Page({
           userId = app.globalData.userId;
           that.getUserInfo()
           that.getTotalSignDays()
-        }else{
+        } else {
           wx.hideLoading()
         }
       }
@@ -227,9 +228,9 @@ Page({
         var msgList = res.data.data
         if (msgList.length > 0) {
           that.setData({
-            unreadMsg:true
+            unreadMsg: true
           })
-        }else{
+        } else {
           that.setData({
             unreadMsg: false
           })
@@ -292,6 +293,18 @@ Page({
         }
       },
       envVersion: 'develop',
+      success(res) {
+        // 打开成功
+      }
+    })
+  },
+  toShopMall: function () {
+    wx.navigateToMiniProgram({
+      appId: 'wxf42cfeff721bf114',
+      // path: 'page/index/index?id=123',
+      extraData: {
+
+      },
       success(res) {
         // 打开成功
       }
@@ -459,7 +472,7 @@ Page({
       url: '/pages/mine/postlist/postlist',
     })
   },
-  toMsgList(){
+  toMsgList() {
     if (!this.authorizedFilter()) {
       return
     }

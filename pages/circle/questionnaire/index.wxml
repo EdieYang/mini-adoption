@@ -13,7 +13,7 @@
 		<image src="{{(item.questionnaireItemType === 2 && option.isCheck) ? '/images/select_round_pre.png' : (item.questionnaireItemType === 2 && !option.isCheck)?'/images/select_round_nor.png':(item.questionnaireItemType === 3 && option.isCheck)?'/images/select_square_pre.png':'/images/select_square_nor.png'}}"></image>
 		<div class="option-content">{{option.content}}</div>
 	</view>
-	<view wx:if="{{item.questionnaireItemType === 1}}"><textarea id="{{index}}" bindinput="inputValue" placeholder="{{item.questionnaireItemContent}}" auto-height style="margin-top:20rpx"></textarea></view>
+	<view wx:if="{{item.questionnaireItemType === 1}}"><textarea id="{{index}}" bindinput="inputValue" placeholder="{{item.questionnaireItemContent}}" auto-height style="margin-top:20rpx" style="border:1rpx solid #999;border-radius:10rpx;padding:10rpx 10rpx;margin-top:15rpx;"></textarea></view>
 </view>
 
 <view class="submit" bindtap="submit">提交</view>

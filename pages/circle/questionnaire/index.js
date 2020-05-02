@@ -60,6 +60,7 @@ Page({
 
   submit() {
     let jsonData = []
+    let checked = true
     this.data.questionnaireItemList.map(item => {
       if (item.questionnaireItemType === 1) {
         if (!item.questionnaireItemContent) {
@@ -67,6 +68,7 @@ Page({
             title: '请完成题目',
             icon: 'none'
           })
+          checked = false
           return
         } else {
           jsonData.push({
@@ -86,6 +88,7 @@ Page({
             title: '请完成题目',
             icon: 'none'
           })
+          checked = false
           return
         } else {
           jsonData.push({
@@ -95,7 +98,10 @@ Page({
         }
       }
     })
-    this.postAnswer(jsonData)
+    if (checked) {
+      this.postAnswer(jsonData)
+    }
+
   },
 
   postAnswer(answerDetail) {
@@ -120,7 +126,7 @@ Page({
         wx.hideLoading()
         if (res.data.success) {
           wx.navigateTo({
-            url: '/pages/circle/apply/index?data=' + that.data.activityData+"&delta="+(parseInt(that.data.delta)+1),
+            url: '/pages/circle/apply/index?data=' + that.data.activityData + "&delta=" + (parseInt(that.data.delta) + 1),
           })
         }
       }
@@ -134,7 +140,7 @@ Page({
     this.data.activityId = options.activityId
     this.data.activityData = options.data
     this.data.questionnaireId = options.questionnaireId
-    this.data.delta=options.delta
+    this.data.delta = options.delta
     this.getQuestionnaire()
   },
 

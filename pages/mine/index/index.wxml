@@ -62,10 +62,10 @@
     <view class="option-item flex-auto" bindtap='sendApply'>
       <image src='/images/oper-3.png'></image>我发出的领养申请
     </view>
-    <view class="option-item">
+    <button class="option-item" open-type='share' style="border:none;outline:none;background:none">
       <image src='/images/oper-9.png'></image>
-      <button open-type='share' class='oper-btn'>推荐给朋友</button>
-    </view>
+      <view  class='oper-btn'>推荐给朋友</view>
+    </button>
   </view>
   <view style="display:flex;margin-bottom:40rpx">
     <view class="option-item"  bindtap='toMsgList'>
@@ -75,7 +75,7 @@
     <view class="option-item flex-auto" bindtap="myPosts">
       <image src='/images/oper-11.png'></image>我发出的帖子
     </view>
-    <view class="option-item padding-r">
+    <view class="option-item padding-r" bindtap="toShopMall">
       <image src='/images/oper-12.png'></image>邻宠生活
     </view>
   </view>
