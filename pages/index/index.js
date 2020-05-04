@@ -63,7 +63,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     wx.showLoading({
       title: '抓会儿蝴蝶~',
     })
@@ -71,11 +71,13 @@ Page({
     petType = 2
     pageNum = 1
     bottomLast = false
+    petInfoListArr= [] 
+    
     this.getBannerList()
-    app.IfAccess().then(function (res) {
+    app.IfAccess().then(function(res) {
       if (res) {
         userId = app.globalData.userId;
-        if (userId && typeof (userId) != 'undefined' && userId != '') {
+        if (userId && typeof(userId) != 'undefined' && userId != '') {
           wx.hideLoading()
           that.getPetAdoptList()
           // that.getOrgList()
@@ -84,13 +86,13 @@ Page({
       }
     })
   },
-  closeCollectTop: function () {
+  closeCollectTop: function() {
     wx.setStorageSync('collectMini', true)
     this.setData({
       collectMini: false
     })
   },
-  onImageLoad: function (e) {
+  onImageLoad: function(e) {
     let petId = e.currentTarget.id;
     let oImgW = e.detail.width; //图片原始宽度
     let oImgH = e.detail.height; //图片原始高度
@@ -133,7 +135,7 @@ Page({
     }
 
   },
-  getPetAdoptList: function () {
+  getPetAdoptList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/pets/list',
@@ -149,7 +151,7 @@ Page({
         pageSize: pageSize
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         wx.hideLoading()
         var petInfoList = res.data.data.list
         if (res.data.data.list.length < pageSize) {
@@ -168,27 +170,27 @@ Page({
       }
     })
   },
-  getOrgList: function () {
+  getOrgList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/orgs/list',
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         that.setData({
           orgList: res.data.data
         })
       }
     })
   },
-  getBannerList: function () {
+  getBannerList: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/banner/list',
       data: {
-        position:1  
+        position: 1
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var bannerlist = res.data.data
         that.setData({
           bannerlist: bannerlist
@@ -196,7 +198,7 @@ Page({
       }
     })
   },
-  getFollowAdoption: function () {
+  getFollowAdoption: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/adopt/pets/' + userId + '/attention',
@@ -205,7 +207,7 @@ Page({
         pageSize: pageSize
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         var petInfoList = res.data.data.list
         if (petInfoList.length < pageSize) {
           bottomLast = true
@@ -222,7 +224,7 @@ Page({
       }
     })
   },
-  getActivities: function () {
+  getActivities: function() {
     var that = this
     wx.request({
       url: app.globalData.requestUrlCms + '/group/activities/page',
@@ -232,7 +234,7 @@ Page({
         pageSize: 3
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         res.data.data.list.map(item => {
           item.activityBanner = that.data.photoPrefix + item.activityBanner
           //IOS只识别2018/03/09这样的格式
@@ -244,7 +246,7 @@ Page({
       }
     })
   },
-  handleScroll: function (e) {
+  handleScroll: function(e) {
     this.setData({
       toLeft: e.detail.scrollLeft <= 10
     })
@@ -262,7 +264,7 @@ Page({
         isActive: 1
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         let item = res.data.data[0]
         wx.navigateTo({
           url: '/pages/circle/activity/index?groupId=' + item.groupId + "&groupType=" + item.groupType,
@@ -270,7 +272,7 @@ Page({
       }
     })
   },
-  chooseTab: function (e) {
+  chooseTab: function(e) {
     var that = this
     chosenId = e.currentTarget.dataset.id;
     if (chosenId == 2) {
@@ -298,35 +300,35 @@ Page({
       that.getPetAdoptList()
     }
   },
-  filter: function () {
+  filter: function() {
     this.setData({
       showFilter: true
     })
   },
-  chooseAge: function (e) {
+  chooseAge: function(e) {
     age = e.currentTarget.dataset.type;
     this.setData({
       ageType: age
     })
   },
-  chooseSex: function (e) {
+  chooseSex: function(e) {
     sex = e.currentTarget.dataset.type;
     this.setData({
       sexType: sex
     })
   },
-  chooseHealth: function (e) {
+  chooseHealth: function(e) {
     healthStatus = e.currentTarget.dataset.type;
     this.setData({
       healthStatus: healthStatus
     })
   },
-  closeFilter: function () {
+  closeFilter: function() {
     this.setData({
       showFilter: false
     })
   },
-  reset: function (e) {
+  reset: function(e) {
     age = 1
     sex = 1
     healthStatus = 1
@@ -343,7 +345,7 @@ Page({
       bottomLast: bottomLast
     })
   },
-  submit: function (e) {
+  submit: function(e) {
     var filtered = false
     var formId = e.detail.formId
     if (age == 1) {
@@ -427,36 +429,36 @@ Page({
     this.getPetAdoptList()
   },
 
-  toAdoptionDetail: function (e) {
+  toAdoptionDetail: function(e) {
     var petId = e.currentTarget.dataset.petid
     wx.navigateTo({
       url: '../adoption/detail/detail?petId=' + petId,
     })
   },
 
-  redirectUrl: function (e) {
+  redirectUrl: function(e) {
     var index = e.currentTarget.dataset.index
     var type = this.data.bannerlist[index].type
     var extraData = this.data.bannerlist[index].extraData
-    if(type == 2){
+    if (type == 2) {
       wx.navigateToMiniProgram({
         appId: extraData,
         // path: 'page/index/index?id=123',
-      })  
-    }else if(type ==3){
+      })
+    } else if (type == 3) {
       wx.navigateTo({
         url: '../redirect/redirect?url=' + extraData,
       })
     }
   },
 
-  orgDetail: function (e) {
+  orgDetail: function(e) {
     wx.navigateTo({
       url: '../organize/home/home?orgId=' + e.currentTarget.dataset.orgid,
     })
   },
 
-  onReachBottom: function () {
+  onReachBottom: function() {
     var that = this
     //刷新页面
     if (!bottomLast) {
@@ -475,31 +477,35 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
+  onUnload: function() {
+    this.setData({
+      col1: [],
+      col2: [],
+      petCols: []
+    })
   },
-  onPageScroll: function (res) {
+  onPageScroll: function(res) {
     var that = this
     console.log(res);
     if (res.scrollTop > 40 && this.data.collectMini) {
@@ -507,7 +513,7 @@ Page({
         collectMini: false
       })
     }
-    if(this.data.activities.length==0){
+    if (this.data.activities.length == 0) {
       if (res.scrollTop >= 125 && this.data.tabFix == '') {
         this.setData({
           tabFix: 'position:fixed;top:' + (that.data.marginNav - 10) + 'px;left:0;'
@@ -517,7 +523,7 @@ Page({
           tabFix: ''
         })
       }
-    }else{
+    } else {
       if (res.scrollTop >= 345 && this.data.tabFix == '') {
         this.setData({
           tabFix: 'position:fixed;top:' + (that.data.marginNav - 10) + 'px;left:0;'
@@ -533,7 +539,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     var that = this
     bottomLast = false
     this.setData({
@@ -560,7 +566,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

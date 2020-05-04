@@ -466,8 +466,8 @@ page {
 .activity-content {
   width: 100%;
   position: absolute;
-  top: 136rpx;
-  height: 170rpx;
+  top: 190rpx;
+  height: 160rpx;
   padding: 15rpx;
   box-sizing: border-box;
   background: white;
@@ -476,6 +476,11 @@ page {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.activity-title{
+  font-size: 28rpx;
+  font-weight: bold;
 }
 
 .activity-time {
