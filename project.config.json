@@ -64,9 +64,9 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/circle/post/index",
-					"pathName": "pages/circle/post/index",
-					"query": "",
+					"name": "pages/circle/activityDetail/index",
+					"pathName": "pages/circle/activityDetail/index",
+					"query": "scene=828b4feee52441a8928e40e8ed622df5",
 					"scene": null
 				}
 			]
