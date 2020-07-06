@@ -52,55 +52,55 @@ Page({
     immuneType: '',
     sterilizeType: '',
     petCharacter: [{
-      name: '讲卫生',
-      value: '1',
-      checked: false
-    },
-    {
-      name: '亲人',
-      value: '2',
-      checked: false
-    },
-    {
-      name: '不乱叫',
-      value: '3',
-      checked: false
-    },
-    {
-      name: '高冷',
-      value: '4',
-      checked: false
-    },
-    {
-      name: '胆小',
-      value: '5',
-      checked: false
-    },
-    {
-      name: '健康',
-      value: '6',
-      checked: false
-    },
-    {
-      name: '无攻击性',
-      value: '7',
-      checked: false
-    },
-    {
-      name: '会看家',
-      value: '8',
-      checked: false
-    },
-    {
-      name: '活泼',
-      value: '9',
-      checked: false
-    },
-    {
-      name: '聪明',
-      value: '10',
-      checked: false
-    }
+        name: '讲卫生',
+        value: '1',
+        checked: false
+      },
+      {
+        name: '亲人',
+        value: '2',
+        checked: false
+      },
+      {
+        name: '不乱叫',
+        value: '3',
+        checked: false
+      },
+      {
+        name: '高冷',
+        value: '4',
+        checked: false
+      },
+      {
+        name: '胆小',
+        value: '5',
+        checked: false
+      },
+      {
+        name: '健康',
+        value: '6',
+        checked: false
+      },
+      {
+        name: '无攻击性',
+        value: '7',
+        checked: false
+      },
+      {
+        name: '会看家',
+        value: '8',
+        checked: false
+      },
+      {
+        name: '活泼',
+        value: '9',
+        checked: false
+      },
+      {
+        name: '聪明',
+        value: '10',
+        checked: false
+      }
     ],
     requirements: [{
       name: '领养前取得家人的同意。',
@@ -391,8 +391,8 @@ Page({
     var obey = this.data.obeyRules
     if (!obey) {
       wx.requestSubscribeMessage({
-        tmplIds: ['bP86rGBY1p6XP8C-UTjPnnyQP8Qi5i3GKBfmU9-rxL0', 'dPDzxprSMn8oar0v2DKNDLhtHLy-SjhAUHm-nSG_GkE'],
-        success(res) { }
+        tmplIds: ['bP86rGBY1p6XP8C-UTjPnnyQP8Qi5i3GKBfmU9-rxL0', 'dPDzxprSMn8oar0v2DKNDLhtHLy-SjhAUHm-nSG_GkE', 'BIkEd9GjX_lA2NFyWArRMfdzt0WbJcHnt4KFtN4jJy8', 'p9QlNOPBEtJG9X1pJjAnymX5yNCXMtnFqlK6yeJN-dw'],
+        success(res) {}
       })
     }
     this.setData({
