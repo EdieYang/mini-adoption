@@ -21,7 +21,7 @@
 
     <button class="share-cover-2" open-type='share'>
       <image src="../../../images/share-mini.png" style="width:80rpx;height:80rpx;"></image>
-      <view style="font-size:20rpx;">分享到群</view>
+      <view style="font-size:20rpx;">分享</view>
     </button>
   </block>
 

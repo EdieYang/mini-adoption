@@ -67,6 +67,10 @@ Page({
     wx.showLoading({
       title: '抓会儿蝴蝶~',
     })
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
     var that = this
     petType = 2
     pageNum = 1
@@ -567,6 +571,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+   
   }
 })
